@@ -1,0 +1,5 @@
+<div class="btn-group">
+	{foreach $currencies as $key => $currency}
+		<a href="{plink this currency => $key}" class="btn btn-default">{$currency}</a>
+	{/foreach}
+</div>

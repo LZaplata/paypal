@@ -1,0 +1,65 @@
+{var $url = 'url'.$presenter->lang}
+{var $defaultUrl = 'url'.$defaultLang}
+{var $name = 'name'.$presenter->lang}
+{var $defaultName = 'name'.$defaultLang}
+{var $description = 'description'.$presenter->lang}
+{var $defaultDescription = 'description'.$defaultLang}
+
+<div class="articles layout2 row">
+	{foreach $articles as $article}
+		{$control->getUrl($article)}
+		
+		<div class="article col-xs-{$cols}">				
+			<div class="row">
+				{var $thumb = $control->getThumb($article, 1)}
+				{var $image = $control->getImages($article, true)}
+			
+				{if $image}
+					<div class="col-xs-5">
+						<p class="img no-margin">
+							<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article|nosafeurl}">
+								<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
+							</a>
+						</p>
+					</div>
+				{/if}
+				
+				<div class="col-xs-{if $image && $thumb}7{else}12{/if}">
+					{if $article->sections->date}
+						<div class="date">
+							<p>
+								{$article->date|date: 'j. n. Y'}
+							</p>
+						</div>
+					{/if}	
+				
+					{if $article->sections->visName}					
+						<div class="name">
+							<h3 class="no-margin-top">
+								<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article|nosafeurl}">
+									{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
+								</a>
+							</h3>
+						</div>
+					{/if}				
+				
+					{if $article->sections->description}
+						<div class='description'>
+							<p>
+								{!$article->$description ?: ($article->$defaultDescription ?: $article->description)|nbsp}
+							</p>
+						</div>
+					{/if}		
+				</div>
+			</div>
+		</div>
+		
+		{if $iterator->counter %$clearfix == 0 || $iterator->last}
+			<div class="clearfix"></div>
+		{/if}
+	{/foreach}
+	
+	{if $control->module->paginator}
+		{control paginator}
+	{/if}
+</div>

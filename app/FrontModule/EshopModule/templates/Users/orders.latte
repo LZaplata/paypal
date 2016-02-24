@@ -1,0 +1,19 @@
+{block #eshop}
+	{include './nav.latte'}
+	<table class="table">
+		<tbody>
+			{foreach $orders as $order}
+				<tr>
+					<td>obj. č. {$order->no}</td>
+					<td>{$order->date|date: 'j. n. Y'}</td>
+					<td>{$order->price} czk</td>
+					<td>{$presenter->orderStates[$order->state]}</td>
+					<td class="actions">
+						<a href="{link Users:order $order->id}" title="Detail objednávky">
+							<i class="fa fa-search"></i>
+						</a>
+					</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>

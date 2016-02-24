@@ -1,0 +1,40 @@
+{block #content}
+	<div id="left">
+		{include menu.latte}
+	</div>	
+
+	<div class="commonpage">
+		<div class="col-sm-12 {if $rightbar}col-md-8 col-lg-9{/if}" id="right">
+			<div class="content">
+				<p>
+					<a href="{$presenter->context->httpRequest->referer}" class="btn btn-primary">
+						<i class="fa fa-thumbs-o-up"></i>&nbsp; Hotovo
+					</a>
+				</p>
+					
+				<fieldset>
+					<legend>Pořadí stránek</legend>
+						
+					{if count($pages)}
+						{snippet categoriesTable}
+							<div class="row">
+								<div class="col-sm-4">
+									<table class="position table table-bordered">							
+										<tbody>
+											{foreach $pages as $page}
+												<tr id="{$page->id}" class="sortable">
+													<td class="level1">{$page->name} <i class="move fa fa-plus pull-right"></i></td>
+												</tr>
+											{/foreach}
+										</tbody>
+									</table>
+								</div>
+							</div>			
+						{/snippet}
+					{else}
+						<p>Žádné stránky</p>
+					{/if}
+				</fieldset>
+			</div>
+		</div>
+	</div>

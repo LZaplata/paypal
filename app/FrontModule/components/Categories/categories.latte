@@ -1,0 +1,23 @@
+{var $level = 0}
+{var $parent = null}
+
+<div class="menu">
+	{block #categories}
+		{if $level < $maxLevel}
+			<ul class="level{$level+1} nav nav-pills">
+				{foreach $categories as $category}	
+					{$control->getUrl($category)}
+								
+					<li class="{if $presenter->cid == $category}active{/if} {$category->url}">
+						<a href="{dlink :Front:Page: url => $control->url, cid => $category->id, category => $category->url}">
+							{$category->name}
+						</a>
+						{if count($control->getCategories($category->id))}
+							{include #categories, categories => $control->getCategories($category->id), level => $level+1, parent => $category->url}
+						{/if}
+					</li>
+				{/foreach}
+			</ul>
+		{/if}
+	{/block}
+</div>

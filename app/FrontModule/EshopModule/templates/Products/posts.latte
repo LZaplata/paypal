@@ -1,0 +1,143 @@
+<div class="tab-pane" id="posts">
+	<button class="btn btn-primary btn-sm" data-toggle="collapse" data-target="#user-check"><i class="fa fa-comment-o"></i>&nbsp; Vložit příspěvek</button>
+						
+	{snippet user}							
+		<div class="row collapse {ifset $errors}in{/ifset}" id="user-check">
+			{if !$user->loggedIn}
+				<div class="col-sm-6">
+					<h2 class="h4"><i class="fa fa-unlock"></i>&nbsp; Máte už účet?</h2>
+					{control signInForm}
+				</div>
+				<div class="col-sm-6">
+					<h2 class="h4"><i class="fa fa-lock"></i>&nbsp; Nemáte ještě účet?</h2>
+					<p>
+						Registrace Vám zjednodušší práci s vkládáním příspěvku a také Vám umožní mít u svého příspěvku avatar
+					</p>
+					<a href="{dlink :FrontEshop:Users:registration eshop => $presenter->eshop}" class="btn btn-danger">Registrace</a>
+				</div>
+			{/if}							
+							
+			<div class="col-sm-12">
+				<h2 class="h4" id="add-post"><i class="fa fa-envelope"></i>&nbsp; Napište příspěvek</h2>
+									
+				{ifset $reply}
+					<p>
+						odpovídáte na <a href="#post{$reply->id}">#{$reply->id} {$reply->name} {$reply->surname}</a>&nbsp; 
+						<a href="{plink CancelReply!}" class="ajax"><i class="fa fa-times text-danger"></i></a>
+					</p>
+				{/ifset}
+									
+				{form addPost}																		
+					{if $form->hasErrors()}
+						<div class="alert alert-danger" role="alert">
+							{foreach $form->errors as $error}
+								{$error} <br />
+							{/foreach}
+						</div>
+					{/if}
+									
+					<div class="form-group">
+						{label name class => "control-label col-sm-2" /}
+						<div class="col-sm-4">
+							{input name class => "form-control"}
+						</div>
+						{label surname class => "control-label col-sm-2" /}
+						<div class="col-sm-4">
+							{input surname class => "form-control"}
+						</div>
+					</div>
+					<div class="form-group">
+						{label email class => "control-label col-sm-2" /}
+						<div class="col-sm-4">
+							{input email class => "form-control"}
+						</div>
+						<span class="help-block col-sm-6">Slouží pouze pro odpověď, nebude nikde zobrazen.</span>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-2 text-right">
+							{if !$user->loggedIn || !file_exists($presenter->context->parameters['wwwDir']."/files/avatars/$user->id.png")}
+								<i class="fa fa-user fa-3x fa-border"></i>	
+							{else}
+								<img class="media-object pull-right" src="{$basePath}/files/avatars/{$user->id}.png" alt="" />	
+							{/if}
+						</div>
+						
+						<div class="col-sm-10">
+							{input text class => "form-control"}
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-sm-12">
+							{input add class => "btn btn-primary pull-right"}
+							{input nospam class => "nospam"}
+						</div>
+					</div>
+				{/form}
+			</div>
+		</div>
+							
+		<script>nospam();</script>
+	{/snippet}
+				
+	{snippet posts}							
+		<p>&nbsp;</p>
+		<ul class="media-list">
+			{foreach $posts as $post}									
+				<li class="media" id="post{$post->id}">
+					{block post}											
+						{if $post->users_id == null || !file_exists($presenter->context->parameters['wwwDir']."/files/avatars/$post->users_id.png")}
+							<i class="fa fa-user pull-left fa-3x fa-border"></i>	
+						{else}
+							<img class="media-object pull-left" src="{$basePath}/files/avatars/{$post->users_id}.png" alt="" />	
+						{/if}
+											
+						<div class="media-body">											
+							<h4 class="media-heading">
+								{$post->name} {$post->surname} 
+								<small>{$post->date|ago}</small> 	     												
+								{if $user->loggedIn && $user->id == $post->users_id && $post->date->format("Y-m-d H:i:s") >= date("Y-m-d H:i:s", strtotime("-1 minute"))}	     													
+									<a class="h5 pull-right text-danger" href="" onclick="return false;" data-toggle="modal" data-target=".confirmation{$post->id}">
+										<i class="fa fa-trash-o"></i>&nbsp; smazat
+									</a>
+	     													
+									<div aria-hidden="true" aria-labelledby="modal{$post->id}" role="dialog" tabindex="-1" class="modal confirmation{$post->id}">
+										<div class="modal-dialog modal{$post->id}">
+											<div class="modal-content">	
+												<div class="modal-header">
+													<button data-dismiss="modal" class="close" type="button"><span aria-hidden="true">×</span></button>
+													<h4 class="modal-title">Smazání</h4>
+												</div>
+												<div class="modal-body h5">
+													Opravdu chcete smazat příspěvek?
+												</div>
+												<div class="modal-footer">
+													<a href="{plink DeletePost! $post->id}" class="btn btn-default ajax" data-dismiss="modal">Ano</a>
+													<button class="btn btn-danger" data-dismiss="modal">Zrušit</button>
+												</div>
+											</div>
+										</div>
+									</div>
+	     						{/if}
+     												
+								{if $post->posts_id == 0}	     													
+									<a class="h5 pull-right ajax" href="{plink Reply! $post->id}">
+										<i class="fa fa-comments"></i>&nbsp; odpovědět
+									</a>
+								{/if}
+							</h4>
+							{!$post->text}
+												
+							{if count($children = $post->related("posts")->where("trash", 0))}
+								{foreach $children as $child}
+									<div class="media">
+										{include post post => $child}
+									</div>
+								{/foreach}
+							{/if}
+    					</div>
+    				{/block}
+				</li>
+			{/foreach}
+		</ul>
+	{/snippet}
+</div>

@@ -1,0 +1,77 @@
+{var $thumb = $presenter->getThumb(1)}
+{var $name = 'name'.$presenter->lang}
+{var $defaultName = 'name'.$defaultLang}
+{var $description = 'description'.$presenter->lang}
+{var $defaultDescription = 'description'.$defaultLang}
+{var $url = 'url'.$presenter->lang}
+{var $defaultUrl = 'url'.$defaultLang}
+{var $category = array()}
+
+{foreach $products as $product}
+	{var $image = $product->galleries->related('galleries_images', 'galleries_id')->order('highlight DESC, position ASC')->fetch()}
+	{ifset $related}
+		{var $cat = $presenter->getProductCategory($product)}
+		{var $category = array("category" => ($cat->$url ?: ($cat->$defaultUrl ?: $cat->url)), "cid" => $cat->id)}
+	{/ifset}
+				
+	<div class="product col-sm-{$cols}">
+		{if $settings->name}			
+			<div class="name">
+				<h2 class="h3 no-margin-top">
+					<a href="{plink :FrontEshop:Products:view (expand) $category, pid => $product, product => ($product->$url ?: ($product->$defaultUrl ?: $product->url))|nosafeurl}">
+						{!$product->$name ?: ($product->$defaultName ?: $product->name)|nbsp}
+					</a>
+				</h2>	
+			</div>
+		{/if}
+		
+		{if $image && $thumb}
+			<div class="img">
+				<p>
+					<a href="{plink :FrontEshop:Products:view (expand) $category, pid => $product, product => ($product->$url ?: ($product->$defaultUrl ?: $product->url))|nosafeurl}">
+						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
+					</a>
+				</p>
+			</div>
+		{/if}
+		
+		{if $settings->price}				
+			<div class="price">
+				<p>
+					{$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1)|number:$decimals:",":" "} 
+					<span class="currency">{_$currency}</span>
+				</p>
+			</div>
+		{/if}
+		
+		{if $settings->description}			
+			<div class="description">
+				<p class="no-margin">
+					{!$product->$description ?: ($product->$defaultDescription ?: $product->description)|nbsp}
+				</p>
+			</div>
+		{/if}
+		
+		{*if $settings->stock}
+			{if $product->amount > 0}
+				<div class="cart">
+					{control addToCart-$product->id}
+				</div>
+			{else}
+				<div class="availability">
+					<p>Zboží neni skladem</p>
+				</div>
+			{/if}
+		{/if*}
+	</div>
+		
+	{if $iterator->counter %$clearfix == 0 || $iterator->last}
+		<div class="clearfix"></div>
+	{/if}
+{/foreach}
+
+{if $control->module->paginator}
+	<div class="col-sm-12">
+		{control paginator}
+	</div>	
+{/if}

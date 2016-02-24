@@ -1,0 +1,60 @@
+{block #eshop}
+	{include menu.latte}
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="row">
+				{snippet transport}
+					{form transport}
+						{foreach $form->controls as $control}
+							{if !$control instanceof Nette\Forms\Controls\HiddenField && !$control instanceof Nette\Forms\Controls\SelectBox}
+								<div class="col-sm-6">
+									<div class="h4 no-margin-top heading">{$control->label}</div>
+
+									<div class="btn-group-vertical wrapper" data-toggle="buttons">
+										{foreach $control->items as $key => $label}
+											{var $controlName = $control->name}
+
+											<label class="btn btn-default {if $order->$controlName == $key}active{/if} clearfix">
+												{input $control->name:$key} {$label}
+
+												{if $order->$controlName == $key && key_exists($key, $transports)}
+													<div class="h4">
+														{input zasilkovna class => "form-control input-sm"}
+													</div>
+												{/if}
+											</label>
+										{/foreach}
+									</div>
+								</div>
+							{/if}
+						{/foreach}
+					{/form}
+				{/snippet}
+			</div>
+		</div>
+		
+		<div class="col-sm-6 col-sm-offset-6">
+			<div class="h4 no-margin-top">Cena doručení</div>
+
+			{block #totalPrice}
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div>
+							Zboží: <span class="pull-right">{$order->price / $order->rate|number:$decimals:",":" "} {_$currency}</span> <br />
+							Doprava a platba: <span class="pull-right">{snippet transportPrice}{$order->transport / $order->rate|number:$decimals:",":" "} {_$currency}{/snippet}</span> <br /> <br />					
+							<div class="pull-right h4 no-margin-bottom">{snippet totalPrice}<strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {_$currency}</strong>{/snippet}</div>
+						</div>
+					</div>
+				</div>
+			{/block}
+		</div>
+	</div>
+	
+	<div class="next">
+		<p class="pull-right">
+			<a href="{plink Order:summary}" class="btn btn-primary">
+				{_'Souhrn'}
+			</a>
+		</p>
+	</div>

@@ -1,0 +1,44 @@
+{block #booking}
+	{ifCurrent Order:cart}
+		{include menu.latte}
+	{/ifCurrent}
+
+	{snippet cartView}	
+		<div id="cart">
+			<table class="table">
+				<thead>
+					<th>{_'Název'}</th>
+					<th>{_'Od'}</th>
+					<th>{_'Do'}</th>
+					<th>{_'Celkem'}</th>
+				</thead>
+				<tbody>
+					{if count($presenter->sectionSession->objects)}
+						{foreach $presenter->sectionSession->objects as $object}
+						{var $obj = $control->getObject($object->booking_objects_id)}
+							<tr>
+								<td>{$obj->name}</td>
+								<td>{$object->dateFrom|date:"d.m.Y"}</td>
+								<td>{$object->dateTo|date:"d.m.Y"}</td>
+								<td>{$object->price}</td>
+							</tr>
+						{/foreach}
+					{else}
+						<tr>
+							<td colspan="4">Košík je prázdný</td>
+						</tr>
+					{/if}
+				</tbody>
+			</table>
+				
+			{ifCurrent Order:cart}
+				<div class="next">
+					<p class="pull-right">
+						<a href="{plink Order:contact}" class="btn btn-primary">
+							{_'Kontaktní údaje'}
+						</a>
+					</p>
+				</div>
+			{/ifCurrent}
+		</div>
+	{/snippet}

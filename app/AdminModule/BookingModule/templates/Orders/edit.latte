@@ -1,0 +1,51 @@
+{block #booking}
+	{include menu.latte}
+
+	<div class="tab-content">
+		<div class="tab-pane {if !$presenter->getParameter('search')}active{/if} content" id="edit">
+			{control order}
+		</div>
+		<div class="tab-pane {if $presenter->getParameter('search')}active{/if}" id="detail">
+			<div class="content">
+				{control search}
+			
+				{if $control->search}
+					{if $objects->count()}	
+						<table n:snippet="objects" class="table table-condensed table-hover table-striped">
+							<thead>
+								<tr>
+									<th>Název</th>
+									<th>Kapacita</th>
+									<th>Cena</th>
+									<th>Akce</th>
+								</tr>
+							</thead>
+							
+							<tbody>
+								{foreach $objects as $object}
+									{var $price = $control->getObjectPrice($object)}
+									
+									<tr>
+										<td>{$object->name}</td>
+										<td class="text-left">{$object->capacity}</td>
+										<td class="text-left">{$price}</td>
+										<td class="text-left">
+											<a data-confirm="Opravdu chcete přiřadit?" href="{link addToBooking! $object->id,$price}" class="ajax">
+												<i class="fa fa-plus"></i>
+											</a>
+										</td>
+									</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					{else}
+						<strong>V tento termín nebylo nic nalezeno!</strong>
+					{/if}
+				{/if}
+			</div>
+	
+			<div class="content clearfix">
+				{control bookingBookings}
+			</div>
+		</div>
+	</div>

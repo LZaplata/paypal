@@ -1,0 +1,31 @@
+{block #content}
+	{include menu.latte}
+	
+	<div id="right">	
+		{control graph}
+		
+		<table class="structure">
+			<thead>
+				<th>pozice</th>
+				<th>text</th>
+				<th>vyhledávač</th>
+				<th>akce</th>
+			</thead>
+			<tbody>
+				{var $i = "A"}
+				{foreach $annotations as $annotation}
+					<tr>
+						<td>{$i}</td>
+						<td class="level1">{$annotation->flagSeznam ? $annotation->flagSeznam : $annotation->flagGoogle}</td>
+						<td class="level1">{$annotation->flagGoogle ? "Google" : "Seznam"}</td>
+						<td class="actions">
+							<a n:confirm="Opravdu smazat položku" href="{plink Delete! $annotation->id}" class="del"></a>
+						</td>  
+					</tr>
+					{var $i++}
+				{/foreach}
+			</tbody>
+		</table>
+			
+		{control addForm}
+	</div>

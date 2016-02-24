@@ -1,0 +1,127 @@
+<script type="text/javascript">
+	// definice slov
+	var kw = {$kw};
+	var kwe = {$kwe};
+	
+	// definice sledovanych poli
+	var allowedBaseElements = {$allowedBaseElements};
+	var allowedContentElements = {$allowedContentElements};
+</script>
+
+<div id="seo-assistant">
+	{foreach $langs as $lang}
+	<div class="well lang-{$lang}">
+		<h4 class="text-uppercase no-margin-top">
+			Základní informace
+		</h4>
+		
+		{foreach $elements[$lang]['base'] as $control}
+		<h5 class="no-margin-top" data-toggle="collapse" href=".base-data-{$control->name}">
+			{$control->label} <i class="fa fa-toggle-on pull-right"></i>
+		</h5>
+			
+		<div class="base-data-{$control->name} collapse in">
+			<p>
+				<span class="h5 hwc-{$lang}">nacitam</span> hledatelných slov
+			</p>
+			
+			<p>
+				<span class="h5 hkwc-{$lang}">nacitam</span> klíčových a <span class="h5 hkwec-{$lang}">nacitam</span> rozšířených slov
+			</p>
+			
+			<div class="progress">
+				<div class="progress-bar progress-hkwp-{$lang} progress-bar-success">
+					<span class="hkwp"></span>
+				</div>
+				<div class="progress-bar progress-hkwep-{$lang}" style="background-color: #91E091;">
+					<span class="hkwep"></span>
+				</div>
+			</div>
+			
+			{if $control->title}
+			<div class="progress">
+				<div class="progress-bar progress-hkws-{$lang} progress-bar-success" style="min-width: 4em;" data-original-title="poměr klíčových slov"  data-toggle="tooltip">
+					síla <span class="hkws-{$lang}">nacitam</span>% 
+				</div>
+				<div class="progress-bar progress-hkwsa-{$lang}" style="background-color: #91E091;" data-original-title="pořadí klíčových slov"  data-toggle="tooltip">
+					<span class="hkwsa-{$lang}">nacitam</span>%
+				</div>
+			</div>
+			{/if}
+		</div>
+		{/foreach}
+	</div>
+	
+	<div class="well lang-{$lang}">
+		<h4 class="text-uppercase no-margin-top">
+			Obsah
+		</h4>
+
+		{foreach $elements[$lang]['content'] as $control}
+		<h5 class="no-margin-top" data-toggle="collapse" href=".content-data-{$control->name}">
+			{$control->label} <i class="fa fa-toggle-on pull-right"></i>
+		</h5>
+		
+		<div class="content-data-{$control->name} collapse in">
+			<p>
+				<span class="h5 cwc-{$lang}">nacitam</span> slov
+			</p>
+			
+			<p>
+				<span class="h5 ckwc-{$lang}">nacitam</span> klíčových a <span class="h5 ckwec-{$lang}">nacitam</span> rozšířených slov
+			</p>
+			
+			<div class="progress">
+				<div class="progress-bar progress-ckwp-{$lang} progress-bar-success">
+					<span class="ckwp"></span>
+				</div>
+				<div class="progress-bar progress-ckwep-{$lang}" style="background-color: #91E091;">
+					<span class="ckwep"></span>
+				</div>
+			</div>
+			
+			{if $control->tinymce}
+			<p>
+				<span class="h5 chc-{$lang}">nacitam</span> nadpisů
+			</p>
+			
+			<p>
+				<span class="h5 cho-{$lang}">nacitam</span> pořadí nadpisů
+			</p>
+			{/if}
+		</div>
+		{/foreach}
+	</div>
+	
+	<div class="well lang-{$lang}">
+		<h4 class="text-uppercase no-margin-top">
+			klíčová slova
+		</h4>
+		<h5 class="no-margin-top" data-toggle="collapse" href=".kw-data">
+			Hlavní <i class="fa fa-toggle-on pull-right"></i>
+		</h5>
+	
+		<div class="kw-data collapse">
+			{foreach $kw[$lang] as $word}
+			<p>
+				{$word}{*}: <span class="kwc-{$word|webalize}">0</span>x na stránce{*}
+			</p>
+			{/foreach}
+		</div>
+		
+		{if $lang == 'cs'}
+		<h5 class="no-margin-top" data-toggle="collapse" href=".kwe-data">
+			Rozšířená <i class="fa fa-toggle-on pull-right"></i>
+		</h5>
+	
+		<div class="kwe-data collapse">
+			{foreach $kwe[$lang] as $word}
+			<p>
+				{$word}{*}: <span class="kwec-{$word|webalize}">0</span>x na stránce{*}
+			</p>
+			{/foreach}
+		</div>
+		{/if}
+	</div>
+	{/foreach}
+</div>

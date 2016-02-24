@@ -1,0 +1,61 @@
+{var $level = 0}
+
+{if count($pages)}
+	<div role="navigation" class="navbar navbar-default navbar-static-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button data-target=".navbar-collapse" data-toggle="collapse" class="navbar-toggle" type="button">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="{dlink :Front:Page:}">
+					<img src="{$basePath}/images/logo.png" alt="" />
+				</a>
+			</div>				
+			
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav">
+					{var $u = 'url'.$presenter->lang}
+				
+					{foreach $pages as $page}
+						{if $page->highlight == 1}
+							{var $url = ""}
+						{else}
+							{$control->getPageUrl($page)}
+							{var $url = $control->url}
+						{/if}
+						
+						<li class="{$page->url} {if $iterator->first}first{/if} 
+						{if isset($presenter->pages)}
+							{if isset($presenter->pages[$level]) && $presenter->pages[$level] == $page->$u}
+								active
+							{/if}
+						{elseif $presenter->moduleName == 'FrontEshop'}
+							{if $page->related('pages_modules')->where('position', 1)->order('modules_id DESC')->fetch()->modules_id == 3}
+								active
+							{/if}
+						{elseif $presenter->moduleName == 'FrontBooking'}
+							{if $page->related('pages_modules')->order('modules_id DESC')->fetch()->modules_id == 4}
+								active
+							{/if}
+						{else}
+							{if $page->highlight == 1}
+								active
+							{/if}
+						{/if}">
+							<a href="{plink :Front:Page: url => $url, article => null, aid => null, category => null, cid => null}">
+								{var $name = 'name'.$presenter->lang}
+								{$page->$name == null ? $page->name : $page->$name}
+							</a>
+							{*if count($control->getPages($page->id))}
+								{include #pages, pages => $control->getPages($page->id), level => $level+1}
+							{/if*}
+						</li>
+					{/foreach}
+				</ul>
+			</div>
+		</div>
+	</div>
+{/if}

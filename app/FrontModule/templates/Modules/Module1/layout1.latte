@@ -1,0 +1,95 @@
+{var $text = 'text'.$lang}
+{var $defaultText = 'text'.$defaultLang}
+{var $name = 'name'.$lang}
+{var $defaultName = 'name'.$defaultLang}
+
+{if $editor}
+	<div class="editor editor-layout1 {if $menu}row{/if}">
+		{if $menu}
+			<div class="editor-menu col-sm-3">
+				{$presenter["menu"]->render(array("pid" => $menu, "level" => $level))}
+			</div>
+		{/if}
+	
+		<div class="{if $menu}col-sm-9{/if}">
+			{if $headingLevel}
+				<h{!$headingLevel}>{!$editor->$name?: ($editor->$defaultName ?: $editor->name)|nbsp}</h{!$headingLevel}>
+			{/if}
+
+			{if $editor->sections->text}
+				<div class="text">
+					{!($editor->$text ?: ($editor->$defaultText ?: $editor->text))|nbsp}
+				</div>
+			{/if}
+
+			{if $editor->sections->gallery}
+				{if count($images = $control->getImages()) && $thumb = $control->getThumb(2)}
+					<div class="editor-gallery row clearfix h1">
+						{if $editor->galleries->paginator}
+							{control paginator}
+						{/if}
+
+						<ul class="list-unstyled">
+							{foreach $images as $image}
+								<li class="col-xs-2">
+									<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}" rel="{$image->galleries}">
+										<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
+									</a>
+								</li>
+							{/foreach}
+						</ul>
+
+						{if $editor->galleries->paginator}
+							{control paginator}
+						{/if}
+
+					</div>
+				{/if}
+			{/if}
+
+			{if $editor->sections->files}
+				{var $files = $control->getFiles($editor)}
+				{var $tag = 1}
+
+				{if count($files)}
+					<div id="files">
+						<h2 class="h3">Soubory</h2>
+
+						{foreach $files as $file}
+							{var $extension = pathinfo($file->name, PATHINFO_EXTENSION)}
+
+							{if $file->tag != null && $file->tag != $tag}
+								{var $tag = $file->tag}
+
+								{if !$iterator->first}
+									</ul>
+								{/if}
+
+								<h3 class="h4">{$tag}</h3>
+
+								<ul class="list-unstyled">
+							{else}
+								{if $iterator->first}
+									{var $tag = false}
+
+									<ul class="list-unstyled">
+								{/if}
+							{/if}
+
+							<li>
+								<i class="fa fa-file-{$icons[$extension]}-o"></i>&nbsp;
+								<a href="{$basePath}/files/files/f{$file->filestores_id}-{$file->name}">
+									{$file->title ? $file->title : $file->name}
+								</a>
+							</li>
+						{/foreach}
+					</div>
+				{/if}
+			{/if}
+
+			{if $control->module->contact_form}
+				{$presenter["contactForm"]->render()}
+			{/if}
+		</div>
+	</div>
+{/if}

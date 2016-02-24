@@ -1,0 +1,30 @@
+{block #eshop}
+	<div class="content">
+		<p>
+			<a href="{link Products:add}" class="btn btn-primary">
+				<i class="fa fa-plus"></i>&nbsp; Přidat
+			</a>
+		</p>
+	
+		{*snippet filters}
+			<ul id="filters">
+				{foreach $filters as $filter}			
+					<li>
+						<a href="{$filter->url}">{$filter->name}</a>
+						<a href="{plink DeleteFilter! $filter->id}" class="del ajax"></a>
+					</li>
+				{/foreach}
+			</ul>
+		{/snippet*}
+		
+		<div class="col-sm-6">
+			{*control addFilter*}
+			{control categories}
+		</div>
+		
+		<div class="clearfix"></div>
+		
+		{snippet productsTable}
+			{control grid}
+		{/snippet}
+	</div>

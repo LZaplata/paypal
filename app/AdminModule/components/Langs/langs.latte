@@ -1,0 +1,17 @@
+{if count($langs)}
+	<ul class="nav nav-tabs langs {if $float}float{/if}">
+		<li class="active">
+			<a href="#lang-cs" role="tab" data-toggle="tab">
+				<i class="flag-icon flag-icon-cz"></i>
+			</a>
+		</li>
+		
+		{foreach $langs as $lang}
+			<li>
+				<a href="#lang-{$lang->key}" role="tab" data-toggle="tab">
+					<i class="flag-icon flag-icon-{$lang->key == 'en' ? 'us' : $lang->key}"></i>
+				</a>
+			</li>
+		{/foreach}
+	</ul>
+{/if}

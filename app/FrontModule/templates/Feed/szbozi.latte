@@ -1,0 +1,27 @@
+{contentType application/xml}
+<?xml version="1.0" encoding="utf-8" ?>
+	<SHOP xmlns="http://www.zbozi.cz/ns/offer/1.0">
+		{foreach $products as $product}		
+			<SHOPITEM>
+				<ITEM_ID>{$product->products_id}</ITEM_ID>
+				<PRODUCTNAME>{$product->products->name|striptags}</PRODUCTNAME> {* jakýkoliv název i rozvětvený z eshopu *}
+				<PRODUCT>{$product->products->title|striptags}</PRODUCT> {* jakýkoliv název i rozvětvený z eshopu *}
+				<DESCRIPTION>{$product->products->text|replaceRE:'(</[a-z0-9A-Z]+>)':' '|striptags}</DESCRIPTION>
+				<URL>{plink //:FrontEshop:Products:view eshop => $eshop, category => $product->categories->url, cid => $product->categories_id, product => $product->products->url, pid => $product->products_id}</URL>
+				{foreach $product->products->galleries->related("galleries_images")->order("highlight DESC, position ASC") as $image}				
+					{if $iterator->first}
+						<IMGURL>{$presenter->context->parameters["host"]}/files/galleries/originals/{hash("sha512", $image->id)}.{pathinfo($image->name, PATHINFO_EXTENSION)}</IMGURL>
+					{/if}
+				{/foreach}			
+				<PRICE_VAT>{$product->products->price}</PRICE_VAT>
+				<CATEGORYTEXT>{$presenter->getZboziCategory($product->categories)}</CATEGORYTEXT>
+				<EAN>{$product->products->ean}</EAN>
+				<PRODUCTNO>{$product->products->code}</PRODUCTNO>
+				<MANUFACTURER><![CDATA[{$product->products->producer}]]></MANUFACTURER>
+				<DELIVERY_DATE>{$product->products->delivery_date}</DELIVERY_DATE>
+				{if $product->products->pid != null}
+					<ITEMGROUP_ID>{$product->products->pid}</ITEMGROUP_ID>
+				{/if}
+			</SHOPITEM>
+		{/foreach}
+	</SHOP>

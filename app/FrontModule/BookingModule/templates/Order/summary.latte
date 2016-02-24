@@ -1,0 +1,55 @@
+{block #booking}
+	{include menu.latte}
+
+	<div id="contact" class="row">
+		<div id="invoice" class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span class="h4">Kontaktní údaje</span>
+				</div>
+				<div class="panel-body">			
+					<table class="table-condensed no-margin">
+						<tbody>
+							<tr>
+								<th>Jméno a příjmení:</th>
+								<td>{$order->name} {$order->surname}</td>
+							</tr>
+							<tr>
+								<th>Telefon:</th>
+								<td>{$order->phone}</td>
+							</tr>
+							<tr>
+								<th>E-mail:</th>
+								<td>{$order->email}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			{include cart.latte}		
+		</div>
+	</div>
+	
+	
+	
+	<div class="row">		
+		<div class="col-sm-6 col-sm-offset-6">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div>
+						<div class="pull-left h4">Celkem</div><div class="pull-right h4">{snippet totalPrice}<strong>{$order->price}</strong>{/snippet}</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="next">
+		<p class="pull-right">
+			<a href="{plink Order:send}" class="btn btn-primary">
+				{_'Odeslat rezervaci'}
+			</a>
+		</p>
+	</div>

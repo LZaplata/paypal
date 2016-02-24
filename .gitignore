@@ -1,0 +1,14 @@
+/.project
+/.settings
+/log
+/temp
+/vendor/*
+!/vendor/others
+/www/webtemp/*
+/www/adminModule/webtemp/*
+/www/files/files/*
+/www/files/avatars/*
+/www/files/galleries/*
+/www/files/galleries/originals/*
+/.buildpath
+/.idea

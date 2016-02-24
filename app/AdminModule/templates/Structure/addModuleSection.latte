@@ -1,0 +1,32 @@
+{block #content}
+	{include menu.latte}
+	
+	<div class="commonpage">
+		<div class="col-sm-12 {if $rightbar}col-md-8 col-lg-9{/if}">
+			<div class="content">
+				{control addSectionForm}
+			</div>
+			
+			{if $presenter->section}
+				<ul class="nav nav-tabs" role="tablist">
+				  	<li class="active"><a href="#dimensions" role="tab" data-toggle="tab">Rozměry obrázků</a></li>
+				  	<li><a href="#specials" role="tab" data-toggle="tab">Speciální položky</a></li>
+				  	<li><a href="#tags" role="tab" data-toggle="tab">Tagy</a></li>
+				</ul>
+				
+				<div class="tab-content content">
+				  	<div class="tab-pane active" id="dimensions">
+				  		{control thumbs}
+				  	</div>
+				  	
+				  	<div class="tab-pane" id="specials">
+				  		{control fields}
+				  	</div>
+				  	
+				  	<div class="tab-pane" id="tags">
+				  		{control tags}
+				  	</div>
+				</div>
+			{/if}
+		</div>
+	</div>

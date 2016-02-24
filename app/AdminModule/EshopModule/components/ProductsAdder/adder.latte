@@ -1,0 +1,20 @@
+{snippet}
+	{control addToCartForm}
+	{if $control->product}
+		{control propertiesForm}
+	{/if}
+	<div class="price">
+			{$product->name}
+			{$product->price}
+	</div>
+	<script>
+		function changeProduct () {
+			$.get({link changeProduct!},$("#frm-productsAdder-addToCartForm").serialize());
+		}	
+		function changeProperties() {
+			$.get({link changeProperties!}, $("#frm-productsAdder-propertiesForm").serialize());
+		//	location.href="?do=changeProperties&"+$("#frm-propertiesForm").serialize();
+		}		
+		loadChosen();
+	</script>
+{/snippet}

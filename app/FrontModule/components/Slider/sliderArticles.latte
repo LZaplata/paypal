@@ -1,0 +1,50 @@
+<div id="slider" class="carousel slide" data-ride="carousel" data-interval="4000" data-pause="hover" data-wrap="true">	
+	<div class="carousel-inner">
+		{foreach $articles as $article}
+			{var $thumb = $presenter['articles']->getThumb($article, $presenter->url || isset($presenter->eshop) ? 1 : 0)}
+			{var $image = $presenter['articles']->getImages($article, true)}
+			
+			<div class="item {if $iterator->first}active{/if}">
+				{if $image && $thumb}
+					<img src="{$basePath}/files/galleries/{$thumb}_g{$article->galleries}-{$image->name}" alt="{$image->title}" />
+				{/if}
+				
+				<div class="carousel-caption">					
+					{if $article->sections->visName}
+						{var $name = 'name'.$presenter->lang}
+						
+    					<h3>{$article->$name ? $article->$name : $article->name}</h3>
+    				{/if}
+    				{if $article->sections->description}
+    					{var $description = 'description'.$presenter->lang}
+    				
+						<p>{$article->$description ? $article->$description : $article->description}</p>
+					{/if}
+ 				</div>
+			</div>
+		{/foreach}
+	</div>
+	
+	{if count($articles) > 1}
+		{var $thumb = $presenter['articles']->getThumb($article, 2)}
+	{/if}
+	
+	{if $thumb}
+		<ol class="carousel-indicators">
+			{foreach $articles as $article}
+				<li data-target="#slider" data-slide-to="{$iterator->counter - 1}" class="{if $iterator->first}active{/if}">
+					{*}<img src="{$basePath}/files/galleries/{$thumb}_g{$article->galleries}-{$image->name}" alt="{$image->title}" />{*}
+				</li>
+			{/foreach}
+		</ol>
+	{/if}
+
+	{if count($articles) > 1}
+		<a class="left carousel-control" href="#slider" data-slide="prev">
+			<span class="fa fa-chevron-left"></span>
+		</a>
+		<a class="right carousel-control" href="#slider" data-slide="next">
+			<span class="fa fa-chevron-right"></span>
+		</a>
+	{/if}
+</div>

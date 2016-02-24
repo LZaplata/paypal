@@ -1,0 +1,41 @@
+{contentType application/xml}
+<?xml version="1.0" encoding="utf-8" ?>
+	<SHOP>
+		{foreach $products as $product}		
+			<SHOPITEM>
+				<ITEM_ID>{$product->products_id}</ITEM_ID>
+				<PRODUCTNAME>{$product->products->name}</PRODUCTNAME> {* upřesnit podle http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
+				<PRODUCT>{$product->products->name}</PRODUCT> {* jakýkoliv název i rozvětvený z eshopu *}
+				<DESCRIPTION>{!$product->products->text|striptags}</DESCRIPTION>
+				<URL>{plink //:FrontEshop:Products:view eshop => $eshop, category => $product->categories->url, cid => $product->categories_id, product => $product->products->url, pid => $product->products_id}</URL>
+				{foreach $product->products->galleries->related("galleries_images")->order("highlight DESC, position ASC") as $image}				
+					{if $iterator->first}
+						<IMGURL>{$presenter->context->parameters["host"]}/files/galleries/originals/{hash("sha512", $image->id)}.{pathinfo($image->name, PATHINFO_EXTENSION)}</IMGURL>
+					{else}
+						<IMGURL_ALTERNATIVE>{$presenter->context->parameters["host"]}/files/galleries/originals/{hash("sha512", $image->id)}.{pathinfo($image->name, PATHINFO_EXTENSION)}</IMGURL_ALTERNATIVE>
+					{/if}
+				{/foreach}				
+				<VIDEO_URL></VIDEO_URL>
+				<PRICE_VAT>{$product->products->price}</PRICE_VAT>
+				<ITEM_TYPE></ITEM_TYPE> {* K rozlišení nových a bazarových položek. Jen pro bazarové vyplnit např. "BAZAR" *}
+				{foreach $presenter->getProductProperties($product->products_id) as $property}
+					<PARAM>
+						<PARAM_NAME>{$property->name}</PARAM_NAME>
+						<VAL>{$property->val}</VAL>
+					</PARAM>
+				{/foreach}
+				<MANUFACTURER></MANUFACTURER>
+				<CATEGORYTEXT>{$product->categories->categories_heureka->name_full}</CATEGORYTEXT>
+				<EAN>{$product->products->ean}</EAN>
+				<ISBN></ISBN> {* kód určený pro jednoznačnou identifikaci knižních vydání *}
+				<HEUREKA_CPC>0</HEUREKA_CPC> {* maximální cena, kterou jste ochotni za proklik nabídnout *}
+				<DELIVERY_DATE>{$product->products->delivery_date}</DELIVERY_DATE>
+				{* <DELIVERY></DELIVERY> http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
+				{if $product->products->pid != null}
+					<ITEMGROUP_ID>{$product->products->pid}</ITEMGROUP_ID>
+				{/if}
+				{* <ACCESSORY></ACCESSORY> http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
+				{* <DUES></DUES> http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
+			</SHOPITEM>
+		{/foreach}
+	</SHOP>

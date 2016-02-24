@@ -1,0 +1,23 @@
+{block #content}
+	{include menu.latte}
+	
+	<div class="col-sm-8">
+		{if $presenter->id}
+			{include tabs.latte}
+		{/if}
+	
+		<div class="content">
+			{snippet addMail}
+				<script>loadTinyMCE();</script>
+				<script>loadChosen();</script>
+				
+				{control addMail}
+			{/snippet}		
+		</div>
+		
+		<div class="content">
+			{if $presenter->email}
+				{control mailContent}
+			{/if}
+		</div>
+	</div>

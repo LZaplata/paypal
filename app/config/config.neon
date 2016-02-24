@@ -1,0 +1,161 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+development:
+	parameters:
+		database:
+			driver: mysql
+			host: localhost
+			dbname: cms
+			database: cms
+			user: root
+			password: 
+		layouts:
+			1: 1 blok
+			2: 2 bloky vedle sebe
+			3: 3 bloky vedle sebe
+			4: 2 bloky vedle sebe 1 pod
+			5: 2 bloky vedle sebe 1 nad
+			6: 3 bloky pod sebou
+			7: 2 bloky pod sebou
+			8: 2 bloky vedle sebe 2. horizontálně rozpůlený
+			9: 2 bloky vedle sebe 1. horizontálně rozpůlený
+		layoutsBlocks:
+			1: 1
+			2: 2
+			3: 3
+			4: 3
+			5: 3
+			6: 3
+			7: 2
+			8: 3
+			9: 3
+		layoutsBooking:
+			1: "hotely, ubytování"
+		countModulesLayouts:
+			1: 3
+			2: 4
+			3: 2
+			4: 1
+		countModulesDetailLayouts:
+			1: 1
+			2: 2
+			3: 1
+			4: 0
+		contact:
+			name: Lukáš Záplata
+			email: zap@hucr.cz
+		orderStates:
+			0: Vyřizuje se
+			1: Doručená
+			2: Částečně doručená
+			3: Storno
+		orderStatesBooking:
+			0: Vyřizuje se
+			1: Platba/Záloha
+			2: Dokončeno
+		content:
+			tree: false
+		host: "http://localhost/CMS/www"
+		version: "2.3 beta"
+		tax: 21
+		discount: 1 # 1 = hierarchická, 2 = sčítací
+		deliveryDates:
+			0: Skladem
+			1: Do 3 dnů
+			4: Do týdne
+			8: Do 2 týdnů
+			15: Do měsíce
+			31: Více jak měsíc
+			null: Info v obchodu
+		icons:
+			png: picture
+			jpg: picture
+			gif: picture
+			pdf: pdf
+			doc: word
+			docx: word
+			odt: word
+			xls: excel
+			xlsx: excel
+			ods: excel
+			ppt: powerpoint
+			pptx: powerpoint
+		facebook:
+			appId:
+			appSecret:
+		currency: "Kč"
+		zasilkovna:
+			apiKey:
+
+	php:
+		date.timezone: Europe/Prague
+		# session.save_path: "%tempDir%/sessions"
+		# zlib.output_compression: yes
+
+
+	services:
+		model: App\Model\Db
+		- App\Model\Orders
+		- App\Model\Products
+		- App\Model\Logs
+		- App\Model\Pages
+		database: @database.default
+		authenticator: Authenticator
+		translatorStorage: LiveTranslator\Storage\NetteDatabase(localization_text, localization)
+		translator: 
+			class : LiveTranslator\Translator(cs)
+			setup:
+				- setPresenterLanguageParam(lang)
+		translatorPanel: LiveTranslator\Panel
+		wlCssFilter: WebLoader\Filter\CssUrlsFilter(%wwwDir%)
+		lessFilter: WebLoader\Filter\LessFilter
+		
+	database:
+		dsn: 'mysql:host=%database.host%;dbname=%database.dbname%'
+		user: %database.user%
+		password: %database.password%
+		options: [PDO::MYSQL_ATTR_COMPRESS = true]
+		debugger: true # panel v Debugger baru
+		explain: false  # explain dotazů v Debugger baru
+		reflection: conventional # nebo conventional nebo název třídy
+		
+	nette:
+		session:
+			expiration: "+ 14 days"
+			save_path: "%tempDir%/sessions"
+		mailer:
+			smtp: true
+			host: "mail1.hucr.cz"
+			username: "zap@hucr.cz"
+			password: "5dwTYY5F"
+		debugger:
+			bar:
+				- LiveTranslator\Panel
+		latte:
+			macros:
+				- Macros::install
+		container:
+			accessors: TRUE
+			
+	extensions:
+		debugger.session: Kdyby\SessionPanel\DI\SessionPanelExtension
+		webloader: WebLoader\Nette\Extension
+					
+
+production < development:
+	parameters:
+		database:
+			driver: mysql
+			host: localhost
+			dbname: cms
+			database: cms
+			user: zap
+			password: ZaP2011       
+		contact:
+			name: Lukáš Záplata
+			email: zap@hucr.cz 
+		host: "http://cms.hucr.cz"

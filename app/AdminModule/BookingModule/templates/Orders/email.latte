@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title></title>
+	
+	<style>
+		body {
+			width: 970px;
+			padding: 20px;
+		}
+	
+		{!$css}
+	</style>
+</head>
+
+<body>
+	<p>
+		Dobrý den, <br />
+		došlo k změně stavu vaší rezervace č. {$order->id}.
+	</p>
+	<p>
+		Stav rezervace: <strong>{$presenter->statesOrder[$order->state]}</strong>
+	</p>
+	<div id="contact" class="row">
+		<div id="invoice" class="col-sm-6">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<span class="h4">Osobní údaje</span>
+				</div>
+				<div class="panel-body">			
+					<table class="table-condensed no-margin">
+						<tbody>
+							<tr>
+								<th>Jméno a příjmení:</th>
+								<td>{$order->name} {$order->surname}</td>
+							</tr>
+							<tr>
+								<th>Telefon:</th>
+								<td>{$order->phone}</td>
+							</tr>
+							<tr>
+								<th>E-mail:</th>
+								<td>{$order->email}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="cart">
+		<table class="table">
+			<thead>
+				<th>Areál</th>
+				<th>Místnost</th>
+				<th>Objekt</th>
+				<th>Termín</th>
+				<th>Cena</th>
+			</thead>
+			<tbody>
+				{foreach $order->related("booking_bookings") as $object}
+					<tr>
+						<td>{$presenter->model->getBookingRooms()->wherePrimary($object->booking_objects->booking_rooms->pid)->fetch()->name}</td>
+						<td>{$object->booking_objects->booking_rooms->name}</td>
+						<td>{$object->booking_objects->name}</td>
+						<td>{$object->dateFrom->format("j. n. Y")} - {$object->dateTo->format("j. n. Y")}</td>
+						<td>{$object->price}</td>
+					</tr>
+				{/foreach}
+			</tbody>
+		</table>
+	</div>
+	<div class="row">		
+		<div class="col-sm-6 col-sm-offset-6">
+			<div class="panel panel-default">
+				<div class="panel-body">
+					<div>				
+						<div class="pull-right h4"><strong>{$order->price} czk</strong></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

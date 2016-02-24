@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+		<title></title>
+	
+		<style>
+			p {
+				font-size: 12px;
+			}
+		</style>
+	</head>
+
+	<body>
+		{ifset $client}
+			<img src="{$host}/?do=newsletter-viewEmail&id={$client->id}&utm_source=google&utm_medium=email&utm_campaign={$email->name}" alt="" />
+		{/ifset}
+	
+		{!$email->text}
+		
+		{foreach $contents as $content}
+			{if $content->editors_id}
+				{var $editor = $model->getEditors()->wherePrimary($content->editors_id)->fetch()}
+				
+				<div class="editor">
+					<h3>{$editor->name}</h3>
+					
+					<div class="text">
+						{!$editor->text}
+					</div>
+				</div>
+			{elseif $content->articles_id}
+				{var $article = $model->getArticles()->wherePrimary($content->articles_id)->fetch()}
+				
+				<div class="article">
+					<div class='top'>
+						<h3>{$article->name}</h3>
+						
+						<div class='date'>
+							{$article->date|date:'j. n. Y'}
+						</div>
+					</div>
+						
+					<div class="center">
+						{if $article->description}
+							<div class='description'>								
+								<p>
+									{$article->description}
+								</p>
+							</div>
+						{/if}
+					
+						{if $article->text}
+							<div class='text'>								
+								{!$article->text}
+							</div>
+						{/if}
+					</div>
+				</div>
+			{else}
+				{var $product = $model->getProducts()->wherePrimary($content->products_id)->fetch()}
+			
+				<div class="product">
+					<div class='top'>
+						<h3>{$product->name}</h3>
+					</div>
+						
+					<div class="center">
+						{if $product->description}
+							<div class='description'>								
+								<p>
+									{$product->description}
+								</p>
+							</div>
+						{/if}
+					
+						{if $product->text}
+							<div class='text'>								
+								{!$product->text}
+							</div>
+						{/if}
+					</div>
+				</div>
+			{/if}
+		{/foreach}
+		
+		{ifset $client}
+			<p clsss="signout">
+				<a href="{$host}/?do=newsletter-cancel&id={$client->id}&email={$client->users->email}&utm_source=google&utm_medium=email&utm_campaign={$email->name}">
+					Odhlásit se z newsletteru
+				</a>
+			</p>
+		{/ifset}
+	</body>
+</html>

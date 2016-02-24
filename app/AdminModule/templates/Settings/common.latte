@@ -1,0 +1,65 @@
+{block #content}
+	{include menu.latte}
+	
+	<div class="commonpage">
+		<div class="col-sm-12 {if $rightbar}col-md-12 col-lg-9{/if}">	
+			<ul class="nav nav-tabs" role="tablist">
+			  	<li class="{if !$presenter['contactFormEmailsForm']->hasErrors()}active{/if}">
+			  		<a href="#ga" role="tab" data-toggle="tab">
+			  			<i class="fa fa-google"></i>&nbsp; Externí služby
+			  		</a>
+			  	</li>
+			  	<li>
+			  		<a href="#favicon" role="tab" data-toggle="tab">
+			  			<i class="fa fa-picture-o"></i>&nbsp; Favicon
+			  		</a>
+			  	</li>
+			  	<li>
+			  		<a href="#social" role="tab" data-toggle="tab">
+			  			<i class="fa fa-facebook"></i>&nbsp; Sociální sítě
+			  		</a>
+			  	</li>
+			  	<li class="{if $presenter['contactFormEmailsForm']->hasErrors()}active{/if}">
+			  		<a href="#emails" role="tab" data-toggle="tab">
+			  			<i class="fa fa-envelope"></i>&nbsp; E-maily
+			  		</a>
+			  	</li>
+			  	<li class="">
+			  		<a href="#titles" role="tab" data-toggle="tab">
+			  			<i class="fa fa-header"></i>&nbsp; Titulky
+			  		</a>
+			  	</li>
+			</ul>
+			
+			<div class="tab-content content">
+				<div class="tab-pane {if !$presenter['contactFormEmailsForm']->hasErrors()}active{/if}" id="ga">
+			  		{control ga}
+			  	</div>
+			  	
+			  	<div class="tab-pane" id="favicon">
+					<p>
+						{if file_exists($presenter->context->parameters['wwwDir'].'/favicon.ico')}
+							<img src="{$basePath}/favicon.ico" class="pull-left" />
+							<a href="{plink DeleteFavicon!}" class="fa fa-trash text-danger col-sm-5"></a>
+						{/if}
+					</p>
+					
+					<p class="clearfix"></p>
+				
+					{control favicon}
+			  	</div>
+			  	
+			  	<div class="tab-pane" id="social">
+			  		{control social}
+			  	</div>
+			  	
+			  	<div class="tab-pane {if $presenter['contactFormEmailsForm']->hasErrors()}active{/if}" id="emails">
+			  		{control contactFormEmailsForm}
+			  	</div>
+			  	
+			  	<div class="tab-pane" id="titles">
+			  		{control titles}
+			  	</div>
+			</div>
+		</div>
+	</div>

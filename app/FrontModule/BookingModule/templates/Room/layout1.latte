@@ -1,0 +1,38 @@
+<div class="col-sm-8">
+	<h2>
+		{$room->name}
+	</h2>
+	
+	{control searchForm}
+	
+	{var $i = 1}                              
+	                
+	{foreach $objects as $key=>$objectsArrays}	
+		<div class="panel panel-default">
+			{var $price = array()}
+		
+			<div class="panel-body">
+				<table class="table table-condensed">
+					<thead>
+						<th>Objekt</th>
+						<th>Kapacita</th>
+						<th>Cena</th>
+					</thead>
+					<tbody>
+						{foreach $objectsArrays as $object}
+							<tr>
+								<td>{$object->name}</td>
+								<td>{$object->capacity}</td>
+								<td>{$prices[$key][$object->id]}</td>
+							</tr>
+						{/foreach}						
+					</tbody>
+				</table>
+				
+				{control booking-$key}
+			</div>
+		</div>
+				
+		{var $i += 1}
+	{/foreach}
+</div>

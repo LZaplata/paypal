@@ -1,0 +1,43 @@
+{block #content}
+	<div class="content">
+		<fieldset>
+			<legend>Originální obrázek</legend>
+			
+			<p class="dimensions hidden">
+				šířka: <span class="width"></span> px <br />
+				výška: <span class="height"></span> px
+			</p>
+			
+			<div class="cropper row">
+				<div class="col-sm-8">
+					<img src="{$basePath}/files/galleries/originals/{hash('sha512', $image->id)}.{$extension}" title="{$image->title}" id="cropper">
+				</div>
+			</div>
+			
+			{control cropForm}
+		</fieldset>
+		
+		<fieldset>
+			<legend>Náhledy</legend>
+			
+			{snippet thumbs}
+				<div class="row cropper-thumbs">
+					{foreach $dimensions as $dimension}
+						<div class="col-sm-3">
+							<img src="{$basePath}/files/galleries/{$dimension->dimension}_g{$image->galleries}-{$image->name}" title="{$image->title}">
+							
+							{if $dimension->operation == 1}
+								{var $info = $control->getWidthHeight($dimension->dimension)}
+								
+								<div class="radio">
+									<label>
+										<input type="radio" class="cropImage" name="crop" data-width="{$info[1]}" data-height="{$info[2]}" /> Znovu oříznout? ({$dimension->dimension} px)
+									</label>
+								</div>
+							{/if}	
+						</div>
+					{/foreach}
+				</div>
+			{/snippet}
+		</fieldset>
+	</div>

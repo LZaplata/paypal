@@ -1,0 +1,57 @@
+{if $presenter->product}
+	<ul class="nav nav-tabs">
+		<li class="button f-left {ifCurrentIn 'Products:edit'}active{/ifCurrentIn}">
+			<a href="{ifCurrent Products:edit}#edit{else}{link Products:edit $presenter->product->id, 0}{/ifCurrent}" {ifCurrent Products:edit}data-toggle="tab"{/ifCurrent}>
+				<i class="fa fa-pencil"></i>&nbsp; Editace
+			</a>
+		</li>
+		{*}<li class="button f-left {ifCurrentIn 'Products:properties'}active{/ifCurrentIn}">
+			<a href="{link Products:properties $presenter->product->id}">
+				<i class="fa fa-shield"></i>&nbsp; Vlastnosti
+			</a>
+		</li>{*}
+		<li class="button f-left {ifCurrentIn 'Products:gallery'}active{/ifCurrentIn}">
+			<a href="{link Products:gallery $presenter->product->galleries, 0}">
+				<i class="fa fa-camera"></i>&nbsp; Galerie
+			</a>
+		</li>
+		
+		{if $presenter->section->files}
+			<li class="{ifCurrentIn 'Products:files'}active{/ifCurrentIn}">
+				<a href="{link Products:files $presenter->product->filestores, 0}">
+					<i class="fa fa-file-o"></i>&nbsp; Soubory
+				</a>
+			</li>
+		{/if}
+		
+		{if $presenter->product && $presenter->section->versions}
+			{ifCurrent Products:edit}
+				<li class="{*ifCurrentIn 'Products:gallery'}active{/ifCurrentIn*}">
+					<a href="#versions" data-toggle="tab">
+						<i class="fa fa-history"></i>&nbsp; Verze
+					</a>
+				</li>
+			{/ifCurrent}
+		{/if}
+		
+		{if $presenter->product && $presenter->section->discounts}
+			{ifCurrent Products:edit}
+				<li>
+					<a href="#discounts" data-toggle="tab">
+						<i class="fa fa-history"></i>&nbsp; Množstevní slevy
+					</a>
+				</li>
+			{/ifCurrent}
+		{/if}
+		
+		{if $presenter->section->siblings}
+			{ifCurrent Products:edit}
+				<li>
+					<a href="#related" data-toggle="tab">
+						<i class="fa fa-barcode"></i>&nbsp; Podobné produkty
+					</a>
+				</li>
+			{/ifCurrent}
+		{/if}
+	</ul>
+{/if}

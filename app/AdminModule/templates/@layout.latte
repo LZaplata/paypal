@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title>HUCR admin {$presenter->context->parameters["version"]}</title>
+	
+	{control css}
+	
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
+	
+	<script type="text/javascript" src="{$basePath}/adminModule/js/tinymce/tinymce.min.js"></script>
+	{control js}
+	
+	{*
+	<script type="text/javascript">
+	  window.intercomSettings = {
+	    app_id: "eecrdsoh",
+	    name: "{!$user->getIdentity()->name} {!$user->getIdentity()->surname}", // Full name
+	    email: "{!$user->getIdentity()->email}", // Email address
+	    created_at: 1312182000 // Signup date as a Unix timestamp
+	  };
+	</script>
+	<script type="text/javascript">
+		(function(){ var w=window;var ic=w.Intercom;if(typeof ic==="function"){
+		ic('reattach_activator');ic('update',intercomSettings);}else{
+		var d=document;var i=function(){ i.c(arguments)};i.q=[];i.c=function(args){
+		i.q.push(args)};w.Intercom=i;function l(){ var s=d.createElement('script');
+		s.type='text/javascript';s.async=true;s.src='https://widget.intercom.io/widget/eecrdsoh';
+		var x=d.getElementsByTagName('script')[0];x.parentNode.insertBefore(s,x);}
+		if(w.attachEvent){ w.attachEvent('onload',l);}else{ w.addEventListener('load',l,false);}}})()
+	</script>
+	*}
+</head>
+
+<body class="{if $presenter->presenterName == 'Browser'}bg{/if}">
+	{snippet flashMessages}
+		<div n:foreach="$flashes as $flash" class="flash {$flash->type}">{$flash->message}</div>
+	{/snippet}
+	
+	{ifset #content}
+		{if $presenter->presenterName != 'Browser'}
+			<nav class="navbar navbar-default" role="navigation">
+  				<div class="container-fluid">
+					<div class="collapse navbar-collapse">
+        				<ul class="nav navbar-nav pull-right">
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									{$user->identity->email} <span class="caret"></span>
+								</a>
+								
+								<ul class="dropdown-menu" role="menu">						
+									<li>
+										<a href="{plink :Admin:Accounts:edit $user->id}"><i class="fa fa-pencil fa-fw"></i> Upravit profil</a>
+									</li>
+									<li class="divider"></li>
+									<li>
+										<a href="{plink SignOut!}"><i class="fa fa-unlock fa-fw"></i> Odhlásit</a>
+									</li>
+								</ul>
+							</li>
+	      				</ul>
+	      				
+	      				<a href="{link :Front:Page:}" target="_blank" class="navbar-btn pull-right h3" data-toggle="tooltip" data-placement="left" title="Přejít na web">
+	      					{$hostName} <span class="favicon img-circle text-center"><img src="{$basePath}/favicon.ico"></span>
+	      				</a>
+        			</div>
+  				</div>
+  			</nav>
+
+			<div id="content">
+				<div class="pull-left main-menu">
+					<ul class="nav nav-stacked nav-pills">
+						<li class="text-center {ifCurrentIn 'Homepage:*'}active{/ifCurrentIn}">
+							<a href="{link :Admin:Homepage:}" class="text-uppercase">
+								<i class="fa fa-home fa-2x"></i><br>home
+							</a>
+						</li>
+						
+						{if $presenter->acl->isAllowed($user->getIdentity()->role, 'structure')}
+							<li class="text-center {ifCurrentIn 'Structure:*'}active{/ifCurrentIn}">
+								<a href="{link :Admin:Structure:}" class="text-uppercase">
+									<i class="fa fa-puzzle-piece fa-2x"></i><br>struktura
+								</a>
+							</li>
+						{/if}	
+						
+						<li class="text-center {ifCurrentIn 'Content:*', 'Editor:*', 'Articles:*', 'Admin:Categories:*', 'Files:*'}active{/ifCurrentIn}">
+							<a href="{link :Admin:Content:}" class="text-uppercase">
+								<i class="fa fa-list-alt fa-2x"></i><br>obsah
+							</a>
+						</li>
+							
+						{if $settings}
+							{if $settings->eshop}
+								<li class="text-center eshop {ifCurrentIn 'AdminEshop:*:*', 'AdminEshop:Gallery:*'}active{/ifCurrentIn}">
+									<a href="{link :AdminEshop:Products:}" class="text-uppercase">
+										<i class="fa fa-shopping-cart fa-2x"></i><br>e-shop
+									</a>
+								</li>
+							{/if}
+							
+							{if $presenter->acl->isAllowed($user->getIdentity()->role, 'mailing') && $settings->mailing}
+								<li class="mailing {ifCurrentIn 'Admin:Mailing:*'}active{/ifCurrentIn}">
+									<a href="{link :Admin:Mailing:}" class="text-uppercase">
+										<i class="fa fa-envelope"></i>&nbsp; mailing
+									</a>
+								</li>
+							{/if}
+							
+							{if $settings->booking}
+								<li class="text-center booking {ifCurrentIn 'AdminBooking:*:*'}active{/ifCurrentIn}">
+									<a href="{link :AdminBooking:Rooms: pid => 1}" class="text-uppercase">
+										<i class="fa fa-fax fa-2x"></i>&nbsp; rezervace
+									</a>
+								</li>
+							{/if}
+						{/if}	
+						
+						{if $presenter->acl->isAllowed($user->getIdentity()->role, 'settings')}
+							<li class="text-center settings {ifCurrentIn 'Admin:Settings:*'}active{/ifCurrentIn}">
+								<a href="{link :Admin:Settings:common}" class="text-uppercase">
+									<i class="fa fa-cogs fa-2x"></i><br>nastavení
+								</a>
+							</li>
+						{/if}
+						{if $presenter->acl->isAllowed($user->getIdentity()->role, 'accounts')}
+							<li class="text-center accounts {ifCurrentIn 'Accounts:*'}active{/ifCurrentIn}">
+								<a href="{link :Admin:Accounts:Admin}" class="text-uppercase">
+									<i class="fa fa-lock fa-2x"></i><br>účty
+								</a>
+							</li>
+						{/if}
+					</ul>
+				</div>
+				
+				{include content}
+			</div>
+			{*
+			<div class="clearfix"></div>
+			
+			<div class="footer text-center container-fluid">
+				<p class="no-margin">
+					<span>
+						<img src="{$basePath}/adminModule/images/logo-sm.png">
+					</span>
+					
+					<span>
+						<i class="fa fa-phone"></i>&nbsp; +420 777 563 613
+					</span>		
+					
+					<span>
+						<i class="fa fa-envelope-o"></i>&nbsp; info@hucr.cz
+					</span>		
+					
+					<span>
+						verze {$presenter->context->parameters["version"]}
+					</span>		
+				</p>
+			</div>
+			*}
+		{else}
+			{include content}
+		{/if}
+	{else}
+		{include sign}
+	{/ifset}
+</body>
+</html>

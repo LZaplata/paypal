@@ -1,0 +1,46 @@
+{var $name = "name".$presenter->lang}
+{var $defaultName = "name".$defaultLang}
+
+{if !$image}
+	{var $p = $presenter->model->getProducts()->wherePrimary($product->pid)->fetch()}
+	
+	{if $p}
+		{var $image = $p->galleries->related('galleries_images')->order("position ASC")->fetch()}
+	{/if}
+{/if}
+
+<div id="cart-popup">
+	<div aria-hidden="false" aria-labelledby="cartPopup" role="dialog" tabindex="-1" class="modal fade in" id="modal">
+	    <div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title">Do košíku jste vložili:</h4>
+				</div>
+				<div class="modal-body clearfix">
+					<div class="row">
+						{if $thumb && $image}
+							<div class="col-xs-4">
+								<p class="img">
+									<img src="{$basePath}/files/galleries/{$thumb->dimension}_g{$image->galleries}-{$image->name}" class="img-responsive" />
+								</p>
+							</div>
+						{/if}
+						
+						<div class="col-xs-8">
+							<h1 class="h3 no-margin">{$product->$name ?: ($product->$defaultName ?: $product->name)}</h1>
+							<p>
+								<br />
+								{$amount} ks za {$price|number:$decimals:",":" "} {_$currency}/ks <br />
+								<span class="h3">{$amount * $price|number:$decimals:",":" "}</span> {_$currency} celkem
+							</p>
+						</div>
+					</div>
+				</div>				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Pokračovat v nákupu</button>
+					<a href="{plink :FrontEshop:Order:cart category => null, cid => null, product => null, pid => null}" class="btn btn-primary">Přejít do košíku</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

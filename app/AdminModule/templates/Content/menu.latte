@@ -1,0 +1,54 @@
+<div class="pull-left menu">
+	{var $level = 1}
+
+	{block #pages}
+		<ul class="nav nav-pills nav-stacked">
+			{foreach $pages as $page}
+				{var $modules = $page->related("pages_modules")->where("modules_id NOT IN ?", array(3,4))}
+				{var $pages = $presenter->getPages($page->id)}
+			
+				{if count($modules)}
+					<li class="">
+						{if count($modules) > 1}
+							<span class="text-uppercase">
+								{if $level > 1}<i class="fa fa-level-up fa-rotate-90"></i>&nbsp;{/if} {$page->name}
+							</span>
+						
+							{foreach $modules as $module}		
+								<a href="{if $module->modules_id == 1}{link Editor:Edit $module->id, $module->sections->id}{else}{link Articles:View $module->sections}{/if}" class="block {ifCurrentIn 'Editor:* '.$module->id, 'Articles:* '.$module->sections->id, 'Categories:* '.$module->sections->id}active{/ifCurrentIn}">
+									{if $module->modules_id == 1}
+										<i class="fa fa-file-text-o fa-fw"></i>&nbsp;
+									{else}
+										<i class="fa fa-list fa-fw"></i>&nbsp;
+									{/if}
+									
+									blok {$module->position} <em style="opacity: 0.7;">({$module->sections->name})</em>
+								</a>
+							{/foreach}
+						{else}
+							{var $module = $modules->fetch()}
+						
+							<a href="{if $module->modules_id == 1}{link Editor:Edit $module->id, $module->sections->id}{else}{link Articles:View $module->sections}{/if}" class="text-uppercase {ifCurrentIn 'Editor:* '.$module->id, 'Articles:* '.$module->sections->id, 'Categories:* '.$module->sections->id}active{/ifCurrentIn}">
+								{if $level > 1}<i class="fa fa-level-up fa-rotate-90"></i>&nbsp;{/if} {$page->name}
+							</a>			
+						{/if}
+						
+						{if count($pages)}
+							{include #pages, pages => $pages, level => $level+1}
+						{/if}
+					</li>	
+				{/if}
+			{/foreach}
+			
+			{if $level == 1}
+				{foreach $sections as $section}
+					<li>
+						<a href="{link Articles:View $section->id}" class="text-uppercase {ifCurrentIn 'Articles:* '.$section->id, 'Categories:* '.$section->id}active{/ifCurrentIn}">
+							{$section->name}
+						</a>
+					</li>
+				{/foreach}
+			{/if}
+		</ul>
+	{/block}
+</div>

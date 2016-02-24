@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title></title>
+</head>
+
+<body style="width: 670px; padding: 0 15px; font-size: 13px; font-family: sans-serif, arial, verdana;">
+	<p>
+		Dobrý den, <br />
+		na vašich stránkách byla uskutečněna nová rezervace.
+	</p>
+	
+	<h1 style="font-size: 20px;">Rezervace č. {$order->id}</h1>
+	
+	<table style="border-spacing: 0; border: none; width: 100%; font-family: sans-serif; font-size: 13px;">
+		<thead>
+			<tr>
+				<th style="font-size: 17px;" align="left">Osobní údaje</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td style="width: 50%;">
+					<table style="border-spacing: 0; border: none; width: 100%; font-family: sans-serif; font-size: 13px;">
+						<tbody>
+							<tr>
+								<th align="left">Jméno a příjmení:</th>
+								<td>{$order->name} {$order->surname}</td>
+							</tr>
+							<tr>
+								<th align="left">Telefon:</th>
+								<td>{$order->phone}</td>
+							</tr>
+							<tr>
+								<th align="left">E-mail:</th>
+								<td>{$order->email}</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+				<td style="width: 50%;"></td>
+			</tr>
+		</tbody>
+	</table>	
+
+	<table style="border-spacing: 0; border: none; width: 100%; font-family: sans-serif; font-size: 13px; margin: 30px 0;">
+		<thead>
+			{*}<th align="left">Areál</th>
+			<th align="left">Místnost</th>{*}
+			<th align="left">Objekt</th>
+			<th align="left">Termín</th>
+			<th align="left">Cena</th>
+		</thead>
+		<tbody>
+			{foreach $order->related("booking_bookings") as $object}
+				<tr>
+					{*}<td>{$presenter->model->getBookingRooms()->wherePrimary($object->booking_objects->booking_rooms->pid)->fetch()->name}</td>
+					<td>{$object->booking_objects->booking_rooms->name}</td>{*}
+					<td>{$object->booking_objects->name}</td>
+					<td>{$object->dateFrom->format("j. n. Y H:i")} - {$object->dateTo->format("j. n. Y H:i")}</td>
+					<td>{$object->price|number:$decimals:",":" "} czk</td>
+				</tr>
+			{/foreach}
+		</tbody>
+	</table>
+	
+	<table style="border-spacing: 0; border: none; width: 50%; font-family: sans-serif; font-size: 13px;">
+		<tbody>
+			<tr>
+				<th align="left">celková cena:</th>
+				<td style="font-size: 20px;">
+					<strong>
+						{$order->price|number:$decimals:",":" "} czk{*$order->currency*}
+					</strong>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{block #booking}
+	<div id="rooms" class="row">
+		{foreach $rooms as $room}
+			<div class="room col-sm-4">
+				<h3>
+					<a href="{plink :FrontBooking:Room:view room => $room->url, rid => $room->id|nosafeurl}">
+						{$room->name}	
+					</a>
+				</h3>
+			</div>
+		{/foreach}
+	</div>

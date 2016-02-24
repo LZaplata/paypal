@@ -1,0 +1,21 @@
+<ul class="nav nav-tabs">
+	<li class="button f-left {ifCurrentIn 'Articles:edit'}active{/ifCurrentIn}">
+		<a href="{link Articles:edit $presenter->article, $presenter->section->id}">
+			<i class="fa fa-pencil"></i>&nbsp; Editace
+		</a>
+	</li>
+	{if $presenter->section->gallery}
+		<li class="button f-left {ifCurrentIn 'Articles:gallery'}active{/ifCurrentIn}">
+			<a href="{link Articles:gallery $presenter->article->galleries, $presenter->section->id}">
+				<i class="fa fa-camera"></i>&nbsp; Galerie
+			</a>
+		</li>
+	{/if}
+	{if $presenter->section->files}
+		<li class="button f-left {ifCurrentIn 'Articles:files'}active{/ifCurrentIn}">
+			<a href="{link Articles:files $presenter->article->filestores, $presenter->section->id}">
+				<i class="fa fa-file-o"></i>&nbsp; Soubory
+			</a>
+		</li>
+	{/if}
+</ul>

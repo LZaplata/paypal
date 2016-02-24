@@ -1,0 +1,73 @@
+<div class="dropdown userbar {ifset $error}open{/ifset}">
+	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+		<strong>{if !$user->loggedIn}{_'Přihlásit'}{else}{$user->identity->email}{/if}</strong> <span class="caret"></span>
+	</a>
+	
+	<div id="" class="dropdown-menu login-dp">
+		<div class="row">
+			<div class="col-sm-12">
+				{if !$user->loggedIn}
+					{if $presenter->context->parameters["facebook"]["appId"]}
+						Přihlásit pomocí
+						<div class="social-buttons">						
+							{$presenter["facebookLogin"]->render()}
+		<!-- 					<a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a> -->
+						</div>
+						
+						nebo
+					{/if}				
+				
+					{form signInForm}
+						<ul class="alert alert-danger alert-sm list-unstyled" n:if="$form->hasErrors()">
+							<li n:foreach="$form->errors as $error">{$error}</li>
+						</ul>
+					
+						<div class="form-group">
+							 {input email class => "form-control"}
+						</div>
+						<div class="form-group">
+							 {input password class => "form-control"}
+							 <div class="help-block text-right">
+							 	<a href="{dlink :FrontEshop:Users:password eshop => $eshop}">{_'Zapomněli jste heslo?'}</a>
+							 </div>
+						</div>
+						<div class="form-group">
+							 {input login class => "btn btn-primary btn-block"}
+						</div>
+						<div class="checkbox">
+							 {input remember}
+						</div>
+					{/form}
+				{else}
+					<div class="form-group">
+						<ul class="list-unstyled">
+							<li>
+								<a href="{dlink :FrontEshop:Users:edit eshop => $eshop}">
+									<i class="fa fa-user fa-fw"></i> Upravit profil
+								</a>
+							</li>
+							<li>
+								<a href="{dlink :FrontEshop:Users:orders eshop => $eshop}">
+									<i class="fa fa-shopping-cart fa-fw"></i> Moje objednávky
+								</a>
+							</li>
+							<li>
+								<a href="{dlink :FrontEshop:Users:change-password eshop => $eshop}">
+									<i class="fa fa-unlock-alt fa-fw"></i> Změnit heslo
+								</a>
+							</li>
+						</ul>
+					</div>
+				{/if}
+			</div>
+			
+			<div class="bottom text-center">
+				{if !$user->loggedIn}
+					{_'Nemáte účet?'} <a href="{dlink :FrontEshop:Users:registration eshop => $eshop}"><strong>{_'Zaregistrujte se'}</strong></a>
+				{else}
+					<a href="{plink SignOut!}"><strong>{_'Odhlásit'}</strong></a>
+				{/if}
+			</div>
+		</div>
+	</div>
+</div>

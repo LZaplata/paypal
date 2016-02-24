@@ -1,0 +1,33 @@
+{snippet newsletter}
+	{if $inline}
+		<div class="f-left">
+			<p class="no-margin">
+				<img src="{$basePath}/images/newsletter.jpg" alt="newsletter" />
+			</p>
+		</div>
+	
+		<div class="f-left">
+			<h2 class="no-margin">Přejete-li si dostávat informace <br /> ohledně našich kulturních akcích?</h2>
+			<p class="no-margin">
+				(výstavy, koncerty, výtvarné dílny, atd.) Zaregistrujte, prosím, svůj email. <br />
+				Zasílání informací můžete kdykoliv odhlásit.
+			</p>
+		
+			{form newsletter}
+				{*if $form->hasErrors()}
+					<ul class="errors">
+						{foreach $form->errors as $error} 
+							<li>{$error}</li>
+						{/foreach}
+					</ul>
+				{/if*}
+			
+				<p class="label f-left">{label email /}</p>
+				<p class="input f-left">{input email class => text}</p>
+				<p class="f-left">{input send class => button}</p>
+			{/form}
+		</div>
+	{else}
+		{control newsletter}
+	{/if}
+{/snippet}

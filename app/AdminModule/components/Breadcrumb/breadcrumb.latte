@@ -1,0 +1,9 @@
+<ol class="breadcrumb">
+	{foreach $breadcrumb as $stage}
+		<li class="{if $iterator->last}active{/if}">
+			<a href="{$stage->url}">
+				{$stage->name}
+			</a>
+		</li>
+	{/foreach}
+</ol>

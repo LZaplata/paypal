@@ -1,0 +1,32 @@
+{block #content}
+	{include menu.latte}
+	
+	<div class="commonpage">
+		<div class="col-sm-12 {if $rightbar}col-md-8 col-lg-9{/if}">
+			<ul class="nav nav-tabs" role="tablist">
+			  	<li class="active">
+			  		<a href="#texts" role="tab" data-toggle="tab">
+			  			<i class="fa fa-file-text-o"></i>&nbsp; Textová pole
+			  		</a>
+			  	</li>
+			  	<li>
+			  		<a href="#articles" role="tab" data-toggle="tab">
+			  			<i class="fa fa-newspaper-o"></i>&nbsp; Články
+			  		</a>
+			  	</li>
+			</ul>
+			
+			<div class="content">
+				<div class="tab-content">
+				  	<div class="tab-pane active" id="texts">
+				  		{control editorsGrid}
+				  	</div>
+				  	
+				  	<div class="tab-pane" id="articles">
+				  		{control articlesGrid}
+				  	</div>
+				</div>
+			</div>
+		</div>
+	</div>
+{/block}

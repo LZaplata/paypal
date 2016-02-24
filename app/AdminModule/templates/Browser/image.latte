@@ -1,0 +1,79 @@
+{block #content}	
+	<div id="browser-images">
+		<ul class="col-sm-4 list-unstyled">
+			{foreach $sections as $section}
+				{block #folders}
+					{if count($galleries = $presenter->getGalleries($section->modules_id, $section->id))}
+						<li>
+							<i class="fa fa-folder"></i>&nbsp; 
+							<a href="#section{$section->id}" data-toggle="collapse">
+								{$section->name}
+							</a>
+							
+							<ul class="collapse {if $section->id == $presenter->getParameter('sid')}in{/if}" id="section{$section->id}">
+								{foreach $galleries as $gallery}
+									{block #gallery}
+										{if count($gallery->galleries->related('galleries_images'))}
+											<li> 
+												<a href="{plink this gid => $gallery->galleries_id, sid => $section->id}">
+													{$gallery->name ? $gallery->name : (isset($gallery->pages_modules_id) ? $gallery->pages_modules->pages->name : "")}
+												</a>
+											</li>
+										{/if}
+									{/block}
+								{/foreach}
+							</ul>
+							
+							{foreach $presenter->model->getCategories()->where("sections_id", $section->id) as $gallery}
+								{include #gallery}
+							{/foreach}
+						</li>
+					{/if}
+				{/block}
+			{/foreach}
+			{include #folders, section => (object) array("modules_id" => 3, "id" => 0, "name" => "eshop")}
+		</ul>
+	
+		{if $images}
+			<div class="col-sm-8">
+				<div class="row">
+					{foreach $images as $image}
+						{var $thumb = false}
+						
+						<div class="col-sm-3">
+							<div class="thumbnail">								
+								{foreach $dimensions as $dimension}
+									{var $imageURL = $presenter->context->httpRequest->url->baseUrl.'files/galleries/'.$dimension->dimension.'_g'.$image->galleries.'-'.$image->name}
+									{var $originalImageURL = $presenter->context->httpRequest->url->baseUrl.'files/galleries/g'.$image->galleries.'-'.$image->name}
+								
+									{if file_exists($presenter->context->parameters['wwwDir'].'/files/galleries/'.$dimension->dimension.'_g'.$image->galleries.'-'.$image->name)}
+										{if !$thumb}
+											<p>
+												<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}">
+													<img src="{$basePath}/files/galleries/{$dimension->dimension}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
+												</a>
+											</p>
+											
+											{*}<h4>{($image->title ? $image->title : $image->name)|truncate:16}</h4>{*}
+											
+											<i class="fa fa-download"></i>&nbsp; 
+											<a href="#" class="browser" onclick="addUrl({$originalImageURL}, {$image->title});">
+												originál
+											</a><br>
+											
+											{var $thumb = true}
+										{/if}
+										
+										<i class="fa fa-download"></i>&nbsp;
+										<a href="#" class="browser" onclick="addUrl({$imageURL}, {$image->title});">
+											{$dimension->dimension} {if !$iterator->last}<br>{/if}
+										</a>
+									{/if}
+								{/foreach}
+							</div>
+						</div>
+					{/foreach}
+				</div>
+			</div>
+		{/if}
+	</div>

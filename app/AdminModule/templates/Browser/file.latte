@@ -1,0 +1,60 @@
+{block #content}
+	<div id="browser-files">
+		<ul class="nav nav-tabs">
+			<li>
+				<a href="#files" data-toggle="tab">Soubory</a>
+			</li>
+			<li class="{if !$presenter->getParameter('gid')}active{/if}">
+				<a href="#pages" data-toggle="tab">Stránky</a>
+			</li>
+			<li class="{if $presenter->getParameter('gid')}active{/if}">
+				<a href="#images" data-toggle="tab">Obrázky</a>
+			</li>
+		</ul>
+		
+		<div class="tab-content">
+		    <div class="tab-pane" id="files">
+		    	<ul id="files" class="tab-pane {if $presenter->getParameter('gid')}hidden{/if}">	
+					{foreach $files as $file}
+						{var $fileURL = $basePath.'/files/files/f'.$file->filestores->id.'-'.$file->name}
+					
+						<li>
+							<a href="#" onclick="addUrl({$fileURL})">
+								{$file->name}
+							</a>
+						</li>
+					{/foreach}
+				</ul>
+		    </div>
+		    
+		    <div class="tab-pane {if !$presenter->getParameter('gid')}active{/if}" id="pages">
+		    	{var $level = 0}
+				{block #pages}
+					<ul {if $level == 0}id="pages"{/if} class="tab-pane">
+						{foreach $pages as $page}
+							{$presenter->getPageUrl($page->pid, $page->url)}
+							
+							{if $page->highlight == 1}
+								{var $url = $basePath}
+							{else}
+								{var $url = $basePath.$presenter->url}
+							{/if}
+						
+							<li>
+								<a href="#" onclick="addUrl({$url})">
+									{$page->name}
+								</a>
+								{if count($control->getPages($page->id))}
+									{include #pages, pages => $presenter->getPages($page->id), level => $level+1}
+								{/if}
+							</li>
+						{/foreach}
+					</ul>
+				{/block}
+		    </div>
+		    
+		    <div class="tab-pane {if $presenter->getParameter('gid')}active{/if}" id="images">
+				{include image.latte}
+		    </div>
+ 		</div>
+	</div>

@@ -1,0 +1,26 @@
+{contentType application/xml}
+<?xml version="1.0" encoding="utf-8" ?>
+{if !Tracy\Debugger::isEnabled()}<rss version="2.0" xmlns:g="http://base.google.com/ns/1.0">{/if}
+<channel xmlns:g="http://base.google.com/ns/1.0">
+<title>Marko koupelny - vaše osobní lázně</title>
+<link>http://www.marko-koupelny.cz/</link>
+	{foreach $products as $product}
+		<item>
+			<g:id>{$product->products_id}</g:id>
+			<title>{$product->products->name|striptags}</title>
+			<description>{$product->products->text|replaceRE:'(</[a-z0-9A-Z]+>)':' '|striptags}</description>
+			<g:google_product_category>{$product->categories->categories_merchants->name_full}</g:google_product_category>
+			<g:availability>{if $product->products->amount > 0}in stock{else}out of stock{/if}</g:availability>
+			<link>{plink //:FrontEshop:Products:view eshop => $eshop, category => $product->categories->url, cid => $product->categories_id, product => $product->products->url, pid => $product->products_id}</link>
+			{foreach $product->products->galleries->related("galleries_images")->order("highlight DESC, position ASC") as $image}				
+				{if $iterator->first}
+					<g:image_link>{$presenter->context->parameters["host"]}/files/galleries/originals/{hash("sha512", $image->id)}.{pathinfo($image->name, PATHINFO_EXTENSION)}</g:image_link>
+				{/if}
+			{/foreach}				
+			<g:price>{$product->products->price}</g:price>
+			<g:condition>new</g:condition>
+			<g:brand>{$product->products->producer}</g:brand>
+		</item>
+	{/foreach}
+</channel>	
+{*</rss>*}

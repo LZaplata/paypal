@@ -1,0 +1,33 @@
+@import "bootstrap/variables.less";
+
+.ui-autocomplete {
+	background-color: @dropdown-bg;
+	border: 1px solid @dropdown-fallback-border; // IE8 fallback
+	border: 1px solid @dropdown-border;
+	border-radius: @border-radius-base;
+	z-index: @zindex-dropdown;
+	padding: 5px 0;
+  	margin: 2px 0 0; // override default ul
+	
+	> li {
+		> a {
+		    display: block;
+		    padding: 3px 20px !important;
+		    clear: both;
+		    font-weight: normal;
+		    line-height: @line-height-base !important;
+		    color: @dropdown-link-color;
+		    white-space: nowrap; // prevent links from randomly breaking onto new lines
+		    font-size: @font-size-base !important;
+		    font-family: @font-family-base !important;
+			
+			&.ui-state-focus {
+				text-decoration: none;
+    			color: @dropdown-link-hover-color;
+    			background: @dropdown-link-hover-bg;
+    			border: none;
+    			border-radius: 0;
+			}
+		}
+	}
+}

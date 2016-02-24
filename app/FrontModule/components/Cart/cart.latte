@@ -1,0 +1,13 @@
+<div id="cart-mini" class="panel-body">
+	{snippet cart}
+		<p>
+			Celkem: <span class="pull-right">{$price|number:$decimals:",":" "} {_$currency}</span>
+		</p>
+	{/snippet}
+	
+	<div class="clearfix"></div>
+	
+	<a href="{dlink :FrontEshop:Order:cart eshop => $eshop}" class="btn btn-primary">
+		{_'Košík'}
+	</a>
+</div>

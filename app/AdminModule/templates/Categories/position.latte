@@ -1,0 +1,36 @@
+{block #content}
+	{include ../Content/menu.latte}
+
+	<div class="col-sm-8">
+		<div class="content">
+			<p>
+				<a href="{$presenter->context->httpRequest->referer}" class="btn btn-primary">
+					<i class="fa fa-thumbs-o-up"></i>&nbsp; Hotovo
+				</a>
+			</p>
+			
+			<fieldset>
+				<legend>Pořadí kategorií</legend>
+				
+				{if count($categories)}
+					{snippet categoriesTable}
+						<div class="row">
+							<div class="col-sm-4">		
+								<table class="position table table-bordered">						
+									<tbody>
+										{foreach $categories as $category}
+											<tr id="{$category->id}" class="sortable">
+												<td class="level1">{$category->name} <i class="move fa fa-plus pull-right"></i></td>
+											</tr>
+										{/foreach}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					{/snippet}
+				{else}
+					<p>Žádné kategorie</p>
+				{/if}
+			</fieldset>
+		</div>
+	</div>

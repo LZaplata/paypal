@@ -1,0 +1,34 @@
+{block #content}
+	{include ../Content/menu.latte}
+
+	<div class="col-sm-8">		
+		{include tabs.latte}
+	
+		<script>loadTinyMCE()</script>
+		
+		{if $presenter->category}				
+			{control langs}
+		{/if}
+	
+		<div class="tab-content content">
+  			<div class="tab-pane active" id="lang-cs">
+  				{control addForm-cs}
+  			</div>
+  			
+  			{foreach $presenter->langs as $lang}
+  				<div class="tab-pane" id="lang-{$lang->key}">
+  					<p class="copy grid text-right">
+  						<a href="{plink Copy! lang => $lang->key}" class="btn btn-default btn-xs">
+  							Zkopírovat obsah z české mutace
+  						</a>
+  					</p>
+  					
+  					{control addForm-{$lang->key}}
+  				</div>
+  			{/foreach}
+  		</div>
+	</div>
+	
+	<div class="col-sm-2">
+		{*control seo*}
+	</div>

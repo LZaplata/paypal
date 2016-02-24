@@ -1,0 +1,18 @@
+{block #content}
+	{include ../Content/menu.latte}
+
+	<div class="commonpage">
+		<div class="col-sm-12 {if $rightbar}col-md-12 col-lg-9{/if}">
+			{include tabs.latte}
+		
+			<div class="content">
+				<p>
+					<a href="{link Categories:Add $presenter->id, lang => null}" class="btn btn-primary">
+						<i class="fa fa-plus"></i>&nbsp; Přidat
+					</a>
+				</p>
+				
+				{control grid}
+			</div>
+		</div>
+	</div>

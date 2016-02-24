@@ -1,0 +1,30 @@
+<ul class="nav nav-tabs">
+	<li class="active">
+		<a href="#settings" data-toggle="tab">
+			<i class="fa fa-wrench"></i>&nbsp; Základní nastavení
+		</a>
+	</li>
+	
+	{if $presenter->section}
+		<li>
+			<a href="#dimensions" data-toggle="tab">
+				<i class="fa fa-crop"></i>&nbsp; Rozměry obrázků
+			</a>
+		</li>
+		<li>
+			<a href="#methods" data-toggle="tab">
+				<i class="fa fa-truck"></i>&nbsp; Doprava a platba
+			</a>
+		</li>
+		<li>
+			<a href="#properties" data-toggle="tab">
+				<i class="fa fa-flask"></i>&nbsp; Vlastnosti
+			</a>
+		</li>
+		<li>
+			<a href="#fields" data-toggle="tab">
+				<i class="fa fa-magic"></i>&nbsp; Speciální položky
+			</a>
+		</li>
+	{/if}
+</ul>

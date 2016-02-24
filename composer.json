@@ -1,0 +1,27 @@
+{
+    "require": {
+        "php" : ">=5.3.1",
+        "nette/nette": "2.3.0",
+        "vladahejda/livetranslator": "dev-master",
+        "kdyby/nette-session-panel": "@dev",
+        "janmarek/webloader": "2.4.0",
+        "oyejorge/less.php": "dev-master",
+        "texy/texy": "dev-master",
+        "electrolinux/phpquery": "dev-master",
+        "phpclasses/curl-multi-sitemap": ">=1.0.0",
+        "facebook/php-sdk-v4" : "4.0.*",
+        "heureka/overenozakazniky" : "dev-master"
+    },
+    "repositories": [
+    	{
+    		"type": "composer",
+    		"url": "http:\/\/www.phpclasses.org\/"
+    	}
+    ],
+    "http-basic": {
+        "www.phpclasses.org": {
+            "username": "zzaapp",
+            "password": "0656caeba2530b3cc1362a610b3c89fd"
+        }
+    }
+}

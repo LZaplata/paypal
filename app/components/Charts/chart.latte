@@ -1,0 +1,131 @@
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	google.load('visualization', '1.1', { packages: ['corechart', 'controls']});
+      
+  	function drawChart() {
+   		var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard'));
+   		
+   		{foreach $chartControls as $chartControl}
+	   		var {!$chartControl->name} = new google.visualization.ControlWrapper({
+	   			'controlType': {$chartControl->type},
+	    		'containerId': {$chartControl->name},
+	    		'options': {
+	      			'filterColumnLabel': {$chartControl->filterColumn},
+	      			'ui': {
+	        			'allowTyping': false,
+	        			'allowMultiple': false,
+	        			'allowNone': false,
+	        			'selectedValuesLayout': 'belowStacked',
+	        			'chartOptions' : {
+		           			'chartArea': {
+		           				left: 20,
+		           				width: '74%'
+		           			},
+		           			'hAxis': {
+			       				'format': 'd. M. y'
+			       			}
+		           		},
+		           		'chartView': {
+		           			'columns': [
+								{foreach $columns as $column}
+									{if isset($column->visibility)}
+										{if $column->visibility}
+											{!$iterator->counter-1},
+										{/if}
+									{/if}
+								{/foreach}
+							]
+						}
+	      			}
+	    		},
+	    		'state': {'selectedValues': [{$chartControl->defaultValue}]}
+	   		});
+	   	{/foreach}
+      
+        var chart = new google.visualization.ChartWrapper({
+           	'chartType': {$type},
+           	'containerId': 'chart',
+     		'options': {
+       			'vAxis': {'viewWindow': {
+       						{if $minValue}
+       							'min': {$minValue},
+       						{/if}
+       						{if $maxValue} 
+       							'max': {$maxValue},
+       						{/if}
+       					}
+       			},
+       			'hAxis': {
+       				'format': 'd. M.'
+       			},
+       			'chartArea': {
+       				top: 10,
+       				left: 20,
+       				width: '76%',
+       				height: '85%'
+       			}
+     		},
+     		'view': {
+     			'columns': [
+     				{var $i = 0}
+					{foreach $columns as $column}
+						{if isset($column->visibility)}
+							{if $column->visibility}
+								{$i},
+							{/if}
+						{/if}
+						{var $i++}
+					{/foreach}
+				]
+     		}
+       	});
+      
+      	var data = new google.visualization.DataTable();
+	  	
+	  	{foreach $columns as $column}
+	  		data.addColumn({if isset($column->role)}{ type:{$column->type}, role:{$column->role} }{else}{$column->type}{/if}{if isset($column->label)}, {$column->label}{/if});
+	  	{/foreach}
+      
+        {foreach $rows as $row}
+        	data.addRow([
+        		{foreach $row as $value}
+        			{if $columns[$iterator->counter-1]->type == 'date'}
+        				new Date({!$value|date:'Y'}, {!$value|date:'n'}-1, {!$value|date:'j'}),
+        			{else}
+        				{$value},
+        			{/if}
+        		{/foreach}
+        	]);
+        {/foreach}
+        
+        var formatter = new google.visualization.DateFormat({ formatType: 'long' });
+        formatter.format(data, 0);
+      
+        {if count($dependentControls)}
+        	{foreach $dependentControls as $dependentControl}
+        		dashboard.bind({!$dependentControl->parent->name}, {!$dependentControl->child->name});
+        		
+        		{if $iterator->last}
+        			dashboard.bind({!$dependentControl->child->name}, chart);
+        		{/if}
+        	{/foreach}
+        {else}
+        	dashboard.bind([
+        		{foreach $chartControls as $chartControl}
+        			{!$chartControl->name},
+        		{/foreach}
+        	], chart);
+        {/if}
+        
+        dashboard.draw(data);
+	}
+ 
+   	google.setOnLoadCallback(drawChart);
+</script>
+
+<div id="dashboard">
+    <div id="chart"></div>
+    {foreach $chartControls as $chartControl}
+    	<div id="{$chartControl->name}"></div>
+    {/foreach}
+</div>

@@ -1,0 +1,22 @@
+<ul class="nav nav-tabs">
+	<li class="button f-left {ifCurrentIn 'Mailing:edit'}active{/ifCurrentIn}">
+		<a href="{link Mailing:edit $presenter->email->id}">
+			<i class="fa fa-pencil"></i>&nbsp; Editace
+		</a>
+	</li>
+	<li class="button f-left {ifCurrentIn 'Mailing:files'}active{/ifCurrentIn}">
+		<a href="{link Mailing:files $presenter->email->filestores_id}">
+			<i class="fa fa-file-o"></i>&nbsp; Přílohy
+		</a>
+	</li>
+	<li class="button f-left {ifCurrentIn 'Mailing:preview'}active{/ifCurrentIn}">
+		<a href="{link Mailing:preview $presenter->email->id}">
+			<i class="fa fa-binoculars"></i>&nbsp; Náhled
+		</a>
+	</li>
+	<li class="button f-left {ifCurrentIn 'Mailing:graph'}active{/ifCurrentIn}">
+		<a href="{link Mailing:graph $presenter->email->id}">
+			<i class="fa fa-pie-chart"></i>&nbsp; Graf
+		</a>
+	</li>
+</ul>

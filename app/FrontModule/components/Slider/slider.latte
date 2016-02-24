@@ -1,0 +1,32 @@
+<div id="slider">
+	<div class="left f-left"></div>
+
+	<ul>	
+		{foreach $images as $image}
+			<li id="{$iterator->counter}">
+				<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" />
+				
+				{if $image->title}
+					<p class="description no-margin">
+						{var $title = 'title'.$lang}
+					
+						{$article->$title ? $article->$title : $article->title}
+					</p> 
+				{/if}
+			</li>
+		{/foreach}
+	</ul>
+	
+	<div class="numbers">	
+		{var $thumb = $control->getThumbsDimensions(2)}
+	
+		{foreach $images as $image}
+			<span class="{if $iterator->first}current{/if}">
+				<a href="" onclick="return false">{$iterator->counter}</a>
+				<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" />
+			</span>
+		{/foreach}
+	</div>
+	
+	<div class="right f-right"></div>
+</div>

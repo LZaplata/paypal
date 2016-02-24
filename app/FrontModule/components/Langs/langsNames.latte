@@ -1,0 +1,12 @@
+<div id="langs">
+	<ul class="nav nav-pills">
+		<li class="cs {if $presenter->lang == null}active{/if}">
+			<a href="{dlink :Front:Page: lang => cs}">Čeština</a>
+		</li>
+		{foreach $langs as $lang}
+			<li class="{$lang->key} {if $presenter->lang == '_'.$lang->key}active{/if}">
+				<a href="{dlink :Front:Page: lang => $lang->key}">{$lang->name}</a>
+			</li>
+		{/foreach}
+	</ul>
+</div>

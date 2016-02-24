@@ -1,0 +1,22 @@
+<html>
+	<head></head>
+	
+	<body>
+		<h1>Vzkaz z kontaktního formuláře</h1>
+				
+		<table>
+			<tbody>
+				{foreach $values as $key => $value}
+					{var $value = (array) $value}
+				
+					{if $key != "nospam"}
+						<tr>
+							<th>{$names[$key]->caption}</th>
+							<td>{implode(", ", $value)}</td>
+						</tr>
+					{/if}
+				{/foreach}
+			</tbody>
+		</table>
+	</body>
+</html>

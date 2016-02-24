@@ -1,0 +1,26 @@
+{block #eshop}
+	{snippet categories}
+		<script>loadTinyMCE()</script>
+	
+		{if $presenter->category}
+			{control langs false}
+		{/if}
+	
+		<div class="tab-content content">
+  			<div class="tab-pane active" id="lang-cs">
+  				{control addCategory-cs}
+  			</div>
+  			
+  			{foreach $presenter->langs as $lang}
+  				<div class="tab-pane" id="lang-{$lang->key}">
+  					<p class="copy grid text-right">
+  						<a href="{plink Copy! lang => $lang->key}" class="btn btn-default btn-xs">
+  							Zkopírovat obsah z české mutace
+  						</a>
+  					</p>
+	  					
+  					{control addCategory-{$lang->key}}
+  				</div>
+  			{/foreach}
+  		</div>
+	{/snippet}

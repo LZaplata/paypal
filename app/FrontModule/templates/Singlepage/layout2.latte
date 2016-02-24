@@ -1,0 +1,14 @@
+{block #content}
+	<div id="layout2" class="row">
+		<div id="left" class="col-xs-6">		
+			{if $module = $presenter->getPageModule($page, 1)}
+				{control editor $module->id}
+			{/if}
+		</div>
+		
+		<div id="right" class="col-xs-6">		
+			{if $module = $presenter->getPageModule($page, 2)}
+				{control editor $module->id}
+			{/if}
+		</div>
+	</div>

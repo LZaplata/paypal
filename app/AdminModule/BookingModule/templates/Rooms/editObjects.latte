@@ -1,0 +1,28 @@
+{block #booking}
+<fieldset>
+	<legend>Seznam objektů</legend>
+	<table>
+		<thead>
+			<tr>
+				<th style="text-align:left;">id</th>
+				<th style="text-align:left;">název</th>
+				<th style="text-align:left;">kapacita</th>
+			</tr>
+		</thead>
+		<tbody n:inner-foreach = "$objects as $object">
+			<tr>
+				<td>{$object->id}</td>
+				<td>{$object->name}</td>
+				<td>{$object->capacity}</td>
+				{*}<td><a href="{link removeObject! id=>$object->id}">ODEBRAT</a></td>{*}
+			</tr>		
+		</tbody>
+	</table>
+</fieldset>	
+
+<fieldset>
+	<legend>Změna kapacity</legend>
+	{control capacityForm}
+</fieldset>
+
+{control pricesObjects}

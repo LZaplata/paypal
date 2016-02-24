@@ -1,0 +1,23 @@
+<div id="properties-filter">
+	{snippet url}
+		{ifset $url}
+			<script>changeUrl({$url});</script>
+		{/ifset}
+	{/snippet}
+	
+	{form filterForm}
+		{foreach $categoryCategories as $category}
+			{capture $name}category{$category->categories_id|webalize}{/capture}
+		
+			<div class="well">
+				<p class="h4 no-margin">{$category->categories->title}</p>
+				
+				{foreach $form[$name]->items as $key => $label}				
+					<label class="checkbox-inline">
+						 {input $name:$key} {$label}
+					</label>
+				{/foreach}
+			</div>
+		{/foreach}
+	{/form}
+</div>

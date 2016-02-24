@@ -1,0 +1,15 @@
+<ul class="nav nav-tabs">
+	<li class="active">
+		<a href="#room" data-toggle="tab">
+			<i class="fa fa-pencil"></i>&nbsp; Editace
+		</a>
+	</li>
+	
+	{if $presenter->room}
+		<li>
+			<a href="#open-hours" data-toggle="tab">
+				<i class="fa fa-clock-o"></i>&nbsp; Otevírací doba
+			</a>
+		</li>
+	{/if}
+</ul>

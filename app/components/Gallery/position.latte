@@ -1,0 +1,27 @@
+{block #content}
+	<div class="content">		
+		<fieldset>
+			<legend>Pořadí obrázků</legend>
+			
+			{if count($images)}
+				<div class="row">
+					<div class="col-sm-4">
+						<table class="position table table-bordered">				
+							<tbody class="gallery">
+								{foreach $images as $image}
+									<tr id="{$image->id}" class="sortable">
+										<td class="level1">
+											<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries_id}-{$image->name}" alt="{$image->name}" /> 
+											<i class="move fa fa-plus pull-right"></i>
+										</td>
+									</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			{else}
+				<p>Žádné obrázky</p>
+			{/if}
+		</fieldset>
+	</div>

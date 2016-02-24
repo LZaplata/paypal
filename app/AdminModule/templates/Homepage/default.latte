@@ -1,0 +1,126 @@
+{block #content}
+	<div class="homepage">
+		{if $settings}
+			{if $settings->eshop}
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<div class="well">
+						<h2 class="no-margin-top h3">Poslední objednávky</h2>
+						
+						<table class="table table-condensed no-margin">
+							<thead>
+								<tr>
+									<th>#</th>		
+									<th>Jméno</th>		
+									<th>Příjmení</th>		
+									<th>Datum</th>		
+									<th>Cena</th>
+									<th></th>
+								</tr>					
+							</thead>
+							
+							<tbody>
+								{foreach $orders as $order}
+									<tr>
+										<td>{$order->no}</td>
+										<td>{$order->name}</td>
+										<td>{$order->surname}</td>
+										<td>{$order->date|date:"j. n. Y"}</td>
+										<td>{$order->price|number:0:".":" "} {$order->currency}</td>
+										<td class="text-right">
+											<a href="{plink :AdminEshop:Orders:edit $order->id}">
+												<i class="fa fa-search"></i>
+											</a>
+										</td>
+									</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="col-sm-12 col-md-6 col-lg-4">
+					<div class="well">
+						<h2 class="no-margin-top h3">Poslední přidané produkty</h2>
+						
+						<table class="table table-condensed no-margin">
+							<thead>
+								<tr>		
+									<th>Název</th>		
+									<th>Cena</th>		
+									<th></th>		
+								</tr>					
+							</thead>
+							
+							<tbody>
+								{foreach $products as $product}
+									<tr>
+										<td>{$product->name}</td>
+										<td>{$product->price|number:0:".":" "} czk</td>
+										<td class="text-right">
+											<a href="{plink :AdminEshop:Products:edit $product->id, 0}">
+												<i class="fa fa-search"></i>
+											</a>
+										</td>
+									</tr>
+								{/foreach}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			{/if}
+
+			<div class="clearfix hidden-lg hidden-md"></div>
+
+			<div class="col-sm-12 col-md-6 col-lg-4">
+				<div class="well">
+					<h2 class="no-margin-top h3">Poslední vyhledávané</h2>
+					
+					<table class="table table-condensed no-margin">
+						<thead>
+							<tr>		
+								<th>Výraz</th>		
+								<th>Naposledy vyhledávané</th>		
+								<th>Počet vyhledávání</th>		
+							</tr>					
+						</thead>
+						
+						<tbody>
+							{foreach $searchLog as $log}
+								<tr>
+									<td>{$log->query}</td>
+									<td>{$log->date|date:"j. n. Y H:i"}</td>
+									<td>{$log->count}x</td>
+								</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<div class="clearfix hidden-md"></div>
+			
+			<div class="col-sm-12 col-md-6 col-lg-4">
+				<div class="well">
+					<h2 class="no-margin-top h3">Poslední přihlášení</h2>
+					
+					<table class="table table-condensed no-margin">
+						<thead>
+							<tr>		
+								<th>Uživatel</th>		
+								<th>Poslední přihlášení</th>	
+							</tr>					
+						</thead>
+						
+						<tbody>
+							{foreach $loginLog as $log}
+								<tr>
+									<td>{$log->users->email}</td>
+									<td>{$log->date|date:"j. n. Y H:i"}</td>
+								</tr>
+							{/foreach}
+						</tbody>
+					</table>
+				</div>
+			</div>
+		{/if}
+	</div>

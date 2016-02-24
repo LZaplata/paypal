@@ -1,0 +1,47 @@
+<div class="col-sm-2">
+	{block #sections}
+		<div class="list-group text-uppercase">
+			{foreach $textPages as $page} 
+				{if $page->related('editors')->fetch()}
+					{var $gallery = $page->related('editors')->fetch()->galleries_id}
+				{else}
+					{var $gallery = 0}
+				{/if}
+			
+				{if $presenter->acl->isAllowed($user->getIdentity()->role, 'section_'.$page->sections_id)}
+					<a href="{link Editor:Edit $page->id, $page->sections_id}" class="list-group-item {ifCurrentIn 'Editor:* '.$page->id}active{/ifCurrentIn}">
+						<i class="fa fa-file-text-o fa-fw"></i> {$page->pages->name} <span>(blok {$page->position})</span>
+					</a>
+						
+					{*if $page->related('editors')->fetch()}
+						{if $page->sections->files}
+							<a href="{link Editor:files $page->related('editors')->fetch()->filestores_id, $page->sections_id, $page->id}" class="pull-right">
+								<i class="fa"></i>
+							</a>
+						{/if}
+						{if $page->sections->related('sections_thumbs')->fetch()}
+							<a href="{link Editor:gallery $page->related('editors')->fetch()->galleries_id, $page->sections_id, $page->id}" class="pull-right">
+								<i class="fa fa-camera"></i>
+							</a>
+						{/if}
+					{/if*}
+				{/if}
+			{/foreach}
+		
+			{foreach $sections as $section}
+				{if $presenter->acl->isAllowed($user->getIdentity()->role, 'section_'.$section->id)}
+					<a href="{link Articles:View $section->id}" class="list-group-item {ifCurrentIn 'Articles:* '.$section->id, 'Categories:* '.$section->id}active{/ifCurrentIn}">
+						<i class="fa fa-newspaper-o fa-fw"></i> {$section->name}
+					</a>
+					{*if $section->categories}
+						<ul>
+							<li>
+								<a href="{link Categories:View $section->id, grid-order => 'position ASC'}">kategorie</a>
+							</li>
+						</ul>
+					{/if*}
+				{/if}
+			{/foreach}
+		</div>
+	{/block}
+</div>

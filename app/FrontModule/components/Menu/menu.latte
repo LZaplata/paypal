@@ -1,0 +1,53 @@
+{if count($pages)}
+	<div class="menu">
+		{block #pages}
+			{if $level < $maxLevel}
+				<ul class="nav nav-pills level{$level}">
+					{var $u = 'url'.$presenter->lang}
+					
+					{foreach $pages as $page}
+						{if $page->highlight == 1}
+							{var $url = ""}
+						{else}
+							{$control->getPageUrl($page)}
+							{var $url = $control->url}
+						{/if}
+						
+						<li class="{$page->url} {if $iterator->first}first{/if} 
+						{if isset($presenter->pages)}
+							{if isset($presenter->pages[$level]) && $presenter->pages[$level] == $page->$u}
+								active
+							{/if}
+						{elseif $presenter->moduleName == 'FrontEshop'}
+							{if $page->related('pages_modules')->where('position', 1)->order('modules_id DESC')->fetch()->modules_id == 3 && $page->$u == $presenter->eshop}
+								active
+							{/if}
+						{elseif $presenter->moduleName == 'FrontBooking'}
+							{if $page->related('pages_modules')->order('modules_id DESC')->fetch()->modules_id == 4}
+								active
+							{/if}
+						{else}
+							{if $page->highlight == 1}
+								active
+							{/if}
+						{/if}">
+							<a href="{if !$presenter->vendorSettings->singlepage}{plink :Front:Page: url => $url, article => null, aid => null, category => null, cid => null}{else}#{$page->url}{/if}">
+								{var $name = 'name'.$presenter->lang}
+								{$page->$name == null ? $page->name : $page->$name}
+							</a>
+							{if count($control->getPages($page->id))}
+								{include #pages, pages => $control->getPages($page->id), level => $level+1}
+							{/if}
+							
+							{if $cats}
+								{if $page->related('pages_modules')->where('position', 1)->order('modules_id DESC')->fetch()->modules_id == 3}
+									{$presenter["categories"]->renderEshop(array("level" => 1))}
+								{/if}
+							{/if}
+						</li>
+					{/foreach}
+				</ul>
+			{/if}
+		{/block}
+	</div>
+{/if}

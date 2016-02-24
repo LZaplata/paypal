@@ -1,0 +1,64 @@
+<div id="sections-menu">
+	{var $level = 1}
+
+	{block #sections}
+		<ul class="{$level > 1 ? 'level' : 'root'}">
+			{foreach $pages as $page}		
+				{var $visible = false}
+			
+				{foreach $page->related('pages_modules')->where('modules_id != ?', 3) as $module}						
+					{if $presenter->acl->isAllowed($user->getIdentity()->role, 'section_'.$module->sections->id)}
+						{var $visible = true}
+					{/if}
+				{/foreach}
+				<li class="{$visible == false && !count($presenter->getPages($page->id)) ? 'hidden'}">
+					<span></span>
+					{$page->name} <br />
+					
+					<ul class="hidden">
+						{foreach $page->related('pages_modules')->where('modules_id != ?', 3) as $module}						
+							{if $presenter->acl->isAllowed($user->getIdentity()->role, 'section_'.$module->sections->id)}														
+								<li class="mini module{$module->modules} {ifCurrentIn 'Editor:* '.$module->id, 'Articles:* '.$module->sections->id, 'Categories:* '.$module->sections->id}current{/ifCurrentIn}">	
+									<span></span>
+																								
+									{if $module->modules->id == 1}
+										<a href="{link Editor:Edit $module->id, $module->sections->id}">
+									{else}
+										<a href="{link Articles:View $module->sections}">
+									{/if}
+											<span>blok {$module->position}</span>
+										</a>
+										
+									<ul>
+										{if $module->related('editors')->fetch() && $module->modules->id == 1}
+											{if $module->sections->related('sections_thumbs')->fetch()}
+												<li>
+													<a href="{link Editor:gallery $module->related('editors')->fetch()->galleries_id, $module->sections->id, $module->id, gallery-grid-order => 'position ASC'}">obrázky</a>
+												</li>
+											{/if}
+											{if $module->sections->files}
+												<li>
+													<a href="{link Editor:files $module->related('editors')->fetch()->filestores_id, $module->sections->id, $module->id}">soubory</a>
+												</li>
+											{/if}
+										{/if}										
+										
+										{if $module->sections->categories && $module->modules->id > 1}
+											<li>
+												<a href="{link Categories:View $module->sections, grid-order => 'position ASC'}">kategorie</a>
+											</li>
+										{/if}
+									</ul>
+								</li>
+							{/if}
+						{/foreach}
+					</ul>
+					
+					{if count($presenter->getPages($page->id))}
+						{include #sections, pages => $presenter->getPages($page->id), level => $level+1}
+					{/if}
+				</li>
+			{/foreach}
+		</ul>
+	{/block}
+</div>

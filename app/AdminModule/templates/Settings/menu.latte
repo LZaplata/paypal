@@ -1,0 +1,37 @@
+<div class="pull-left menu">
+	<ul class="nav nav-pills nav-stacked">
+		<li class="text-uppercase">
+			<a href="{link Settings:common}" class="{ifCurrentIn 'Settings:common'}active{/ifCurrentIn}">
+				<i class="fa fa-wrench fa-fw"></i> obecné
+			</a>
+		</li>
+		
+		<li class="text-uppercase">
+			<a href="{link Settings:Languages}" class="{ifCurrentIn 'Settings:languages', 'Settings:addLanguage', 'Settings:editLanguage'}active{/ifCurrentIn}">
+				<i class="fa fa-language fa-fw"></i> jazyky
+			</a>
+		</li>
+		
+		{if $presenter->acl->isAllowed($user->identity->role, "adminSettings")}
+			<li class="text-uppercase">
+				<a href="{link Settings:admin}" class="{ifCurrentIn 'Settings:admin'}active{/ifCurrentIn}">
+					<i class="fa fa-cube fa-fw"></i> administrace
+				</a>
+			</li>
+		{/if}	
+		
+		{if $presenter->acl->isAllowed($user->identity->role, "adminSettings")}
+			<li class="text-uppercase">
+				<a href="{link Settings:rewriteUrl}" class="{ifCurrentIn 'Settings:rewriteUrl'}active{/ifCurrentIn}">
+					<i class="fa fa-cube fa-fw"></i> přepis adres
+				</a>
+			</li>
+		{/if}	
+			
+		<li class="text-uppercase">
+			<a href="{link DeleteCache!}">
+				<i class="fa fa-refresh fa-fw"></i> smazat cache
+			</a>
+		</li>
+	</ul>
+</div>

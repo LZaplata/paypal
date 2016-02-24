@@ -1,0 +1,150 @@
+@import "bootstrap/variables.less";
+@import "bootstrap/mixins/vendor-prefixes.less";
+
+@font-family-fa: "FontAwesome";
+
+.articles_detail, .editor {
+	#gallery, .editor-gallery {
+		li {
+			margin-bottom: @grid-gutter-width;
+		}
+	}
+}
+
+#order-levels {
+	margin-bottom: @grid-gutter-width;
+}
+
+.product, .article {
+	margin-top: @grid-gutter-width;
+}
+
+.product-detail {
+	#gallery {
+		li {
+			margin-top: @grid-gutter-width;
+		}
+	}
+}
+
+.userbar {
+	.login-dp{
+	    min-width: 250px;
+	    padding: 14px 14px 0;
+	    overflow: hidden;
+	    
+	    .social-buttons{
+    		margin: 12px 0;
+    		
+    		a {
+    			width: 100%;
+//    			width: 49%;
+    		}
+    		
+    		.btn-fb{
+    			color: #fff;
+    			background-color: #3b5998;
+    			
+    			&:hover {
+    				background-color: #496ebc;
+    			}
+			}
+		}
+		
+		form {
+			.alert {
+				margin-bottom: 10px;
+				padding: 5px 15px;
+			}	
+							
+			.form-group {
+			    margin-bottom: 10px;
+			    
+			    .help-block{
+				    font-size: @font-size-small;
+				}
+			}	
+		}
+		
+		.bottom{
+		    border-top: 1px solid #ddd;
+		    clear: both;
+		    padding: 14px;
+		}
+	}
+}
+
+#contact-form {
+	form {
+		.form-group {
+			&.required {
+				.control-label {
+					label {
+						&:after {
+							content: "\f069";
+							font-family: @font-family-fa;
+							color: @brand-danger;
+							font-size: @font-size-small - 4;
+							font-weight: 400;
+							top: -4px;
+							position: relative;
+							margin-left: 3px;
+						}
+					}
+				}
+			}
+		}
+	}
+		
+	.fa-asterisk {
+		font-size: @font-size-small - 4;
+		top: -4px;
+		position: relative;
+	}
+}
+
+body {
+	background-image: url("../images/bg.jpg");
+	background-repeat: no-repeat;
+	background-position: center top;
+}
+
+#eshop-layout {
+	#cart {
+		table {
+			td {
+				img {
+					max-width: 100px;
+				}
+
+				.add-to-cart {
+					.col-sm-3 {
+						display: none;
+					}
+
+					.col-sm-9 {
+						input {
+							width: 50px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.productsView {
+		a {
+			margin-left: 20px;
+			display: inline-block;
+
+			&:hover, &:focus {
+				text-decoration: none;
+			}
+
+			&.active {
+				font-weight: 700;
+				color: @text-color;
+			}
+		}
+	}
+}

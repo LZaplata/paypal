@@ -1,0 +1,11 @@
+<div id="add-to-cart" class="text-right">
+	<p class="h3">{$totalPrice} czk</p>
+	
+	<form n:name=addToCart class=form>
+		{foreach $objects as $object}
+	    	<input type=hidden name="objects[]" value={$object->id}>
+		{/foreach}
+		
+	 	<input type=submit name="add" value="Rezervovat" class="btn btn-primary">       
+	</form>
+</div>       

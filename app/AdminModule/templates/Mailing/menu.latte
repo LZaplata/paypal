@@ -1,0 +1,14 @@
+<div class="col-sm-2">
+	<div class="list-group text-uppercase">
+		<a href="{link Mailing:default}" class="list-group-item {ifCurrentIn 'Mailing:default', 'Mailing:add', 'Mailing:edit', 'Mailing:gallery', 'Mailing:files', 'Mailing:preview', 'Mailing:graph'}active{/ifCurrentIn}">
+			<i class="fa fa-envelope fa-fw"></i> kampaně
+		</a>
+		<a href="{link Mailing:groups}" class="list-group-item {ifCurrentIn 'Mailing:groups', 'Mailing:addGroup', 'Mailing:editGroup'}active{/ifCurrentIn}">
+			<i class="fa fa-group fa-fw"></i> skupiny
+		</a>
+		{*}<li class="groups {ifCurrentIn 'Mailing:users'}current{/ifCurrentIn}"><span></span><a href="{link Mailing:users}">MAILY</a></li>{*}
+		<a href="{link Mailing:statistics}" class="list-group-item {ifCurrentIn 'Mailing:statistics'}active{/ifCurrentIn}">
+			<i class="fa fa-pie-chart fa-fw"></i> statistiky
+		</a>
+	</div>
+</div>

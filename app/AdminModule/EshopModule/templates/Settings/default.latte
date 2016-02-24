@@ -1,0 +1,33 @@
+{block #eshop}
+	{include menu.latte}
+	
+	<div class="tab-content">
+		<div class="tab-pane active content" id="settings">
+			{control settingsForm}
+		</div>
+		
+		{if $presenter->section}
+			<div class="tab-pane content" id="dimensions">
+				{control thumbs}
+			</div>
+			<div class="tab-pane content" id="methods">
+				<fieldset>
+					<legend>Nastavení</legend>
+				
+					{control methods}
+				</fieldset>
+				
+				<fieldset>
+					<legend>Vztahy a ceny</legend>
+					
+					{control methodsRelations}
+				</fieldset>
+			</div>
+			<div class="tab-pane content" id="properties">
+				{control properties}
+			</div>
+			<div class="tab-pane content" id="fields">
+				{control fields}
+			</div>
+		{/if}
+	</div>

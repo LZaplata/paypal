@@ -1,0 +1,57 @@
+{var $thumb = $control->getThumb(1)}
+{var $text = 'text'.$presenter->lang}
+{var $name = 'name'.$presenter->lang}
+{var $description = 'description'.$presenter->lang}
+{var $url = 'url'.$presenter->lang}
+{var $category = array()}
+
+{foreach $products as $product}
+	{var $image = $product->galleries->related('galleries_images', 'galleries_id')->order('highlight DESC, position ASC')->fetch()}
+	{var $cat = $control->getProductCategory($product)}
+	{var $category = array("category" => $cat->url, "cid" => $cat->id)}
+				
+	<div class="product col-sm-4">
+		{if $settings->name}			
+			<div class="name">
+				<h2>
+					<a href="{plink :FrontEshop:Products:view (expand) $category, eshop => $eshop, pid => $product->id, product => $product->$url|nosafeurl}">
+						{!$product->$name ? $product->$name : $product->name|nbsp}
+					</a>
+				</h2>	
+			</div>
+		{/if}
+		
+		{if $image && $thumb}
+			<div class="img">
+				<p>
+					<a href="{plink :FrontEshop:Products:view (expand) $category, eshop => $eshop, pid => $product->id, product => $product->$url|nosafeurl}">
+						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" />
+					</a>
+				</p>
+			</div>
+		{/if}
+		
+		{if $settings->price}				
+			<div class="price">
+				<p>
+					{$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1)|number:$decimals:",":" "} 
+					<span class="currency">{_$currency}</span>
+				</p>
+			</div>
+		{/if}
+		
+		{if $settings->description}			
+			<div class="description">
+				{if $product->$description} 
+					<p>{!$product->$description|nbsp}</p>
+				{else}
+					{if $product->description}
+						<p>{!$product->description|nbsp}</p>
+					{else}
+						{!($product->$text ? $product->$text : $product->text)|nbsp}
+					{/if}
+				{/if}
+			</div>
+		{/if}
+	</div>
+{/foreach}

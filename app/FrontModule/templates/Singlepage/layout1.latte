@@ -1,0 +1,8 @@
+{block #content}
+	<div id="layout1" class="row">
+		<div id="center" class="col-xs-12">		
+			{if $module = $presenter->getPageModule($page, 1)}
+				{control editor $module->id}
+			{/if}
+		</div>
+	</div>

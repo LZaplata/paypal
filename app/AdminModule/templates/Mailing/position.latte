@@ -1,0 +1,50 @@
+{block #content}
+	{include menu.latte}
+
+	<div class="col-sm-8">
+		<div class="content">
+			<p>
+				<a href="{$presenter->context->httpRequest->referer}" class="btn btn-primary">
+					<i class="fa fa-thumbs-up"></i>&nbsp; Hotovo
+				</a>
+			</p>
+					
+			<fieldset>
+				<legend>Pořadí obsahů emailu</legend>
+				
+				{if count($emailContent)}			
+					{snippet contents}			
+						{var $modules = array(1 => "Textový editor", 2 => "Články", 3 => "E-shop")}	
+						
+						<div class="row">
+							<div class="col-sm-4">
+								<table class="position table table-bordered">								
+									<tbody>
+										{foreach $emailContent as $content}
+											<tr id="{$content->id}" class="sortable">
+												<td class="level1">
+													{if $content->editors_id}
+														{var $module = 1}
+														{$content->editors->name}
+													{elseif $content->articles_id}
+														{var $module = 2}
+														{$content->articles->name}
+													{else}
+														{var $module = 3}
+														{$content->products->name}
+													{/if}
+												</td>
+												<td class="level1">{$modules[$module]} <i class="move fa fa-plus pull-right"></i></td>
+											</tr>
+										{/foreach}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					{/snippet}
+				{else}
+					<p>Žádné obsahy emailu</p>
+				{/if}
+			</fieldset>
+		</div>
+	</div>

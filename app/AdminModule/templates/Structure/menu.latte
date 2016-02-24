@@ -1,0 +1,17 @@
+<div class="pull-left menu">
+	<ul class="nav nav-pills nav-stacked">
+		<li class="text-uppercase">
+			<a href="{link Structure:}" class="{ifCurrentIn 'Structure:default', 'Structure:add'}active{/ifCurrentIn}">
+				<i class="fa fa-list fa-fw"></i> přehled
+			</a>
+		</li>
+		{*}<a href="{link Structure:Add}" class="list-group-item {ifCurrentIn 'Structure:add', 'Structure:edit'}active{/ifCurrentIn}">
+			<i class="fa fa-plus fa-fw"></i> přidat
+		</a>{*}
+		<li class="text-uppercase">
+			<a href="{link Structure:ModulesSections}" class="{ifCurrentIn 'Structure:modulesSections', 'Structure:addModuleSection', 'Structure:editModuleSection'}active{/ifCurrentIn}">
+				<i class="fa fa-cube fa-fw"></i> sekce modulů
+			</a>
+		</li>
+	</ul>
+</div>

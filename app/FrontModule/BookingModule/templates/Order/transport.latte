@@ -1,0 +1,32 @@
+{block #booking}
+	{include menu.latte}
+	
+	<div class="row">
+		<div class="col-sm-6">
+			{snippet transport}
+				{control transport}
+			{/snippet}
+		</div>
+		
+		<div class="col-sm-6">
+			{block #totalPrice}
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<div>
+							Zboží: <span class="pull-right">{$order->price} {$order->currency}</span> <br />
+							Doprava a platba: <span class="pull-right">{snippet transportPrice}{$order->transport} {$order->currency}{/snippet}</span> <br /> <br />					
+							<div class="pull-right h4">{snippet totalPrice}<strong>{$order->price + $order->transport} {$order->currency}</strong>{/snippet}</div>
+						</div>
+					</div>
+				</div>
+			{/block}
+		</div>
+	</div>
+	
+	<div class="next">
+		<p class="pull-right">
+			<a href="{plink Order:summary}" class="btn btn-primary">
+				{_'Souhrn'}
+			</a>
+		</p>
+	</div>

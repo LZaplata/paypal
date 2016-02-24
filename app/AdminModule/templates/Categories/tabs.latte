@@ -1,0 +1,12 @@
+<ul class="nav nav-tabs">
+	<li class="{ifCurrentIn 'Articles:* '.$presenter->sid}active{/ifCurrentIn}">
+		<a href="{link Articles:view $presenter->id}">
+			<i class="fa fa-list"></i>&nbsp; Přehled
+		</a>
+	</li>
+	<li class="active">
+		<a href="{link Categories:View $presenter->sid, grid-order => 'position ASC'}">
+			<i class="fa fa-folder"></i>&nbsp; Kategorie
+		</a>
+	</li>
+</ul>

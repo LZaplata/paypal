@@ -1,0 +1,17 @@
+{block #booking}
+	 {include menu.latte}
+
+	<div id="contact">
+		{if !$presenter->user->isLoggedIn()}
+			<div id="login">
+				<fieldset>
+					<legend>Přihlášení</legend>
+					{control signInForm}
+				</fieldset>
+			</div>
+		{/if}
+			
+		<div id="contact-data">
+			{control contact}
+		</div>
+	</div>

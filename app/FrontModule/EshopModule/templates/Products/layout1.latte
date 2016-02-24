@@ -1,0 +1,186 @@
+{block #eshop}
+	{if $product}	
+		<div class="product-detail layout1 row">
+			<div class="left col-sm-5">
+				{snippet gallery}
+					{var $thumb = $presenter->getThumb(1)}	
+					{var $image = $product->galleries->related('galleries_images', 'galleries_id')->where("visibility", 1)->order('highlight DESC, position ASC')->fetch()}
+
+					{*if !$image}
+						{var $image = $presenter->model->getProducts()->wherePrimary($product->pid)->fetch()->galleries->related('galleries_images')->order("position ASC")->fetch()}
+					{/if*}
+				
+					{if $image}
+						<div class="img">
+							<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}" rel="gallery">
+								<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
+							</a>
+						</div>
+						
+						<div id="gallery" class="row">
+							{var $firstImage = $thumb ? 1 : 0}
+							{var $thumb = $presenter->getThumb(2)}
+							
+							<ul class="list-unstyled">				
+								{foreach $product->galleries->related('galleries_images')->where("visibility", 1)->order("highlight DESC, position ASC") as $image}
+									{if $iterator->counter > $firstImage}
+										<li class="col-sm-4">
+											<a href="{$basePath}/files/galleries/g{$product->galleries}-{$image->name}" rel="gallery">
+												<img src="{$basePath}/files/galleries/{$thumb}_g{$product->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
+											</a>
+										</li>
+									{/if}
+								{/foreach}
+							</ul>
+						</div>
+					{/if}
+				{/snippet}
+			</div>
+			
+			<div class="right col-sm-7">
+				{snippet name}
+					{var $name = 'name'.$presenter->lang}
+					{var $defaultName = 'name'.$defaultLang}
+				
+					{if $settings->name}						
+						<div class="name">
+							<h1 class="h2 no-margin-top">
+								{!$product->$name ?: ($product->$defaultName ?: $product->name)|nbsp}
+							</h1>
+						</div>
+					{/if}
+				{/snippet}		
+				
+				{snippet propertiesForm}
+					{control propertiesForm}
+				{/snippet}
+						
+				{snippet price}
+					{if $settings->price}
+						{var $price = 'price'.$presenter->lang}
+					
+						<div class="price">
+							<p>
+								{$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1)|number:$decimals:",":" "} 
+								<span class="currency">{_$currency}</span>
+							</p>
+						</div>
+					{/if}							
+				
+					{if $settings->stock}
+						{if $product->amount > 0}
+							<div class="cart">
+								{control addToCart-$product->id}
+							</div>
+						{else}
+							<div class="availability">
+								<p>Zboží neni skladem</p>
+							</div>
+						{/if}
+					{/if}
+				{/snippet}
+				
+				{snippet info}
+					{var $description = 'description'.$presenter->lang}
+					{var $defaultDescription = 'description'.$defaultLang}
+				
+					{if $settings->description}				
+						<div class="description">
+							<p>
+								{!$product->$description ?: ($product->$defaultDescription ?: $product->description)|nbsp}	
+							</p>
+						</div>
+					{/if}
+				{/snippet}
+				
+				{define text}
+					{snippet text}
+						{var $text = 'text'.$presenter->lang}
+						{var $defaultText = 'text'.$defaultLang}
+					
+						<div class="text">
+							{!($product->$text ?: ($product->$defaultText ?: $product->text))|nbsp}
+						</div>
+					{/snippet}
+				{/define}			
+				
+				{if !$settings->posts}
+					{if $settings->text}
+						{include text}
+					{/if}
+				{else}
+					<ul class="nav nav-tabs" role="tablist" id="product-tabs">
+						{if $settings->text}
+							<li class="active"><a href="#text" role="tab">Text</a></li>
+						{/if}
+						
+						<li class="posts-tab"><a href="#posts" role="tab">Diskuze</a></li>
+					</ul>
+				
+					<div class="tab-content">
+						<p></p>
+					
+						{if $settings->text}
+							<div class="tab-pane active" id="text">
+								{include text}
+							</div>
+						{/if}		
+						
+						{snippetArea postsArea}
+							{include posts.latte}
+						{/snippetArea}
+					</div>
+				{/if}
+
+                {if $settings->files}
+                    {var $files = $control->getFiles($product)}
+                    {var $tag = 1}
+
+                    {if count($files)}
+                        <div id="files">
+                            <h2 class="h3">Soubory</h2>
+
+                            {foreach $files as $file}
+                                {var $extension = pathinfo($file->name, PATHINFO_EXTENSION)}
+
+                                {if $file->tag != null && $file->tag != $tag}
+                                    {var $tag = $file->tag}
+
+                                    {if !$iterator->first}
+                                        </ul>
+                                    {/if}
+
+                                    <h3 class="h4">{$tag}</h3>
+
+                                    <ul class="list-unstyled">
+                                {else}
+                                    {if $iterator->first}
+                                        {var $tag = false}
+
+                                        <ul class="list-unstyled">
+                                    {/if}
+                                {/if}
+
+                                <li>
+                                    <i class="fa fa-file-{$icons[$extension]}-o"></i>&nbsp;
+                                    <a href="{$basePath}/files/files/f{$file->filestores_id}-{$file->name}" target="_blank">
+                                        {$file->title ? $file->title : $file->name}
+                                    </a>
+                                </li>
+                            {/foreach}
+                        </div>
+                    {/if}
+                {/if}
+			</div>
+		</div>
+		
+		{if $settings->siblings}
+			{if count($products = $control->getProductsRelated())}
+				<div id="related">
+					<h2>{_'Podobné produkty'}</h2>
+				
+					{include ../Categories/layout$layout.latte products => $products, related => true}
+				</div>
+			{/if}
+		{/if}		
+	{/if}

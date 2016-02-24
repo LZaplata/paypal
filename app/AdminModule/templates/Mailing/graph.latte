@@ -1,0 +1,42 @@
+{block #content}
+	{include menu.latte}
+	
+	<div class="col-sm-8">	
+		{var $seen = count($control->getEmails()->where("view != ?", false))}
+		{var $seenLogout = count($control->getEmails()->where("view != ?", false)->where("logout", 1))}
+		{var $unseen = count($control->getEmails()->where("view IS NULL"))}
+		{var $unseenLogout = count($control->getEmails()->where("view IS NULL")->where("logout", 1))}
+		
+		{include tabs.latte}
+		
+		<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+	    <script type="text/javascript">
+	      google.load("visualization", "1", { packages:["corechart"] });
+	      google.setOnLoadCallback(drawChart);
+	      function drawChart() {
+	        var data = google.visualization.arrayToDataTable([
+	          ['Piece', 'Count'],
+	          ['Přečtené', {$seen - $seenLogout}],
+	          ['Nepřečtené', {$unseen - $unseenLogout}],
+	          ['Nepřečtené s odhlášením', {$unseenLogout}],
+	          ['Přečtené s odhlášením', {$seenLogout}]
+	        ]);
+	
+	        var options = {
+	          title: {$email->name},
+	          titleTextStyle: {
+	        		fontSize: 30  
+	          },
+	          pieHole: 0.4,
+	          colors: ['#b1d33c', '#34b3f4', '#06496c', '#42530b']
+	        };
+	
+	        var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+	        chart.draw(data, options);
+	      }
+	    </script>
+	    
+	    <div class="content">
+	    	<div id="piechart" style="width: 100%; height: 500px;"></div>
+	    </div>
+	</div>

@@ -1,0 +1,31 @@
+{var $url = 'url'.$presenter->lang}
+{var $defaultUrl = 'url'.$defaultLang}
+{var $name = 'name'.$presenter->lang}
+{var $defaultName = 'name'.$defaultLang}
+
+<div id="articles_categories">
+	{foreach $categories as $category}
+		<div class="category">
+			{var $thumb = $control->getThumb($category, 3)}
+			{var $image = $control->getImages($category, true)}
+			
+			<div class="top">
+				<p class="img">
+					{if $image}
+						<a href="{plink Page: category => ($category->$url ?: ($category->$defaultUrl ?: $category->url)), cid => $category->id, article => null, aid => null|nosafeurl}">
+							<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" />
+						</a>
+					{/if}
+				</p>
+			</div>
+			
+			<div class="bottom">
+				<p class="name">
+					<a href="{plink Page: category => ($category->$url ?: ($category->$defaultUrl ?: $category->url)), cid => $category->id, article => null, aid => null|nosafeurl}">
+						{!($category->$name ?: ($category->$defaultName ?: $category->name))|nbsp}
+					</a>
+				</p>
+			</div>
+		</div>
+	{/foreach}
+</div>

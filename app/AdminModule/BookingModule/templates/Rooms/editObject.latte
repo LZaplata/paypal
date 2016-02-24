@@ -1,0 +1,22 @@
+{block #booking}
+	<ul class="nav nav-tabs">
+		<li class="active">
+			<a href="#edit" data-toggle="tab">
+				<i class="fa fa-pencil"></i>&nbsp; Editace
+			</a>
+		</li>
+		<li>
+			<a href="#prices" data-toggle="tab">
+				<i class="fa fa-money"></i>&nbsp; Ceny
+			</a>
+		</li>
+	</ul>
+
+	<div class="tab-content content">
+		<div class="tab-pane active" id="edit">
+			{control editObject}
+		</div>
+		<div class="tab-pane" id="prices">
+			{control prices}
+		</div>
+	</div>

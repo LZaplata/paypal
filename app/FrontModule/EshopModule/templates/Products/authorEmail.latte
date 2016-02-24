@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+	<title></title>
+</head>
+
+<body>
+	<div style="width: 970px; font-size: 14px;">
+		<p>
+			Dobrý den, <br />
+			bylo odpovězeno na váš příspěvek v diskuzi.
+		</p>
+		
+		<h3>Diskuze k produktu <a href="{$host}/{$presenter->eshop}/{$presenter->category}:c{$presenter->cid}/{$presenter->product}:p{$presenter->pid}.htm">{$post->products->name}</a></h3>
+		
+		<div>
+			<p>
+				<strong>{$post->name} {$post->surname}</strong> <small>{$post->date|date:"j.n.Y H:i"}</small> <br />
+				{$post->text}
+			</p>
+			
+			{foreach $post->related("posts") as $p}
+				<p style="padding-left: 30px;">
+					<strong>{$p->name} {$p->surname}</strong> <small>{$p->date|date:"j.n.Y H:i"}</small> <br />
+					{$p->text}
+				</p>
+			{/foreach}
+		</div>
+	</div>
+</body>
+</html>

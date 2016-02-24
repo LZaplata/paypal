@@ -1,0 +1,20 @@
+{block #content}
+	<div id="layout3" class="row">
+		<div id="left" class="col-xs-4">	
+			{if $module = $presenter->getPageModule($page, 1)}
+				{control editor $module->id}
+			{/if}
+		</div>
+		
+		<div id="center" class="col-xs-4">	
+			{if $module = $presenter->getPageModule($page, 2)}
+				{control editor $module->id}
+			{/if}
+		</div>
+		
+		<div id="right" class="col-xs-4">	
+			{if $module = $presenter->getPageModule($page, 3)}
+				{control editor $module->id}
+			{/if}
+		</div>
+	</div>

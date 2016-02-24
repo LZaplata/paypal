@@ -1,0 +1,15 @@
+{if count($breadcrumb)}
+	<ol class="breadcrumb">
+		{foreach $breadcrumb as $stage}
+			<li class="{if $iterator->last}active{/if}">
+				{if $iterator->last}
+					{$stage->name}
+				{else}
+					<a href="{$stage->url}">
+						{$stage->name}
+					</a>
+				{/if}
+			</li>
+		{/foreach}
+	</ol>
+{/if}

@@ -1,0 +1,13 @@
+<div class="tags">
+	{var $url = $control->getUrl()}
+
+	<ul>
+		{foreach $tags->sections->related('articles') as $tag}		
+			<li class="{$tag->url} {$presenter->tag == $tag ? 'current' : ''}">
+				<a href="{plink Page: pages => $url, tag => $tag->url, tid => $tag->id}">
+					{$tag->name}
+				</a>
+			</li>
+		{/foreach} 
+	</ul>
+</div>

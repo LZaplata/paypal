@@ -1,0 +1,12 @@
+<ul class="nav nav-tabs">
+	<li class="{if !$presenter->getParameter('search')}active{/if}">
+		<a href="#edit" data-toggle="tab">
+			<i class="fa fa-pencil"></i>&nbsp; Editace
+		</a>
+	</li>
+	<li class="{if $presenter->getParameter('search')}active{/if}">
+		<a href="#detail" data-toggle="tab">
+			<i class="fa fa-table"></i>&nbsp; Rezervované místnosti
+		</a>
+	</li>
+</ul>

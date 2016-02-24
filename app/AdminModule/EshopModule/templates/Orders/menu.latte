@@ -1,0 +1,12 @@
+<ul class="nav nav-tabs">
+	<li class="{if !$presenter->getParameter('search')}active{/if}">
+		<a href="#contact" data-toggle="tab">
+			<i class="fa fa-truck"></i>&nbsp; Údaje pro doručení
+		</a>
+	</li>
+	<li class="{if $presenter->getParameter('search')}active{/if}">
+		<a href="#cart" data-toggle="tab">
+			<i class="fa fa-shopping-cart"></i>&nbsp; Košík
+		</a>
+	</li>
+</ul>

@@ -1,0 +1,175 @@
+{block #eshop}
+	{include './nav.latte'}
+	<h1>Objednávka č. {$order->no}</h1>
+
+
+<div id="order" class="row">
+	<div id="invoice" class="col-sm-6">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<span class="h4">Fakturační údaje</span>
+		</div>
+		<div class="panel-body">			
+			<table class="table-condensed no-margin">
+				<tbody>
+					<tr>
+						<th>Jméno a příjmení:</th>
+						<td>{$order->name} {$order->surname}</td>
+					</tr>
+					{if $order->company}
+						<tr>
+							<th>Firma:</th>
+							<td>{$order->company}</td>
+						</tr>
+					{/if}
+					{if $order->ic}
+						<tr>
+							<th>IČ:</th>
+							<td>{$order->ic}</td>
+						</tr>
+					{/if}
+					{if $order->dic}
+						<tr>
+							<th>DIČ:</th>
+							<td>{$order->dic}</td>
+						</tr>
+					{/if}
+					<tr>
+						<th>Ulice:</th>
+						<td>{$order->street}</td>
+					</tr>
+					<tr>
+						<th>Město:</th>
+						<td>{$order->city}</td>
+					</tr>
+					<tr>
+						<th>PSČ:</th>
+						<td>{$order->psc}</td>
+					</tr>
+					<tr>
+						<th>Telefon:</th>
+						<td>{$order->phone}</td>
+					</tr>
+					<tr>
+						<th>E-mail:</th>
+						<td>{$order->email}</td>
+					</tr>
+				</tbody>			
+			</table>
+		</div>
+	</div>
+	</div>
+
+	<div id="delivery" class="col-sm-6">
+	<div class="panel panel-default">
+			<div class="panel-heading">
+				<span class="h4">Údaje pro doručení</span>
+			</div>
+			<div class="panel-body">			
+				<table class="table-condensed">
+					<tbody>
+						<tr>
+							<th>Jméno a příjmení:</th>
+							<td>
+								{if $order->delivery_name}
+									{$order->delivery_name} {$order->delivery_surname}
+								{else}
+									{$order->name} {$order->surname}
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<th>Ulice:</th>
+							<td>
+								{if $order->delivery_street}
+									{$order->delivery_street}
+								{else}
+									{$order->street}
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<th>Město:</th>
+							<td>
+								{if $order->delivery_city}
+									{$order->delivery_city}
+								{else}
+									{$order->city}
+								{/if}
+							</td>
+						</tr>
+						<tr>
+							<th>PSČ:</th>
+							<td>
+								{if $order->delivery_psc}
+									{$order->delivery_psc}
+								{else}
+									{$order->psc}
+								{/if}
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+	</div>
+	</div>	
+</div>
+
+<div class="row">
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<table class="table">
+					<thead>
+						<tr>
+							<th>{_'Název'}</th>
+							<th>{_'Cena/MJ'}</th>
+							<th>{_'Množství'}</th>
+							<th>{_'Celkem'}</th>
+						</tr>
+					</thead>
+					<tbody>
+						{var $name = "name".$presenter->lang}
+						{var $defaultName = "name".$defaultLang}
+						
+						{foreach $order->related('orders_products') as $product}
+							{ifset $product->products->name}
+							<tr>
+								<td>
+									{$product->products->$name ?: ($product->products->$defaultName ?: $product->products->name)}<br>
+								
+									<small>
+										<em>{$presenter->getProductProperties($product->products->id)}</em>
+									</small>	
+								</td>
+								<td>
+									{var $price = $product->price}
+									{$price}
+								</td>
+								<td>{$product->amount}</td>
+								<td>
+									{$product->amount * $price}
+								</td>
+							</tr>
+							{/ifset}
+						{/foreach}
+					</tbody>
+				</table>			
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row">		
+	<div class="col-sm-12">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<div>
+					Zboží: <span class="pull-right">{$order->price} {$order->currency}</span> <br />
+					Doprava ({$presenter->getMethodName($order->transport_id)}) a platba ({$presenter->getMethodName($order->payment_id)}): <span class="pull-right">{snippet transportPrice}{$order->transport} {$order->currency}{/snippet}</span> <br /> <br />					
+					<div class="pull-right h4">{snippet totalPrice}<strong>{$order->price + $order->payment + $order->transport} {$order->currency}</strong>{/snippet}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,18 @@
+{block #content}
+	{include menu.latte}
+	
+	<div class="commonpage">
+		<div class="col-sm-12 {if $rightbar}col-md-12 col-lg-9{/if}">
+			<div class="content">
+				{if !$front}
+					<p>
+						<a href="{link Accounts:Add}" class="btn btn-primary">
+							<i class="fa fa-plus"></i>&nbsp; Přidat
+						</a>
+					</p>
+				{/if}
+				
+				{control grid}
+			</div>
+		</div>
+	</div>

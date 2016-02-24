@@ -1,0 +1,24 @@
+{block #booking}
+	<div id="room">
+		<h1>{$areal->name}</h1>
+	
+		<div class="row">
+			<div class="col-sm-4">
+				<ul class="nav nav-pills nav-stacked">
+					{foreach $rooms as $r}
+						<li class="{if $presenter->rid == $r->id || ($room->pid == 0 && $iterator->first)}active{/if}">
+							<a href="{plink :FrontBooking:Room:view room => $r->url, rid => $r->id}">
+								{$r->name}
+							</a>
+						</li>
+					{/foreach}
+				</ul>
+			</div>			
+			
+			{if $room->pid == 0}
+				{var $room = $rooms->fetch()}
+			{/if}
+			
+			{include layout$room->layout.latte room => $room}			
+		</div>
+	</div>

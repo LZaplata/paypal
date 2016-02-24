@@ -1,0 +1,27 @@
+{var $level = 0}
+{var $parent = null}
+{var $name = 'name'.$presenter->lang}
+{var $url = 'url'.$presenter->lang}
+{var $thumb = $control->getThumb(3)}
+
+<div id="categories">
+	{foreach $categories as $category}
+		{var $image = $category->galleries->related('galleries_images', 'galleries_id')->order('highlight DESC, position ASC')->fetch()}
+	
+		<div class="category col-sm-4">
+			{if $image && $thumb}
+				<p class="img">
+					<a href="{plink :FrontEshop:Categories:view eshop => $eshop, category => $category->$url, cid => $category->id, product => null, pid => null|nosafeurl}">
+						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive">
+					</a>
+				</p>
+			{/if}
+			
+			<h2>
+				<a href="{plink :FrontEshop:Categories:view eshop => $eshop, category => $category->$url, cid => $category->id, product => null, pid => null|nosafeurl}">
+					{$category->$name == null ? $category->name : $category->$name}
+				</a>		
+			</h2>
+		</div>
+	{/foreach}
+</div>

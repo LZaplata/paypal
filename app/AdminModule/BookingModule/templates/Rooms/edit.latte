@@ -1,0 +1,14 @@
+{block #booking}
+	{include menu.latte}
+
+	<div class="tab-content content">
+		<div class="tab-pane active" id="room">
+			{control editRoom}
+		</div>
+		
+		{if $presenter->room}
+			<div class="tab-pane" id="open-hours">
+				{control hours}
+			</div>
+		{/if}
+	</div>

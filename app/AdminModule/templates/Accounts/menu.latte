@@ -1,0 +1,19 @@
+<div class="pull-left menu">
+	<ul class="nav nav-pills nav-stacked">
+		<li class="text-uppercase">
+			<a href="{link Accounts:Front}" class="{ifCurrent Accounts:Front}active{/ifCurrent}">
+				<i class="fa fa-globe fa-fw"></i> web
+			</a>
+		</li>
+		<li class="text-uppercase">
+			<a href="{link Accounts:Admin}" class="{ifCurrent Accounts:Admin}active{/ifCurrent}">
+				<i class="fa fa-cube fa-fw"></i> administrace
+			</a>
+		</li>
+		<li class="text-uppercase">
+			<a href="{link Accounts:groups}" class="{ifCurrentIn 'Accounts:groups', 'Accounts:editGroup'}active{/ifCurrentIn}">
+				<i class="fa fa-group fa-fw"></i> skupiny
+			</a>
+		</li>
+	</ul>
+</div>

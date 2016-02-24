@@ -1,0 +1,25 @@
+<div class="well">
+	{snippet url}
+		{ifset $url}
+			<script>changeUrl({$url});</script>
+		{/ifset}
+	{/snippet}
+	
+	<div class="row">
+		<div class="col-sm-12">
+			<p class="h4 no-margin">Filtrace ceny</p><p></p>
+		</div>
+		
+		<div class="col-sm-2">
+			<span class="min">{$minSelect|number:$decimals:",":""}</span> {_$currency}
+		</div>
+		
+		<div class="col-sm-8">
+			<div id="price-filter" data-min="{$min|number:$decimals:',':''}" data-max="{$max|number:$decimals:',':''}" data-min-select="{$minSelect|number:$decimals:',':''}" data-max-select="{$maxSelect|number:$decimals:',':''}"></div>
+		</div>
+	
+		<div class="col-sm-2 text-right">
+			<span class="max">{$maxSelect|number:$decimals:",":""}</span> {_$currency}
+		</div>
+	</div>
+</div>

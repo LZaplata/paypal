@@ -1,0 +1,81 @@
+{extends ../../templates/@layout.latte}
+
+{block #content}
+	<div class="pull-left menu">
+		<ul class="nav nav-pills nav-stacked">
+			<li class="text-uppercase">
+				<a href="{link Categories:}" class="{ifCurrentIn 'Categories:*'}active{/ifCurrentIn}">
+					<i class="fa fa-folder fa-fw"></i> kategorie
+				</a>
+			</li>
+			<li class="text-uppercase">
+				<a href="{link Products:}" class="{ifCurrentIn 'Products:default', 'Products:edit', 'Products:add', 'Products:gallery', 'Products:files', 'Products:variations', 'Products:properties', 'Products:position'}active{/ifCurrentIn}">
+					<i class="fa fa-barcode fa-fw"></i> produkty
+				</a>
+			</li>
+			<li class="text-uppercase">
+				<a href="{link Orders:}" class="{ifCurrentIn 'Orders:*'}active{/ifCurrentIn}">
+					<i class="fa fa-calculator fa-fw"></i> objednávky
+				</a>
+			</li>
+			<li class="text-uppercase">
+				<a href="{link Settings:}" class="{ifCurrentIn 'Settings:*'}active{/ifCurrentIn}">
+					<i class="fa fa-wrench fa-fw"></i> nastavení
+				</a>
+			</li>
+			
+			{if $shopSettings && $shopSettings->heureka}
+				<li class="text-uppercase">
+					<a href="{link SettingsHeureka:}" class="{ifCurrentIn 'SettingsHeureka:*'}active{/ifCurrentIn}">
+						<i class="fa fa-wrench fa-fw"></i> nastavení Heureka.cz
+					</a>
+				</li>
+			{/if}	
+			
+			{if $shopSettings && $shopSettings->zbozi}
+				<li class="text-uppercase">
+					<a href="{link SettingsZbozi:}" class="{ifCurrentIn 'SettingsZbozi:*'}active{/ifCurrentIn}">
+						<i class="fa fa-wrench fa-fw"></i> nastavení Zboží.cz
+					</a>
+				</li>
+			{/if}
+			
+			{if $shopSettings && $shopSettings->merchants}
+				<li class="text-uppercase">
+					<a href="{link SettingsMerchants:}" class="{ifCurrentIn 'SettingsMerchants:*'}active{/ifCurrentIn}">
+						<i class="fa fa-wrench fa-fw"></i> nastavení Merchants
+					</a>
+				</li>
+			{/if}
+			
+			{if $shopSettings && $shopSettings->posts}
+				<li class="text-uppercase">
+					<a href="{link Posts:}" class="{ifCurrentIn 'Posts:*'}active{/ifCurrentIn}">
+						<i class="fa fa-comment fa-fw"></i> diskuze
+					</a>
+				</li>
+			{/if}	
+				
+			<li class="text-uppercase">
+				<a href="{link Products:trash}" class="{ifCurrentIn 'Products:trash'}active{/ifCurrentIn}">
+					<i class="fa fa-trash fa-fw"></i> koš
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="commonpage">
+		<div class="col-sm-12 {if $rightbar}col-md-12 col-lg-9{/if}">
+			{control breadcrumb}
+		
+			{include #eshop}
+		</div>
+		
+		{if $rightbar}
+		<div class="hidden-sm col-md-4 col-lg-3">
+			{if $settings->seo_assist}
+				{control seo}
+			{/if}
+		</div>
+		{/if}
+	</div>

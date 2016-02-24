@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+	<meta name="description" content="{$desc}">
+	<meta name="keywords" content="{$keywords}">
+	<meta name="robots" content="{$robots}" n:ifset="$robots">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<title>{$title}{if $title_addition} | {$title_addition}{/if}</title>
+
+	{control css}
+	
+	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
+
+	{control js}	
+
+	{if $vendorSettings}
+		{if $vendorSettings->webmasterToolsVerification}
+		<meta name="google-site-verification" content="{$vendorSettings->webmasterToolsVerification}" />
+		{/if}
+	
+		{if $vendorSettings->analyticsUID}
+		<script type="text/javascript">
+			(function(i,s,o,g,r,a,m){ i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+			m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+			})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+			
+			ga('create', {$vendorSettings->analyticsUID}, {$vendorSettings->analyticsURL});
+			ga('require', 'linkid', 'linkid.js');
+			ga('require', 'ecommerce', 'ecommerce.js');
+			ga('send', 'pageview');
+		</script>
+		{/if}
+		
+		{if $vendorSettings->addthisActive && $vendorSettings->addthis}
+		<!-- Go to www.addthis.com/dashboard to customize your tools -->
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid={$vendorSettings->addthis}" async="async"></script>
+		{/if}
+	{/if}
+</head>
+
+<body{if $vendorSettings->singlepage} id="singlepage" data-spy="scroll" data-target=".menu"{/if}>
+	{snippet flashMessages}
+		{foreach $flashes as $flash}
+			{if $flash->type == "popup"}
+				{$flash->message}
+			{else}
+				<div class="alert alert-{$flash->type} alert-dismissible" role="alert">
+					<button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+					{$flash->message}
+				</div>
+			{/if}
+		{/foreach}
+	{/snippet}
+	
+	{if !$vendorSettings->singlepage}
+		<div class="container-fluid" id="header">
+			<div class="container">
+				<div class="pull-left" id="logo">
+					<p class="no-margin">
+						<a href="{dlink :Front:Page:}">
+							<img src="{$basePath}/images/logo.png" alt="logo" />
+						</a>
+					</p>
+				</div>
+				
+				<div class="pull-left">
+					{control menu}
+				</div>
+				
+				<div class="pull-right">
+					{control langs}
+				</div>
+			</div>
+		</div>
+			
+		<div class="container-fluid" id="content">
+			{include #content}
+		</div>
+		
+		<div class="container-fluid" id="copyright">
+			<div class="container">
+				<p class="pull-left">
+					&copy; 2015
+				</p>
+				
+				<p class="pull-right">
+					<a href="http://www.hucr.cz" target="_blank">
+						<img src="{$basePath}/images/signature.png" alt="Humlnet Creative, s.r.o. - E-shopy, firemní prezentace, reklamní grafika" />
+					</a>
+				</p>
+			</div>
+		</div>
+	{else}
+		<div class="container-fluid wrapper" data-spy="affix" id="header">
+			<div class="container" id="logo">
+				<p class="text-center">
+					<a href="{dlink :Front:Page:}">
+						<img src="{$basePath}/images/logo.png" alt="logo" />
+					</a>
+				</p>
+			</div>
+			
+			<div class="container" id="menu">
+				{control menu}
+			</div>
+		</div>
+		
+		{foreach $singlepagePages as $page}
+			<div class="container-fluid clearfix" id="{$page->url}">
+				<div class="container">
+					{include Singlepage/layout$page->layout.latte page => $page}
+				</div>
+			</div>
+		{/foreach}
+	{/if}
+</body>
+</html>

@@ -1,0 +1,14 @@
+{var $order = $user->loggedIn ? $presenter['cart']->tempOrder : $presenter['cart']->order}
+
+<ul id="order-levels" class="nav nav-pills nav-justified">
+	<li class="level first {ifCurrent Order:contact}active{/ifCurrent}">
+		<a href="{plink Order:contact}">
+			Kontaktní údaje
+		</a>
+	</li>
+	<li class="level second {if !$order || $order->transport_id == null || $order->name == null}disabled{/if} {ifCurrent Order:summary}active{/ifCurrent}">
+		<a href="{plink Order:summary}">
+			Souhrn
+		</a>
+	</li>
+</ul>

@@ -1,0 +1,81 @@
+{block #eshop}
+	<div class="content">
+		<fieldset>
+			<legend>Nastavení pro Heureka.cz</legend>
+		</fieldset>	
+		<div class="tab-content content">
+			<div class="row">
+				<div class="col-sm-12">
+					{form heurekaSetting}
+						<div class="row">
+							<div class="col-sm-6">
+								<div class="form-group">
+									{label heurekaConversion /}
+									{input heurekaConversion class=>"form-control"}
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="form-group">
+									{label heurekaVerification /}
+									{input heurekaVerification class=>"form-control"}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="form-group">
+									{input submit class=>"btn btn-primary"}
+								</div>									
+							</div>
+						</div>	
+					{/form}
+				</div>
+			</div>
+		</div>
+	
+		<div class="row">
+			<div class="col-sm-5" id="category-filter">
+				<fieldset>
+					<legend>Všechny kategorie pro Heureka.cz</legend>
+				</fieldset>
+				
+				<div class="form-group">
+					<div class="form-inline text-right">
+						<input type="text" class="form-control input-sm" name="q" value="" />
+						<input type="button" class="btn btn-primary btn-sm" value="Hledat" />
+					</div>
+				</div>
+			
+				{block #categories}
+					<ul class="grid {ifset $pid}cat{$pid} collapse{else}cat0{/ifset}">
+						{foreach $categories as $category}
+							<li>
+								{ifset $category->CATEGORY}
+									<a href=".cat{$category->CATEGORY_ID}" data-toggle="collapse">
+										{$category->CATEGORY_NAME}
+									</a>
+								
+									{include categories categories => $category->CATEGORY, pid => $category->CATEGORY_ID}
+								{else}
+									<span>
+									{$category->CATEGORY_NAME}&nbsp;
+								
+									<a href="{plink ActivateCategory! $category}" title="Aktivovat" class="ajax">
+										<i class="fa fa-eye text-primary fa-fw"></i>
+									</a>
+									</span>						
+								{/ifset}
+							</li>
+						{/foreach}
+					</ul>
+				{/block}
+			</div>
+			
+			<div class="col-sm-7">
+				<fieldset>
+					<legend>Aktivní kategorie pro Heureka.cz</legend>
+				</fieldset>
+				{control activeCategories}
+			</div>
+		</div>
+	</div>

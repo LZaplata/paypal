@@ -1,0 +1,14 @@
+{block #content}
+	{include menu.latte}
+	
+	<div class="col-sm-8">
+		{include tabs.latte}
+	
+		<div class="content">
+			<div class="well">
+				{!$html}
+			</div>
+			
+			{control queue}
+		</div>
+	</div>

@@ -1,0 +1,26 @@
+{extends ../../templates/@layout.latte}
+
+{block #content}
+	<div class="pull-left menu">
+		<ul class="nav nav-pills nav-stacked">
+			<li class="text-uppercase">
+				<a href="{link Rooms: pid => 0}" class="{ifCurrentIn 'Rooms:* 0'}active{/ifCurrentIn}">
+					<i class="fa fa-bank fa-fw"></i> areály
+				</a>
+			</li>
+			<li class="text-uppercase">
+				<a href="{link Rooms: pid => 1}" class="{ifCurrentIn 'Rooms:* 1'}active{/ifCurrentIn}">
+					<i class="fa fa-table fa-fw"></i> místnosti
+				</a>
+			</li>
+			<li class="text-uppercase">
+				<a href="{link Orders:}" class="{ifCurrentIn 'Orders:*'}active{/ifCurrentIn}">
+					<i class="fa fa-fax fa-fw"></i> rezervace
+				</a>
+			</li>
+		</ul>
+	</div>
+	
+	<div class="col-sm-8">
+		{include #booking}
+	</div>
