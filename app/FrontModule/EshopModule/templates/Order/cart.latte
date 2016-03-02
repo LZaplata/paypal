@@ -1,5 +1,7 @@
 {block #eshop}
 	{ifCurrent Order:cart}
+		<h1 class="h2 no-margin-top">Košík</h1>
+
 		{include menu.latte}
 	{/ifCurrent}
 
@@ -11,45 +13,47 @@
 		<div id="cart">
 			<table class="table">
 				<thead>
-					<th></th>
+					{*<th></th>*}
 					<th>{_'Název'}</th>
-					<th>{_'Cena/MJ'}</th>
-					<th>{_'Množství'}</th>
-					<th>{_'Celkem'}</th>
+					<th></th>
+					<th>{_'cena za kus'}</th>
+					<th>{_'cena celkem'}</th>
 				</thead>
 				<tbody>
 					{if count($presenter["cart"]->products)}
 						{foreach $presenter["cart"]->products as $product}
 							<tr>
 								{if !$product->trash}
-									{var $image = $presenter->getParentProduct($product->products_id)}
-									{var $image = $image->galleries->related("galleries_images")->where("visibility", 1)->order("position ASC")->fetch()}
-									
+									{*{var $image = $presenter->getParentProduct($product->products_id)}*}
+									{*{var $image = $image->galleries->related("galleries_images")->where("visibility", 1)->order("position ASC")->fetch()}*}
+
+									{*<td>*}
+										{*{if $image && $thumb}*}
+											{*<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries_id}-{$image->name}">*}
+										{*{/if}*}
+									{*</td>															*}
 									<td>
-										{if $image && $thumb}
-											<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries_id}-{$image->name}">
-										{/if}
-									</td>															
-									<td>
-										{if $user->loggedIn}
-											{$product->products->$name ?: ($product->products->$defaultName ?: $product->products->name)}
-										{else}
-											{$product->productName}
-										{/if}<br>
-										
-										<small>
-											<em>{$presenter->getProductProperties($product->products_id)}</em>
-										</small>
+										<strong>
+										    {if $user->loggedIn}
+    											{$product->products->$name ?: ($product->products->$defaultName ?: $product->products->name)}
+    										{else}
+    											{$product->productName}
+    										{/if}<br>
+
+    										<small>
+    											<em>{$presenter->getProductProperties($product->products_id)}</em>
+    										</small>
+										</strong>
 									</td>
-									<td>{$price = $presenter["cart"]->getProductDiscountPrice($product->products_id, $product->price, 1)|number:$decimals:",":" "} {_$currency}</td>
 									<td>
 										{ifCurrent :FrontEshop:Order:cart}
 											{control addToCart-$product->products_id}
 										{else}
 											{$product->amount}
-										{/ifCurrent}									
+										{/ifCurrent}
 									</td>
-									<td>{$price * $product->amount|number:$decimals:","," "} {_$currency}</td>
+									<td>{$price = $presenter["cart"]->getProductDiscountPrice($product->products_id, $product->price, 1)|number:$decimals:",":" "} {_$currency}</td>
+									<td><strong>{$price * $product->amount|number:$decimals:","," "} {_$currency}</strong></td>
 								{else}
 									<td colspan="4">
 										Produkt <strong>{$product->productName}</strong> již není v nabídce!
@@ -97,8 +101,12 @@
 			{ifCurrent Order:cart}
 				<div class="next">
 					<p class="pull-right">
-						<a href="{plink Order:contact}" class="btn btn-primary">
-							{_'Kontaktní údaje'}
+						<a href="{plink Order:contact}" class="h4 no-margin text-warning sm">
+							{_'pokračovat v objevnáce'}
+								<span class="fa-stack">
+								<i class="fa fa-circle fa-stack-2x"></i>
+								<i class="fa fa-arrow-right fa-stack-1x fa-inverse"></i>
+							</span>
 						</a>
 					</p>
 				</div>

@@ -13,6 +13,7 @@
 	{control css}
 	
 	<link rel="shortcut icon" href="{$basePath}/favicon.ico" type="image/x-icon">
+	<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
 	{control js}	
 
@@ -43,6 +44,15 @@
 </head>
 
 <body{if $vendorSettings->singlepage} id="singlepage" data-spy="scroll" data-target=".menu"{/if}>
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&version=v2.5&appId=391221134311660";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
 	{snippet flashMessages}
 		{foreach $flashes as $flash}
 			{if $flash->type == "popup"}
@@ -57,6 +67,16 @@
 	{/snippet}
 	
 	{if !$vendorSettings->singlepage}
+		<div class="container-fluid" id="menu-wrapper">
+		    <div class="container">
+		        {control menu menu => 1, maxLevel => 1}
+
+				<div class="pull-right">
+					{control userbar}
+				</div>
+		    </div>
+		</div>
+
 		<div class="container-fluid" id="header">
 			<div class="container">
 				<div class="pull-left" id="logo">
@@ -66,33 +86,157 @@
 						</a>
 					</p>
 				</div>
-				
-				<div class="pull-left">
-					{control menu}
-				</div>
-				
+
+				{control menu menu => 2}
+
 				<div class="pull-right">
-					{control langs}
+					<div class="pull-right">
+						{control langs}
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div>
+						<div class="pull-right">
+							{control cart}
+						</div>
+						<div class="pull-right">
+							{control search}
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-			
+
+		{if $homepage}
+			<div class="wrapper" id="slider-wrapper">
+				{control slider:articles 2}
+			</div>
+
+			<div class="clearfix"></div>
+
+			<div class="container-fluid" id="news">
+			    <div class="container">
+				    {control articles 3}
+			    </div>
+			</div>
+
+			<div class="container-fluid" id="advantages">
+			    <div class="container">
+			        <div class="row">
+			            <div class="col-sm-3 advantage">
+							<h3>Bez konzervantů</h3>
+							<p class="text">
+								Připraveno bez přídaných chemických látek a konzervantů.
+							</p>
+							<p class="text-center img">
+								<img src="{$basePath}/images/advantage1.png" alt="">
+							</p>
+						</div>
+			            <div class="col-sm-3 advantage">
+							<h3>Trvanlivost 3 roky</h3>
+							<p class="text">
+								Můžete skladovat při teplotě do +30°C.
+							</p>
+							<p class="text-center img">
+								<img src="{$basePath}/images/advantage1.png" alt="">
+							</p>
+						</div>
+			            <div class="col-sm-3 advantage">
+							<h3>Odolný obal</h3>
+							<p class="text">
+								Jídlo si můžete vzít všude s sebou a mít ho stále po ruce.
+							</p>
+							<p class="text-center img">
+								<img src="{$basePath}/images/advantage1.png" alt="">
+							</p>
+						</div>
+			            <div class="col-sm-3 advantage">
+							<h3>Snadná příprava</h3>
+							<p class="text">
+								Stačí ohřát, přidat přílohu a můžete jíst.
+							</p>
+							<p class="text-center img">
+								<img src="{$basePath}/images/advantage1.png" alt="">
+							</p>
+						</div>
+			        </div>
+			    </div>
+			</div>
+		{else}
+			<div class="container-fluid" id="breadcrumb">
+			    <div class="container">
+			        {control breadcrumb}
+			    </div>
+			</div>
+		{/if}
+
 		<div class="container-fluid" id="content">
 			{include #content}
 		</div>
-		
-		<div class="container-fluid" id="copyright">
-			<div class="container">
-				<p class="pull-left">
-					&copy; 2015
-				</p>
-				
-				<p class="pull-right">
-					<a href="http://www.hucr.cz" target="_blank">
-						<img src="{$basePath}/images/signature.png" alt="Humlnet Creative, s.r.o. - E-shopy, firemní prezentace, reklamní grafika" />
-					</a>
-				</p>
+
+		{if $homepage}
+			<div class="container-fluid" id="family">
+			    <div class="container">
+			        {control editor 14}
+			    </div>
 			</div>
+			
+			<div class="container-fluid" id="about">
+			    <div class="container">
+			        {control editor 15}
+			    </div>
+			</div>
+		{/if}
+
+		<div class="container-fluid" id="footer">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-sm-3">
+						<div class="fb-page" data-href="https://www.facebook.com/EXPRES-MENU-81899707155/?fref=ts" data-tabs="message" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
+					</div>
+		            <div class="col-sm-3">
+						{control menu maxLevel => 1}
+					</div>
+		            <div class="col-sm-3">
+						{control menu menu => 3, maxLevel => 1}
+					</div>
+		            <div class="col-sm-3">
+						<p>
+							<strong>&copy; EXPRES MENU, s.r.o.</strong><br>
+							Lomní 355, 541 01 Trutnov
+						</p>
+						<p>
+							<a href="mailto:info@expresmenu.com">info@expresmenu.com</a><br>
+							+420 <strong>499 819 219</strong>
+						</p>
+						<p class="no-margin">
+							<a href="http://www.hucr.cz" target="_blank">
+								<img src="{$basePath}/images/signature.png" alt="Humlnet Creative, s.r.o. - E-shopy, firemní prezentace, reklamní grafika" />
+							</a>
+						</p>
+					</div>
+		        </div>
+		    </div>
+		</div>
+
+		<div class="container-fluid" id="logos">
+		    <div class="container">
+		        <div class="row">
+		            <div class="col-sm-3 gluten">
+						<p class="no-margin h4">
+							<img src="{$basePath}/images/gluten.png" alt=""> Vaříme bez lepku
+						</p>
+					</div>
+					<div class="col-sm-6 imgs">
+						<p class="no-margin text-center">
+							<img src="{$basePath}/images/heureka.png" alt="">
+							<img src="{$basePath}/images/czech-made.png" alt="">
+							<img src="{$basePath}/images/yummy.png" alt="">
+						</p>
+					</div>
+		        </div>
+		    </div>
 		</div>
 	{else}
 		<div class="container-fluid wrapper" data-spy="affix" id="header">

@@ -7,13 +7,20 @@
 		public $url;
 		public $visibility;
 		public $id;
-		
+		public $menu;
+
 		public function __construct($parent, $name) {
 			parent::__construct($parent, $name);
 		}
 		
 		public function getPages ($pid) {			
-			return $this->presenter->model->getPages()->where(array('pid' => $pid, 'visibility' => $this->visibility))->where('menu = ? OR menu = ?', 0, $this->id)->order('position ASC');
+			$pages = $this->presenter->model->getPages()->where(array('pid' => $pid, 'visibility' => $this->visibility))->where('menu = ? OR menu = ?', 0, $this->id)->order('position ASC');
+
+			if ($this->menu) {
+				$pages->where("menu_no", $this->menu);
+			}
+
+			return $pages;
 		}
 		
 		public function getPageUrl ($page, $i = 0) {
@@ -41,6 +48,7 @@
 		public function render ($params = null) {
 			$this->visibility = isset($params['onlyHidden']) ? 0 : 1;
 			$this->id = isset($params['id']) ? $params['id'] : 0;
+			$this->menu = isset($params['menu']) ? $params['menu'] : false;
 			
 			$this->template->setFile(__DIR__.'/menu.latte');
 			

@@ -1,3 +1,18 @@
-<div class="add-to-cart">
-	{control addToCart}
+<div class="add-to-cart clearfix">
+	{ifCurrent :FrontEshop:Products:view}
+		{form addToCart}
+			<p class="pull-left no-margin">
+				{input amount class => "form-control"}
+			</p>
+			<button name="add" class="h4 no-margin pull-left">
+				<span class="">do košíku</span>
+				<span class="fa-stack">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-shopping-basket fa-stack-1x fa-inverse"></i>
+				</span>
+			</button>
+		{/form}
+	{else}
+		{control addToCart}
+	{/ifCurrent}
 </div>

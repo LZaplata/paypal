@@ -345,8 +345,12 @@
 			
 			$form->addGroup()
 				->setOption('container', 'fieldset class=last');
-			$form->addSubmit('transport', 'Doprava a platba')
-				->onClick[] = callback($this, 'submitContact');
+			$form->addSubmit('transport')
+				->getControlPrototype()
+				->setName("button")
+				->setHtml("pokračovat v objednávce <span class='fa-stack'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-arrow-right fa-stack-1x fa-inverse'></i></span>");
+
+			$form["transport"]->onClick[] = callback($this, 'submitContact');
 			
 			$order = $this->user->loggedIn ? $this['cart']->tempOrder : $this['cart']->order;
 			
@@ -364,7 +368,7 @@
 		
 		public function submitContact ($button) {
 			$values = $button->parent->values;
-			
+
 			if ($this->user->loggedIn) {
 				$this['cart']->tempOrder->update($values);
 				
@@ -392,7 +396,7 @@
 					$this['cart']->order->users_id = $lastID->id;
 				}
 			}
-			
+
 			$this->redirect('Order:transport');
 		}
 		

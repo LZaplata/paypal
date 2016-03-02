@@ -17,12 +17,12 @@
 				$this->products = $this->model->getProducts()->where('name LIKE ? OR description LIKE ? OR text LIKE ? OR code LIKE ?', '%'.$q.'%', '%'.$q.'%', '%'.$q.'%', '%'.$q.'%')->where('visibility', 1)->where('trash', 0)->where('pid IS NULL');
 			}
 			else {
-				$this->products = $this->model->getProducts()->where('pid IS NULL')->where('highlight', 1)->where('visibility', 1)->where('trash', 0);
+//				$this->products = $this->model->getProducts()->where('pid IS NULL')->where('highlight', 1)->where('visibility', 1)->where('trash', 0);
 			}
 
 			$this->paginator->itemsPerPage = $this->module->lmt;
 			$this->paginator->itemCount = count($this->products);
-			$this->products->page($this->paginator->page, $this->paginator->itemsPerPage);
+//			$this->products->page($this->paginator->page, $this->paginator->itemsPerPage);
 		}
 
 		public function renderDefault () {
@@ -32,7 +32,7 @@
 			$this->template->title = $page->title;
 			$this->template->title_addition = $this->vendorSettings->title_editors;
 			$this->template->desc = $page->description;
-			$this->template->products = $this->products;
+//			$this->template->products = $this->products;
 			$this->template->settings = $this->settings;
 			$this->template->related = true;
 			$this->template->currency = $this->currency == 'czk' ? $this->context->parameters['currency'] : $this->currency;
@@ -41,5 +41,10 @@
 			$this->template->cols = $this->cols[$this->module->cols];
 			$this->template->clearfix = $this->module->cols;
 			$this->template->isSearch = isset($_GET["q"]);
+			$this->template->categories = $this->model->getCategories()->where("pid", 10);
+		}
+
+		public function getCategoryProducts ($cid) {
+			return $this->products = $this->model->getProductsCategories()->select('*, products.*')->where('categories_id', $cid)->where('products.pid IS NULL')->where('products.trash', 0)->where('visibility', 1)/*->order('position ASC')*/;
 		}
 	}

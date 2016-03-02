@@ -53,6 +53,7 @@
 			$this->template->posts = $this->posts;
 			$this->template->homepage = false;
 			$this->template->icons = $this->presenter->context->parameters['icons'];
+			$this->template->tags = $this->model->getProductsTags()->select("tags.*")->where("products_id", $this->pid);
 			$this->template->setTranslator($this->translator);
 		}
 

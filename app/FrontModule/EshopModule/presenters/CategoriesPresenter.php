@@ -3,7 +3,8 @@
 
 	use FrontEshopModule\Filters\PriceFilter;
 use FrontEshopModule\Filters\PropertiesFilter;
-use FrontEshopModule\Sorters\Sorter;
+	use FrontEshopModule\Filters\TagsFilter;
+	use FrontEshopModule\Sorters\Sorter;
 		
 	class CategoriesPresenter extends BasePresenter {
 		public $categories;
@@ -34,13 +35,14 @@ use FrontEshopModule\Sorters\Sorter;
 				$this->view->productsView = $view == "grid" ? 1 : 2;
 			}
 			
-			$this['priceFilter']->filterProducts();
+//			$this['priceFilter']->filterProducts();
+			$this['tagsFilter']->filterProducts();
+
+//			if (count($this['propertiesFilter']->categoryCategories)) {
+//				$this['propertiesFilter']->filterProducts();
+//			}
 			
-			if (count($this['propertiesFilter']->categoryCategories)) {
-				$this['propertiesFilter']->filterProducts();
-			}
-			
-			$this['sorter']->sortProducts();
+//			$this['sorter']->sortProducts();
 			
 			$this->paginator->itemsPerPage = $this->module->lmt;
 			$this->paginator->itemCount = count($this->products);
@@ -106,5 +108,10 @@ use FrontEshopModule\Sorters\Sorter;
 		
 		public function createComponentSorter ($name) {
 			return new Sorter($this, $name);
+		}
+
+		public function createComponentTagsFilter($name)
+		{
+			return new TagsFilter($this, $name);
 		}
 	}

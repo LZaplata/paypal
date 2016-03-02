@@ -42,7 +42,7 @@ use Nette\Forms\Rendering\BootstrapFormRenderer;
 			$this->properties = $this->model->getShopProperties();
 			
 			if (!$this['fields']->getParameter('order')) {
-				$this->redirect('this', array('fields-order' => 'name ASC', 'properties-order' => 'id ASC', 'methods-order' => 'id ASC', 'methodsRelations-order' => 'id ASC', 'thumbs-order' => 'dimension ASC'));
+				$this->redirect('this', array('fields-order' => 'name ASC', 'properties-order' => 'id ASC', 'methods-order' => 'id ASC', 'methodsRelations-order' => 'id ASC', 'thumbs-order' => 'dimension ASC', "tags-order" => "id ASC"));
 			}
 		}
 		
@@ -228,5 +228,10 @@ use Nette\Forms\Rendering\BootstrapFormRenderer;
 		
 		public function createComponentGallery ($name) {
 			return new \GalleryPresenter($this, $name);
-		}		
+		}
+
+		public function createComponentTags()
+		{
+			return new Tags($this->model->getTags());
+		}
 	}

@@ -6,9 +6,9 @@
 
 {if $paginator->pageCount > 1}
 	<ul class="pagination pagination-sm">
-		<li class="{if $paginator->isFirst()}disabled{/if}">
-			<a href="{plink this, (expand) $params, page => $paginator->page - 1}">« Předchozí</a>
-		</li>
+<!--		<li class="{if $paginator->isFirst()}disabled{/if}">-->
+<!--			<a href="{plink this, (expand) $params, page => $paginator->page - 1}">« Předchozí</a>-->
+<!--		</li>-->
 	  
 	  	{foreach $steps as $step}
 	  		<li class="{if $step == $paginator->page}active{/if}">
@@ -18,8 +18,8 @@
 			{*if $iterator->nextValue > $step + 1}<span>…</span>{/if*}
 		{/foreach}
 		  
-		<li class="{if $paginator->isLast()}disabled{/if}">
-			<a href="{plink this, (expand) $params, page => $paginator->page + 1}">Další »</a>
-		</li>
+<!--		<li class="{if $paginator->isLast()}disabled{/if}">-->
+<!--			<a href="{plink this, (expand) $params, page => $paginator->page + 1}">Další »</a>-->
+<!--		</li>-->
 	</ul>
 {/if}

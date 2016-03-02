@@ -41,6 +41,7 @@
 		public $section;
 		public $filters;
 		public $categories;
+		public $tags;
 		public $properties;
 		public $propertiesCategories;
 		public $discounts;
@@ -111,6 +112,7 @@
 			}
 
 			$this->categories = $this->model->getProductsCategories()->where('products_id', $id)->fetchPairs('categories_id', 'categories_id');
+			$this->tags = $this->model->getProductsTags()->where('products_id', $id)->fetchPairs('tags_id', 'tags_id');
 			$this->discounts = $this->model->getProductsDiscounts()->where('products_id', $id);
 
 			if ($this->product) {
@@ -366,6 +368,10 @@
 						->getControlPrototype()->class('chosen');
 	// 			}
 
+				$tags = $form->addContainer('tags');
+				$tags->addMultiSelect('tags', 'Tagy:', $this->model->getTags()->fetchPairs('id', 'name'))
+					->getControlPrototype()->class('chosen');
+
 				if ($this->product) {
 					$form->addGroup('Vlastnosti produktu');
 					$properties = $form->addContainer('properties');
@@ -391,7 +397,7 @@
 							$infos->addCheckbox($field->title.$key, $field->name);
 							break;
 						case 5:
-							$form->addTextarea($field->title.$key, $field->name)
+							$infos->addTextarea($field->title.$key, $field->name)
 								->getControlPrototype()->class('tinymce');
 					}
 				}
@@ -424,6 +430,7 @@
 					$date['infos']['expirationDateFrom'] = $this->product->expirationDateFrom != null ? $this->product->expirationDateFrom->format('Y-m-d H:i') : null;
 					$date['infos']['expirationDateTo'] = $this->product->expirationDateTo != null ? $this->product->expirationDateTo->format('Y-m-d H:i') : null;
 					$data['categories']['categories'] = $this->categories;
+					$data['tags']['tags'] = $this->tags;
 
 					if ($this->properties) {
 						$data['properties'] = $this->properties;
@@ -467,6 +474,16 @@
 					if (in_array($category, $this->categoriesCategories)) {
 						$propertiesRedirect = true;
 					}
+				}
+			}
+
+			if (isset($values['tags']['tags'])) {
+				foreach ($values['tags']['tags'] as $tag) {
+					$data = array();
+					$data["tags_id"] = $tag;
+					$data["products_id"] = $lastID;
+
+					$this->model->getProductsTags()->insert($data);
 				}
 			}
 
@@ -524,7 +541,21 @@
 				}
 			}
 
+			if (isset($values['tags']['tags'])) {
+				foreach ($values['tags']['tags'] as $tag) {
+					$data = array();
+					$data["tags_id"] = $tag;
+					$data["products_id"] = $this->id;
+
+					if (!$this->model->getProductsTags()->where($data)->fetch()) {
+						$this->model->getProductsTags()->insert($data);
+					}
+				}
+			}
+
 			if (isset($values['properties'])) {
+				$data = array();
+
 				foreach ($this->properties as $property) {
 					$data['p_'. $property] = false;
 				}

@@ -85,6 +85,10 @@ $(document).ready(function() {
 	$("#properties-filter").on("change", function () {		
 		$.get(window.location.href + getQueryCharacter() + "do=propertiesFilter-filter", {data : $("#frm-propertiesFilter-filterForm").serialize()});
 	});
+
+	$("#tags-filter").on("change", function () {
+		$.get(window.location.href + getQueryCharacter() + "do=tagsFilter-filter", {data : $("#frm-tagsFilter-filterForm").serialize()});
+	});
 	
 	/**
 	 * sorters

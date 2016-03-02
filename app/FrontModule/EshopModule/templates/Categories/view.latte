@@ -13,25 +13,28 @@
 		</div>
 	
 		<div class="col-sm-12">
-			{control priceFilter}
-			{control propertiesFilter}
+			{*{control priceFilter}*}
+			{*{control propertiesFilter}*}
+			{control tagsFilter}
 		</div>
 
-		<div class="col-sm-12">
-			<div class="well well-sm productsView">
-				Zobrazit jako
-				<a href="{plink this view => grid}" class="text-uppercase {if $presenter->view->productsView == 1 || !isset($presenter->view->productsView)}active{/if}">
-					<i class="fa fa-th"></i>&nbsp; katalog
-				</a>
-				<a href="{plink this view => list}" class="text-uppercase {if $presenter->view->productsView == 2}active{/if}">
-					<i class="fa fa-bars"></i>&nbsp; seznam
-				</a>
-			</div>
-		</div>
+		{*<div class="col-sm-12">*}
+			{*<div class="well well-sm productsView">*}
+				{*Zobrazit jako*}
+				{*<a href="{plink this view => grid}" class="text-uppercase {if $presenter->view->productsView == 1 || !isset($presenter->view->productsView)}active{/if}">*}
+					{*<i class="fa fa-th"></i>&nbsp; katalog*}
+				{*</a>*}
+				{*<a href="{plink this view => list}" class="text-uppercase {if $presenter->view->productsView == 2}active{/if}">*}
+					{*<i class="fa fa-bars"></i>&nbsp; seznam*}
+				{*</a>*}
+			{*</div>*}
+		{*</div>*}
 	
 		<div class="col-sm-12">
 			{control sorter}
 		</div>
+
+		<div class="clearfix"></div>
 	
 		{snippet products}
 			{include layout$layout.latte}

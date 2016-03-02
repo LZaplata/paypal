@@ -3,22 +3,22 @@
 <ul id="order-levels" class="nav nav-pills nav-justified">
 	<li class="level first {ifCurrent Order:cart}active{/ifCurrent}">
 		<a href="{plink :FrontEshop:Order:cart}" class="h4 no-margin">
-			<i class="fa fa-shopping-cart"></i>&nbsp; {_'Košík'}
+			{_'výčet objednávky'}
 		</a>
 	</li>
 	<li class="level second {ifCurrent Order:contact}active{/ifCurrent}">
 		<a href="{plink :FrontEshop:Order:contact}" class="h4 no-margin">
-			<i class="fa fa-home"></i>&nbsp; {_'Kontaktní údaje'}
+			{_'kontaktní údaje'}
 		</a>
 	</li>
 	<li class="level third {if !$order || $order->name == null}disabled{/if} {ifCurrent Order:transport}active{/ifCurrent}">
 		<a href="{plink :FrontEshop:Order:transport}" class="h4 no-margin">
-			<i class="fa fa-truck"></i>&nbsp; {_'Doprava a platba'}
+			{_'doprava a platba'}
 		</a>
 	</li>
 	<li class="level fourth {if !$order || $order->transport_id == null || $order->name == null}disabled{/if} {ifCurrent Order:summary}active{/ifCurrent}">
 		<a href="{plink :FrontEshop:Order:summary}" class="h4 no-margin">
-			<i class="fa fa-calculator"></i>&nbsp; {_'Souhrn'}
+			{_'souhrn'}
 		</a>
 	</li>
 </ul>

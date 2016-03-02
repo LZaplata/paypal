@@ -3,10 +3,29 @@
 		{if $q = $presenter->getParameter("q")}
 			Výsledky vyhledávání výrazu "{$q}"
 		{else}
-			Oblíbené
+			nabídka e-shopu
 		{/if}
 	</h1>
 
 	<div class="row">
-		{include ../Categories/layout1.latte}
+		{foreach $categories as $category}
+			<div class="category-day">
+				{var $products = $presenter->getCategoryProducts($category->id)}
+
+				<h2 class="h3 text-warning no-margin col-sm-12">
+					{$category->name}
+					<small class="pull-right">
+						<a href="{dlink :FrontEshop:Categories:view eshop => $presenter->eshop, category => $category->url, cid => $category->id}">
+							vše v kategorii
+							<span class="fa-stack">
+								<i class="fa fa-circle fa-stack-2x"></i>
+								<i class="fa fa-arrow-right fa-stack-1x fa-inverse"></i>
+							</span>
+						</a>
+					</small>
+				</h2>
+
+				{include ../Categories/layout1.latte products => $products}
+			</div>
+		{/foreach}
 	</div>

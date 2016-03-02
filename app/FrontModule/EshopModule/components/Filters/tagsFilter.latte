@@ -1,0 +1,19 @@
+<div id="tags-filter" class="well">
+	{snippet url}
+		{ifset $url}
+			<script>changeUrl({$url});</script>
+		{/ifset}
+	{/snippet}
+
+	<p>
+		<strong>Vyhledat pouze jídla s těmito štítky</strong>
+	</p>
+
+	{control filterForm}
+
+	<p class="no-margin">
+		<em>
+			(Všechna jídla jsou standardně <a href="">bezlepková</a>.)
+		</em>
+	</p>
+</div>

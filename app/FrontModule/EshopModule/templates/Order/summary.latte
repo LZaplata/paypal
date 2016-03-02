@@ -1,4 +1,6 @@
 {block #eshop}
+	<h1 class="h2 no-margin-top">Souhrn</h1>
+
 	{include menu.latte}
 
 	<div id="contact" class="row">
@@ -131,8 +133,12 @@
 	
 	<div class="next">
 		<p class="pull-right">
-			<a href="{plink Order:send}" class="btn btn-primary">
-				{_'Odeslat objednávku'}
+			<a href="{plink Order:send}" class="h4 sm text-warning no-margin">
+				{_'odeslat objednávku'}
+				<span class="fa-stack">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-arrow-right fa-stack-1x fa-inverse"></i>
+				</span>
 			</a>
 		</p>
 	</div>

@@ -5,53 +5,65 @@
 {var $url = 'url'.$presenter->lang}
 {var $category = array()}
 
+<h2 class="h3 col-sm-12 no-margin-bottom">tento týden doporučujeme</h2>
+
 {foreach $products as $product}
 	{var $image = $product->galleries->related('galleries_images', 'galleries_id')->order('highlight DESC, position ASC')->fetch()}
 	{var $cat = $control->getProductCategory($product)}
 	{var $category = array("category" => $cat->url, "cid" => $cat->id)}
 				
-	<div class="product col-sm-4">
-		{if $settings->name}			
-			<div class="name">
-				<h2>
-					<a href="{plink :FrontEshop:Products:view (expand) $category, eshop => $eshop, pid => $product->id, product => $product->$url|nosafeurl}">
+	<div class="product col-sm-3">
+		<a href="{plink :FrontEshop:Products:view (expand) $category, eshop => $eshop, pid => $product->id, product => $product->$url|nosafeurl}">
+			{if $settings->name}
+				<div class="name">
+					<h2 class="h4 no-margin">
 						{!$product->$name ? $product->$name : $product->name|nbsp}
-					</a>
-				</h2>	
-			</div>
-		{/if}
-		
-		{if $image && $thumb}
-			<div class="img">
-				<p>
-					<a href="{plink :FrontEshop:Products:view (expand) $category, eshop => $eshop, pid => $product->id, product => $product->$url|nosafeurl}">
-						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" />
-					</a>
-				</p>
-			</div>
-		{/if}
-		
-		{if $settings->price}				
-			<div class="price">
-				<p>
-					{$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1)|number:$decimals:",":" "} 
-					<span class="currency">{_$currency}</span>
-				</p>
-			</div>
-		{/if}
-		
-		{if $settings->description}			
-			<div class="description">
-				{if $product->$description} 
-					<p>{!$product->$description|nbsp}</p>
-				{else}
-					{if $product->description}
-						<p>{!$product->description|nbsp}</p>
+					</h2>
+				</div>
+			{/if}
+
+			{if $product->tip}
+				<div class="tip">
+					<img src="{$basePath}/images/tip.png" alt="">
+				</div>
+			{/if}
+
+			{if $image && $thumb}
+				<div class="img">
+					<p class="no-margin">
+						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
+					</p>
+				</div>
+			{/if}
+
+			{if $settings->price}
+				<div class="price">
+					<p class="no-margin">
+						{$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1)|number:$decimals:",":" "}
+						<span class="currency">{_$currency}</span>
+					</p>
+				</div>
+			{/if}
+
+			{if $settings->description}
+				<div class="description">
+					{if $product->$description}
+						<p>{!$product->$description|nbsp|truncate:130}</p>
 					{else}
-						{!($product->$text ? $product->$text : $product->text)|nbsp}
+						{if $product->description}
+							<p>{!$product->description|nbsp|truncate:130}</p>
+						{else}
+							{!($product->$text ? $product->$text : $product->text)|nbsp}
+						{/if}
 					{/if}
-				{/if}
+				</div>
+			{/if}
+
+			<div class="tags">
+				{foreach $product->related("products_tags") as $tag}
+					<span class="tag" style="background: {!$tag->tags->color}">{$tag->tags->name}</span>
+				{/foreach}
 			</div>
-		{/if}
+		</a>
 	</div>
 {/foreach}

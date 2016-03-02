@@ -1,27 +1,146 @@
 {block #eshop}
 	{if $product}	
 		<div class="product-detail layout1 row">
-			<div class="left col-sm-5">
+			<div class="col-sm-12">
+				{snippet name}
+					{var $name = 'name'.$presenter->lang}
+					{var $defaultName = 'name'.$defaultLang}
+
+					{if $settings->name}
+						<div class="name">
+							<h1 class="h2 no-margin-top">
+								{!$product->$name ?: ($product->$defaultName ?: $product->name)|nbsp}
+							</h1>
+						</div>
+					{/if}
+				{/snippet}
+			</div>
+
+			<div class="left col-sm-6">
+				{snippet price}
+					{if $settings->price}
+						{var $price = 'price'.$presenter->lang}
+
+						<div class="price">
+							<p>
+								<span class="h3 no-margin text-warning">
+									{$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1)|number:$decimals:",":" "} {_$currency}
+								</span>
+								<span>
+									({$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1, true)|number:2:".":" "} {_$currency} bez DPH)
+								</span>
+							</p>
+						</div>
+					{/if}
+
+					{if $settings->stock}
+						{if $product->amount > 0}
+							<div class="cart">
+								{control addToCart-$product->id}
+							</div>
+						{else}
+							<div class="availability">
+								<p>Zboží neni skladem</p>
+							</div>
+						{/if}
+					{/if}
+				{/snippet}
+
+				{define text}
+					{snippet text}
+					{var $text = 'text'.$presenter->lang}
+					{var $defaultText = 'text'.$defaultLang}
+
+						<div class="text">
+							{!($product->$text ?: ($product->$defaultText ?: $product->text))|nbsp}
+						</div>
+					{/snippet}
+				{/define}
+
+				<p>
+					<span>
+						<em><strong class="text-primary">Porce:</strong></em> {$product->meals}
+					</span>
+				</p>
+
+				<div>
+					<p class="no-margin text-primary">
+						<strong><em>Hmotnost:</em></strong>
+					</p>
+					<p>
+						{$product->weight}
+					</p>
+				</div>
+
+				{if !$settings->posts}
+					{if $settings->text}
+						<p class="no-margin text-primary">
+							<em><strong>Popis:</strong></em>
+						</p>
+						{include text}
+					{/if}
+				{else}
+					<ul class="nav nav-tabs" role="tablist" id="product-tabs">
+						{if $settings->text}
+							<li class="active"><a href="#text" role="tab">Text</a></li>
+						{/if}
+
+						<li class="posts-tab"><a href="#posts" role="tab">Diskuze</a></li>
+					</ul>
+
+					<div class="tab-content">
+						<p></p>
+
+						{if $settings->text}
+							<div class="tab-pane active" id="text">
+								{include text}
+							</div>
+						{/if}
+
+						{snippetArea postsArea}
+							{include posts.latte}
+						{/snippetArea}
+					</div>
+				{/if}
+
+				<div>
+					<p class="no-margin text-primary">
+						<strong><em>Složení:</em></strong>
+					</p>
+					{!$product->construction|nbsp}
+				</div>
+
+				<div>
+					<p class="no-margin text-primary">
+						<strong><em>Informace pro alergiky:</em></strong>
+					</p>
+					<p>
+						{$product->alergens}
+					</p>
+				</div>
+			</div>
+			
+			<div class="right col-sm-6">
 				{snippet gallery}
-					{var $thumb = $presenter->getThumb(1)}	
+					{var $thumb = $presenter->getThumb(0)}
 					{var $image = $product->galleries->related('galleries_images', 'galleries_id')->where("visibility", 1)->order('highlight DESC, position ASC')->fetch()}
 
 					{*if !$image}
 						{var $image = $presenter->model->getProducts()->wherePrimary($product->pid)->fetch()->galleries->related('galleries_images')->order("position ASC")->fetch()}
 					{/if*}
-				
+
 					{if $image}
 						<div class="img">
 							<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}" rel="gallery">
 								<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
 							</a>
 						</div>
-						
+
 						<div id="gallery" class="row">
 							{var $firstImage = $thumb ? 1 : 0}
 							{var $thumb = $presenter->getThumb(2)}
-							
-							<ul class="list-unstyled">				
+
+							<ul class="list-unstyled">
 								{foreach $product->galleries->related('galleries_images')->where("visibility", 1)->order("highlight DESC, position ASC") as $image}
 									{if $iterator->counter > $firstImage}
 										<li class="col-sm-4">
@@ -35,102 +154,54 @@
 						</div>
 					{/if}
 				{/snippet}
-			</div>
-			
-			<div class="right col-sm-7">
-				{snippet name}
-					{var $name = 'name'.$presenter->lang}
-					{var $defaultName = 'name'.$defaultLang}
-				
-					{if $settings->name}						
-						<div class="name">
-							<h1 class="h2 no-margin-top">
-								{!$product->$name ?: ($product->$defaultName ?: $product->name)|nbsp}
-							</h1>
-						</div>
-					{/if}
-				{/snippet}		
-				
+
+				<div class="tags">
+					{foreach $tags as $tag}
+						<span class="tag" style="background: {!$tag->color}">{$tag->name}</span>
+					{/foreach}
+				</div>
+
+				<div class="values">
+					<p>
+						<strong><em>Výživová hodnota na 100g</em></strong>
+					</p>
+					<p class="no-margin">
+						<span>Energetická hodnota</span> {$product->kj} kj <br>
+						<span>Tuky</span> {$product->fats} g <br>
+						<span>Bílkoviny</span> {$product->protein} g <br>
+						<span>Sacharidy</span> {$product->carbohydrates} g
+					</p>
+				</div>
+
+				<div class="gluten">
+					<p class="no-margin h4 text-uppercase">
+						potravina bez lepku
+					</p>
+					<p>
+						Hotový pokrm sterilovaný, vyrobeno bez konzervačních látek.
+					</p>
+					<p class="no-margin">
+						Skladujte v suchu a temnu při teplotě <strong>+1 až +30 °C</strong>. Otevřený výrobek uskladněte v chladničce a spotřebujte do 48 hodin.<br>
+						Doba spotřeby je 36 měsíců.
+					</p>
+				</div>
+
 				{snippet propertiesForm}
 					{control propertiesForm}
 				{/snippet}
-						
-				{snippet price}
-					{if $settings->price}
-						{var $price = 'price'.$presenter->lang}
-					
-						<div class="price">
-							<p>
-								{$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1)|number:$decimals:",":" "} 
-								<span class="currency">{_$currency}</span>
-							</p>
-						</div>
-					{/if}							
 				
-					{if $settings->stock}
-						{if $product->amount > 0}
-							<div class="cart">
-								{control addToCart-$product->id}
-							</div>
-						{else}
-							<div class="availability">
-								<p>Zboží neni skladem</p>
-							</div>
-						{/if}
-					{/if}
-				{/snippet}
-				
-				{snippet info}
-					{var $description = 'description'.$presenter->lang}
-					{var $defaultDescription = 'description'.$defaultLang}
-				
-					{if $settings->description}				
-						<div class="description">
-							<p>
-								{!$product->$description ?: ($product->$defaultDescription ?: $product->description)|nbsp}	
-							</p>
-						</div>
-					{/if}
-				{/snippet}
-				
-				{define text}
-					{snippet text}
-						{var $text = 'text'.$presenter->lang}
-						{var $defaultText = 'text'.$defaultLang}
-					
-						<div class="text">
-							{!($product->$text ?: ($product->$defaultText ?: $product->text))|nbsp}
-						</div>
-					{/snippet}
-				{/define}			
-				
-				{if !$settings->posts}
-					{if $settings->text}
-						{include text}
-					{/if}
-				{else}
-					<ul class="nav nav-tabs" role="tablist" id="product-tabs">
-						{if $settings->text}
-							<li class="active"><a href="#text" role="tab">Text</a></li>
-						{/if}
-						
-						<li class="posts-tab"><a href="#posts" role="tab">Diskuze</a></li>
-					</ul>
-				
-					<div class="tab-content">
-						<p></p>
-					
-						{if $settings->text}
-							<div class="tab-pane active" id="text">
-								{include text}
-							</div>
-						{/if}		
-						
-						{snippetArea postsArea}
-							{include posts.latte}
-						{/snippetArea}
-					</div>
-				{/if}
+				{*{snippet info}*}
+					{*{var $description = 'description'.$presenter->lang}*}
+					{*{var $defaultDescription = 'description'.$defaultLang}*}
+				{**}
+					{*{if $settings->description}				*}
+						{*<div class="description">*}
+							{*<p>*}
+								{*{!$product->$description ?: ($product->$defaultDescription ?: $product->description)|nbsp}	*}
+							{*</p>*}
+						{*</div>*}
+					{*{/if}*}
+				{*{/snippet}*}
 
                 {if $settings->files}
                     {var $files = $control->getFiles($product)}

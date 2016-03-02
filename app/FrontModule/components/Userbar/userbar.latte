@@ -1,6 +1,10 @@
 <div class="dropdown userbar {ifset $error}open{/ifset}">
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		<strong>{if !$user->loggedIn}{_'Přihlásit'}{else}{$user->identity->email}{/if}</strong> <span class="caret"></span>
+		<span class="fa-stack">
+  			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-user fa-stack-1x fa-inverse"></i>
+		</span>
+		<strong>{if !$user->loggedIn}{_'Můj účet'}{else}{$user->identity->email}{/if}</strong> {*<span class="caret"></span>*}
 	</a>
 	
 	<div id="" class="dropdown-menu login-dp">

@@ -11,10 +11,15 @@
 			<ul class="level{$level+1} nav nav-pills nav-stacked">
 				{foreach $categories as $category}								
 					<li class="{if in_array( $category->id, $current)}active{/if} {$category->url}">
-						<a href="{dlink :FrontEshop:Categories:view lang => $presenter->lang, eshop => $eshop, category => ($category->$url ?: ($category->$defaultUrl ?: $category->url)), cid => $category->id, product => null, pid => null|nosafeurl}">					
+						{if $level > 0}
+							<a href="{dlink :FrontEshop:Categories:view lang => $presenter->lang, eshop => $eshop, category => ($category->$url ?: ($category->$defaultUrl ?: $category->url)), cid => $category->id, product => null, pid => null|nosafeurl}">
+								{$category->$name ?: ($category->$defaultName ?: $category->name)}
+							</a>
+						{else}
 							{$category->$name ?: ($category->$defaultName ?: $category->name)}
-						</a>
-						{if count($control->getCategories($category->id)) && in_array($category->id, $current)}
+						{/if}
+
+						{if (count($control->getCategories($category->id)) && in_array($category->id, $current)) || (count($control->getCategories($category->id)) && $level == 0)}
 							{include #categories, categories => $control->getCategories($category->id), level => $level+1, parent => $category->url}
 						{/if}
 					</li>

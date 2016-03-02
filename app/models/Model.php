@@ -349,4 +349,12 @@
 		public function getFormFields () {
 			return $this->database->table('form_fields');
 		}
+
+		public function getTags () {
+			return $this->database->table("tags");
+		}
+
+		public function getProductsTags () {
+			return $this->database->table("products_tags");
+		}
 	}

@@ -230,6 +230,8 @@ use Nette\Application\UI\Multiplier;
 				->setRequired('Vyplňte prosím popis!');
 			
 			$infos->addSelect('pid', 'Nadřazená stránka:', $this->getPagesSelect());
+
+			$infos->addSelect("menu_no", "Menu:", array(1 => 1, 2 => 2));
 			
 			$infos->addRadioList('layout', 'Layout:', $this->createOptions($this->layouts))
 				->setAttribute('onclick', 'loadBlocks()')

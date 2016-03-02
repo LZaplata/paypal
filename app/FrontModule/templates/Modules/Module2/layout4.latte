@@ -16,7 +16,7 @@
 			{if $image && $thumb}
 				<div class="row">
 					<div class="col-xs-12">					
-						<p class="img">
+						<p class="img no-margin">
 							<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article->id|nosafeurl}">
 								<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
 							</a>
@@ -29,9 +29,13 @@
 				<div class="row">
 					{if $article->sections->visName}		
 						<div class="name col-xs-12">
-							<h3 class="no-margin-top">
+							<h3 class="h4 no-margin clearfix">
 								<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article->id|nosafeurl}">
 									{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
+									<span class="fa-stack pull-right">
+										<i class="fa fa-circle fa-stack-2x"></i>
+										<i class="fa fa-arrow-right fa-stack-1x text-warning"></i>
+									</span>
 								</a>
 							</h3>
 						</div>
@@ -39,23 +43,23 @@
 				</div>
 			{/if}
 			
-			{if $article->sections->date || $article->sections->description}
-				<div class="row">
-					<div class="col-xs-12">
-						{if $article->sections->date}
-							<p class="date">
-								{$article->date|date: 'j. n. Y'}
-							</p>
-						{/if}
-						
-						{if $article->sections->description}
-							<p class="no-margin">
-								{!$article->$description ?: ($article->$defaultDescription ?: $article->description)|nbsp}
-							</p>
-						{/if}
-					</div>
-				</div>
-			{/if}
+			{*{if $article->sections->date || $article->sections->description}*}
+				{*<div class="row">*}
+					{*<div class="col-xs-12">*}
+						{*{if $article->sections->date}*}
+							{*<p class="date">*}
+								{*{$article->date|date: 'j. n. Y'}*}
+							{*</p>*}
+						{*{/if}*}
+						{**}
+						{*{if $article->sections->description}*}
+							{*<p class="no-margin">*}
+								{*{!$article->$description ?: ($article->$defaultDescription ?: $article->description)|nbsp}*}
+							{*</p>*}
+						{*{/if}*}
+					{*</div>*}
+				{*</div>*}
+			{*{/if}*}
 		</div>
 		
 		{if $iterator->counter %$clearfix == 0 || $iterator->last}
