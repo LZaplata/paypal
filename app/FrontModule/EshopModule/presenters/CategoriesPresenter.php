@@ -42,7 +42,7 @@ use FrontEshopModule\Filters\PropertiesFilter;
 //				$this['propertiesFilter']->filterProducts();
 //			}
 			
-//			$this['sorter']->sortProducts();
+			$this['sorter']->sortProducts();
 			
 			$this->paginator->itemsPerPage = $this->module->lmt;
 			$this->paginator->itemCount = count($this->products);

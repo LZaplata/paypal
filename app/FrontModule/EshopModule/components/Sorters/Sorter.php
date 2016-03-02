@@ -83,11 +83,11 @@ use Nette\Forms\Rendering\BootstrapFormRenderer;
 			}
 
 			if ($sorter == 'name ASC') {
-				$sorter = 'position ASC, '.$sorter;
+				$sorter = $sorter;
 			}
 			
 			if ($sorter == 'name DESC') {
-				$sorter = 'position DESC, '.$sorter;
+				$sorter = $sorter;
 			}
 			
 			$this->presenter->products->order($sorter);
