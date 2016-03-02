@@ -19,8 +19,8 @@ use Nette\Forms\Rendering\BootstrapFormRenderer;
 			$this->sorters = array (
 					'price ASC' => 'od nejlevnějšího',
 					'price DESC' => 'od nejdražšího',
-					'name ASC' => 'A-Z',
-					'name DESC' => 'Z-A'				
+//					'name ASC' => 'A-Z',
+//					'name DESC' => 'Z-A'
 			);
 		}
 		
