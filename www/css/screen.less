@@ -36,33 +36,39 @@
 		border: 1px solid @gray-lighter;
 	}
 
-	.tags {
-		margin: 0 0 10px;
-
-		.tag {
-			display: inline-block;
-			background: @brand-warning;
-			color: @text-color;
-			padding: 1px 5px;
-			margin: 0px;
-			font-size: @font-size-base - 2;
+	.right {
+		@media (max-width: @screen-xs-max) {
+			margin-top: 30px;
 		}
-	}
 
-	.values {
-		background: #FFF3D9;
-		padding: @grid-gutter-width;
-		margin-bottom: @grid-gutter-width;
+		.tags {
+			margin: 0 0 10px;
 
-		span {
-			display: inline-block;
-			width: 65%;
+			.tag {
+				display: inline-block;
+				background: @brand-warning;
+				color: @text-color;
+				padding: 1px 5px;
+				margin: 0px;
+				font-size: @font-size-base - 2;
+			}
 		}
-	}
 
-	.gluten {
-		background: #F9E1C0;
-		padding: @grid-gutter-width;
+		.values {
+			background: #FFF3D9;
+			padding: @grid-gutter-width;
+			margin-bottom: @grid-gutter-width;
+
+			span {
+				display: inline-block;
+				width: 65%;
+			}
+		}
+
+		.gluten {
+			background: #F9E1C0;
+			padding: @grid-gutter-width;
+		}
 	}
 }
 
@@ -223,21 +229,87 @@ body {
 	}
 
 	.nav.level1 {
-		margin-top: 18px;
+		@media (min-width: @screen-lg-min) {
+			margin-top: 18px;
+		}
+
+		@media (max-width: @screen-md-max) {
+			border-bottom: 3px solid @gray-lighter;
+			margin-bottom: 30px;
+		}
 
 		& > li {
-			padding: 0;
-			font-weight: 700;
-			font-style: italic;
-			color: @brand-primary;
 			margin-bottom: 20px;
+
+			& > a {
+				padding: 0;
+				font-weight: 700;
+				font-style: italic;
+				color: @brand-primary;
+
+				&:hover, &:focus {
+					background: none;
+				}
+
+				@media (max-width: @screen-md-max) {
+					&:hover, &:focus {
+						color: @brand-warning;
+					}
+
+					i {
+						top: 5px;
+						position: relative;
+					}
+				}
+
+				@media (min-width: @screen-lg-min) {
+					pointer-events: none;
+					cursor: default;
+				}
+			}
+
+			@media (max-width: @screen-md-max) {
+				float: left;
+				width: 25%;
+				margin-top: 0;
+			}
+
+			@media (max-width: @screen-sm-max) {
+				width: 50%;
+
+				&:nth-child(3) {
+					clear: both;
+				}
+			}
+
+			@media (max-width: @screen-xs-max) {
+				width: auto;
+				float: none;
+
+				&:nth-child(3) {
+					clear: none;
+				}
+			}
 
 			&.active > a {
 				background: none;
+
+				@media (max-width: @screen-md-max) {
+					color: @brand-warning;
+				}
 			}
 
 			& > ul {
 				margin-top: 5px;
+
+				@media (max-width: @screen-md-max) {
+					margin-top: 20px;
+				}
+
+				@media (min-width: @screen-lg-min) {
+					display: block;
+					visibility: visible;
+				}
 
 				& > li {
 					& > a {
@@ -246,15 +318,37 @@ body {
 						font-size: @font-size-h4;
 						color: #FFFFFF;
 						font-style: normal;
+
+						@media (max-width: @screen-md-max) {
+							background: none;
+							color: @text-color;
+							padding: 5px 0;
+						}
 					}
 
 					&.active > a, & > a:hover, & > a:focus {
 						background: @brand-warning;
+
+						@media (max-width: @screen-md-max) {
+							background: none;
+							color: @brand-warning;
+						}
+					}
+
+					&.active > ul {
+						//@media (min-width: @screen-lg-min) {
+							display: block;
+							visibility: visible;
+						//}
 					}
 
 					ul {
 						background: @gray-lighter;
 						padding-left: @grid-gutter-width;
+
+						@media (max-width: @screen-md-max) {
+							background: none;
+						}
 
 						li {
 							a {
@@ -285,11 +379,21 @@ body {
 							background: @gray-lighter;
 							color: @text-color;
 							font-weight: 400;
+
+							@media (max-width: @screen-md-max) {
+								background: none;
+								padding: 5px 0;
+							}
 						}
 
 						&.active a, a:hover, a:focus {
 							background: @brand-warning;
 							color: #FFFFFF;
+
+							@media (max-width: @screen-md-max) {
+								background: none;
+								color: @brand-warning;
+							}
 						}
 					}
 				}
@@ -953,6 +1057,11 @@ body {
 					padding: 0;
 					min-height: inherit;
 					margin-right: @grid-gutter-width;
+
+					@media (max-width: @screen-xs-max) {
+						width: 50%;
+						margin-right: 0;
+					}
 				}
 			}
 		}
@@ -966,7 +1075,7 @@ body {
 		}
 
 		.col-sm-9 {
-			width: 25%;
+			width: 120px;
 		}
 	}
 

@@ -22,7 +22,7 @@
 		{var $category = array("category" => ($cat->$url ?: ($cat->$defaultUrl ?: $cat->url)), "cid" => $cat->id)}
 	{/ifset}
 				
-	<div class="product col-sm-{$cols}">
+	<div class="product col-lg-{$cols} col-md-4 col-sm-6">
 		<a href="{plink :FrontEshop:Products:view (expand) $category, pid => $product, product => ($product->$url ?: ($product->$defaultUrl ?: $product->url))|nosafeurl}">
 			{if $settings->name}
 				<div class="name">
