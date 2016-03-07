@@ -305,27 +305,72 @@ body {
 #menu-wrapper {
 	background: @brand-primary;
 
-	.nav {
-		float: left;
-		left: 50%;
-		position: relative;
-		.translate(-50%, 0);
+	.fa-bars {
+		color: #FFFFFF;
+		font-size: @font-size-base + 6;
+		margin-top: 5px;
 
-		li {
-			margin: 0;
+		&:hover, &:focus {
+			color: darken(#FFFFFF, 15%);
+		}
+	}
 
-			a {
-				text-transform: uppercase;
-				padding: 5px 15px;
-				color: #FFFFFF;
+	.menu1 {
+		@media (min-width: @screen-sm-min) {
+			display: block;
+			visibility: visible;
+		}
+
+		.nav {
+			float: left;
+			left: 50%;
+			position: relative;
+			.translate(-50%, 0);
+
+			li {
+				margin: 0;
+
+				a {
+					text-transform: uppercase;
+					padding: 5px 15px;
+					color: #FFFFFF;
+				}
+
+				&.active a {
+					background: @brand-primary-dark;
+				}
+
+				a:hover, a:focus {
+					background: lighten(@brand-primary-dark, 5%);
+				}
+			}
+		}
+
+		@media (max-width: @screen-xs-max) {
+			&.collapsing {
+				position: absolute;
 			}
 
-			&.active a {
-				background: @brand-primary-dark;
-			}
+			&.collapsing, &.in {
+				display: block;
+				visibility: visible;
 
-			a:hover, a:focus {
-				background: lighten(@brand-primary-dark, 5%);
+				.nav {
+					left: 0;
+					width: 100%;
+					float: none;
+					background: @brand-primary;
+					margin-top: 30px;
+					z-index: 1000;
+					padding: 0 0 10px 0;
+					position: absolute;
+					.translate(0, 0);
+
+					li {
+						float: none;
+						margin: 0;
+					}
+				}
 			}
 		}
 	}
@@ -336,17 +381,48 @@ body {
 
 	#logo {
 		margin: @grid-gutter-width 0;
+
+		img {
+			@media (max-width: @screen-xs-max) {
+				width: 120px;
+			}
+		}
 	}
 
-	.menu {
+	.fa-bars {
+		float: left;
+		margin-top: 44px;
+		position: absolute;
+		left: 50%;
+		.translate(-50%, 0);
+
+		@media (max-width: @screen-xs-max) {
+			left: auto;
+			margin-left: 40px;
+			margin-top: 17px;
+			.translate(0, 0);
+		}
+	}
+
+	.menu2 {
+		@media (min-width: @screen-md-min) {
+			display: block;
+			visibility: visible;
+		}
+
 		.nav {
+			float: left;
+			margin-top: 44px;
 			position: absolute;
 			left: 50%;
 			.translate(-50%, 0);
-			float: left;
-			margin-top: 44px;
 
 			li {
+				@media (max-width: @screen-sm-max) {
+					float: none;
+					margin: 0;
+				}
+
 				a {
 					color: @brand-primary;
 					font-size: @font-size-h3 - 2;
@@ -355,6 +431,11 @@ body {
 					&:hover, &:focus {
 						background: none;
 						color: @brand-primary-dark;
+					}
+
+					@media (max-width: @screen-sm-max) {
+						padding: 3px 30px;
+
 					}
 				}
 
@@ -365,12 +446,46 @@ body {
 				}
 			}
 		}
+
+		@media (max-width: @screen-sm-max) {
+			&.collapsing {
+				position: absolute;
+			}
+
+			&.collapsing, &.in {
+				display: block;
+				visibility: visible;
+
+				.nav {
+					left: 0;
+					width: 100%;
+					float: none;
+					background: #FFFFFF;
+					margin-top: 116px;
+					z-index: 1000;
+					padding: 20px 0;
+					.translate(0, 0);
+				}
+			}
+		}
+
+		@media (max-width: @screen-xs-max) {
+			&.collapsing, &.in {
+				.nav {
+					margin-top: 89px;
+				}
+			}
+		}
 	}
 
 	.pull-right {
 		.nav {
 			margin-top: 5px;
 			margin-bottom: 34px;
+
+			@media (max-width: @screen-xs-max) {
+				margin-bottom: 6px;
+			}
 
 			li {
 				margin-left: 15px;
@@ -405,16 +520,18 @@ body {
 	}
 
 	#cart-mini {
-		.translate(0, -25%);
-		margin-left:  30px;
+		@media (min-width: @screen-sm-min) {
+			margin-left:  30px;
+			.translate(0, -25%);
 
-		.fa-stack {
-			width: 3em;
-			height: 3em;
-			line-height: 3em;
+			.fa-stack {
+				width: 3em;
+				height: 3em;
+				line-height: 3em;
 
-			&-2x {
-				font-size: 3em;
+				&-2x {
+					font-size: 3em;
+				}
 			}
 		}
 
@@ -452,7 +569,7 @@ body {
 				}
 			}
 
-			.pull-left {
+			.name {
 				padding: 7px 0;
 			}
 		}
@@ -482,8 +599,18 @@ body {
 	.layout3 & {
 		h3 {
 			a {
+				padding-left: 26px;
+				display: block;
+
 				&:hover, &:focus {
 					text-decoration: none;
+				}
+
+				&:before {
+					content: "\f061";
+					font-family: @font-family-fa;
+					position: absolute;
+					margin-left: -26px;
 				}
 			}
 		}
@@ -538,6 +665,19 @@ body {
 
 		.img {
 			margin: @grid-gutter-width 0 0;
+			position: relative;
+
+			img {
+				position: relative;
+				left: 50%;
+				.translate(-50%, 0);
+			}
+		}
+
+		@media (max-width: @screen-md-max) {
+			&:nth-child(1), &:nth-child(2) {
+				margin-bottom: @grid-gutter-width;
+			}
 		}
 	}
 }
@@ -636,6 +776,12 @@ body {
 			}
 		}
 	}
+
+	#right {
+		@media (max-width: @screen-xs-max) {
+			margin-top: 40px;
+		}
+	}
 }
 
 .editor {
@@ -648,12 +794,22 @@ body {
 		h3 {
 			margin-top: 0;
 			width: 62%;
+
+			@media (max-width: @screen-md-max) {
+				width: 53%;
+			}
 		}
 
 		div.text {
 			img {
 				margin-top: -130px;
 				margin-left: 30px;
+
+				@media (max-width: @screen-sm-max) {
+					width: 300px;
+					height: auto;
+					margin-bottom: 20px;
+				}
 			}
 		}
 	}
@@ -726,6 +882,16 @@ body {
 				color: @brand-warning;
 				background: none;
 			}
+		}
+
+		@media (max-width: @screen-md-max) {
+			margin-left: 0;
+		}
+	}
+
+	.copyright {
+		@media (max-width: @screen-xs-max) {
+			text-align: center;
 		}
 	}
 }
@@ -939,6 +1105,32 @@ body {
 					outline: none;
 					.box-shadow(none);
 				}
+			}
+		}
+	}
+}
+
+#search {
+	position: relative;
+
+	a {
+		margin-top: -2px;
+		margin-left: 2px;
+		top: 0;
+		left: 100%;
+		color: @brand-primary;
+		position: absolute;
+		.translate(-100%, 0);
+
+		&:hover, &:focus {
+			color: @brand-primary-dark;
+		}
+	}
+
+	.search {
+		@media (max-width: @screen-md-max) {
+			&:not(.in) {
+				display: none;
 			}
 		}
 	}

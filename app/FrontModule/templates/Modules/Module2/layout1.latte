@@ -35,20 +35,22 @@
 				{/if}
 				
 				<div class="col-xs-{if $image && $thumb}7{else}12{/if}">
-					{if $article->sections->visName}
-						<h3 class="no-margin">
-							<span class="pull-left">
-								{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
-							</span>
-							<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article->id|nosafeurl}" class="pull-right">
-								<strong>více informací</strong>&nbsp;
-								<span class="fa-stack">
-									<i class="fa fa-circle fa-stack-2x"></i>
-									<i class="fa fa-arrow-right fa-stack-1x fa-inverse text-warning"></i>
-								</span>
-							</a>
-						</h3>
-					{/if}
+					<div class="row">
+					    {if $article->sections->visName}
+    						<h3 class="no-margin">
+    							<span class="col-lg-9 col-sm-12 name">
+    								{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
+    							</span>
+    							<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article->id|nosafeurl}" class="col-lg-3 col-sm-12 text-right">
+    								<strong>více informací</strong>&nbsp;
+    								<span class="fa-stack">
+    									<i class="fa fa-circle fa-stack-2x"></i>
+    									<i class="fa fa-arrow-right fa-stack-1x fa-inverse text-warning"></i>
+    								</span>
+    							</a>
+    						</h3>
+    					{/if}
+					</div>
 					
 					{if $article->sections->description}
 						<div class="description">

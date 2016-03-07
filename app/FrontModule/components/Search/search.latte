@@ -1,6 +1,6 @@
 <div id="search" class="clearfix pull-right">
 	{form searchForm}
-		<div class="">				
+		<div class="search">
 			{input q class => "form-control autocomplete", placeholder => "vyhledat..."}
 			{input search class => "hidden"}
 			
@@ -11,4 +11,11 @@
 	      	{*}
 	    </div>
 	{/form}
+
+	<a href=".search" class="pull-right hidden-lg" data-toggle="collapse">
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-2x"></i>
+			<i class="fa fa-search fa-stack-1x fa-inverse"></i>
+		</span>
+	</a>
 </div>

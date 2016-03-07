@@ -12,7 +12,7 @@
 	{var $cat = $control->getProductCategory($product)}
 	{var $category = array("category" => $cat->url, "cid" => $cat->id)}
 				
-	<div class="product col-sm-3">
+	<div class="product col-lg-3 col-md-4 col-sm-6">
 		<a href="{plink :FrontEshop:Products:view (expand) $category, eshop => $eshop, pid => $product->id, product => $product->$url|nosafeurl}">
 			{if $settings->name}
 				<div class="name">

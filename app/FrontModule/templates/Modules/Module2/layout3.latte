@@ -16,7 +16,7 @@
 						<div class="name col-xs-{if $article->sections->date}9{else}12{/if}">
 							<h3 class="no-margin-top h4">
 								<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article->id|nosafeurl}" class="text-warning">
-									<i class="fa fa-arrow-right"></i> &nbsp;{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
+									{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
 								</a>
 							</h3>
 						</div>
@@ -65,7 +65,7 @@
 
 	<div class="text-right col-sm-12">
 		<a href="{plink Page: url => $control->url}">
-			všechna videa
+			<strong>všechna videa</strong>
 			<span class="fa-stack">
 				<i class="fa fa-circle fa-stack-2x"></i>
 				<i class="fa fa-arrow-right fa-stack-1x fa-inverse"></i>
