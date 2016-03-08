@@ -6,12 +6,20 @@
 {if $editor}
 	<div class="editor editor-layout1 {if $menu}row{/if}">
 		{if $menu}
-			<div class="editor-menu col-sm-3">
-				{$presenter["menu"]->render(array("pid" => $menu, "level" => $level))}
+			<div class="editor-menu col-lg-3 col-sm-12">
+				<div class="clearfix">
+				    <a href=".menu3" data-toggle="collapse" class="hidden-lg">
+    					<i class="fa fa-bars fa-3x"></i>
+    				</a>
+
+    				<div class="collapse menu3">
+    					{$presenter["menu"]->render(array("pid" => $menu, "level" => $level))}
+    				</div>
+				</div>
 			</div>
 		{/if}
 	
-		<div class="{if $menu}col-sm-9{/if}">
+		<div class="{if $menu}col-lg-9 col-sm-12{/if}">
 			{if $headingLevel}
 				<h{!$headingLevel}>{!$editor->$name?: ($editor->$defaultName ?: $editor->name)|nbsp}</h{!$headingLevel}>
 			{/if}

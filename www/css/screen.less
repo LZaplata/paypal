@@ -925,23 +925,55 @@ body {
 	}
 
 	&-menu {
-		margin-top: 43px;
+		@media (min-width: @screen-lg-min) {
+			margin-top: 43px;
+		}
 
-		.nav {
-			li {
-				float: none;
-				margin: 0 0 2px 0;
+		& > div {
+			@media (max-width: @screen-md-max) {
+				border-bottom: 3px solid @gray-lighter;
+				padding-bottom: 15px;
+				margin-bottom: 20px;
+			}
+		}
 
-				a {
-					font-weight: 700;
-					background: @brand-primary;
-					font-size: @font-size-h4;
-					color: #FFFFFF;
-					font-style: normal;
+		.menu3 {
+			@media (min-width: @screen-lg-min) {
+				display: block;
+				visibility: visible;
+			}
+
+			.nav {
+				@media (max-width: @screen-md-max) {
+					padding-top: 15px;
 				}
 
-				&.active a, a:hover, a:focus {
-					background: @brand-warning;
+				li {
+					float: none;
+					margin: 0 0 2px 0;
+
+					a {
+						font-weight: 700;
+						background: @brand-primary;
+						font-size: @font-size-h4;
+						color: #FFFFFF;
+						font-style: normal;
+
+						@media (max-width: @screen-md-max) {
+							background: none;
+							color: @text-color;
+							padding: 5px 0;
+						}
+					}
+
+					&.active a, a:hover, a:focus {
+						background: @brand-warning;
+
+						@media (max-width: @screen-md-max) {
+							background: none;
+							color: @brand-warning;
+						}
+					}
 				}
 			}
 		}
@@ -1184,6 +1216,23 @@ body {
 
 					.form-group {
 						margin-bottom: 0;
+					}
+				}
+
+				@media (max-width: @screen-xs-max) {
+					display: block;
+					border: none;
+					padding: 0 20px;
+
+					&:first-child {
+						padding-top: 15px;
+						padding-bottom: 10px;
+					}
+
+					&:last-child {
+						padding-bottom: 15px;
+						padding-top: 10px;
+						border-bottom: 7px solid #ffffff;
 					}
 				}
 			}
