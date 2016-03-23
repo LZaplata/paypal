@@ -75,8 +75,8 @@ use Nette\Forms\Rendering\BootstrapFormRenderer;
 			
 			if ($this->presenter->isAjax() && isset($values['data'])) {
 				parse_str(Url::unescape($values['data']), $data);
-				
-				$sorter = $data['sort'];
+
+				$sorter = empty($data['sort']) ? "position ASC" : $data["sort"];
 			}
 			else {			
 				$sorter = isset($values['sort']) ? $values['sort'] : 'position ASC';
@@ -89,7 +89,7 @@ use Nette\Forms\Rendering\BootstrapFormRenderer;
 			if ($sorter == 'name DESC') {
 				$sorter = $sorter;
 			}
-			
+
 			$this->presenter->products->order($sorter);
 		}
 	}

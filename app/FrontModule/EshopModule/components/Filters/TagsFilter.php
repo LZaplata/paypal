@@ -97,7 +97,7 @@
 					}
 				}
 
-				$this->presenter->products->where('products.id', array_values($array));
+				$this->presenter->products->where('products.id NOT IN ?', array_values($array));
 			}
 		}
 	}
