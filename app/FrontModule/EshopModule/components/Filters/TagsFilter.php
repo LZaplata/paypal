@@ -93,11 +93,11 @@
 					if (empty($array)) {
 						$array = $p;
 					} else {
-						$array = array_intersect($array, $p);
+						$array = array_merge($array, $p);
 					}
 				}
 
-				$this->presenter->products->where('products.id NOT IN ?', array_values($array));
+				$this->presenter->products->where('products.id NOT IN ('.implode(",", array_values($array)).')');
 			}
 		}
 	}
