@@ -231,6 +231,37 @@
 			}
 		}
 
+		public function actionImport()
+		{
+			$xml = simplexml_load_file("http://www.expresmenu.cz/?feed-heureka,22");
+
+			foreach ($xml->SHOPITEM as $item) {
+				$product = array();
+				$product["old_id"] = (int) $item->ITEM_ID;
+				$product["name"] = $product["title"] = $product["keywords"] = $product["meta_description"] = (string) $item->PRODUCTNAME;
+				$product["url"] = Strings::webalize($product["name"]);
+				$product["description"] = (string) $item->DESCRIPTION;
+				$product["ean"] = (string) $item->EAN;
+				$product["delivery_date"] = (int) $item->DELIVERY_DATE;
+				$product["price"] = $product["price_filter"] = (float) $item->PRICE_VAT;
+				$product["galleries_id"] = $this->model->getGalleries()->insert(array());
+				$product["filestores_id"] = $this->model->getFilestores()->insert(array());
+				$product["date"] = date("Y-m-d H:i:s");
+				$product["amount"] = 1;
+				$product["price_discount"] = 0;
+				$product["tax"] = 21;
+
+				if ($p = $this->model->getProducts()->where("old_id", $product["old_id"])->fetch()) {
+					$product["products_id"] = $p->id;
+
+					$p->update($product);
+				} else {
+					$lastID = $this->model->getProducts()->insert($product);
+					$lastID->update($lastID->id);
+				}
+			}
+		}
+
 		public function renderDefault () {
 			$this->template->filters = $this->filters;
 		}

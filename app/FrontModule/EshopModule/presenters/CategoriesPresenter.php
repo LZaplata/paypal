@@ -34,16 +34,16 @@ use FrontEshopModule\Filters\PropertiesFilter;
 			if (($view = $this->getParameter("view"))) {
 				$this->view->productsView = $view == "grid" ? 1 : 2;
 			}
-			
+
 //			$this['priceFilter']->filterProducts();
 			$this['tagsFilter']->filterProducts();
 
 //			if (count($this['propertiesFilter']->categoryCategories)) {
 //				$this['propertiesFilter']->filterProducts();
 //			}
-			
+
 			$this['sorter']->sortProducts();
-			
+
 			$this->paginator->itemsPerPage = $this->module->lmt;
 			$this->paginator->itemCount = count($this->products);
 			$this->products->page($this->paginator->page, $this->paginator->itemsPerPage);
