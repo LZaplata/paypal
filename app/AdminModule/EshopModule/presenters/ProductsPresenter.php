@@ -553,13 +553,13 @@
 			$values['infos']['price_discount'] = $priceDiscount = Strings::replace($values['infos']['price_discount'], '~,~', '.');
 			$values['infos']['price_filter'] = $priceDiscount ? ($priceDiscount < $price ? $priceDiscount : $price) : $price;
 
-			if (isset($values['infos']['price']) && $values['infos']['price'] != $this->product->price) {
-				$price['products_id'] = $this->id;
-				$price['price'] = $values['infos']['price'];
-				$price['date'] = date('Y-m-d H:i:s');
-
-				$this->model->getProductsPrices()->insert($price);
-			}
+//			if (isset($values['infos']['price']) && $values['infos']['price'] != $this->product->price) {
+//				$price['products_id'] = $this->id;
+//				$price['price'] = $values['infos']['price'];
+//				$price['date'] = date('Y-m-d H:i:s');
+//
+//				$this->model->getProductsPrices()->insert($price);
+//			}
 
 			if (isset($values['categories']['categories'])) {
 				$categories = $this->model->getProductsCategories()->where('products_id', $this->id)->fetchPairs('categories_id', 'categories_id');
