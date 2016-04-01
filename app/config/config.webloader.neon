@@ -27,7 +27,7 @@ webloader:
 			files:
 				- %wwwDir%/adminModule/css/bootstrap/bootstrap.less
 				- %wwwDir%/adminModule/css/screen.less
-				- {files: ["*.css"], from: adminModule/css}
+				- {files: ["*.css"], from:  %wwwDir%/adminModule/css}
 				- css/cropper.css
 			fileFilters:
 				- @lessFilter
