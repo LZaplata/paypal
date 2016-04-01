@@ -25,8 +25,8 @@ webloader:
 				- //cdn.hucr.cz/flag-icon-css/css/flag-icon.min.css
 				- //cdn.hucr.cz/fancybox/2.1.5/source/jquery.fancybox.css
 			files:
-				- adminModule/css/bootstrap/bootstrap.less
-				- adminModule/css/screen.less
+				- %wwwDir%/adminModule/css/bootstrap/bootstrap.less
+				- %wwwDir%/adminModule/css/screen.less
 				- {files: ["*.css"], from: adminModule/css}
 				- css/cropper.css
 			fileFilters:
