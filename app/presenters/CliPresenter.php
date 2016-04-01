@@ -72,4 +72,31 @@ use Nette\Utils\Strings;
 			fwrite($xml, $sitemap->generate_sitemap());
 			fclose($xml);
 		}
+
+		public function actionExport () {
+			$orders = $this->model->getOrders()->where('state >= ?', 0);
+
+			foreach ($orders as $order) {
+				$file = WWW_DIR.'/pohoda/orders/'.$order->no.'.xml';
+
+				if (!file_exists($file)) {
+					$xml = $this->createTemplate();
+					$xml->setFile(APP_DIR.'/templates/Cli/export.latte');
+					$xml->registerFilter(new Engine());
+					$xml->registerHelperLoader('Nette\Templating\Helpers::loader');
+					$xml->order = $order;
+					$xml->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
+					$xml->products = $order->related("orders_products");
+					$xml->presenter = $this;
+
+					$handle = fopen($file, 'w');
+					fwrite($handle, $xml->__toString());
+					fclose($handle);
+
+//					system('ncftpput -u xml-smiledesign -p xmlsmile  win.humlnet.cz orders  /home/creative/www.designwear.cz/www/pohoda/orders/'.$order->no.'.xml');
+				}
+			}
+
+			$this->terminate();
+		}
 	}

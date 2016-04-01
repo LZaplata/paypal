@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+	<dat:dataPack id="ob{$order->no}" ico="02025345" application="php" version="2.0" note="Import Objednávky"        
+		xmlns:dat="http://www.stormware.cz/schema/version_2/data.xsd"        
+		xmlns:ord="http://www.stormware.cz/schema/version_2/order.xsd"
+		xmlns:typ="http://www.stormware.cz/schema/version_2/type.xsd" >		
+		<dat:dataPackItem id="OBJ{$order->no}" version="2.0">
+			<ord:order version="2.0">
+				<ord:orderHeader>
+					<ord:orderType>receivedOrder</ord:orderType>
+					<ord:numberOrder>{$order->no}</ord:numberOrder>
+					<ord:date>{$order->date|date:"Y-m-d"}</ord:date>
+					<ord:dateFrom>{$order->date|date:"Y-m-d"}</ord:dateFrom>
+					<ord:dateTo>{$order->date|date:"Y-m-d"}</ord:dateTo>
+					<ord:text>Objednáváme u Vás zboží z e-shopu www.designmix.cz</ord:text>
+					<ord:partnerIdentity>
+						<typ:address>
+							<typ:company></typ:company>
+							<typ:division></typ:division>
+							<typ:name>{$order->name} {$order->surname}</typ:name>
+							<typ:city>{$order->city}</typ:city>
+							<typ:street>{$order->street} {$order->street_number}</typ:street>
+							<typ:zip>{$order->psc}</typ:zip>
+							<typ:ico>{$order->ic}</typ:ico>
+							<typ:dic>{$order->dic}</typ:dic>
+							<typ:phone>{$order->phone}</typ:phone>
+							<typ:email>{$order->email}</typ:email>
+						</typ:address>
+						<typ:shipToAddress>
+							<typ:company></typ:company>
+							<typ:division></typ:division>
+							<typ:name>{if $order->delivery_name}{$order->delivery_name} {$order->delivery_surname}{else}{$order->name} {$order->surname}{/if}</typ:name>
+							<typ:city>{if $order->delivery_city}{$order->delivery_city}{else}{$order->city}{/if}</typ:city>
+							<typ:street>{if $order->delivery_street}{$order->delivery_street} {$order->delivery_street_number}{else}{$order->street} {$order->street_number}{/if}</typ:street>
+							<typ:zip>{if $order->delivery_psc}{$order->delivery_psc}{else}{$order->psc}{/if}</typ:zip>
+							<typ:phone>{$order->phone}</typ:phone>
+							<typ:email>{$order->email}</typ:email>
+							<typ:defaultShipAddress>true</typ:defaultShipAddress>
+						</typ:shipToAddress>
+					</ord:partnerIdentity>
+					<ord:paymentType>
+						<typ:ids>{$methods[$order->payment_id]}</typ:ids>
+					</ord:paymentType>
+					<ord:priceLevel>
+						<typ:ids>koncova</typ:ids>
+					</ord:priceLevel>
+				</ord:orderHeader>				
+				<ord:orderDetail>
+					{foreach $products as $product}
+						{var $properties = $presenter->model->getProductsProperties()->select("shop_properties.*, products_properties.*")->where("products_id", $product->products_id)->order("shop_properties.categories_id")}
+				<ord:orderItem>
+							<ord:quantity>{$product->amount}</ord:quantity>
+							<ord:delivered>0</ord:delivered>
+		                    <ord:rateVAT>high</ord:rateVAT>
+		                    <ord:payVAT>true</ord:payVAT>
+		                    <ord:homeCurrency>
+		                        <typ:unitPrice>{$product->price}</typ:unitPrice>
+		                    </ord:homeCurrency>
+		                    <ord:stockItem>
+		                        <typ:stockItem>
+		                            <typ:ids>{$product->products->pohodacode}</typ:ids>
+		                        </typ:stockItem>
+                    		</ord:stockItem>
+                   			<ord:note>{$product->products->code} {$product->products->name} {$properties->fetch()->shop_properties->name} {$properties->fetch()->shop_properties->name} {$properties->fetch()->shop_properties->name}</ord:note>
+						</ord:orderItem>
+						{/foreach}
+						<ord:orderItem>
+		                    <ord:text>Doprava a platba</ord:text>
+		                    <ord:quantity>1</ord:quantity>
+		                    <ord:delivered>0</ord:delivered>
+		                    <ord:rateVAT>high</ord:rateVAT>
+		                    <ord:payVAT>true</ord:payVAT>
+		                    <ord:homeCurrency>
+		                        <typ:unitPrice>{$order->transport}</typ:unitPrice>
+		                    </ord:homeCurrency>
+		                </ord:orderItem>
+				</ord:orderDetail>				
+				<ord:orderSummary>
+					<ord:roundingDocument>up2one</ord:roundingDocument>
+				</ord:orderSummary>
+			</ord:order>
+		</dat:dataPackItem>
+	</dat:dataPack>
