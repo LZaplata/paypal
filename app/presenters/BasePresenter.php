@@ -88,8 +88,8 @@
 			
 			
 			preg_match('/(.*):(.*)/', $this->presenter->name, $names);			
-			$this->presenterName = $names[2];
-			$this->moduleName = $names[1];
+			$this->presenterName = isset($names[2]) ? $names[2] : "";
+			$this->moduleName = isset($names[1]) ? $names[1] : "";
 			
 			$this->vendorSettings = $this->template->vendorSettings = $this->model->getSettings()->fetch();
 			
