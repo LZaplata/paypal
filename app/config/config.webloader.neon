@@ -46,7 +46,7 @@ webloader:
 				- //cdn.hucr.cz/plupload/2.1.7/js/plupload.full.min.js
 			files:
 				- {files: ["*.js"], exclude: "fce.js", from: %wwwDir%/js}
-				- fce.js
+				- %wwwDir%/fce.js
 		admin:
 			remoteFiles:
 				- //cdn.hucr.cz/jquery/1.8.3/jquery-1.8.3.min.js
@@ -58,9 +58,9 @@ webloader:
 				- //cdn.hucr.cz/plupload/2.1.7/js/i18n/cs.js
 				- //cdn.hucr.cz/bootstrap/3.2.0/dist/js/bootstrap.min.js
 			files:
-				- js/nette.ajax.js
-				- js/livequery.js
-				- js/cropper.js
-				- {files: ["*.js"], from: adminModule/js}
-			tempDir: adminModule/webtemp
-			tempPath: adminModule/webtemp
+				- %wwwDir%/js/nette.ajax.js
+				- %wwwDir%/js/livequery.js
+				- %wwwDir%/js/cropper.js
+				- {files: ["*.js"], from: %wwwDir%/adminModule/js}
+			tempDir: %wwwDir%/adminModule/webtemp
+			tempPath: %wwwDir%/adminModule/webtemp
