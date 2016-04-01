@@ -22,19 +22,19 @@
         		<div class="article col-xs-{$cols}">
         			<div class="clearfix">
         			    <div class="row">
-            				{var $thumb = $control->getThumb($article, 2)}
-            				{var $image = $control->getImages($article, true)}
+            				{*{var $thumb = $control->getThumb($article, 2)}*}
+            				{*{var $image = $control->getImages($article, true)}*}
 
-            				{if $image}
-            					<div class="col-xs-5">
-            						<p class="img no-margin">
+            				{*{if $image}*}
+            					{*<div class="col-xs-5">*}
+            						{*<p class="img no-margin">*}
             							{*<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article|nosafeurl}">*}
-            							<a href="{$article->link}" target="_blank">
-            								<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
-            							</a>
-            						</p>
-            					</div>
-            				{/if}
+            							{*<a href="{$article->link}" target="_blank">*}
+            								{*<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />*}
+            							{*</a>*}
+            						{*</p>*}
+            					{*</div>*}
+            				{*{/if}*}
 
             				<div class="col-xs-{if $image && $thumb}7{else}12{/if}">
             					{if $article->sections->date}
