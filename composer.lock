@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/electrolinux/phpquery.git",
-                "reference": "3a10e8df11abb997521ce3fe399957b31c9f7ec3"
+                "reference": "c084e1bb238be87fce3862db4ade0ff8cb8db6fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/electrolinux/phpquery/zipball/3a10e8df11abb997521ce3fe399957b31c9f7ec3",
-                "reference": "3a10e8df11abb997521ce3fe399957b31c9f7ec3",
+                "url": "https://api.github.com/repos/electrolinux/phpquery/zipball/c084e1bb238be87fce3862db4ade0ff8cb8db6fb",
+                "reference": "c084e1bb238be87fce3862db4ade0ff8cb8db6fb",
                 "shasum": ""
             },
             "type": "library",
@@ -45,7 +45,7 @@
             ],
             "description": "phpQuery is a server-side, chainable, CSS3 selector driven Document Object Model (DOM) API based on jQuery JavaScript Library",
             "homepage": "http://code.google.com/p/phpquery/",
-            "time": "2016-01-28 08:15:49"
+            "time": "2016-02-01 18:19:40"
         },
         {
             "name": "facebook/php-sdk-v4",
@@ -1509,12 +1509,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/oyejorge/less.php.git",
-                "reference": "1ae03feb7aa257976327f56a89f0ca8ce57ebcc9"
+                "reference": "1736a49af9249f2202aca1678ba80aba79ff4208"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oyejorge/less.php/zipball/1ae03feb7aa257976327f56a89f0ca8ce57ebcc9",
-                "reference": "1ae03feb7aa257976327f56a89f0ca8ce57ebcc9",
+                "url": "https://api.github.com/repos/oyejorge/less.php/zipball/1736a49af9249f2202aca1678ba80aba79ff4208",
+                "reference": "1736a49af9249f2202aca1678ba80aba79ff4208",
                 "shasum": ""
             },
             "require": {
@@ -1563,7 +1563,7 @@
                 "php",
                 "stylesheet"
             ],
-            "time": "2016-01-18 16:03:49"
+            "time": "2016-02-05 05:02:03"
         },
         {
             "name": "phpclasses/curl-multi-sitemap",
@@ -1711,12 +1711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VladaHejda/LiveTranslator.git",
-                "reference": "d042982464b1b8a700cd1d11f41b5ae6661a2e55"
+                "reference": "0c9c7da239f46317d8059a366a2cc64855e82ce6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VladaHejda/LiveTranslator/zipball/d042982464b1b8a700cd1d11f41b5ae6661a2e55",
-                "reference": "d042982464b1b8a700cd1d11f41b5ae6661a2e55",
+                "url": "https://api.github.com/repos/VladaHejda/LiveTranslator/zipball/0c9c7da239f46317d8059a366a2cc64855e82ce6",
+                "reference": "0c9c7da239f46317d8059a366a2cc64855e82ce6",
                 "shasum": ""
             },
             "require": {
@@ -1754,7 +1754,7 @@
                 "nette",
                 "translator"
             ],
-            "time": "2015-10-23 01:48:23"
+            "time": "2016-02-07 18:43:44"
         }
     ],
     "packages-dev": [],
