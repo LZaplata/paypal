@@ -46,7 +46,7 @@ webloader:
 				- //cdn.hucr.cz/plupload/2.1.7/js/plupload.full.min.js
 			files:
 				- {files: ["*.js"], exclude: "fce.js", from: %wwwDir%/js}
-				- %wwwDir%/fce.js
+				- %wwwDir%/js/fce.js
 		admin:
 			remoteFiles:
 				- //cdn.hucr.cz/jquery/1.8.3/jquery-1.8.3.min.js
