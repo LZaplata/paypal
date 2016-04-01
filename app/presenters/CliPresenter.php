@@ -80,17 +80,25 @@ use Nette\Utils\Strings;
 				$file = WWW_DIR.'/pohoda/orders/'.$order->no.'.xml';
 
 				if (!file_exists($file)) {
-					$xml = $this->createTemplate();
-					$xml->setFile(APP_DIR.'/templates/Cli/export.latte');
-					$xml->registerFilter(new Engine());
-					$xml->registerHelperLoader('Nette\Templating\Helpers::loader');
-					$xml->order = $order;
-					$xml->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
-					$xml->products = $order->related("orders_products");
-					$xml->presenter = $this;
+					$xml = new Engine();
+					$params = array(
+						"order" => $order,
+						"methods" => $this->model->getShopMethods()->fetchPairs('id', 'name'),
+						"products" => $order->related("orders_products"),
+						"presenter" => $this
+					);
+
+//					$xml = $this->createTemplate();
+//					$xml->setFile(APP_DIR.'/templates/Cli/export.latte');
+//					$xml->registerFilter(new Engine());
+//					$xml->registerHelperLoader('Nette\Templating\Helpers::loader');
+//					$xml->order = $order;
+//					$xml->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
+//					$xml->products = $order->related("orders_products");
+//					$xml->presenter = $this;
 
 					$handle = fopen($file, 'w');
-					fwrite($handle, $xml->__toString());
+					fwrite($handle, $xml->renderToString(APP_DIR."/templates/Cli/export.latte", $params));
 					fclose($handle);
 
 //					system('ncftpput -u xml-smiledesign -p xmlsmile  win.humlnet.cz orders  /home/creative/www.designwear.cz/www/pohoda/orders/'.$order->no.'.xml');
