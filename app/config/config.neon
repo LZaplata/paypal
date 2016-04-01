@@ -156,6 +156,6 @@ production < development:
 			user: zap
 			password: ZaP2011       
 		contact:
-			name: Lukáš Záplata
-			email: zap@hucr.cz 
+			name: Jakub Janovec
+			email: jakub@expresmenu.cz
 		host: "http://cms.hucr.cz"
