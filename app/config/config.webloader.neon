@@ -34,8 +34,8 @@ webloader:
 			filters:
 				- @wlCssFilter
 			joinFiles: false
-			tempDir: adminModule/webtemp
-			tempPath: adminModule/webtemp
+			tempDir: %wwwDir%/adminModule/webtemp
+			tempPath: %wwwDir%/adminModule/webtemp
 	js:
 		front:
 			remoteFiles:
