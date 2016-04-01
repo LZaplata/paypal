@@ -33,7 +33,9 @@ use Tracy\Debugger;
 
 	// Create Dependency Injection container from config.neon file
 	$configurator->addConfig(__DIR__ . '/config/config.neon', Configurator::AUTO);
-	$configurator->addConfig(__DIR__ . '/config/config.webloader.neon');
+	if (!$container->parameters['consoleMode']) {
+		$configurator->addConfig(__DIR__ . '/config/config.webloader.neon');
+	}
 	$container = $configurator->createContainer();
 
 	// Init application
