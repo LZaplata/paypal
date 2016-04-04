@@ -25,17 +25,17 @@ webloader:
 				- //cdn.hucr.cz/flag-icon-css/css/flag-icon.min.css
 				- //cdn.hucr.cz/fancybox/2.1.5/source/jquery.fancybox.css
 			files:
-				- %wwwDir%/adminModule/css/bootstrap/bootstrap.less
-				- %wwwDir%/adminModule/css/screen.less
-				- {files: ["*.css"], from:  %wwwDir%/adminModule/css}
-				- %wwwDir%/css/cropper.css
+				- adminModule/css/bootstrap/bootstrap.less
+				- adminModule/css/screen.less
+				- {files: ["*.css"], from: adminModule/css}
+				- css/cropper.css
 			fileFilters:
 				- @lessFilter
 			filters:
 				- @wlCssFilter
 			joinFiles: false
-			tempDir: %wwwDir%/adminModule/webtemp
-			tempPath: %wwwDir%/adminModule/webtemp
+			tempDir: adminModule/webtemp
+			tempPath: adminModule/webtemp
 	js:
 		front:
 			remoteFiles:
@@ -46,7 +46,7 @@ webloader:
 				- //cdn.hucr.cz/plupload/2.1.7/js/plupload.full.min.js
 			files:
 				- {files: ["*.js"], exclude: "fce.js", from: %wwwDir%/js}
-				- %wwwDir%/js/fce.js
+				- fce.js
 		admin:
 			remoteFiles:
 				- //cdn.hucr.cz/jquery/1.8.3/jquery-1.8.3.min.js
@@ -58,9 +58,9 @@ webloader:
 				- //cdn.hucr.cz/plupload/2.1.7/js/i18n/cs.js
 				- //cdn.hucr.cz/bootstrap/3.2.0/dist/js/bootstrap.min.js
 			files:
-				- %wwwDir%/js/nette.ajax.js
-				- %wwwDir%/js/livequery.js
-				- %wwwDir%/js/cropper.js
-				- {files: ["*.js"], from: %wwwDir%/adminModule/js}
-			tempDir: %wwwDir%/adminModule/webtemp
-			tempPath: %wwwDir%/adminModule/webtemp
+				- js/nette.ajax.js
+				- js/livequery.js
+				- js/cropper.js
+				- {files: ["*.js"], from: adminModule/js}
+			tempDir: adminModule/webtemp
+			tempPath: adminModule/webtemp
