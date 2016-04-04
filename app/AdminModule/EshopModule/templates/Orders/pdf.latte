@@ -84,6 +84,9 @@
                 položka
             </th>
             <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center;">
+                množství
+            </th>
+            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center;">
                 cena
             </th>
         </tr>
@@ -91,8 +94,11 @@
         <tbody>
         {foreach $order->related("orders_products") as $product}
             <tr>
-                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: left; vertical-align: top; width: 80%;">
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: left; vertical-align: top; width: 70%;">
                     {$product->products->name}
+                </td>
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em;">
+                    {$product->amount}
                 </td>
                 <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em;">
                     {$product->price|number:$decimals:",":" "} {$currency}
@@ -101,7 +107,7 @@
         {/foreach}
 
         <tr>
-            <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; font-size: 1.2em; padding: 20px; text-align: right;">
+            <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; font-size: 1.2em; padding: 20px; text-align: right;" colspan="2">
                 celkem
             </td>
             <td style="background: #f5f5f5; border-top: 1px solid #5d6975; font-size: 1.2em; padding: 20px; text-align: right;">
