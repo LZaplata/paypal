@@ -92,6 +92,10 @@ use Nette\Utils\Strings;
 				}
 			}
 			else {
+				$this->addColumn('pohoda', 'Pohoda')
+					->setTextEditable()
+					->setTextFilter();
+
 				$this->addColumn('price', 'Cena')
 					->setRenderer(function($row) {return number_format($row['price'], 2, '.', '');})
 					->setTextEditable();
