@@ -13,12 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/electrolinux/phpquery.git",
-                "reference": "3a10e8df11abb997521ce3fe399957b31c9f7ec3"
+                "reference": "196aa28b33c17ff31016cb5aed3c229c49dc743c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/electrolinux/phpquery/zipball/3a10e8df11abb997521ce3fe399957b31c9f7ec3",
-                "reference": "3a10e8df11abb997521ce3fe399957b31c9f7ec3",
+                "url": "https://api.github.com/repos/electrolinux/phpquery/zipball/196aa28b33c17ff31016cb5aed3c229c49dc743c",
+                "reference": "196aa28b33c17ff31016cb5aed3c229c49dc743c",
                 "shasum": ""
             },
             "type": "library",
@@ -45,7 +45,7 @@
             ],
             "description": "phpQuery is a server-side, chainable, CSS3 selector driven Document Object Model (DOM) API based on jQuery JavaScript Library",
             "homepage": "http://code.google.com/p/phpquery/",
-            "time": "2016-01-28 08:15:49"
+            "time": "2016-03-24 10:32:29"
         },
         {
             "name": "facebook/php-sdk-v4",
@@ -102,12 +102,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/heureka/overeno-zakazniky.git",
-                "reference": "5085c9317047363e0d3df8601c3d38b7979f09be"
+                "reference": "193acaa3eff0330ee5526ae61ecff798ac58d3ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/heureka/overeno-zakazniky/zipball/5085c9317047363e0d3df8601c3d38b7979f09be",
-                "reference": "5085c9317047363e0d3df8601c3d38b7979f09be",
+                "url": "https://api.github.com/repos/heureka/overeno-zakazniky/zipball/193acaa3eff0330ee5526ae61ecff798ac58d3ff",
+                "reference": "193acaa3eff0330ee5526ae61ecff798ac58d3ff",
                 "shasum": ""
             },
             "require": {
@@ -134,7 +134,7 @@
                 }
             ],
             "description": "Heureka 'Ověřeno zákazníky' service API",
-            "time": "2016-01-27 13:37:06"
+            "time": "2016-03-30 12:16:17"
         },
         {
             "name": "janmarek/webloader",
@@ -1509,19 +1509,19 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/oyejorge/less.php.git",
-                "reference": "1ae03feb7aa257976327f56a89f0ca8ce57ebcc9"
+                "reference": "ca54efbb40403c5665e2dd7335662c44bb9fc644"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/oyejorge/less.php/zipball/1ae03feb7aa257976327f56a89f0ca8ce57ebcc9",
-                "reference": "1ae03feb7aa257976327f56a89f0ca8ce57ebcc9",
+                "url": "https://api.github.com/repos/oyejorge/less.php/zipball/ca54efbb40403c5665e2dd7335662c44bb9fc644",
+                "reference": "ca54efbb40403c5665e2dd7335662c44bb9fc644",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.3"
             },
             "require-dev": {
-                "phpunit/phpunit": "~4.8.18"
+                "phpunit/phpunit": "~4.8.21"
             },
             "bin": [
                 "bin/lessc"
@@ -1563,14 +1563,14 @@
                 "php",
                 "stylesheet"
             ],
-            "time": "2016-01-18 16:03:49"
+            "time": "2016-03-23 04:37:27"
         },
         {
             "name": "phpclasses/curl-multi-sitemap",
             "version": "1.0.0",
             "dist": {
                 "type": "zip",
-                "url": "http://www.phpclasses.org/install/package/curl-multi-sitemap.zip",
+                "url": "https://www.phpclasses.org/install/package/curl-multi-sitemap.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1711,12 +1711,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/VladaHejda/LiveTranslator.git",
-                "reference": "d042982464b1b8a700cd1d11f41b5ae6661a2e55"
+                "reference": "0c9c7da239f46317d8059a366a2cc64855e82ce6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/VladaHejda/LiveTranslator/zipball/d042982464b1b8a700cd1d11f41b5ae6661a2e55",
-                "reference": "d042982464b1b8a700cd1d11f41b5ae6661a2e55",
+                "url": "https://api.github.com/repos/VladaHejda/LiveTranslator/zipball/0c9c7da239f46317d8059a366a2cc64855e82ce6",
+                "reference": "0c9c7da239f46317d8059a366a2cc64855e82ce6",
                 "shasum": ""
             },
             "require": {
@@ -1754,7 +1754,7 @@
                 "nette",
                 "translator"
             ],
-            "time": "2015-10-23 01:48:23"
+            "time": "2016-02-07 18:43:44"
         }
     ],
     "packages-dev": [],
