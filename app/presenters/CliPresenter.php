@@ -12,7 +12,7 @@
 	use Nette\Application\UI\Presenter;
 use Nette\Utils\Strings;
 	
-	class CliPresenter extends Presenter {
+	class CliPresenter extends BasePresenter {
 		public $model;
 		public $mailer;
 		public $locs = array();
