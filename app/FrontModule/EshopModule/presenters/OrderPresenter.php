@@ -151,6 +151,7 @@
 			
 			$this->sendOfficeEmail($this->order);
 			$this->sendCustomerEmail($this->order, $paymentType);
+			$this->createPdf($this->order);
 		}
 		
 		public function renderCart () {
@@ -563,5 +564,32 @@
 					$this->zasilkovnaBranches[$branchName] = $branchName;
 				}
 			}
+		}
+
+		public function createPdf ($order) {
+			$file = WWW_DIR.'/invoices/'.$order->no.'.pdf';
+			$latte = new Engine();
+			$params = array(
+				"order" => $order,
+				"presenter" => $this,
+				"currency" => $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency,
+				"decimals" => $order->currency == 'czk' ? 0 : 2,
+				"host" => $this->context->parameters['host']
+			);
+
+//			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/pdf.latte');
+//			$template->registerFilter(new Engine());
+//			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+//			$template->order = $order;
+//			$template->presenter = $this;
+//			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
+//			$template->decimals = $order->currency == 'czk' ? 0 : 2;
+//			$template->host = $this->context->parameters['host'];
+
+			$pdf = new \mPDF('', 'A4', '9', 'Arial', 15, 15, 0, 0);
+			$pdf->SetHTMLHeaderByName('_default');
+			$pdf->SetHTMLFooterByName('_default');
+			$pdf->WriteHTML($latte->renderToString($file, $params), 2);
+			$pdf->Output($file, 'F');
 		}
 	}

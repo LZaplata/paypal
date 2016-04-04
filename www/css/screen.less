@@ -404,7 +404,7 @@ body {
 	}
 
 	.category-day {
-		margin-bottom: @grid-gutter-width * 2;
+		margin-bottom: @grid-gutter-width;
 	}
 }
 
@@ -790,7 +790,7 @@ body {
 
 .product {
 	.category-day & {
-		margin: 0;
+		margin: 0 0 @grid-gutter-width;
 	}
 
 	a {
@@ -846,6 +846,7 @@ body {
 
 		.tags {
 			margin: 0 0 10px 10px;
+			min-height: 21px;
 
 			.tag {
 				display: inline-block;
