@@ -589,7 +589,7 @@
 			$pdf = new \mPDF('', 'A4', '9', 'Arial', 15, 15, 0, 0);
 			$pdf->SetHTMLHeaderByName('_default');
 			$pdf->SetHTMLFooterByName('_default');
-			$pdf->WriteHTML($latte->renderToString($file, $params), 2);
+			$pdf->WriteHTML($latte->renderToString(APP_DIR."/AdminModule/EshopModule/templates/Orders/pdf.latte", $params), 2);
 			$pdf->Output($file, 'F');
 		}
 	}

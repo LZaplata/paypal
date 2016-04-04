@@ -10,7 +10,8 @@
         "electrolinux/phpquery": "dev-master",
         "phpclasses/curl-multi-sitemap": ">=1.0.0",
         "facebook/php-sdk-v4" : "4.0.*",
-        "heureka/overenozakazniky" : "dev-master"
+        "heureka/overenozakazniky" : "dev-master",
+        "mpdf/mpdf": "dev-master"
     },
     "repositories": [
     	{
