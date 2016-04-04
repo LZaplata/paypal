@@ -54,7 +54,7 @@
 		public function setParams () {
 			$this->params = array (
 								2 => 'CREATE_ORDER',
-								6 => 1,
+								6 => 0,
 							);
 		}
 		

@@ -23,7 +23,7 @@
 				
 			$self = $this;
 			$transports = $this->presenter->model->getShopMethods()->where('type', array(0, 3))->fetchPairs('id', 'name');
-			$payments = $this->presenter->model->getShopMethods()->where('type', array(1, 4))->fetchPairs('id', 'name');
+			$payments = $this->presenter->model->getShopMethods()->where('type', array(1, 2, 4))->fetchPairs('id', 'name');
 		
 			$this->addColumn('id');
 			$this->addColumn('highlight')

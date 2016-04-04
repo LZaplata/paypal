@@ -1,0 +1,10 @@
+{block #eshop}
+	{if $response}
+		<div id="order-success" class="alert alert-success">
+			Objednávka byla v pořádku odeslána a zaplacena
+		</div>
+	{else}
+		<div id="order-success" class="alert alert-danger">
+			Platba neproběhla úspěšně
+		</div>
+	{/if}
