@@ -4,8 +4,8 @@
 		{foreach $products as $product}		
 			<SHOPITEM>
 				<ITEM_ID>{$product->products_id}</ITEM_ID>
-				<PRODUCTNAME>{$product->products->name}</PRODUCTNAME> {* upřesnit podle http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
-				<PRODUCT>{$product->products->name}</PRODUCT> {* jakýkoliv název i rozvětvený z eshopu *}
+				<PRODUCTNAME>EXPRES MENU {$product->products->name}</PRODUCTNAME> {* upřesnit podle http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
+				<PRODUCT>EXPRES MENU {$product->products->name}</PRODUCT> {* jakýkoliv název i rozvětvený z eshopu *}
 				<DESCRIPTION>{!$product->products->text|striptags}</DESCRIPTION>
 				<URL>{plink //:FrontEshop:Products:view eshop => $eshop, category => $product->categories->url, cid => $product->categories_id, product => $product->products->url, pid => $product->products_id}</URL>
 				{foreach $product->products->galleries->related("galleries_images")->order("highlight DESC, position ASC") as $image}				
