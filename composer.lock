@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b17e233d424a5459704359f40c4828a0",
-    "content-hash": "b168ccd8877a980c07bb3c1faf0efb71",
+    "hash": "1b1321a00748da95f71c546ce82763bd",
+    "content-hash": "b661de727266e9894bbeccc51b854ea4",
     "packages": [
         {
             "name": "electrolinux/phpquery",
@@ -334,6 +334,53 @@
                 "twig"
             ],
             "time": "2015-02-24 22:10:51"
+        },
+        {
+            "name": "mpdf/mpdf",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/mpdf/mpdf.git",
+                "reference": "9f2d761e7ac1d89a6752a18036a597fa9ce2d8c7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/mpdf/mpdf/zipball/9f2d761e7ac1d89a6752a18036a597fa9ce2d8c7",
+                "reference": "9f2d761e7ac1d89a6752a18036a597fa9ce2d8c7",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*",
+                "php": ">=4.3.10"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "mpdf.php",
+                    "classes"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ian Back",
+                    "role": "Developer"
+                }
+            ],
+            "description": "A PHP class to generate PDF files from HTML with Unicode/UTF-8 and CJK support",
+            "homepage": "http://www.mpdf1.com/mpdf/index.php",
+            "keywords": [
+                "pdf",
+                "php",
+                "utf-8"
+            ],
+            "time": "2015-06-17 07:26:51"
         },
         {
             "name": "nette/application",
@@ -1766,7 +1813,8 @@
         "oyejorge/less.php": 20,
         "texy/texy": 20,
         "electrolinux/phpquery": 20,
-        "heureka/overenozakazniky": 20
+        "heureka/overenozakazniky": 20,
+        "mpdf/mpdf": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
