@@ -447,7 +447,7 @@
 		public function createComponentWebPay () {
 			$wp = new WebPay();
 			
-			$wp->setUrl('https://test.3dsecure.gpwebpay.com/csob/order.do');
+			$wp->setUrl('https://3dsecure.gpwebpay.com/csob/order.do');
 			
 			$wp->setMerchantNumber(53268708);
 			

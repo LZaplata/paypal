@@ -62,8 +62,12 @@
 			$this->addButton('edit', 'Editace')
 				->setClass('fa fa-pencil')
 				->setLink(function($row) use ($self){return $self->presenter->link('edit', array($row['id']));})
-				->setAjax(FALSE);				
-			
+				->setAjax(FALSE);
+
+			$this->addButton('reques', 'Výzva k platbě')
+				->setClass('fa fa-credit-card')
+				->setLink(function($row) use ($self){return $self->presenter->link('PaymentRequest!', array($row['id']));});
+
 			$this->addButton('delete', 'Smazat')
 				->setClass('fa fa-trash text-danger')
 				->setLink(function($row) use ($self){return $self->presenter->link('Delete!', array($row['id']));})
