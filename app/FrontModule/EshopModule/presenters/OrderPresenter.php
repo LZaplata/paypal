@@ -497,7 +497,7 @@
 
 			$wp->setPrivateKey(APP_DIR.'/FrontModule/components/WebPay/keys/private_key.pem', 'Exmenu5');
 
-			$wp->setRedirectUrl('http://localhost/www.expresmenu.cz/www/e-shop/order/payment');
+			$wp->setRedirectUrl('http://vyvoj.hucr.cz/www.expresmenu.cz/www/e-shop/order/payment');
 
 			return $wp;
 		}
