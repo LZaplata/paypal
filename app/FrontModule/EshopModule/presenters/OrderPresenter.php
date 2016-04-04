@@ -67,7 +67,7 @@
 			}
 
 			$this->transports = $this->model->getShopMethodsRelations()->select('shop_methods.*')->fetchPairs('id', 'name');
-			$this->payments = $this->context->database->query("SELECT shop_methods.id AS id, name FROM shop_methods LEFT JOIN shop_methods_relations ON shop_methods.id = shop_methods_relations.id_shop_methods WHERE type IN (?)", array(1, 4))->fetchPairs('id', 'name');
+			$this->payments = $this->context->database->query("SELECT shop_methods.id AS id, name FROM shop_methods LEFT JOIN shop_methods_relations ON shop_methods.id = shop_methods_relations.id_shop_methods WHERE type IN (?)", array(1, 2, 4))->fetchPairs('id', 'name');
 			$values = $_GET ? $_GET : null;
 
 			$this->unsetMethods($values);
@@ -152,6 +152,41 @@
 			$this->sendOfficeEmail($this->order);
 			$this->sendCustomerEmail($this->order, $paymentType);
 			$this->createPdf($this->order);
+
+			if ($paymentType) {
+				if ($paymentType->type == 2) {
+					$wp = $this->createComponentWebPay();
+
+					$this->redirectUrl($wp->generateLink($this->order->price + $this->order->transport, $this->order->no));
+				}
+			}
+		}
+
+		public function actionPayment () {
+			if ($this->getParameter('OPERATION')) {
+				$wp = $this->createComponentWebPay();
+				$response = $wp->getResponse();
+
+				if ($response) {
+					$order = $this->model->getOrders()->where('no', $this->getParameter('ORDERNUMBER'))->fetch();
+
+					if ($order) {
+//						$order->update(array('payed' => 1));
+						$order->update(array('state' => 2));
+
+						$this->sendMail($order);
+					}
+				}
+
+				$this->redirect('this', array('response' => $response));
+			}
+			else {
+// 				if ($this->getParameter('response') == false) {
+// 					if (!count($this['cart']->products) || $this['cart']->price == 0) {
+// 						$this->redirect('Order:cart');
+// 					}
+// 				}
+			}
 		}
 
 		public function renderCart () {
@@ -203,6 +238,10 @@
 			$this->template->keywords = 'Odeslání objednávky';
 			$this->template->desc = 'Odeslání objednávky';
 			$this->template->order = $this->order;
+		}
+
+		public function renderPayment () {
+			$this->template->response = $this->getParameter('response');
 		}
 
 		public function getImages ($id, $first = false) {
@@ -448,17 +487,17 @@
 		public function createComponentWebPay () {
 			$wp = new WebPay();
 
-			$wp->setUrl('https://3dsecure.gpwebpay.com/csob/order.do');
+			$wp->setUrl('https://test.3dsecure.gpwebpay.com/kb/order.do');
 
-			$wp->setMerchantNumber(53268708);
+			$wp->setMerchantNumber(9672957009);
 
 			$wp->setCurrency(203);
 
 			$wp->setPublicKey(APP_DIR.'/FrontModule/components/WebPay/keys/muzo.signing_test.pem');
 
-			$wp->setPrivateKey(APP_DIR.'/FrontModule/components/WebPay/keys/private_key.pem', 'freedum');
+			$wp->setPrivateKey(APP_DIR.'/FrontModule/components/WebPay/keys/private_key.pem', 'Exmenu5');
 
-			$wp->setRedirectUrl('http://localhost/CMS/www/objednavka/odeslani');
+			$wp->setRedirectUrl('http://localhost/www.expresmenu.cz/www/e-shop/order/payment');
 
 			return $wp;
 		}
@@ -591,5 +630,26 @@
 			$pdf->SetHTMLFooterByName('_default');
 			$pdf->WriteHTML($latte->renderToString(APP_DIR."/AdminModule/EshopModule/templates/Orders/pdf.latte", $params), 2);
 			$pdf->Output($file, 'F');
+		}
+
+		public function sendMail ($order) {
+			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/email.latte');
+			$template->registerFilter(new Engine());
+			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+			$template->order = $order;
+			$template->presenter = $this;
+			$template->decimals = $order->currency == 'czk' ? 0 : 2;
+			$template->host = $this->context->parameters['host'];
+			$template->paymentType = $this->model->getShopMethods()->wherePrimary($order->payment_id)->fetch()->type;
+
+			$mail = new Message();
+			$mail->setFrom($this->contact->email, $this->contact->name);
+			$mail->addTo($order->email, $order->name.' '.$order->surname);
+			$mail->setSubject('Změna stavu objednávky č. '.$order->no);
+			$mail->setHtmlBody($template);
+
+//			$mail->embedImages();
+
+			$this->mailer->send($mail);
 		}
 	}

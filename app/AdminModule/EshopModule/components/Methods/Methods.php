@@ -20,7 +20,7 @@
 			$this->setDataSource($dataSource);
 				
 			$self = $this;
-			$methods = array(0 => 'Doprava', 1 => 'Platba', 3 => 'Doprava - zásilkovna', 4 => "Platba předem");
+			$methods = array(0 => 'Doprava', 1 => 'Platba', 2 => "Platba kartou", 3 => 'Doprava - zásilkovna', 4 => "Platba předem");
 		
 			$this->addColumn('id', 'ID');
 			$this->addColumn('name', 'Název')
