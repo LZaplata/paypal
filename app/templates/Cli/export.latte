@@ -18,7 +18,7 @@
 							<typ:division></typ:division>
 							<typ:name>{$order->name} {$order->surname}</typ:name>
 							<typ:city>{$order->city}</typ:city>
-							<typ:street>{$order->street} {$order->street_number}</typ:street>
+							<typ:street>{$order->street}</typ:street>
 							<typ:zip>{$order->psc}</typ:zip>
 							<typ:ico>{$order->ic}</typ:ico>
 							<typ:dic>{$order->dic}</typ:dic>
@@ -30,7 +30,7 @@
 							<typ:division></typ:division>
 							<typ:name>{if $order->delivery_name}{$order->delivery_name} {$order->delivery_surname}{else}{$order->name} {$order->surname}{/if}</typ:name>
 							<typ:city>{if $order->delivery_city}{$order->delivery_city}{else}{$order->city}{/if}</typ:city>
-							<typ:street>{if $order->delivery_street}{$order->delivery_street} {$order->delivery_street_number}{else}{$order->street} {$order->street_number}{/if}</typ:street>
+							<typ:street>{if $order->delivery_street}{$order->delivery_street}{else}{$order->street}{/if}</typ:street>
 							<typ:zip>{if $order->delivery_psc}{$order->delivery_psc}{else}{$order->psc}{/if}</typ:zip>
 							<typ:phone>{$order->phone}</typ:phone>
 							<typ:email>{$order->email}</typ:email>
@@ -60,7 +60,7 @@
 		                            <typ:ids>{$product->products->pohodacode}</typ:ids>
 		                        </typ:stockItem>
                     		</ord:stockItem>
-                   			<ord:note>{$product->products->code} {$product->products->name} {$properties->fetch()->shop_properties->name} {$properties->fetch()->shop_properties->name} {$properties->fetch()->shop_properties->name}</ord:note>
+                   			<ord:note>{$product->products->code} {$product->products->name}{*$properties->fetch()->shop_properties->name} {$properties->fetch()->shop_properties->name} {$properties->fetch()->shop_properties->name*}</ord:note>
 						</ord:orderItem>
 						{/foreach}
 						<ord:orderItem>
