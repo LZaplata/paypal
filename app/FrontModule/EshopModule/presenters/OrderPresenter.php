@@ -246,6 +246,7 @@
 
 		public function renderPayment () {
 			$this->template->response = $this->getParameter('response');
+			$this->template->order = $this->order;
 		}
 
 		public function getImages ($id, $first = false) {

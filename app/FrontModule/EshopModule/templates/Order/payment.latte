@@ -8,3 +8,7 @@
 			Platba neproběhla úspěšně
 		</div>
 	{/if}
+
+	{if $order}
+		{include conversion.latte order => $order}
+	{/if}
