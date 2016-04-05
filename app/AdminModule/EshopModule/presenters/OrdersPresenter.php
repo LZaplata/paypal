@@ -440,4 +440,23 @@ use Nette\Utils\ArrayHash;
 				
 			return implode(', ', $properties);
 		}
+
+		public function handlePaymentRequest($id)
+		{
+			$order = $this->model->getOrders()->wherePrimary($id)->fetch();
+			$latte = new Engine();
+			$params = array(
+				"order" => $order
+			);
+
+			$mail = new Message();
+			$mail->setFrom($this->contact->email, $this->contact->name);
+			$mail->addTo($order->email);
+			$mail->setSubject("Výzva k platbě");
+			$mail->setHtmlBody($latte->renderToString(APP_DIR . "/AdminModule/EshopModule/templates/Orders/paymentRequest.latte", $params));
+
+			$this->mailer->send($mail);
+
+			$this->flashMessage("Výzva k platbě byla odeslána");
+		}
 	}
