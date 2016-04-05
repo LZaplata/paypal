@@ -160,6 +160,10 @@
 					$this->redirectUrl($wp->generateLink($this->order->price + $this->order->transport, $this->order->no));
 				}
 			}
+
+			if (isset($this->partner->id)) {
+				$this->partner->remove();
+			}
 		}
 
 		public function actionPayment () {
@@ -369,16 +373,18 @@
 				->setRequired('Vyplňte e-mail!')
 				->addRule(Form::EMAIL, 'Nesprávný formát e-mailu!');
 
-			$form->addGroup('Údaje pro doručení (nevyplňovat, pokud jsou stejné jako fakturační)');
-			$form->addText('delivery_name', 'Jméno:');
+			if (!isset($this->partner->id)) {
+				$form->addGroup('Údaje pro doručení (nevyplňovat, pokud jsou stejné jako fakturační)');
+				$form->addText('delivery_name', 'Jméno:');
 
-			$form->addText('delivery_surname', 'Příjmení:');
+				$form->addText('delivery_surname', 'Příjmení:');
 
-			$form->addText('delivery_street', 'Ulice:');
+				$form->addText('delivery_street', 'Ulice:');
 
-			$form->addText('delivery_city', 'Město:');
+				$form->addText('delivery_city', 'Město:');
 
-			$form->addText('delivery_psc', 'PSČ:');
+				$form->addText('delivery_psc', 'PSČ:');
+			}
 
 			$form->addGroup('Doplňující údaje');
 			$form->addTextArea('text', 'Poznámka:');
