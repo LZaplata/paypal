@@ -394,12 +394,16 @@
 
 			$order = $this->user->loggedIn ? $this['cart']->tempOrder : $this['cart']->order;
 
-			if (isset($order->name) && $order->name == null || !isset($order->name)) {
-				if ($this->user->loggedIn) {
-					$form->setValues($this->model->getUsers()->wherePrimary($this->user->id)->fetch());
+			if (isset($this->partner->id)) {
+				$form->setValues($this->context->parameters["partners"][$this->partner->id]);
+			} else {
+				if (isset($order->name) && $order->name == null || !isset($order->name)) {
+					if ($this->user->loggedIn) {
+						$form->setValues($this->model->getUsers()->wherePrimary($this->user->id)->fetch());
+					}
 				}
+				else $form->setValues($order);
 			}
-			else $form->setValues($order);
 
 			$form->setRenderer(new BootstrapFormRenderer());
 

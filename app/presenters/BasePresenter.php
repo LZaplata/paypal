@@ -61,6 +61,7 @@
 		public $lastEdited;
 		public $mailer;
 		public $vendorSettings;
+		public $partner;
 		
 		public function startup(){
 			parent::startup();
@@ -94,6 +95,13 @@
 			$this->vendorSettings = $this->template->vendorSettings = $this->model->getSettings()->fetch();
 			
 			$this->lastEdited = $this->session->getSection('rows');
+
+			$this->partner = $this->session->getSection("partner");
+			$this->partner->setExpiration("15 minutes");
+
+			if (($partner = $this->getParameter("partner"))) {
+				$this->partner->id = $partner;
+			}
 		}
 		
 		public function beforeRender() {

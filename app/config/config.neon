@@ -89,7 +89,16 @@ development:
 			appSecret:
 		currency: "Kč"
 		zasilkovna:
-			apiKey:
+		    apiKey:
+		partners:
+		    1:
+		        name: Fishing
+		        surname: Travel
+		        street: fa
+		        city: fa
+		        psc: 541 01
+		        phone: 7
+		        email: zap@hucr.cz
 
 	php:
 		date.timezone: Europe/Prague
