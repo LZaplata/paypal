@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
-	<dat:dataPack id="ob{$order->no}" ico="02025345" application="php" version="2.0" note="Import Objednávky"        
-		xmlns:dat="http://www.stormware.cz/schema/version_2/data.xsd"        
+	<dat:dataPack id="ob{$order->no}" ico="02025345" application="php" version="2.0" note="Import Objednávky"
+		xmlns:dat="http://www.stormware.cz/schema/version_2/data.xsd"
 		xmlns:ord="http://www.stormware.cz/schema/version_2/order.xsd"
-		xmlns:typ="http://www.stormware.cz/schema/version_2/type.xsd" >		
+		xmlns:typ="http://www.stormware.cz/schema/version_2/type.xsd" >
 		<dat:dataPackItem id="OBJ{$order->no}" version="2.0">
 			<ord:order version="2.0">
 				<ord:orderHeader>
@@ -43,7 +43,7 @@
 					<ord:priceLevel>
 						<typ:ids>koncova</typ:ids>
 					</ord:priceLevel>
-				</ord:orderHeader>				
+				</ord:orderHeader>
 				<ord:orderDetail>
 					{foreach $products as $product}
 						{var $properties = $presenter->model->getProductsProperties()->select("shop_properties.*, products_properties.*")->where("products_id", $product->products_id)->order("shop_properties.categories_id")}
@@ -73,7 +73,7 @@
 		                        <typ:unitPrice>{$order->transport}</typ:unitPrice>
 		                    </ord:homeCurrency>
 		                </ord:orderItem>
-				</ord:orderDetail>				
+				</ord:orderDetail>
 				<ord:orderSummary>
 					<ord:roundingDocument>up2one</ord:roundingDocument>
 				</ord:orderSummary>
