@@ -92,13 +92,11 @@ development:
 		    apiKey:
 		partners:
 		    1:
-		        name: Fishing
-		        surname: Travel
-		        street: fa
-		        city: fa
-		        psc: 541 01
-		        phone: 7
-		        email: zap@hucr.cz
+		        delivery_name: Fishing
+		        delivery_surname: Travel
+		        delivery_street: fa
+		        delivery_city: fa
+		        delivery_psc: 541 01
 
 	php:
 		date.timezone: Europe/Prague

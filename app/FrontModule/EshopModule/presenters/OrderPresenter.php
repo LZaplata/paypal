@@ -373,18 +373,21 @@
 				->setRequired('Vyplňte e-mail!')
 				->addRule(Form::EMAIL, 'Nesprávný formát e-mailu!');
 
-			if (!isset($this->partner->id)) {
-				$form->addGroup('Údaje pro doručení (nevyplňovat, pokud jsou stejné jako fakturační)');
-				$form->addText('delivery_name', 'Jméno:');
+			$form->addGroup('Údaje pro doručení (nevyplňovat, pokud jsou stejné jako fakturační)');
+			$form->addText('delivery_name', 'Jméno:')
+				->setDisabled(isset($this->partner->id) ? true : false);
 
-				$form->addText('delivery_surname', 'Příjmení:');
+			$form->addText('delivery_surname', 'Příjmení:')
+				->setDisabled(isset($this->partner->id) ? true : false);
 
-				$form->addText('delivery_street', 'Ulice:');
+			$form->addText('delivery_street', 'Ulice:')
+				->setDisabled(isset($this->partner->id) ? true : false);
 
-				$form->addText('delivery_city', 'Město:');
+			$form->addText('delivery_city', 'Město:')
+				->setDisabled(isset($this->partner->id) ? true : false);
 
-				$form->addText('delivery_psc', 'PSČ:');
-			}
+			$form->addText('delivery_psc', 'PSČ:')
+				->setDisabled(isset($this->partner->id) ? true : false);
 
 			$form->addGroup('Doplňující údaje');
 			$form->addTextArea('text', 'Poznámka:');
