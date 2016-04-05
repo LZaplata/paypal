@@ -161,7 +161,7 @@ production < development:
 			dbname: expresmenu
 			database: expresmenu
 			user: zap
-			password: ZaP2011       
+			password: Zap2011
 		contact:
 			name: Jakub Janovec
 			email: jakub@expresmenu.cz
