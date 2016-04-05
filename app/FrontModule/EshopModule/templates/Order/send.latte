@@ -4,57 +4,5 @@
 	</div>
 	
 	{if $order}
-		{if $vendorSettings->heurekaConversion}
-		<script type="text/javascript">
-			var _hrq = _hrq || [];
-			    _hrq.push(['setKey', {$vendorSettings->heurekaConversion}]);
-			    _hrq.push(['setOrderId', {$order->id}]);
-			    
-			    {foreach $order->related("orders_products") as $product}
-			    	_hrq.push(['addProduct', {$product->products->name}, {$product->price}, {$product->amount}]);
-			    {/foreach}
-			      
-			    _hrq.push(['trackOrder']);
-			
-			(function() {
-			    var ho = document.createElement('script'); ho.type = 'text/javascript'; ho.async = true;
-			    ho.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.heureka.cz/direct/js/cache/1-roi-async.js';
-			    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ho, s);
-			})();
-		</script>
-		{/if}
-	
-		<script type="text/javascript">
-			ga('ecommerce:addTransaction', {
-			  'id': {$order->id},											// Transaction ID. Required.
-// 			  'affiliation': 'store',										// Affiliation or store name.
-			  'revenue': {$order->price},									// Grand Total.
-			  'shipping': {$order->transport},								// Shipping.
-			  'tax': {$presenter->context->parameters["tax"] / 100 + 1},	// Tax.
-			  'currency': {$order->currency|upper}								// local currency code.
-			});
-		</script>
-		
-		{foreach $order->related("orders_products") as $product}
-			<script type="text/javascript">
-				ga('ecommerce:addItem', {
-				  'id': {$order->id},										// Transaction ID. Required.
-				  'name': {$product->products->name},						// Product name. Required.
-				  'sku': {$product->products->ean},							// SKU/code.
-// 				  'category': 'Party Toys',									// Category or variation.
-				  'price': {$product->price},								// Unit price.
-				  'quantity': {$product->amount},							// Quantity.
-				  'currency': {$order->currency|upper}
-				});
-			</script>	
-		{/foreach}
-		
-		<script type="text/javascript">
-			ga('ecommerce:send');
-		</script>
-		
-		{if $vendorSettings->sklikConversion}
-		<!-- Sklik.cz tracking code -->
-		<iframe width="119" height="22" frameborder="0" scrolling="no" src="//c.imedia.cz/checkConversion?c={$vendorSettings->sklikConversion}&color=ffffff&v={$order->price}"></iframe>
-		{/if}
+		{include conversion.latte order => $order}
 	{/if}
