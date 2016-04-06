@@ -13,21 +13,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/electrolinux/phpquery.git",
-<<<<<<< HEAD
-                "reference": "c084e1bb238be87fce3862db4ade0ff8cb8db6fb"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/electrolinux/phpquery/zipball/c084e1bb238be87fce3862db4ade0ff8cb8db6fb",
-                "reference": "c084e1bb238be87fce3862db4ade0ff8cb8db6fb",
-=======
                 "reference": "196aa28b33c17ff31016cb5aed3c229c49dc743c"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/electrolinux/phpquery/zipball/196aa28b33c17ff31016cb5aed3c229c49dc743c",
                 "reference": "196aa28b33c17ff31016cb5aed3c229c49dc743c",
->>>>>>> 7fdda881747dc5fb96842731152c83bae972a64d
                 "shasum": ""
             },
             "type": "library",
@@ -54,11 +45,7 @@
             ],
             "description": "phpQuery is a server-side, chainable, CSS3 selector driven Document Object Model (DOM) API based on jQuery JavaScript Library",
             "homepage": "http://code.google.com/p/phpquery/",
-<<<<<<< HEAD
-            "time": "2016-02-01 18:19:40"
-=======
             "time": "2016-03-24 10:32:29"
->>>>>>> 7fdda881747dc5fb96842731152c83bae972a64d
         },
         {
             "name": "facebook/php-sdk-v4",
@@ -1569,21 +1556,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/oyejorge/less.php.git",
-<<<<<<< HEAD
-                "reference": "1736a49af9249f2202aca1678ba80aba79ff4208"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/oyejorge/less.php/zipball/1736a49af9249f2202aca1678ba80aba79ff4208",
-                "reference": "1736a49af9249f2202aca1678ba80aba79ff4208",
-=======
                 "reference": "ca54efbb40403c5665e2dd7335662c44bb9fc644"
             },
             "dist": {
                 "type": "zip",
                 "url": "https://api.github.com/repos/oyejorge/less.php/zipball/ca54efbb40403c5665e2dd7335662c44bb9fc644",
                 "reference": "ca54efbb40403c5665e2dd7335662c44bb9fc644",
->>>>>>> 7fdda881747dc5fb96842731152c83bae972a64d
                 "shasum": ""
             },
             "require": {
@@ -1632,18 +1610,14 @@
                 "php",
                 "stylesheet"
             ],
-<<<<<<< HEAD
-            "time": "2016-02-05 05:02:03"
-=======
             "time": "2016-03-23 04:37:27"
->>>>>>> 7fdda881747dc5fb96842731152c83bae972a64d
         },
         {
             "name": "phpclasses/curl-multi-sitemap",
             "version": "1.0.0",
             "dist": {
                 "type": "zip",
-                "url": "https://www.phpclasses.org/install/package/curl-multi-sitemap.zip",
+                "url": "http://www.phpclasses.org/install/package/curl-multi-sitemap.zip",
                 "reference": null,
                 "shasum": null
             },
