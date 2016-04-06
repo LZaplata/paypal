@@ -27,11 +27,11 @@
             				{var $thumb = $control->getThumb($article, 2)}
             				{var $image = $control->getImages($article, true)}
 
-            				{if $image}
+            				{if $image && $thumb}
             					<div class="col-xs-5">
             						<p class="img no-margin">
-            							{*<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article|nosafeurl}">*}
-            							<a href="{$article->link}" target="_blank">
+            							<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article|nosafeurl}">
+            							{*<a href="{$article->link}" target="_blank">*}
             								<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
             							</a>
             						</p>
@@ -50,8 +50,8 @@
             					{if $article->sections->visName}
             						<div class="name">
             							<h3 class="no-margin-top">
-            								{*<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article|nosafeurl}">*}
-											<a href="{$article->link}" target="_blank">
+            								<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article|nosafeurl}">
+											{*<a href="{$article->link}" target="_blank">*}
             									{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
             								</a>
             							</h3>
