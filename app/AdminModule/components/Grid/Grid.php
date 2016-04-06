@@ -92,7 +92,7 @@ use Nette\Utils\Strings;
 				}
 			}
 			else {
-				$this->addColumn('pohoda', 'Pohoda')
+				$this->addColumn('pohodacode', 'Pohoda')
 					->setTextEditable()
 					->setTextFilter();
 
