@@ -7,9 +7,11 @@
 
 <div class="articles layout2 row">
 	<div class="editor-menu col-sm-3">
-		{var $pid = count($presenter->pages) > 1 ? $presenter->page->pid : $presenter->page->id}
+		<div class="menu3">
+			{var $pid = count($presenter->pages) > 1 ? $presenter->page->pid : $presenter->page->id}
 
-		{$presenter["menu"]->render(array("pid" => $pid, "level" => 1))}
+			{$presenter["menu"]->render(array("pid" => $pid, "level" => 1))}
+		</div>
 	</div>
 
 	<div class="col-sm-9">
