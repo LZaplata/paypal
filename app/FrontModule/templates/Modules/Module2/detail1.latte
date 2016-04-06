@@ -36,30 +36,30 @@
 		</div>
 	{/if}
 
-	{if $article->sections->gallery}
-		{var $thumb = $control->getThumb($article, 2)}
-		{var $images = $control->getImages($article)}		
-			
-		{if $thumb && count($images)}
-			<div class="col-xs-12">
-				<div id="gallery" class="row clearfix h1">
-					<ul class="list-unstyled">				
-						{foreach $images as $image}
-							<li class="col-xs-2">
-								<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}" rel="gallery">
-									<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
-								</a>
-							</li>
-						{/foreach}
-					</ul>
-					
-					{if $article->galleries->paginator}
-						{control paginator}
-					{/if}
-				</div>
-			</div>
-		{/if}
-	{/if}
+	{*{if $article->sections->gallery}*}
+		{*{var $thumb = $control->getThumb($article, 2)}*}
+		{*{var $images = $control->getImages($article)}		*}
+			{**}
+		{*{if $thumb && count($images)}*}
+			{*<div class="col-xs-12">*}
+				{*<div id="gallery" class="row clearfix h1">*}
+					{*<ul class="list-unstyled">				*}
+						{*{foreach $images as $image}*}
+							{*<li class="col-xs-2">*}
+								{*<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}" rel="gallery">*}
+									{*<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />*}
+								{*</a>*}
+							{*</li>*}
+						{*{/foreach}*}
+					{*</ul>*}
+					{**}
+					{*{if $article->galleries->paginator}*}
+						{*{control paginator}*}
+					{*{/if}*}
+				{*</div>*}
+			{*</div>*}
+		{*{/if}*}
+	{*{/if}*}
 		
 	{if $article->sections->files}
 		{var $files = $control->getFiles($article)}
