@@ -19,7 +19,7 @@
 
 	    <div class="row">
 	        {foreach $articles as $article}
-        		{$control->getUrl($article)}
+        		{*{$control->getUrl($article)}*}
 
         		<div class="article col-xs-{$cols}">
         			<div class="clearfix">
@@ -67,8 +67,8 @@
             					{/if}
 
     							<p class="no-margin-bottom text-right">
-    								{*<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article|nosafeurl}">*}
-									<a href="{$article->link}" target="_blank">
+    								<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article|nosafeurl}">
+									{*<a href="{$article->link}" target="_blank">*}
     									<strong>celý článek</strong>
     									<span class="fa-stack">
     										<i class="fa fa-stack-2x fa-circle"></i>
