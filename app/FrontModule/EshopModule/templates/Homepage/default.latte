@@ -10,7 +10,7 @@
 	<div class="row">
 		{foreach $categories as $category}
 			<div class="category-day">
-				{var $products = $presenter->getCategoryProducts($category->id)}
+				{var $products = $presenter->getCategoryProducts($category->id)->limit(3)}
 
 				<h2 class="h3 text-warning no-margin col-sm-12">
 					{$category->name}
