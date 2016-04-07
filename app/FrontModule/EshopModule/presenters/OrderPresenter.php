@@ -377,8 +377,8 @@
 			if(isset($this->partner->id)) {
 				$form->addGroup('Váš dodavatel');
 
-				$form->addText('delivery_name', 'Společnost:');
-				$form->addText('delivery_surname', 'E-mail:');
+				$form->addText('delivery_name', 'Společnost:')->setDisabled(true);
+				$form->addText('delivery_surname', 'E-mail:')->setDisabled(true);
 
 			} else {
 				$form->addGroup('Údaje pro doručení (nevyplňovat, pokud jsou stejné jako fakturační)');
