@@ -1,4 +1,11 @@
-$(document).ready(function() {	
+$(document).ready(function() {
+	$('.eu-cookies button').click(function() {
+	    var date = new Date();
+	    date.setFullYear(date.getFullYear() + 10);
+	    document.cookie = 'eu-cookies=1; path=/; expires=' + date.toGMTString();
+	    $('.eu-cookies').hide();
+	});
+	
 	$('[data-confirm]').click(function(e){
         if(confirm($(this).data().confirm + "?")){
                 return true;
