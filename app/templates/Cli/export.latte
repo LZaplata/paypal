@@ -72,6 +72,13 @@
 		                    <ord:homeCurrency>
 		                        <typ:unitPrice>{$order->transport}</typ:unitPrice>
 		                    </ord:homeCurrency>
+							{if $relation}
+							<ord:stockItem>
+								<typ:stockItem>
+									<typ:ids>{$relation->pohodacode}</typ:ids>
+								</typ:stockItem>
+							</ord:stockItem>
+							{/if}
 		                </ord:orderItem>
 				</ord:orderDetail>
 				<ord:orderSummary>

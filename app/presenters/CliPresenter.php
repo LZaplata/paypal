@@ -85,7 +85,8 @@ use Nette\Utils\Strings;
 						"order" => $order,
 						"methods" => $this->model->getShopMethods()->fetchPairs('id', 'name'),
 						"products" => $order->related("orders_products"),
-						"presenter" => $this
+						"presenter" => $this,
+						"relation" => $this->model->getShopMethodsRelations()->where("shop_methods_id", $order->transport_id)->where("id_shop_methods", $order->payment_id)->fetch()
 					);
 
 //					$xml = $this->createTemplate();

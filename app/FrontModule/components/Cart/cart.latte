@@ -1,16 +1,23 @@
 <div id="cart-mini">
-	{*{snippet cart}*}
+	{snippet cart}
 		{*<p>*}
 			{*Celkem: <span class="pull-right">{$price|number:$decimals:",":" "} {_$currency}</span>*}
 		{*</p>*}
-	{*{/snippet}*}
+
 	{**}
 	{*<div class="clearfix"></div>*}
 	
-	<a href="{dlink :FrontEshop:Order:cart eshop => $eshop}" class="">
-		<span class="fa-stack fa-lg">
-			<i class="fa fa-circle fa-stack-2x"></i>
-			<i class="fa fa-shopping-basket fa-stack-1x fa-inverse"></i>
-		</span>
-	</a>
+		<a href="{dlink :FrontEshop:Order:cart eshop => $eshop}" class="">
+			<span class="fa-stack fa-lg">
+				<i class="fa fa-circle fa-stack-2x"></i>
+				<i class="fa fa-shopping-basket fa-stack-1x fa-inverse"></i>
+			</span>
+
+			{if count($control->products) > 0}
+				<span class="badge">
+					{count($control->products)}
+				</span>
+			{/if}
+		</a>
+	{/snippet}
 </div>

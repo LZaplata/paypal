@@ -42,7 +42,9 @@
 			$this->addColumn('price', 'Cena')
 				->setTextEditable();
 			$this->addColumn('max', 'Maximální cena')
-				->setTextEditable();		
+				->setTextEditable();
+			$this->addColumn("pohodacode", "Kód pro Pohodu")
+				->setTextEditable();
 //			$this->addColumn('country', 'Stát')
 //				->setSelectEditable(array('CZ' => 'CZ', 'SK' => 'SK'));	
 				
