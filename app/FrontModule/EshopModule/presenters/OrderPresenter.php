@@ -412,6 +412,8 @@
 			else $form->setValues($order);
 
 			if (isset($this->partner->id)) {
+				$form->addHidden("partner_id", $this->partner->id);
+
 				$form->setValues($this->context->parameters["partners"][$this->partner->id]);
 			}
 
