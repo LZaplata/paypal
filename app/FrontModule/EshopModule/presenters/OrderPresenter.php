@@ -567,7 +567,7 @@
 			$mail = new Message();
 			$mail->setFrom($this->contact->email, $this->contact->name);
 			$mail->addTo($order->email, $order->name.' '.$order->surname);
-			$mail->setSubject('Objednávka č. '.$order->no);
+			$mail->setSubject('ExpresMenu.cz- nová objednávka č. '.$order->no);
 			$mail->setHtmlBody($template);
 
 			$this->mailer->send($mail);
