@@ -1617,7 +1617,7 @@
             "version": "1.0.0",
             "dist": {
                 "type": "zip",
-                "url": "http://www.phpclasses.org/install/package/curl-multi-sitemap.zip",
+                "url": "https://www.phpclasses.org/install/package/curl-multi-sitemap.zip",
                 "reference": null,
                 "shasum": null
             },
@@ -1634,12 +1634,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/dg/texy.git",
-                "reference": "78b757ee08db20021dc539ea744343199edf41df"
+                "reference": "a584e7f1f7a22448b3d15e4e823a7d83e328621e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dg/texy/zipball/78b757ee08db20021dc539ea744343199edf41df",
-                "reference": "78b757ee08db20021dc539ea744343199edf41df",
+                "url": "https://api.github.com/repos/dg/texy/zipball/a584e7f1f7a22448b3d15e4e823a7d83e328621e",
+                "reference": "a584e7f1f7a22448b3d15e4e823a7d83e328621e",
                 "shasum": ""
             },
             "require": {
@@ -1690,7 +1690,7 @@
                 "wiki",
                 "xhtml"
             ],
-            "time": "2015-12-14 13:30:32"
+            "time": "2016-04-05 15:05:27"
         },
         {
             "name": "tracy/tracy",

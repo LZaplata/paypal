@@ -43,6 +43,10 @@
 								<p>Zboží neni skladem</p>
 							</div>
 						{/if}
+					{else}
+						<div class="cart">
+							{control addToCart-$product->id}
+						</div>
 					{/if}
 				{/snippet}
 

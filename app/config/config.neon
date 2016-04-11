@@ -92,11 +92,11 @@ development:
 		    apiKey:
 		partners:
 		    1:
-		        delivery_name: Fishing
-		        delivery_surname: Travel
-		        delivery_street: fa
-		        delivery_city: fa
-		        delivery_psc: 541 01
+		        delivery_name: "Fishing Travel Agency, s.r.o."
+		        delivery_surname: info@rybolovnorsko.com
+		        delivery_street: K Severu 257
+		        delivery_city: Petrov
+		        delivery_psc: 252 81
 
 	php:
 		date.timezone: Europe/Prague
