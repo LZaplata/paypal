@@ -9,6 +9,7 @@
 
 	use AdminModule\OrdersGrid;
 
+	use Nette\Application\Responses\FileResponse;
 	use pdf\pdf;
 
 	use Nette\Mail\SmtpMailer;
@@ -458,5 +459,13 @@ use Nette\Utils\ArrayHash;
 			$this->mailer->send($mail);
 
 			$this->flashMessage("Výzva k platbě byla odeslána");
+		}
+
+		public function handleGetPdf($id)
+		{
+//			$order = $this->model->getOrders()->wherePrimary($id)->fetch();
+			$file = WWW_DIR . "/invoices/" . $id . ".pdf";
+
+			$this->sendResponse(new FileResponse($file));
 		}
 	}

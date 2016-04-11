@@ -64,9 +64,16 @@
 				->setLink(function($row) use ($self){return $self->presenter->link('edit', array($row['id']));})
 				->setAjax(FALSE);
 
-			$this->addButton('reques', 'Výzva k platbě')
+			$this->addButton('request', 'Výzva k platbě')
 				->setClass('fa fa-credit-card')
 				->setLink(function($row) use ($self){return $self->presenter->link('PaymentRequest!', array($row['id']));});
+
+			$this->addButton('pdf', 'Daňový doklad')
+				->setClass('fa fa-file-pdf-o')
+				->setLink(function($row) use ($self){
+					return $self->presenter->link('GetPdf!', array($row['id']));
+				})
+				->setAjax(false);
 
 			$this->addButton('delete', 'Smazat')
 				->setClass('fa fa-trash text-danger')
