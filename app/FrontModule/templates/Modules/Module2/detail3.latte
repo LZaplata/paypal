@@ -1,0 +1,102 @@
+{var $name = 'name'.$presenter->lang}
+{var $defaultName = 'name'.$defaultLang}
+{var $description = 'description'.$presenter->lang}
+{var $defaultDescription = 'description'.$defaultLang}
+{var $text = 'text'.$lang}
+{var $defaultText = 'text'.$defaultLang}
+
+<div class="articles_detail detail3 row">
+	<div class="editor-menu col-sm-3">
+		<div class="menu3">
+			{var $pid = count($presenter->pages) > 1 ? $presenter->page->pid : $presenter->page->id}
+
+			{$presenter["menu"]->render(array("pid" => $pid, "level" => 1))}
+		</div>
+	</div>
+
+	<div class="col-sm-9">
+		{if $article->sections->visName}
+			<div class="col-xs-12">
+				<h1 class="h2 no-margin-top">
+					{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
+				</h1>
+			</div>
+		{/if}
+
+		{if $article->sections->date}
+			<div class="date col-xs-12">
+				<p>
+					{$article->date|date: 'j. n. Y'}
+				</p>
+			</div>
+		{/if}
+
+		{if $article->sections->description}
+			<div class="col-xs-12 description">
+				<p>
+					{!$article->$description ?: ($article->$defaultDescription ?: $article->description)|nbsp}
+				</p>
+			</div>
+		{/if}
+
+		{if $article->sections->text}
+			<div class="col-xs-12 text">
+				{!($article->$text ?: ($article->$defaultText ?: $article->text))|nbsp}
+			</div>
+		{/if}
+
+		{*{if $article->sections->gallery}*}
+			{*{var $thumb = $control->getThumb($article, 2)}*}
+			{*{var $images = $control->getImages($article)}		*}
+				{**}
+			{*{if $thumb && count($images)}*}
+				{*<div class="col-xs-12">*}
+					{*<div id="gallery" class="row clearfix h1">*}
+						{*<ul class="list-unstyled">				*}
+							{*{foreach $images as $image}*}
+								{*<li class="col-xs-2">*}
+									{*<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}" rel="gallery">*}
+										{*<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />*}
+									{*</a>*}
+								{*</li>*}
+							{*{/foreach}*}
+						{*</ul>*}
+						{**}
+						{*{if $article->galleries->paginator}*}
+							{*{control paginator}*}
+						{*{/if}*}
+					{*</div>*}
+				{*</div>*}
+			{*{/if}*}
+		{*{/if}*}
+
+		{if $article->sections->files}
+			{var $files = $control->getFiles($article)}
+
+			{if count($files)}
+				<div id="files" class="col-xs-12">
+					<h2 class="h4">Soubory</h2>
+
+					{dump $icons}
+
+					<ul class="list-unstyled">
+						{foreach $files as $file}
+							{var $extension = pathinfo($file->name, PATHINFO_EXTENSION)}
+
+							<li>
+								<i class="fa fa-file-{$icons[$extension]}-o"></i>&nbsp;
+								<a href="{$basePath}/files/files/f{$file->filestores_id}-{$file->name}">
+									{$file->title ? $file->title : $file->name}
+								</a>
+							</li>
+						{/foreach}
+					</ul>
+				</div>
+			{/if}
+		{/if}
+
+		{*<p class="back col-xs-12">*}
+			{*<a href="{plink Page: article => null, aid => null|nosafeurl}" class="btn btn-primary btn-xs h1">Zpět</a>*}
+		{*</p>*}
+	</div>
+</div>
