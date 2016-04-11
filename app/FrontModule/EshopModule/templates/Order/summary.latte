@@ -113,6 +113,19 @@
 				</div>
 			</div>
 		</div>
+
+		{if isset($order->ŧext) && !empty($order->text)}
+			<div class="col-sm-12">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<span class="h4">Poznámka</span>
+					</div>
+					<div class="panel-body">
+						{$order->text}
+					</div>
+				</div>
+			</div>
+		{/if}
 	</div>
 	
 	{include cart.latte}	
@@ -132,6 +145,16 @@
 	</div>
 	
 	<div class="next">
+		<p class="pull-left">
+			<a href="{plink Order:transport}" class="h4 sm text-warning no-margin">
+				<span class="fa-stack">
+					<i class="fa fa-circle fa-stack-2x"></i>
+					<i class="fa fa-arrow-left fa-stack-1x fa-inverse"></i>
+				</span>
+				{_'zpět'}
+			</a>
+		</p>
+
 		<p class="pull-right">
 			<a href="{plink Order:send}" class="h4 sm text-warning no-margin">
 				{_'odeslat objednávku'}
