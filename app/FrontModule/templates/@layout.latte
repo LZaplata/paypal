@@ -41,9 +41,19 @@
 		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid={$vendorSettings->addthis}" async="async"></script>
 		{/if}
 	{/if}
+
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var seznam_retargeting_id = 19500;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//c.imedia.cz/js/retargeting.js"></script>
 </head>
 
 <body{if $vendorSettings->singlepage} id="singlepage" data-spy="scroll" data-target=".menu"{/if}>
+	<!-- Měřicí kód Sklik.cz -->
+	<iframe width="119" height="22" frameborder="0" scrolling="no" src="//c.imedia.cz/checkConversion?c=100005573&color=ffffff&v=1"></iframe>
+
 	<div id="fb-root"></div>
 	<script>(function(d, s, id) {
 		var js, fjs = d.getElementsByTagName(s)[0];
