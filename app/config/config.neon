@@ -59,7 +59,7 @@ development:
 			2: Dokončeno
 		content:
 			tree: false
-		host: "http://localhost/CMS/www"
+		host: "http://localhost/www.expresmenu.cz/www"
 		version: "2.3 beta"
 		tax: 21
 		discount: 1 # 1 = hierarchická, 2 = sčítací
@@ -165,4 +165,4 @@ production < development:
 		contact:
 			name: Jakub Janovec
 			email: jakub@expresmenu.cz
-		host: "http://cms.hucr.cz"
+		host: "http://vyvoj.hucr.cz/www.expresmenu.cz/www"
