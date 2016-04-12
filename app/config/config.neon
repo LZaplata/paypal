@@ -89,7 +89,7 @@ development:
 			appSecret:
 		currency: "Kč"
 		zasilkovna:
-		    apiKey:
+		    apiKey: b1896ed4de0f5afc
 		partners:
 		    1:
 		        delivery_name: "Fishing Travel Agency, s.r.o."
