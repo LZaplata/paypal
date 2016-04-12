@@ -625,7 +625,9 @@
 				foreach ($xml->branches->branch as $branch) {
 					$branchName = (string) $branch->nameStreet;
 
-					$this->zasilkovnaBranches[$branchName] = $branchName;
+					if ((string) $branch->country == "sk") {
+						$this->zasilkovnaBranches[$branchName] = $branchName;
+					}
 				}
 			}
 		}
