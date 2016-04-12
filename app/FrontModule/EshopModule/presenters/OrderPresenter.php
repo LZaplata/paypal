@@ -641,7 +641,7 @@
 				"currency" => $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency,
 				"decimals" => $order->currency == 'czk' ? 0 : 2,
 				"host" => $this->context->parameters['host'],
-				"method" => $this->model->getShopMethods()->where("id_shop_methods", $order->payment_id)->fetch()
+				"method" => $this->model->getShopMethods()->wherePrimary($order->payment_id)->fetch()
 			);
 
 //			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/pdf.latte');
