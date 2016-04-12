@@ -18,6 +18,7 @@
 											{var $controlName = $control->name}
 
 											<label class="btn btn-default {if $order->$controlName == $key}active{/if} clearfix">
+												<span class="pull-right shop-method">{!$methodPrices[$key]}</span>
 												{input $control->name:$key} {$label}
 
 												{if $order->$controlName == $key && key_exists($key, $transports)}

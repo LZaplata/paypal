@@ -22,6 +22,7 @@
 	class OrderPresenter extends BasePresenter {
 		public $products;
 		public $transports;
+		public $methodPrices;
 		public $payments;
 		public $transportData;
 		public $lastID;
@@ -67,6 +68,7 @@
 			}
 
 			$this->transports = $this->model->getShopMethodsRelations()->select('shop_methods.*')->fetchPairs('id', 'name');
+			$this->methodPrices = $this->model->getShopMethods()->select('shop_methods.*')->fetchPairs('id', 'price');
 			$this->payments = $this->context->database->query("SELECT shop_methods.id AS id, name FROM shop_methods LEFT JOIN shop_methods_relations ON shop_methods.id = shop_methods_relations.id_shop_methods WHERE type IN (?)", array(1, 2, 4))->fetchPairs('id', 'name');
 			$values = $_GET ? $_GET : null;
 
@@ -222,6 +224,7 @@
 			$this->template->currency = $this->currency == 'czk' ? $this->context->parameters['currency'] : $this->currency;
 			$this->template->decimals = $this->currency == 'czk' ? 0 : 2;
 			$this->template->transports = $this->model->getShopMethods()->where('type', 3)->fetchPairs('id', 'name');
+			$this->template->methodPrices = $this->methodPrices;
 		}
 
 		public function renderSummary () {

@@ -203,6 +203,11 @@ body {
 			}
 		}
 	}
+	
+	.shop-method {
+		color: @gray;
+		font-weight: normal;
+	}
 
 	.productsView {
 		a {
@@ -1159,10 +1164,18 @@ body {
 	padding-bottom: @grid-gutter-width;
 	border-bottom: 3px solid @gray-lighter;
 	margin-bottom: @grid-gutter-width;
+	position: relative;
 
 	.form-control {
 		width: 50px;
 		margin-right: @grid-gutter-width;
+	}
+	
+	.amountChange {
+		cursor: pointer;
+		position: absolute;
+		left: -18px;
+	    top: 7px;
 	}
 
 	button {

@@ -223,6 +223,11 @@ $(function() {
 		val = $(this).val();
 		$(this).val(null);
 	});
+	
+	$("#cart .add-to-cart .amountChange").live("click", function (e) {
+		e.preventDefault();
+		$("#cart .add-to-cart input[name='amount']").trigger("blur");
+	});
 		
 	$("#cart .add-to-cart input[name='amount']").live("blur", function (e) {
 		e.preventDefault();
