@@ -71,7 +71,7 @@
 			$this->addButton('pdf', 'Daňový doklad')
 				->setClass('fa fa-file-pdf-o')
 				->setLink(function($row) use ($self){
-					return $self->presenter->link('GetPdf!', array($row['id']));
+					return $self->presenter->link('GetPdf!', array($row['no']));
 				})
 				->setAjax(false);
 
