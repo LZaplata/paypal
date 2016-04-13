@@ -447,7 +447,14 @@ use Nette\Utils\ArrayHash;
 			$order = $this->model->getOrders()->wherePrimary($id)->fetch();
 			$latte = new Engine();
 			$params = array(
-				"order" => $order
+				"order" => $order,
+				"paymentType" => $this->model->getShopMethods()->wherePrimary($order->payment_id)->fetch()->type,
+				"presenter" => $this,
+				"host" => $this->context->parameters['host'],
+				"decimals" => $this->currency == 'czk' ? 0 : 2,
+				"methods" => $this->model->getShopMethods()->fetchPairs('id', 'name'),
+				"lang" => $this->lang,
+				"defaultLang" => $this->getDefaultLang()
 			);
 
 			$mail = new Message();
@@ -467,5 +474,28 @@ use Nette\Utils\ArrayHash;
 			$file = WWW_DIR . "/invoices/" . $id . ".pdf";
 
 			$this->sendResponse(new FileResponse($file));
+		}
+
+		public function getDefaultLang () {
+			if ($lang = $this->presenter->model->getLanguages()->where('highlight', 1)->fetch()) {
+				return '_'.$lang->key;
+			}
+			else return null;
+		}
+
+		public function getProductProps ($id) {
+			$productProperties = $this->model->getProductsProperties()->where('products_id', $id)->fetch();
+			$shopProperties = $this->model->getShopProperties();
+			$properties = array();
+
+			foreach ($shopProperties as $property) {
+				$p = 'p_'.$property->id;
+
+				if ($productProperties->$p) {
+					$properties[] = $property->categories->name.' - '.$property->name;
+				}
+			}
+
+			return implode(', ', $properties);
 		}
 	}
