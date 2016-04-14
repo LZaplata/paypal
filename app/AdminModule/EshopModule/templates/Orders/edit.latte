@@ -45,11 +45,14 @@
 				{control orderProducts}
 				
 				{snippet price}
-					<div class="well col-sm-4">
+					<div class="well col-sm-5">
 						<h1 class="h3 no-margin">
 							<small class="pull-left">Zboží</small> <small class="pull-right">{$order->price / $order->rate|number:$decimals:",":" "} {$order->currency}</small><br>
 							<small class="pull-left">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]})</small> <small class="pull-right">{$order->transport|number:$decimals:",":" "} {$order->currency}</small><br>
-							<span class="pull-right">{($order->price / $order->rate) + $order->transport|number:$decimals:",":" "} {$order->currency}</span>
+							{if $order->zasilkovna}
+								<small class="pull-left">{$order->zasilkovna}</small><br>
+							{/if}
+							<span class="pull-right text-primary">{($order->price / $order->rate) + $order->transport|number:$decimals:",":" "} {$order->currency}</span>
 						</h1>
 					</div>
 				{/snippet}
