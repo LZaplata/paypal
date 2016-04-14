@@ -30,8 +30,10 @@
 							<h1 class="h3 no-margin">{$product->$name ?: ($product->$defaultName ?: $product->name)}</h1>
 							<p>
 								<br />
-								{$amount} ks za {$price|number:$decimals:",":" "} {_$currency}/ks <br />
-								<span class="h3">{$amount * $price|number:$decimals:",":" "}</span> {_$currency} celkem
+								Cena za ks: {$price|number:$decimals:",":" "} {_$currency} <br>
+								Množství: {$amount} ks<br />
+								Celková cena: <strong>{$amount * $price|number:$decimals:",":" "} {_$currency}</strong>
+								{*<span class="h3">{$amount * $price|number:$decimals:",":" "}</span> {_$currency} celkem*}
 							</p>
 						</div>
 					</div>
