@@ -13,7 +13,7 @@
 		{*<div class="clearfix"></div>*}
 	
 		<div class="row">
-			{if $presenter->presenterName != "Order"}
+			{if $presenter->presenterName != "Order" && $presenter->presenterName != "Users"}
 				<div class="col-lg-3 col-sm-12">
 					{control categories:eshop}
 				</div>
@@ -21,7 +21,7 @@
 
 			<div class="clearfix hidden-lg"></div>
 
-			<div class="{if $presenter->presenterName != 'Order'}col-lg-9 col-md-12{else}col-sm-12{/if}">
+			<div class="{if $presenter->presenterName != 'Order' && $presenter->presenterName != 'Users'}col-lg-9 col-md-12{else}col-sm-12{/if}">
 				{include #eshop}
 			</div>
 		</div>

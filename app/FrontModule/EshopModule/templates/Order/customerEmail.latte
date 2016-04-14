@@ -7,6 +7,8 @@
 
 <body style="background-color: #e6e6e6; margin: 0; padding: 20px;">
 <table style="width: 670px; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana; background-color: #fff;">
+	{includeblock CustomerEmailBlocks/payment$paymentType.latte}
+
 	{*<tr>*}
 		{*<td colspan="2" style="text-align: center; padding: 30px;">*}
 			{*<img src="{$host}/images/logo.png">*}
@@ -17,12 +19,12 @@
 	{*</tr>*}
 	<tr>
 		<td style="padding: 30px 30px 0; font-weight: bold;" colspan="2">
-			Vážený zákazníku,
+			{include salutation}
 		</td>
 	</tr>
 	<tr>
 		<td style="padding: 0 30px 30px;" colspan="2">
-			vaše objednávka <stron>č. 15</stron> na našem e-shopu byla <strong>přijata.</strong> O dalším průběhu zpracování objednávky Vás budeme informovat.
+			{include header}
 		</td>
 	</tr>
 	<tr>
@@ -75,15 +77,13 @@
 	<tr>
 		<td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
 	</tr>
+	{*<tr>*}
+		{*<td style="padding: 15px 30px 0; font-weight: bold" colspan="2">*}
+			{*Platba*}
+		{*</td>*}
+	{*</tr>*}
 	<tr>
-		<td style="padding: 15px 30px 0; font-weight: bold" colspan="2">
-			Platba
-		</td>
-	</tr>
-	<tr>
-		<td style="padding: 0 30px;" colspan="2">
-			{includeblock CustomerEmailBlocks/payment$paymentType.latte}
-
+		<td style="padding: 15px 30px;" colspan="2">
 			{include content}
 		</td>
 	</tr>

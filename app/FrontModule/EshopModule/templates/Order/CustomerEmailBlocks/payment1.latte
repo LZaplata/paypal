@@ -2,10 +2,29 @@
     šablona dobírky
 *}
 
+{define salutation}
+    Vážený zákazníku,
+{/define}
+
+{define header}
+    vaše objednávka <strong>č. {$order->no}</strong> byla dnes <strong>expedována.</strong> V případě jakýchkoliv problémů s doručováním zboží nás neváhejte kontaktovat.
+{/define}
+
 {define content}
-    <p>
-        Dobrý den, <br />
-        děkujeme za Vaši objednávku na e-shopu EXPRES MENU. Tímto e-mailem potvrzujeme, že jsme v pořádku přijali Vaši objednávku.<br>
-        Překontrolujte si údaje uvedené v objednávce a v případě nesrovnalostí nás ihned kontaktujte na e-mailu <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a>
-    </p>
+    <strong>Doručení Česká pošta</strong><br>
+    Zboží Vám přiveze přepravce do 2 pracovních dnů. V sobotu, v neděli a o svátcích přepravní službazboží nedoručuje. Čas doručení se pohybuje v intervalu 8:00 – 18:00. Pokud Vás přepravce nezastihne na Vaší
+    doručovací adrese, uloží Vám do poštovní schránky Výzvu o uložení zásilky na pobočce České pošty v místě Vašeho směrovacího čísla (PSČ). Úložní doba balíku na České poště je POUZE 7 dní! <br><br>
+
+    <strong>Doručení Intime</strong><br>
+    Zboží Vám přiveze přepravce do 2 pracovních dnů. V sobotu, v neděli a o svátcích přepravní službazboží nedoručuje. Čas doručení se pohybuje v intervalu 8:00 – 18:00. Termín dodání zboží Vám oznámí kurýr
+    pomocí sms nebo email avíza. <br><br>
+
+    <strong>Zásilkovna Slovensko</strong><br>
+    Objednávka Vám byla odeslána na vámi vybrané výdejní místo. Do jednoho pracovního dne očekávejte doručení Vaší objednávky na výdejní místo. Jakmile bude objednávka připravena k vyzvednutí, bude vás
+    zásilkovna kontaktovat. <br><br>
+
+    <strong>Důležité upozornění</strong><br>
+    Při přebírání zásilky prosím věnujte mimořádnou pozornost při kontrole vnějšku balení. Pokud narazíte při kontrole na jakýkoli zmíněný či podobný ukazatel toho, že došlo k neoprávněnému vniknutí do zásilky,
+    či možnému poškození během přepravy, oznamte tuto skutečnost před potvrzením přepravního listu řidiči.Trvejte na sepsání reklamačního protokolu, event. potvrzeném záznamu o stavu v jakém byl balík doručen
+    a o případných dalších poškozeních.
 {/define}
