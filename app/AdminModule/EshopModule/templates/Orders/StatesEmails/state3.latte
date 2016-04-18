@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+    <title></title>
+</head>
+
+<body style="background-color: #e6e6e6; margin: 0; padding: 20px;">
+<table style="width: 670px; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana; background-color: #fff;">
+    {*<tr>*}
+    {*<td colspan="2" style="text-align: center; padding: 30px;">*}
+    {*<img src="{$host}/images/logo.png">*}
+    {*</td>*}
+    {*</tr>*}
+    {*<tr>*}
+    {*<td style="background-color: #859182; height: 8px; padding: 0;" colspan="2"></td>*}
+    {*</tr>*}
+    <tr>
+        <td style="padding: 30px 30px 0; font-weight: bold;" colspan="2">
+            Dobrý den,
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0 30px 30px;" colspan="2">
+            text
+        </td>
+    </tr>
+    <tr>
+        <td style="background-color: #859182; height: 1px; padding: 0;" colspan="2"></td>
+    </tr>
+    <tr>
+        <td style="padding: 15px 30px 0; font-weight: bold" colspan="2">
+            Objednané zboží
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0 30px 15px;" colspan="2">
+            <table style="width: 100%; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana;">
+                <thead>
+                <th style="color: #859182; text-align: left; width: 40%;">
+                    <em>Název</em>
+                </th>
+                <th style="color: #859182; text-align: left; width: 20%;">
+                    <em>Cena/MJ</em>
+                </th>
+                <th style="color: #859182; text-align: left; width: 20%;">
+                    <em>Množství</em>
+                </th>
+                <th style="color: #859182; text-align: left; width: 20%;">
+                    <em>Celkem</em>
+                </th>
+                </thead>
+                <tbody>
+                {var $name = "name".$lang}
+                {var $defaultName = "name".$defaultLang}
+
+                {foreach $order->related("orders_products") as $product}
+                    <tr>
+                        <td>
+                            {$product->products->$name ?: ($product->products->$defaultName ?: $product->products->name)}<br>
+
+                            <small>
+                                <em>{$presenter->getProductProps($product->products->id)}</em>
+                            </small>
+                        </td>
+                        <td>{$price = $product->price / $order->rate|number:$decimals:",":" "} {$order->currency}</td>
+                        <td>{$product->amount}</td>
+                        <td>{$price * $product->amount|number:$decimals:",":" "} {$order->currency}</td>
+                    </tr>
+                {/foreach}
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
+    </tr>
+    {*<tr>*}
+    {*<td style="padding: 15px 30px 0; font-weight: bold" colspan="2">*}
+    {*Platba*}
+    {*</td>*}
+    {*</tr>*}
+    <tr>
+        <td style="padding: 15px 30px;" colspan="2">
+            další text
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 15px 30px;" colspan="2">
+            <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
+            <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
+            <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$order->currency}</strong> <br>
+            <em style="color: #859182; font-weight: bold;">Číslo účtu:</em> <strong>35-123456789/8000</strong> <br>
+            <em style="color: #859182; font-weight: bold;">Variabilní symbol:</em> <strong>123456</strong>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 30px 0 15px 30px; width: 50%;">
+            <table style="width: 100%; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana;">
+                <thead>
+                <tr>
+                    <th style="text-align: left;" colspan="2">
+                        Fakturační údaje
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="width: 25%;">
+                        Jméno:
+                    </td>
+                    <td>Lukáš</td>
+                </tr>
+                <tr>
+                    <td>Příjmení:</td>
+                    <td>Záplata</td>
+                </tr>
+                {if $order->company}
+                    <tr>
+                        <td>Firma:</td>
+                        <td>{$order->company}</td>
+                    </tr>
+                {/if}
+                {if $order->ic}
+                    <tr>
+                        <td>IČ:</td>
+                        <td>{$order->ic}</td>
+                    </tr>
+                {/if}
+                {if $order->dic}
+                    <tr>
+                        <td>DIČ:</td>
+                        <td>{$order->dic}</td>
+                    </tr>
+                {/if}
+                <tr>
+                    <td>Ulice:</td>
+                    <td>{$order->street}</td>
+                </tr>
+                <tr>
+                    <td>Město:</td>
+                    <td>{$order->city}</td>
+                </tr>
+                <tr>
+                    <td>PSČ:</td>
+                    <td>{$order->psc}</td>
+                </tr>
+                <tr>
+                    <td>Telefon:</td>
+                    <td>{$order->phone}</td>
+                </tr>
+                <tr>
+                    <td>E-mail:</td>
+                    <td>{$order->email}</td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+        <td style="padding: 30px 30px 15px 0; width: 50%; vertical-align: top;">
+            <table style="width: 100%; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana;">
+                <thead>
+                <tr>
+                    <th style="text-align: left;" colspan="2">
+                        Údaje pro doručení
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td style="width: 25%;">Jméno:</td>
+                    <td>
+                        {if $order->delivery_name}
+                            {$order->delivery_name}
+                        {else}
+                            {$order->name}
+                        {/if}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Příjmení:</td>
+                    <td>
+                        {if $order->delivery_surname}
+                            {$order->delivery_surname}
+                        {else}
+                            {$order->surname}
+                        {/if}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ulice:</td>
+                    <td>
+                        {if $order->delivery_street}
+                            {$order->delivery_street}
+                        {else}
+                            {$order->street}
+                        {/if}
+                    </td>
+                </tr>
+                <tr>
+                    <td>Město:</td>
+                    <td>
+                        {if $order->delivery_city}
+                            {$order->delivery_city}
+                        {else}
+                            {$order->city}
+                        {/if}
+                    </td>
+                </tr>
+                <tr>
+                    <td>PSČ:</td>
+                    <td>
+                        {if $order->delivery_psc}
+                            {$order->delivery_psc}
+                        {else}
+                            {$order->psc}
+                        {/if}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0 30px;" colspan="2">
+            <strong>Poznámka</strong>
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0 30px 30px;" colspan="2">
+            {$order->text}
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="color: #859182; padding: 0 30px 30px;">
+            <strong>Děkujeme Vám a přejeme hezký den.</strong><br><br>
+            EXPRES MENU, s.r.o. <br>
+            Email: <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a> <br>
+            Tel.: +420 499 819 219 (Po-Pá; 6.00 - 14.00)
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="padding: 15px 30px; background: #e6e6e6; color: #888888; text-align: center;">
+            <strong>EXPRES MENU s.r.o.</strong><br>
+            Lomní 355, 541 01 Trutnov <br>
+            <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a><br>
+            +420 123 456 789
+        </td>
+    </tr>
+</table>
+</body>
+</html>

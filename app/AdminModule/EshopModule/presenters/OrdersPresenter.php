@@ -163,23 +163,28 @@ use Nette\Utils\ArrayHash;
 			$this->invalidateControl('productsTable');
 		}
 		
-		public function sendMail ($order) {			
-			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/email.latte');
-			$template->registerFilter(new Engine());
-			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
-			$template->order = $order;
-			$template->presenter = $this;
-			$template->decimals = $order->currency == 'czk' ? 0 : 2;
-			$template->host = $this->context->parameters['host'];
-			$template->paymentType = $this->model->getShopMethods()->wherePrimary($order->payment_id)->fetch()->type;
-			
-			$mail = new Message();
-			$mail->setFrom($this->contact->email, $this->contact->name);
-			$mail->addTo($order->email, $order->name.' '.$order->surname);
-			$mail->setSubject('Změna stavu objednávky č. '.$order->no);
-			$mail->setHtmlBody($template);
-			
-			$this->mailer->send($mail);
+		public function sendMail ($order) {
+			if ($order->state >= 3) {
+				$template = new FileTemplate(APP_DIR . '/AdminModule/EshopModule/templates/Orders/StatesEmails/state' . $order->state . '.latte');
+				$template->registerFilter(new Engine());
+				$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+				$template->order = $order;
+				$template->presenter = $this;
+				$template->decimals = $order->currency == 'czk' ? 0 : 2;
+				$template->host = $this->context->parameters['host'];
+				$template->paymentType = $this->model->getShopMethods()->wherePrimary($order->payment_id)->fetch()->type;
+				$template->lang = $this->lang;
+				$template->defaultLang = $this->getDefaultLang();
+				$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
+
+				$mail = new Message();
+				$mail->setFrom($this->contact->email, $this->contact->name);
+				$mail->addTo($order->email, $order->name . ' ' . $order->surname);
+				$mail->setSubject('Změna stavu objednávky č. ' . $order->no);
+				$mail->setHtmlBody($template);
+
+				$this->mailer->send($mail);
+			}
 		}
 		
 		public function getMethodName ($id) {

@@ -49,10 +49,13 @@ development:
 			name: Lukáš Záplata
 			email: zap@hucr.cz
 		orderStates:
-			0: Vyřizuje se
-			1: Doručená
-			2: Částečně doručená
-			3: Storno
+			0: nevyřízeno
+			1: vyřizuje se
+			2: čekání na platbu
+			3: zaplaceno
+			4: vyexpedováno
+			5: připraveno k odběru
+			6: storno
 		orderStatesBooking:
 			0: Vyřizuje se
 			1: Platba/Záloha
