@@ -89,34 +89,54 @@
             <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center;">
                 cena
             </th>
+            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center;">
+                DPH
+            </th>
+            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center;">
+                cena s DPH
+            </th>
         </tr>
         </thead>
         <tbody>
         {var $amount = 0}
+        {var $price = 0}
+        {var $tax = 0}
+
         {foreach $order->related("orders_products") as $product}
             <tr>
-                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: left; vertical-align: top; width: 70%;">
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: left; vertical-align: top; width: 44%;">
                     {$product->products->name}
                 </td>
-                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em;">
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em; width: 15%;">
                     {var $amount += $product->amount}
 
                     {$product->amount}
                 </td>
-                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em;">
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em; width: 13%;">
+                    {var $price += $product->price - ($product->price * ($product->products->tax / (100 + $product->products->tax)))}
+
+                    {$product->price - ($product->price * ($product->products->tax / (100 + $product->products->tax)))|number:$decimals:",":" "} {$currency}
+                </td>
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em; width: 12%;">
+                    {var $tax += $product->price * ($product->products->tax / (100 + $product->products->tax))}
+
+                    {$product->price * ($product->products->tax / (100 + $product->products->tax))|number:$decimals:",":" "} {$currency}
+                </td>
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em; width: 16%;">
                     {$product->price|number:$decimals:",":" "} {$currency}
                 </td>
             </tr>
         {/foreach}
 
         <tr>
-            <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; font-size: 1.2em; padding: 20px; text-align: right;">
-                celkem
+            <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; font-size: 1.2em; padding: 20px; text-align: right;" colspan="4">
+                celkem <br>
+                DPH <br>
+                celkem s DPH
             </td>
             <td style="background: #f5f5f5; border-top: 1px solid #5d6975; font-size: 1.2em; padding: 20px; text-align: right;">
-                {$amount}
-            </td>
-            <td style="background: #f5f5f5; border-top: 1px solid #5d6975; font-size: 1.2em; padding: 20px; text-align: right;">
+                {$price|number:$decimals:",":" "} {$currency} <br>
+                {$tax|number:$decimals:",":" "} {$currency} <br>
                 {$order->price|number:$decimals:",":" "} {$currency}
             </td>
         </tr>
