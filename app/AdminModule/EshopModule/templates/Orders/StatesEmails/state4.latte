@@ -17,12 +17,12 @@
     {*</tr>*}
     <tr>
         <td style="padding: 30px 30px 0; font-weight: bold;" colspan="2">
-            Dobrý den,
+            Vážený zákazníku,
         </td>
     </tr>
     <tr>
         <td style="padding: 0 30px 30px;" colspan="2">
-            text
+            vaše objednávka č. {$order->no} byla dnes expedována. V případě jakýchkoliv problémů s doručováním zboží nás neváhejte kontaktovat.
         </td>
     </tr>
     <tr>
@@ -75,14 +75,32 @@
     <tr>
         <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
     </tr>
-    {*<tr>*}
-    {*<td style="padding: 15px 30px 0; font-weight: bold" colspan="2">*}
-    {*Platba*}
-    {*</td>*}
-    {*</tr>*}
+    <tr>
+        <td style="padding: 15px 30px 0; font-weight: bold" colspan="2">
+            Doručení
+        </td>
+    </tr>
     <tr>
         <td style="padding: 15px 30px;" colspan="2">
-            další text
+			<h3>Doručení Česká pošta</h3>
+            <p>
+				Zboží Vám přiveze přepravce do 2 pracovních dnů. V sobotu, v neděli a o svátcích přepravní službazboží nedoručuje. Čas doručení se pohybuje v intervalu 8:00 – 18:00. Pokud Vás přepravce nezastihne na Vaší doručovací adrese, uloží Vám do poštovní schránky Výzvu o uložení zásilky na pobočce České pošty v místě Vašeho směrovacího čísla (PSČ). Úložní doba balíku na České poště je POUZE 7 dní !
+			</p>
+
+			<h3>Doručení Intime</h3>
+			<p>
+				Zboží Vám přiveze přepravce do 2 pracovních dnů. V sobotu, v neděli a o svátcích přepravní službazboží nedoručuje. Čas doručení se pohybuje v intervalu 8:00 – 18:00. Termín dodání zboží Vám oznámí kurýr pomocí sms nebo email avíza.
+			</p>
+			
+			<h3>Zásilkovna Slovensko</h3>
+			<p>
+				Objednávka Vám byla odeslána na vámi vybrané výdejní místo. Do jednoho pracovního dne očekávejte doručení Vaší objednávky na výdejní místo. Jakmile bude objednávka připravena k vyzvednutí, bude vás zásilkovna kontaktovat.
+			</p>
+			
+			<h4>Důležité upozornění</h4>
+			<p>
+				Při přebírání zásilky prosím věnujte mimořádnou pozornost při kontrole vnějšku balení. Pokud narazíte při kontrole na jakýkoli zmíněný či podobný ukazatel toho, že došlo k neoprávněnému vniknutí do zásilky, či možnému poškození během přepravy, oznamte tuto skutečnost před potvrzením přepravního listu řidiči.Trvejte na sepsání reklamačního protokolu, event. potvrzeném záznamu o stavu v jakém byl balík doručen a o případných dalších poškozeních.
+			</p>
         </td>
     </tr>
     <tr>
@@ -90,8 +108,6 @@
             <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$order->currency}</strong> <br>
-            <em style="color: #859182; font-weight: bold;">Číslo účtu:</em> <strong>35-123456789/8000</strong> <br>
-            <em style="color: #859182; font-weight: bold;">Variabilní symbol:</em> <strong>123456</strong>
         </td>
     </tr>
     <tr>
@@ -109,11 +125,11 @@
                     <td style="width: 25%;">
                         Jméno:
                     </td>
-                    <td>Lukáš</td>
+                    <td>{$order->name}</td>
                 </tr>
                 <tr>
                     <td>Příjmení:</td>
-                    <td>Záplata</td>
+                    <td>{$order->surname}</td>
                 </tr>
                 {if $order->company}
                     <tr>

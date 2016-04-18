@@ -3,10 +3,24 @@
 		<div id="order-success" class="alert alert-success">
 			Objednávka byla v pořádku odeslána a zaplacena
 		</div>
+		<h2>Objednávka byla vytvořena a zaplacena!</h2>
+		<p>
+			Platební příkaz byl v pořádku přijat. Vaši objednávku budeme expedovat v co nejkratší době. Děkujeme za objednávku.<br/>
+			Váš tým EXPRES MENU
+		</p>
+		<p class="alert alert-warning">
+			Na email jsme Vám zaslali potvrzení objednávky. Pokud Vám tento email nepřijde do 15 minut, kontaktujte nás prosím na provoz@expresmenu.com.
+			Poznámka: v případě nedoručení e-mailu zkontrolujte prosím nevyžádanou poštu (SPAM) ve vaší emailové schránce.
+		</p>
 	{else}
 		<div id="order-success" class="alert alert-danger">
 			Platba neproběhla úspěšně
 		</div>
+		<h2>Během platby kartou došlo k neočekávané chybě.</h2>
+		<p>
+			Uvedená částka nebyla uhrazena. Kontaktujte nás prosím co nejdříve: provoz@expresmenu.com nebo +420 499 819 219 (Po-Pá; 6.00 - 14.00)
+		</p>
+		
 	{/if}
 
 	{if $order}

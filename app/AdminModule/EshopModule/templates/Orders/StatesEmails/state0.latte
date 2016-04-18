@@ -78,7 +78,18 @@
     <tr>
         <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
     </tr>
-  
+    {*<tr>*}
+    {*<td style="padding: 15px 30px 0; font-weight: bold" colspan="2">*}
+    {*Platba*}
+    {*</td>*}
+    {*</tr>*}
+    {*
+    <tr>
+        <td style="padding: 15px 30px;" colspan="2">
+            další text
+        </td>
+    </tr>
+    *}
     <tr>
         <td style="padding: 15px 30px;" colspan="2">
             <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br>

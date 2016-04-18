@@ -142,9 +142,9 @@
 			$paymentType = $this->model->getShopMethods()->wherePrimary($this->order->payment_id)->fetch();
 
 			// při platbě předem změnit defaultní stav objednávky -
-//			if ($paymentType->type == 3) {
-//				$this->order->update(array("state" => ));
-//			}
+			if ($this->order->payment_id == 4) {
+				$this->order->update(array("state" => 2));
+			}
 
 			//overeni zakazniky
 			if ($this->vendorSettings->heurekaVerification) {
@@ -555,7 +555,8 @@
 // 		}
 
 		public function sendCustomerEmail ($order, $paymentType) {
-			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/customerEmail.latte');
+// 			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/customerEmail.latte');
+			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/StatesEmails/state' . $order->state . '.latte');
 			$template->registerFilter(new Engine());
 			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
 			$template->order = $order;
