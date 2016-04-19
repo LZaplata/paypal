@@ -5,11 +5,11 @@
 </head>
 <body style="margin: 0; font-family: Arial; font-size: 12px; width: 565px; color: #001028; height: 810px; position: relative;">
 <header style="margin-bottom: 30px; padding: 10px 0; display: table; clear: both; width: 100%;">
-    <div style="margin-bottom: 10px; text-align: center;">
-        <img src="{$host}/images/logo.png">
-    </div>
+    {*<div style="margin-bottom: 10px; text-align: center;">*}
+        {*<img src="{$host}/images/logo.png">*}
+    {*</div>*}
     <h1 style="text-transform: uppercase; border-bottom: 1px solid #5d6975; border-top: 1px solid #5d6975; color: #5d6975; font-size: 2.4em; font-weight: normal; line-height: 1.4em; margin: 0 0 20px; text-align: center;">
-        faktura č. {str_pad($order->no, 5, 0, STR_PAD_LEFT)}
+        daňový doklad č. {str_pad($order->no, 5, 0, STR_PAD_LEFT)}
     </h1>
     <table style="width: 100%;" cellpadding="0" cellspacing="0" border="0">
         <tbody>
@@ -116,6 +116,7 @@
         {var $tax = 0}
         {var $tax15 = 0}
         {var $tax21 = 0}
+        {var $i = 1}
 
         {foreach $order->related("orders_products") as $product}
             <tr>
@@ -156,7 +157,30 @@
                     {$product->price|number:$decimals:",":" "} {$currency}
                 </td>
             </tr>
+
+            {var $i = $iterator->counter}
         {/foreach}
+
+        <tr>
+            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: left; vertical-align: top; width: 33%;">
+                Poštovné
+            </td>
+            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em; width: 15%;">
+                1
+            </td>
+            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 16%;">
+                {$order->transport - ($order->transport * (15 / 115))|number:$decimals:",":" "} {$currency}
+            </td>
+            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 10%;">
+                15%
+            </td>
+            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 11%;">
+                {$order->transport * (15 / 115)|number:$decimals:",":" "} {$currency}
+            </td>
+            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 14%;">
+                {$order->transport|number:$decimals:",":" "} {$currency}
+            </td>
+        </tr>
 
         <tr>
             <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; padding: 20px 20px 5px; text-align: right;" colspan="3">
