@@ -17,12 +17,12 @@
     {*</tr>*}
     <tr>
         <td style="padding: 30px 30px 0; font-weight: bold;" colspan="2">
-            Dobrý den,
+             Vážený zákazníku,
         </td>
     </tr>
     <tr>
         <td style="padding: 0 30px 30px;" colspan="2">
-            text
+            Vámi objednané zboží je připraveno k odběru na adrese Lomní 355, 541 01 Trutnov.
         </td>
     </tr>
     <tr>
@@ -109,11 +109,11 @@
                     <td style="width: 25%;">
                         Jméno:
                     </td>
-                    <td>Lukáš</td>
+                    <td>{$order->name}</td>
                 </tr>
                 <tr>
                     <td>Příjmení:</td>
-                    <td>Záplata</td>
+                    <td>{$order->surname}</td>
                 </tr>
                 {if $order->company}
                     <tr>

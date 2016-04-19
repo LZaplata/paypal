@@ -7,6 +7,8 @@
 
 <body style="background-color: #e6e6e6; margin: 0; padding: 20px;">
 <table style="width: 670px; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana; background-color: #fff;">
+    
+    
     {*<tr>*}
     {*<td colspan="2" style="text-align: center; padding: 30px;">*}
     {*<img src="{$host}/images/logo.png">*}
@@ -17,12 +19,13 @@
     {*</tr>*}
     <tr>
         <td style="padding: 30px 30px 0; font-weight: bold;" colspan="2">
-            Dobrý den,
+            Vážený zákazníku,
         </td>
     </tr>
     <tr>
         <td style="padding: 0 30px 30px;" colspan="2">
-            text
+			děkujeme za Vaši objednávku na e-shopu EXPRES MENU. Tímto e-mailem potvrzujeme, že jsme v pořádku přijali Vaši objednávku.<br/>
+			Překontrolujte si údaje uvedené v objednávce a v případě nesrovnalostí nás ihned kontaktujte na e-mailu <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a>
         </td>
     </tr>
     <tr>
@@ -37,37 +40,37 @@
         <td style="padding: 0 30px 15px;" colspan="2">
             <table style="width: 100%; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana;">
                 <thead>
-                <th style="color: #859182; text-align: left; width: 40%;">
-                    <em>Název</em>
-                </th>
-                <th style="color: #859182; text-align: left; width: 20%;">
-                    <em>Cena/MJ</em>
-                </th>
-                <th style="color: #859182; text-align: left; width: 20%;">
-                    <em>Množství</em>
-                </th>
-                <th style="color: #859182; text-align: left; width: 20%;">
-                    <em>Celkem</em>
-                </th>
+	                <th style="color: #859182; text-align: left; width: 40%;">
+	                    <em>Název</em>
+	                </th>
+	                <th style="color: #859182; text-align: left; width: 20%;">
+	                    <em>Cena/MJ</em>
+	                </th>
+	                <th style="color: #859182; text-align: left; width: 20%;">
+	                    <em>Množství</em>
+	                </th>
+	                <th style="color: #859182; text-align: left; width: 20%;">
+	                    <em>Celkem</em>
+	                </th>
                 </thead>
                 <tbody>
-                {var $name = "name".$lang}
-                {var $defaultName = "name".$defaultLang}
-
-                {foreach $order->related("orders_products") as $product}
-                    <tr>
-                        <td>
-                            {$product->products->$name ?: ($product->products->$defaultName ?: $product->products->name)}<br>
-
-                            <small>
-                                <em>{$presenter->getProductProps($product->products->id)}</em>
-                            </small>
-                        </td>
-                        <td>{$price = $product->price / $order->rate|number:$decimals:",":" "} {$order->currency}</td>
-                        <td>{$product->amount}</td>
-                        <td>{$price * $product->amount|number:$decimals:",":" "} {$order->currency}</td>
-                    </tr>
-                {/foreach}
+	                {var $name = "name".$lang}
+	                {var $defaultName = "name".$defaultLang}
+	
+	                {foreach $order->related("orders_products") as $product}
+	                    <tr>
+	                        <td>
+	                            {$product->products->$name ?: ($product->products->$defaultName ?: $product->products->name)}<br>
+	
+	                            <small>
+	                                <em>{$presenter->getProductProps($product->products->id)}</em>
+	                            </small>
+	                        </td>
+	                        <td>{$price = $product->price / $order->rate|number:$decimals:",":" "} {$order->currency}</td>
+	                        <td>{$product->amount}</td>
+	                        <td>{$price * $product->amount|number:$decimals:",":" "} {$order->currency}</td>
+	                    </tr>
+	                {/foreach}
                 </tbody>
             </table>
         </td>
@@ -75,25 +78,57 @@
     <tr>
         <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
     </tr>
-    {*<tr>*}
-    {*<td style="padding: 15px 30px 0; font-weight: bold" colspan="2">*}
-    {*Platba*}
-    {*</td>*}
-    {*</tr>*}
-    <tr>
-        <td style="padding: 15px 30px;" colspan="2">
-            další text
-        </td>
-    </tr>
     <tr>
         <td style="padding: 15px 30px;" colspan="2">
             <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$order->currency}</strong> <br>
-            <em style="color: #859182; font-weight: bold;">Číslo účtu:</em> <strong>35-123456789/8000</strong> <br>
-            <em style="color: #859182; font-weight: bold;">Variabilní symbol:</em> <strong>123456</strong>
         </td>
     </tr>
+    {if $order->payment_id == 4}
+    <tr>
+        <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
+    </tr>
+    <tr>
+        <td style="padding: 30px 0 15px 30px; width: 50%;">
+            <table style="width: 100%; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana;">
+                <thead>
+	                <tr>
+	                    <th style="text-align: left;" colspan="2">
+	                        Pokyny k platbě
+	                    </th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr>
+	                    <td style="width: 25%;">
+	                        Peněžní ústav:
+	                    </td>
+	                    <td>FIO banka</td>
+	                </tr>
+	                <tr>
+	                    <td style="width: 25%;">
+	                        Číslo účtu:
+	                    </td>
+	                    <td>2500878134/2010</td>
+	                </tr>
+	                <tr>
+	                    <td style="width: 25%;">
+	                        IBAN/SWIFT:
+	                    </td>
+	                    <td>CZ0620100000002500878134/ FIOBCZPPXXX</td>
+	                </tr>
+	                <tr>
+	                    <td style="width: 25%;">
+	                        Variabilní symbol:
+	                    </td>
+	                    <td>{$order->no}</td>
+	                </tr>
+				</tbody>
+			</table>
+		</td>
+	</tr>
+    {/if}
     <tr>
         <td style="padding: 30px 0 15px 30px; width: 50%;">
             <table style="width: 100%; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana;">
@@ -109,11 +144,11 @@
                     <td style="width: 25%;">
                         Jméno:
                     </td>
-                    <td>Lukáš</td>
+                    <td>{$order->name}</td>
                 </tr>
                 <tr>
                     <td>Příjmení:</td>
-                    <td>Záplata</td>
+                    <td>{$order->surname}</td>
                 </tr>
                 {if $order->company}
                     <tr>

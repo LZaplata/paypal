@@ -17,12 +17,12 @@
     {*</tr>*}
     <tr>
         <td style="padding: 30px 30px 0; font-weight: bold;" colspan="2">
-            Dobrý den,
+            Vážený zákazníku,
         </td>
     </tr>
     <tr>
         <td style="padding: 0 30px 30px;" colspan="2">
-            text
+            potvrzujeme přijetí Vaší platby. O expedici Vaší objednávky Vás budeme informovat. Děkujeme.
         </td>
     </tr>
     <tr>
@@ -75,23 +75,11 @@
     <tr>
         <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
     </tr>
-    {*<tr>*}
-    {*<td style="padding: 15px 30px 0; font-weight: bold" colspan="2">*}
-    {*Platba*}
-    {*</td>*}
-    {*</tr>*}
-    <tr>
-        <td style="padding: 15px 30px;" colspan="2">
-            další text
-        </td>
-    </tr>
     <tr>
         <td style="padding: 15px 30px;" colspan="2">
             <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$order->currency}</strong> <br>
-            <em style="color: #859182; font-weight: bold;">Číslo účtu:</em> <strong>35-123456789/8000</strong> <br>
-            <em style="color: #859182; font-weight: bold;">Variabilní symbol:</em> <strong>123456</strong>
         </td>
     </tr>
     <tr>
@@ -109,11 +97,11 @@
                     <td style="width: 25%;">
                         Jméno:
                     </td>
-                    <td>Lukáš</td>
+                    <td>{$order->name}</td>
                 </tr>
                 <tr>
                     <td>Příjmení:</td>
-                    <td>Záplata</td>
+                    <td>{$order->surname}</td>
                 </tr>
                 {if $order->company}
                     <tr>

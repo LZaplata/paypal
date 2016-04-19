@@ -11,8 +11,8 @@ development:
 			host: localhost
 			dbname: expresmenu
 			database: expresmenu
-			user: root
-			password:
+			user: zdolf
+			password: CreaTive5040
 		layouts:
 			1: 1 blok
 			2: 2 bloky vedle sebe
@@ -46,8 +46,8 @@ development:
 			3: 1
 			4: 0
 		contact:
-			name: Lukáš Záplata
-			email: zap@hucr.cz
+			name: Adam Valenta
+			email: valenta@hucr.cz
 		orderStates:
 			0: nevyřízeno
 			1: vyřizuje se
@@ -63,7 +63,7 @@ development:
 		content:
 			tree: false
 		host: "http://localhost/www.expresmenu.cz/www"
-		version: "2.3 beta"
+		version: "2.3"
 		tax: 21
 		discount: 1 # 1 = hierarchická, 2 = sčítací
 		deliveryDates:
