@@ -84,7 +84,7 @@
         <td style="padding: 15px 30px;" colspan="2">
 			<h3>Doručení Česká pošta</h3>
             <p>
-				Zboží Vám přiveze přepravce do 2 pracovních dnů. V sobotu, v neděli a o svátcích přepravní službazboží nedoručuje. Čas doručení se pohybuje v intervalu 8:00 – 18:00. Pokud Vás přepravce nezastihne na Vaší doručovací adrese, uloží Vám do poštovní schránky Výzvu o uložení zásilky na pobočce České pošty v místě Vašeho směrovacího čísla (PSČ). Úložní doba balíku na České poště je pouze 7 dní ! 
+				Zboží Vám přiveze přepravce do 2 pracovních dnů. V sobotu, v neděli a o svátcích přepravní služba zboží nedoručuje. Čas doručení se pohybuje v intervalu 8:00 – 18:00. Pokud Vás přepravce nezastihne na Vaší doručovací adrese, uloží Vám do poštovní schránky Výzvu o uložení zásilky na pobočce České pošty v místě Vašeho směrovacího čísla (PSČ). Úložní doba balíku na České poště je pouze 7 dní ! 
 			</p>
 
 			<h3>Doručení Intime</h3>
@@ -105,7 +105,7 @@
     </tr>
     <tr>
         <td style="padding: 15px 30px;" colspan="2">
-            <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
+            <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br/>
             <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$order->currency}</strong> <br>
         </td>

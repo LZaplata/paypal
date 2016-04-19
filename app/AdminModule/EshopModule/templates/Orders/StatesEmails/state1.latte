@@ -76,29 +76,57 @@
     <tr>
         <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
     </tr>
-    {*<tr>*}
-    {*<td style="padding: 15px 30px 0; font-weight: bold" colspan="2">*}
-    {*Platba*}
-    {*</td>*}
-    {*</tr>*}
-    {*
-    <tr>
-        <td style="padding: 15px 30px;" colspan="2">
-            další text
-        </td>
-    </tr>
-    *}
     <tr>
         <td style="padding: 15px 30px;" colspan="2">
             <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$order->currency}</strong> <br>
-            {if $paymentType == 4}
-            <em style="color: #859182; font-weight: bold;">Číslo účtu:</em> <strong>35-123456789/8000</strong> <br>
-            <em style="color: #859182; font-weight: bold;">Variabilní symbol:</em> <strong>123456</strong>
-            {/if}
         </td>
     </tr>
+    {if $order->payment_id == 4}
+    <tr>
+        <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
+    </tr>
+    <tr>
+        <td style="padding: 30px 0 15px 30px; width: 50%;">
+            <table style="width: 100%; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana;">
+                <thead>
+	                <tr>
+	                    <th style="text-align: left;" colspan="2">
+	                        Pokyny k platbě
+	                    </th>
+	                </tr>
+                </thead>
+                <tbody>
+	                <tr>
+	                    <td style="width: 25%;">
+	                        Peněžní ústav:
+	                    </td>
+	                    <td>FIO banka</td>
+	                </tr>
+	                <tr>
+	                    <td style="width: 25%;">
+	                        Číslo účtu:
+	                    </td>
+	                    <td>2500878134/2010</td>
+	                </tr>
+	                <tr>
+	                    <td style="width: 25%;">
+	                        IBAN/SWIFT:
+	                    </td>
+	                    <td>CZ0620100000002500878134/ FIOBCZPPXXX</td>
+	                </tr>
+	                <tr>
+	                    <td style="width: 25%;">
+	                        Variabilní symbol:
+	                    </td>
+	                    <td>{$order->no}</td>
+	                </tr>
+				</tbody>
+			</table>
+		</td>
+	</tr>
+    {/if}
     <tr>
         <td style="padding: 30px 0 15px 30px; width: 50%;">
             <table style="width: 100%; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana;">
