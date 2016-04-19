@@ -4,15 +4,15 @@
 		{foreach $products as $product}		
 			<SHOPITEM>
 				<ITEM_ID>{$product->products_id}</ITEM_ID>
-				<PRODUCTNAME>EXPRES MENU {$product->products->name}</PRODUCTNAME> {* upřesnit podle http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
-				<PRODUCT>EXPRES MENU {$product->products->name}</PRODUCT> {* jakýkoliv název i rozvětvený z eshopu *}
-				<DESCRIPTION>{!$product->products->text|striptags}</DESCRIPTION>
-				<URL>{plink //:FrontEshop:Products:view eshop => $eshop, category => $product->categories->url, cid => $product->categories_id, product => $product->products->url, pid => $product->products_id}</URL>
+				<PRODUCTNAME><![CDATA[EXPRES MENU {$product->products->name}]]></PRODUCTNAME> {* upřesnit podle http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
+				<PRODUCT><![CDATA[EXPRES MENU {$product->products->name}]]></PRODUCT> {* jakýkoliv název i rozvětvený z eshopu *}
+				<DESCRIPTION><![CDATA[{!$product->products->text|striptags}]]></DESCRIPTION>
+				<URL>{plink //:FrontEshop:Products:view eshop => 'e-shop', category => $product->categories->url, cid => $product->categories_id, product => $product->products->url, pid => $product->products_id}</URL>
 				{foreach $product->products->galleries->related("galleries_images")->order("highlight DESC, position ASC") as $image}				
 					{if $iterator->first}
-						<IMGURL>{$presenter->context->parameters["host"]}/files/galleries/originals/{hash("sha512", $image->id)}.{pathinfo($image->name, PATHINFO_EXTENSION)}</IMGURL>
+						<IMGURL>{$presenter->context->parameters["host"]}files/galleries/originals/{hash("sha512", $image->id)}.{pathinfo($image->name, PATHINFO_EXTENSION)}</IMGURL>
 					{else}
-						<IMGURL_ALTERNATIVE>{$presenter->context->parameters["host"]}/files/galleries/originals/{hash("sha512", $image->id)}.{pathinfo($image->name, PATHINFO_EXTENSION)}</IMGURL_ALTERNATIVE>
+						<IMGURL_ALTERNATIVE>{$presenter->context->parameters["host"]}files/galleries/originals/{hash("sha512", $image->id)}.{pathinfo($image->name, PATHINFO_EXTENSION)}</IMGURL_ALTERNATIVE>
 					{/if}
 				{/foreach}				
 				<VIDEO_URL></VIDEO_URL>
@@ -24,7 +24,7 @@
 						<VAL>{$property->val}</VAL>
 					</PARAM>
 				{/foreach}
-				<MANUFACTURER></MANUFACTURER>
+				<MANUFACTURER>Expres menu</MANUFACTURER>
 				<CATEGORYTEXT>{$product->categories->categories_heureka->name_full}</CATEGORYTEXT>
 				<EAN>{$product->products->ean}</EAN>
 				<ISBN></ISBN> {* kód určený pro jednoznačnou identifikaci knižních vydání *}
