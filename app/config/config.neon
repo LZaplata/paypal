@@ -166,6 +166,6 @@ production < development:
 			user: zap
 			password: ZaP2011
 		contact:
-			name: Jakub Janovec
-			email: jakub@expresmenu.cz
-		host: "http://pwww.expresmenu.cz/www"
+			name: Obchod Expresmenu
+			email: obchod@expresmenu.com
+		host: "http://www.expresmenu.cz/"
