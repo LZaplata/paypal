@@ -41,7 +41,9 @@
                 </p>
                 <p>
                     IČ: 25927078<br>
-                    DIČ: CZ25927078<br><br>
+                    DIČ: CZ25927078<br>
+                    Peněžní ústav: FIO banka<br>
+                    IBAN/SWIFT: CZ0620100000002500878134/ FIOBCZPPXXX <br><br>
                 </p>
                 <p>
                     Podnikatel zapsán v živ. rejstříku MÚ Trutnov
@@ -54,24 +56,28 @@
         <tbody>
         <tr>
             <td valign="top" style="color: #5d6975; display: inline-block; margin-right: 10px; width: 120px; text-transform: uppercase;">
+                objednáno dne <br>
+                způsob dopravy <br>
                 forma úhrady <br>
                 číslo účtu <br>
                 variabilní symbol
             </td>
             <td valign="top">
+                {$order->date|date:"j. n. Y"} <br>
+                {$transport->name} <br>
                 {$method->name} <br>
                 2500354111/2010 <br>
                 {str_pad($order->no, 5, 0, STR_PAD_LEFT)}
             </td>
             <td align="right" valign="top">
-                {*$order->date|date:"j. n. Y"} <br>
-                {date("j. n. Y", strtotime("+7 days", strtotime($order->date)))*}
-                {date("j. n. Y", strtotime("now"))}
+                {date("j. n. Y", strtotime("+14 days", strtotime($order->date)))} <br>
+                {$order->date|date:"j. n. Y"} <br>
+                {$order->date|date:"j. n. Y"}
             </td>
             <td align="right" valign="top"  style="text-align: right; color: #5d6975; display: inline-block; margin-left: 10px; width: 120px; text-transform: uppercase;">
-                {*}datum vystavení <br>
-                splatnost{*}
-                zaplaceno
+                datum splatnosti <br>
+                datum vystavení <br>
+                datum plnění
             </td>
         </tr>
         </tbody>
@@ -85,19 +91,19 @@
             <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: left; font-size: 0.8em;">
                 položka
             </th>
-            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em;">
+            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em; text-align: right;">
                 množství
             </th>
-            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em;">
+            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em; text-align: right;">
                 cena bez DPH
             </th>
-            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em;">
+            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em; text-align: right;">
                 DPH %
             </th>
-            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em;">
+            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em; text-align: right;">
                 DPH/ks
             </th>
-            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em;">
+            <th style="border-bottom: 1px solid #c1ced9; color: #5d6975; font-weight: normal; padding: 5px 20px; text-transform: uppercase; text-align: center; font-size: 0.8em; text-align: right;">
                 Součet
             </th>
         </tr>
@@ -105,11 +111,15 @@
         <tbody>
         {var $amount = 0}
         {var $price = 0}
+        {var $price15 = 0}
+        {var $price21 = 0}
         {var $tax = 0}
+        {var $tax15 = 0}
+        {var $tax21 = 0}
 
         {foreach $order->related("orders_products") as $product}
             <tr>
-                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: left; vertical-align: top; width: 44%;">
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: left; vertical-align: top; width: 33%;">
                     {$product->products->name}
                 </td>
                 <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em; width: 15%;">
@@ -117,34 +127,107 @@
 
                     {$product->amount}
                 </td>
-                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 13%;">
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 16%;">
                     {var $price += $product->price - ($product->price * ($product->products->tax / (100 + $product->products->tax)))}
+
+                    {if $product->products->tax == 15}
+                        {var $price15 += $product->price - ($product->price * ($product->products->tax / (100 + $product->products->tax)))}
+                    {else}
+                        {var $price21 += $product->price - ($product->price * ($product->products->tax / (100 + $product->products->tax)))}
+                    {/if}
 
                     {$product->price - ($product->price * ($product->products->tax / (100 + $product->products->tax)))|number:$decimals:",":" "} {$currency}
                 </td>
-                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 13%;">
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 10%;">
                     {$product->products->tax} %
                 </td>
-                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 12%;">
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 11%;">
                     {var $tax += $product->price * ($product->products->tax / (100 + $product->products->tax))}
+
+                    {if $product->products->tax == 15}
+                        {var $tax15 += $product->price * ($product->products->tax / (100 + $product->products->tax))}
+                    {else}
+                        {var $tax21 += $product->price * ($product->products->tax / (100 + $product->products->tax))}
+                    {/if}
 
                     {$product->price * ($product->products->tax / (100 + $product->products->tax))|number:$decimals:",":" "} {$currency}
                 </td>
-                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 16%;">
+                <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 14%;">
                     {$product->price|number:$decimals:",":" "} {$currency}
                 </td>
             </tr>
         {/foreach}
 
         <tr>
-            <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; font-size: 1.2em; padding: 20px; text-align: right;" colspan="4">
-                celkem <br>
-                DPH <br>
-                celkem s DPH
+            <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; padding: 20px 20px 5px; text-align: right;" colspan="3">
             </td>
-            <td style="background: #f5f5f5; border-top: 1px solid #5d6975; font-size: 1.2em; padding: 20px; text-align: right;">
-                {$price|number:$decimals:",":" "} {$currency} <br>
-                {$tax|number:$decimals:",":" "} {$currency} <br>
+            <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; padding: 20px 20px 5px; text-align: right; font-weight: bold;">
+                částka
+            </td>
+            <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; padding: 20px 20px 5px; text-align: right; font-weight: bold;">
+                DPH
+            </td>
+            <td style="text-transform: uppercase; background: #f5f5f5; border-top: 1px solid #5d6975; padding: 20px 20px 5px; text-align: right; font-weight: bold;">
+                součet
+            </td>
+        </tr>
+
+        <tr>
+            <td style="text-transform: uppercase; background: #f5f5f5; padding: 0 20px; text-align: right;" colspan="3">
+                celkem bez dph
+            </td>
+            <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
+                {$price|number:$decimals:",":" "} {$currency}
+            </td>
+            <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
+                {$tax|number:$decimals:",":" "} {$currency}
+            </td>
+            <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
+                {$order->price|number:$decimals:",":" "} {$currency}
+            </td>
+        </tr>
+
+        <tr>
+            <td style="text-transform: uppercase; background: #f5f5f5; padding: 0 20px; text-align: right;" colspan="3">
+                dph 21%
+            </td>
+            <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
+                {$price21|number:$decimals:",":" "} {$currency}
+            </td>
+            <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
+                {$tax21|number:$decimals:",":" "} {$currency}
+            </td>
+            <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
+                {($price21 + $tax21)|number:$decimals:",":" "} {$currency}
+            </td>
+        </tr>
+
+        <tr>
+            <td style="text-transform: uppercase; background: #f5f5f5; padding: 0 20px; text-align: right;" colspan="3">
+                dph 15%
+            </td>
+            <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
+                {$price15|number:$decimals:",":" "} {$currency}
+            </td>
+            <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
+                {$tax15|number:$decimals:",":" "} {$currency}
+            </td>
+            <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
+                {($price15 + $tax15)|number:$decimals:",":" "} {$currency}
+            </td>
+        </tr>
+
+        <tr>
+            <td style="text-transform: uppercase; background: #f5f5f5; padding: 5px 20px 20px; text-align: right; font-weight: bold;" colspan="3">
+                celkem k úhradě
+            </td>
+            <td style="text-transform: uppercase; background: #f5f5f5; padding: 5px 20px 20px; text-align: right; font-weight: bold;">
+
+            </td>
+            <td style="text-transform: uppercase; background: #f5f5f5; padding: 5px 20px 20px; text-align: right; font-weight: bold;">
+
+            </td>
+            <td style="background: #f5f5f5; padding: 5px 20px 20px; text-align: right; font-weight: bold;">
                 {$order->price|number:$decimals:",":" "} {$currency}
             </td>
         </tr>
@@ -153,7 +236,7 @@
 </main>
 
 <footer style="width: 86%; border-top: 1px solid #c1ced9; bottom: 0; color: #5d6975; height: 30px; padding: 8px 0; position: absolute; text-align: center;">
-    Petr Sogel, +420 603 145 729, info@expresmenu.com
+    POTRAVINY BEZ LEPKU. Vystavil: Hubáčková Alena, Email: provoz@expresmenu.com, Tel: 499 819 219
 </footer>
 </body>
 </html>
