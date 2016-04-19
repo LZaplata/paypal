@@ -640,7 +640,7 @@
 				"order" => $order,
 				"presenter" => $this,
 				"currency" => $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency,
-				"decimals" => $order->currency == 'czk' ? 0 : 2,
+				"decimals" => $order->currency == 'czk' ? 2 : 2,
 				"host" => $this->context->parameters['host'],
 				"transport" => $this->model->getShopMethods()->wherePrimary($order->transport_id)->fetch(),
 				"method" => $this->model->getShopMethods()->wherePrimary($order->payment_id)->fetch()

@@ -137,10 +137,10 @@
                         {var $price21 += $product->price - ($product->price * ($product->products->tax / (100 + $product->products->tax)))}
                     {/if}
 
-                    {$product->price - ($product->price * ($product->products->tax / (100 + $product->products->tax)))|number:$decimals:",":" "} {$currency}
+                    {$product->price - ($product->price * ($product->products->tax / (100 + $product->products->tax)))|number:$decimals:",":" "}
                 </td>
                 <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 10%;">
-                    {$product->products->tax} %
+                    {$product->products->tax}%
                 </td>
                 <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 11%;">
                     {var $tax += $product->price * ($product->products->tax / (100 + $product->products->tax))}
@@ -151,10 +151,10 @@
                         {var $tax21 += $product->price * ($product->products->tax / (100 + $product->products->tax))}
                     {/if}
 
-                    {$product->price * ($product->products->tax / (100 + $product->products->tax))|number:$decimals:",":" "} {$currency}
+                    {$product->price * ($product->products->tax / (100 + $product->products->tax))|number:$decimals:",":" "}
                 </td>
                 <td style="{if $iterator->odd}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 14%;">
-                    {$product->price|number:$decimals:",":" "} {$currency}
+                    {$product->price|number:$decimals:",":" "}
                 </td>
             </tr>
 
@@ -162,23 +162,29 @@
         {/foreach}
 
         <tr>
-            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: left; vertical-align: top; width: 33%;">
+            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: left; vertical-align: top; width: 30%;">
                 Poštovné
             </td>
             <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; font-size: 1.2em; width: 15%;">
                 1
             </td>
             <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 16%;">
-                {$order->transport - ($order->transport * (15 / 115))|number:$decimals:",":" "} {$currency}
+                {var $price += $order->transport - ($order->transport * (15 / 115))}
+                {var $price15 += $order->transport - ($order->transport * (15 / 115))}
+
+                {$order->transport - ($order->transport * (15 / 115))|number:$decimals:",":" "}
             </td>
-            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 10%;">
+            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 12%;">
                 15%
             </td>
-            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 11%;">
-                {$order->transport * (15 / 115)|number:$decimals:",":" "} {$currency}
+            <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 12%;">
+                {var $tax += $order->transport * (15 / 115)}
+                {var $tax15 += $order->transport * (15 / 115)}
+
+                {$order->transport * (15 / 115)|number:$decimals:",":" "}
             </td>
             <td style="{if $i % 2 == 0}background: #f5f5f5;{/if} padding: 20px; text-align: right; width: 14%;">
-                {$order->transport|number:$decimals:",":" "} {$currency}
+                {$order->transport|number:$decimals:",":" "}
             </td>
         </tr>
 
@@ -201,13 +207,13 @@
                 celkem bez dph
             </td>
             <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
-                {$price|number:$decimals:",":" "} {$currency}
+                {$price|number:$decimals:",":" "}
             </td>
             <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
-                {$tax|number:$decimals:",":" "} {$currency}
+                {$tax|number:$decimals:",":" "}
             </td>
             <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
-                {$order->price|number:$decimals:",":" "} {$currency}
+                {$order->price + $order->transport|number:$decimals:",":" "}
             </td>
         </tr>
 
@@ -216,13 +222,13 @@
                 dph 21%
             </td>
             <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
-                {$price21|number:$decimals:",":" "} {$currency}
+                {$price21|number:$decimals:",":" "}
             </td>
             <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
-                {$tax21|number:$decimals:",":" "} {$currency}
+                {$tax21|number:$decimals:",":" "}
             </td>
             <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
-                {($price21 + $tax21)|number:$decimals:",":" "} {$currency}
+                {($price21 + $tax21)|number:$decimals:",":" "}
             </td>
         </tr>
 
@@ -231,13 +237,13 @@
                 dph 15%
             </td>
             <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
-                {$price15|number:$decimals:",":" "} {$currency}
+                {$price15|number:$decimals:",":" "}
             </td>
             <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
-                {$tax15|number:$decimals:",":" "} {$currency}
+                {$tax15|number:$decimals:",":" "}
             </td>
             <td style="background: #f5f5f5; padding: 0 20px; text-align: right;">
-                {($price15 + $tax15)|number:$decimals:",":" "} {$currency}
+                {($price15 + $tax15)|number:$decimals:",":" "}
             </td>
         </tr>
 
@@ -252,7 +258,7 @@
 
             </td>
             <td style="background: #f5f5f5; padding: 5px 20px 20px; text-align: right; font-weight: bold;">
-                {$order->price|number:$decimals:",":" "} {$currency}
+                {$order->price + $order->transport|number:$decimals:",":" "} {$currency}
             </td>
         </tr>
         </tbody>
