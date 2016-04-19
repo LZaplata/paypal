@@ -11,8 +11,8 @@ development:
 			host: localhost
 			dbname: expresmenu
 			database: expresmenu
-			user: root
-			password:
+			user: zdolf
+			password: CreaTive5040
 		layouts:
 			1: 1 blok
 			2: 2 bloky vedle sebe
