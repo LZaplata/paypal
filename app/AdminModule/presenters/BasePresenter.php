@@ -26,6 +26,8 @@
 
 			if($this->settings->seo_assist || $this->settings->context_help) {
 				$this->template->rightbar = true;
+			} else {
+				$this->template->rightbar = false;
 			}
 		}
 
