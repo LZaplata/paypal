@@ -512,7 +512,7 @@
 		public function createComponentWebPay () {
 			$wp = new WebPay();
 
-			$wp->setUrl('https://test.3dsecure.gpwebpay.com/kb/order.do');
+			$wp->setUrl('https://3dsecure.gpwebpay.com/kb/order.do');
 
 			$wp->setMerchantNumber(9672957009);
 
@@ -522,7 +522,7 @@
 
 			$wp->setPrivateKey(APP_DIR.'/FrontModule/components/WebPay/keys/private_key.pem', 'Exmenu5');
 
-			$wp->setRedirectUrl('http://vyvoj.hucr.cz/www.expresmenu.cz/www/e-shop/order/payment');
+			$wp->setRedirectUrl('http://www.expresmenu.cz/www/e-shop/order/payment');
 
 			return $wp;
 		}

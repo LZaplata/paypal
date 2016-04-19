@@ -168,4 +168,4 @@ production < development:
 		contact:
 			name: Jakub Janovec
 			email: jakub@expresmenu.cz
-		host: "http://vyvoj.hucr.cz/www.expresmenu.cz/www"
+		host: "http://www.expresmenu.cz/www"
