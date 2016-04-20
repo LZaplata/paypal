@@ -98,8 +98,8 @@
 				$this->redirect('Order:cart');
 			}
 
-			$count = count($this->model->getOrders()->where('state >= ?', 0)) + 1;
-			$no = str_pad($count, 5, 0, STR_PAD_LEFT);
+			$count = count($this->model->getOrders()->where('state >= ?', 0)) + 20534;
+			$no = date('y').str_pad($count, 6, 0, STR_PAD_LEFT);
 
 			if ($this->user->loggedIn) {
 				if ($this['cart']->tempOrder->transport_id == null) {
