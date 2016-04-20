@@ -17,7 +17,7 @@
     {*</tr>*}
     <tr>
         <td style="padding: 30px 30px 0; font-weight: bold;" colspan="2">
-             Vážený zákazníku,
+             Vážený zákazníku,<br/><br/>
         </td>
     </tr>
     <tr>
@@ -37,18 +37,18 @@
         <td style="padding: 0 30px 15px;" colspan="2">
             <table style="width: 100%; border-spacing: 0; border: none; font-size: 12px; font-family: sans-serif, arial, verdana;">
                 <thead>
-                <th style="color: #859182; text-align: left; width: 40%;">
-                    <em>Název</em>
-                </th>
-                <th style="color: #859182; text-align: left; width: 20%;">
-                    <em>Cena/MJ</em>
-                </th>
-                <th style="color: #859182; text-align: left; width: 20%;">
-                    <em>Množství</em>
-                </th>
-                <th style="color: #859182; text-align: left; width: 20%;">
-                    <em>Celkem</em>
-                </th>
+	                <th style="color: #859182; text-align: left; width: 40%;">
+	                    <em>Název</em>
+	                </th>
+	                <th style="color: #859182; text-align: left; width: 20%;">
+	                    <em>Cena/MJ</em>
+	                </th>
+	                <th style="color: #859182; text-align: left; width: 20%;">
+	                    <em>Množství</em>
+	                </th>
+	                <th style="color: #859182; text-align: left; width: 20%;">
+	                    <em>Celkem</em>
+	                </th>
                 </thead>
                 <tbody>
                 {var $name = "name".$lang}
@@ -75,23 +75,11 @@
     <tr>
         <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
     </tr>
-    {*<tr>*}
-    {*<td style="padding: 15px 30px 0; font-weight: bold" colspan="2">*}
-    {*Platba*}
-    {*</td>*}
-    {*</tr>*}
-    <tr>
-        <td style="padding: 15px 30px;" colspan="2">
-            další text
-        </td>
-    </tr>
     <tr>
         <td style="padding: 15px 30px;" colspan="2">
             <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
             <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$order->currency}</strong> <br>
-            <em style="color: #859182; font-weight: bold;">Číslo účtu:</em> <strong>35-123456789/8000</strong> <br>
-            <em style="color: #859182; font-weight: bold;">Variabilní symbol:</em> <strong>123456</strong>
         </td>
     </tr>
     <tr>
@@ -243,7 +231,7 @@
             <strong>EXPRES MENU s.r.o.</strong><br>
             Lomní 355, 541 01 Trutnov <br>
             <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a><br>
-            +420 123 456 789
+            +420 499 819 219
         </td>
     </tr>
 </table>
