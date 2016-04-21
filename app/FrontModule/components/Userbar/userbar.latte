@@ -7,7 +7,7 @@
 		<strong>{if !$user->loggedIn}{_'Můj účet'}{else}{$user->identity->email}{/if}</strong> {*<span class="caret"></span>*}
 	</a>
 	
-	<div id="" class="dropdown-menu login-dp">
+	<div class="dropdown-menu login-dp">
 		<div class="row">
 			<div class="col-sm-12">
 				{if !$user->loggedIn}

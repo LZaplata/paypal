@@ -40,7 +40,7 @@
 						<ul class="list-unstyled">
 							{foreach $images as $image}
 								<li class="col-lg-3 col-sm-6">
-									<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}" rel="{$image->galleries}">
+									<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}" rel="g{$image->galleries}">
 										<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
 									</a>
 								</li>

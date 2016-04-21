@@ -22,7 +22,7 @@
 	$configurator->setTempDirectory(__DIR__ . '/../temp');
 
 	// Enable Nette Debugger for error visualisation & logging
-	$configurator->setDebugMode(false);
+	$configurator->setDebugMode('194.12.38.38,188.120.212.32');
 	Debugger::enable(Debugger::DETECT, __DIR__ . '/../log');
 
 	// Enable RobotLoader - this will load all classes automatically
