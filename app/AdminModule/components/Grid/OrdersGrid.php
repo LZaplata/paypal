@@ -22,18 +22,21 @@
 
 			$self = $this;
 
-			$this->addColumn('no', '#', '60px')
+			$this->addColumn('no', '#')
 				->setTextFilter();
 
 			$this->addColumn('email', 'E-mail')
 				->setCellRenderer(function($row){return "font-size: 0.9em;"; })
 				->setTextFilter();
 
-			$this->addColumn('surname', 'Příjmení')
-				->setTextFilter();
+			$this->addColumn('surname', 'Jméno / firma')
+				->setTextFilter()
+				->setRenderer(function ($row) use ($self) {
+					return $row['company'] ? $row['company'] : $row['surname'].' '.$row['name'];
+				});
 
-			$this->addColumn('name', 'Jméno')
-				->setTextFilter();
+// 			$this->addColumn('name', 'Jméno')
+// 				->setTextFilter();
 
 			$this->addColumn('date', 'Datum')
 				->setDateFilter()

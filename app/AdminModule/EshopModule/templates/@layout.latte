@@ -1,6 +1,7 @@
 {extends ../../templates/@layout.latte}
 
 {block #content}
+	{block #modulenav}
 	<div class="pull-left menu">
 		<ul class="nav nav-pills nav-stacked">
 			<li class="text-uppercase">
@@ -63,8 +64,9 @@
 			</li>
 		</ul>
 	</div>
+	{/block}
 	
-	<div class="commonpage">
+	<div class="{block #pagetype}commonpage{/block}">
 		<div class="col-sm-12 {if $rightbar}col-md-12 col-lg-9{/if}">
 			{control breadcrumb}
 		
