@@ -6,7 +6,9 @@
 			
 			<div class="item {if $iterator->first}active{/if}">
 				{if $image && $thumb}
+					{if $article->link}<a href="{$article->link}">{/if}
 					<img src="{$basePath}/files/galleries/{$thumb}_g{$article->galleries}-{$image->name}" alt="{$image->title}" />
+					{if $article->link}</a>{/if}
 				{/if}
 				
 				<div class="carousel-caption">					
