@@ -350,6 +350,9 @@
 
 			$form->addText('delivery_psc', 'PSČ:');
 
+			$form->addGroup("Doplňující údaje");
+			$form->addTextArea("text", "Poznámka:");
+
 			$form->addGroup()
 				->setOption('container', 'fieldset class="submit"');
 			$form->addSubmit('submit','Upravit');
