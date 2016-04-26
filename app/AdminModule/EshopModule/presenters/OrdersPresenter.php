@@ -34,6 +34,8 @@
 		public $product;
 		public $category;
 		public $properties;
+		public $transports;
+		public $payments;
 
 		public function actionDefault () {
 			$this->urlID = 0;
@@ -51,6 +53,9 @@
 			$this->getOrderInfos($id);
 			$this->getComponent('contact')->setDefaults($this->order);
 			$this->products = $this->model->getProducts()->where('visibility', 1)->where('trash', 0)->where('pid IS NULL')->fetchPairs('id', 'name');
+
+			$this->transports = $this->model->getShopMethodsRelations()->select('shop_methods.*')->fetchPairs('id', 'name');
+			$this->payments = $this->context->database->query("SELECT shop_methods.id AS id, name FROM shop_methods LEFT JOIN shop_methods_relations ON shop_methods.id = shop_methods_relations.id_shop_methods WHERE type IN (?)", array(1, 2, 4))->fetchPairs('id', 'name');
 
 			if (!$this['products']->getParameter('order') && !$this->isAjax()) {
 				$this->redirect('this', array('products-order' => 'name DESC','orderProducts-order' => 'amount DESC'));
@@ -529,5 +534,62 @@
 			}
 
 			return implode(', ', $properties);
+		}
+
+		public function createComponentTransport () {
+			$this->getZasilkovnaBranches();
+
+			$form = new Form();
+
+			$form->getElementPrototype()->class('form-horizontal ajax');
+
+			$form->addGroup();
+			$form->addRadioList('transport_id', 'Doprava', $this->transports)
+				->setRequired('Vyberte druh přepravy!')
+				->getLabelPrototype()->class('transport');
+
+			$form->addSelect('zasilkovna', null, $this->zasilkovnaBranches)
+				->setPrompt('--Vyberte pobočku--');
+
+			$form->addRadioList('payment_id', 'Platba', $this->payments)
+				->setRequired('Vyberte druh platby')
+				->getLabelPrototype()->class('payment');
+
+			$form->addGroup()
+				->setOption('container', 'fieldset class="submit"');
+			$form->addSubmit('edit','Upravit');
+
+			$form->onSuccess[] = $this->changeTransport;
+
+			$form->setRenderer(new BootstrapFormRenderer());
+
+			$form->setValues($this->order);
+
+			return $form;
+		}
+
+		public function changeTransport($form, $values)
+		{
+			$relation = $this->model->getShopMethodsRelations()->where('shop_methods_id', $values['transport_id'])->where('id_shop_methods', $values['payment_id'])->fetch();
+			$values["transport"] = $relation->price;
+
+			$this->order->update($values);
+
+			$this->redrawControl("price");
+		}
+
+		public function getZasilkovnaBranches () {
+			if (($key = $this->context->parameters['zasilkovna']['apiKey'])) {
+				$xml = simplexml_load_file('http://www.zasilkovna.cz/api/v3/'.$key.'/branch.xml');
+				$branches = array();
+
+				foreach ($xml->branches->branch as $branch) {
+					$branchName = (string) $branch->nameStreet;
+
+					if ((string) $branch->country == "sk") {
+						$this->zasilkovnaBranches[$branchName] = $branchName;
+					}
+				}
+			}
 		}
 	}
