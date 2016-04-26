@@ -25,6 +25,14 @@
                     {$order->email} <br>
                     {$order->phone} <br><br>
                 </p>
+                <p style="color: #5d6975; text-transform: uppercase;">
+                    doručovací údaje
+                </p>
+                <p>
+                    {$order->delivery_name?: $order->name} {$order->delivery_surname?: $order->surname} <br>
+                    {$order->delivery_street?: $order->street} <br>
+                    {$order->delivery_psc?: $order->psc} {$order->delivery_city?: $order->city} <br><br>
+                </p>
                 {*}<p>
                     IČ: 76430103<br>
                     neptátce DPH
@@ -46,7 +54,7 @@
                     IBAN/SWIFT: CZ0620100000002500878134/ FIOBCZPPXXX <br><br>
                 </p>
                 <p>
-                    Podnikatel zapsán v živ. rejstříku MÚ Trutnov
+                    Zápis u OR KS Hradec Králové, odd. C, vl. 15009
                 </p>
             </td>
         </tr>
