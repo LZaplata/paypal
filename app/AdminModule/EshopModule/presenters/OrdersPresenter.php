@@ -40,7 +40,7 @@
 			$this->orders = $this->model->getOrders()->where('state > ?', -1)->where('trash', 0);
 
 			if (!$this['grid']->getParameter('order') && !$this->isAjax()) {
-				$this->redirect('this', array('grid-order' => 'date DESC'));
+				$this->redirect('this', array('grid-order' => 'no DESC'));
 			}
 		}
 
