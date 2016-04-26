@@ -166,17 +166,17 @@
 		<tbody>
 			<tr>
 				<th align="left">Zboží:</th>
-				<td>{$order->price / $order->rate|number:$decimals:",":" "} {$order->currency}</td>
+				<td>{$order->price / $order->rate|number:$decimals:",":" "} {$currency}</td>
 			</tr>
 			<tr>
 				<th align="left">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</th>
-				<td>{$order->transport / $order->rate|number:$decimals:",":" "} {$order->currency}</td>
+				<td>{$order->transport / $order->rate|number:$decimals:",":" "} {$currency}</td>
 			</tr>
 			<tr>
 				<th></th>
 				<td style="font-size: 20px;">
 					<strong>
-						{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$order->currency}	
+						{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$currency}	
 					</strong>
 				</td>
 			</tr>

@@ -66,9 +66,9 @@
 	                                <em>{$presenter->getProductProps($product->products->id)}</em>
 	                            </small>
 	                        </td>
-	                        <td>{$price = $product->price / $order->rate|number:$decimals:",":" "} {$order->currency}</td>
+	                        <td>{$price = $product->price / $order->rate|number:$decimals:",":" "} {$currency}</td>
 	                        <td>{$product->amount}</td>
-	                        <td>{$price * $product->amount|number:$decimals:",":" "} {$order->currency}</td>
+	                        <td>{$price * $product->amount|number:$decimals:",":" "} {$currency}</td>
 	                    </tr>
 	                {/foreach}
                 </tbody>
@@ -80,9 +80,9 @@
     </tr>
     <tr>
         <td style="padding: 15px 30px;" colspan="2">
-            <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
-            <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$order->currency} <br>
-            <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$order->currency}</strong> <br>
+            <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$currency} <br>
+            <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$currency} <br>
+            <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$currency}</strong> <br>
         </td>
     </tr>
     {if $order->payment_id == 4}

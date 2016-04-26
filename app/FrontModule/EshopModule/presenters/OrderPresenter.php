@@ -563,6 +563,7 @@
 			$template->paymentType = $paymentType->type;
 			$template->presenter = $this;
 			$template->host = $this->context->parameters['host'];
+			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
 			$template->decimals = $this->currency == 'czk' ? 0 : 2;
 			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
 			$template->lang = $this->lang;
@@ -584,6 +585,7 @@
 			$template->order = $order;
 			$template->presenter = $this;
 			$template->host = $this->context->parameters['host'];
+			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
 			$template->decimals = $this->currency == 'czk' ? 0 : 2;
 			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
 			$template->lang = $this->lang;
