@@ -368,7 +368,9 @@
 				->setRequired('Vyplňte město!');
 
 			$form->addText('psc', 'PSČ:')
-				->setRequired('Vyplňte PSČ!');
+				->setRequired('Vyplňte PSČ!')
+				->addRule(Form::LENGTH, "PSČ musí obsahovat 5 čísel", 5)
+				->addRule(Form::NUMERIC, "PSČ musí obsahovat pouze čísla");
 
 			$form->addText('phone', 'Telefon:')
 				->setRequired('Vyplňte telefon!');
