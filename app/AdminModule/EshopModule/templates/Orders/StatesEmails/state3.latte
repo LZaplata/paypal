@@ -57,7 +57,7 @@
                 {foreach $order->related("orders_products") as $product}
                     <tr>
                         <td>
-                            {$product->products->$name ?: ($product->products->$defaultName ?: $product->products->name)} {if $product->products->meals}(porce - {$product->products->meals}){/if}<br>
+                            {$product->products->$name ?: ($product->products->$defaultName ?: $product->products->name)} {if $product->products->meals}({$product->products->meals}p){/if}<br>
 
                             <small>
                                 <em>{$presenter->getProductProps($product->products->id)}</em>
