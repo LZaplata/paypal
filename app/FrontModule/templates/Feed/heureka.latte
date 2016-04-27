@@ -4,8 +4,8 @@
 		{foreach $products as $product}		
 			<SHOPITEM>
 				<ITEM_ID>{$product->products_id}</ITEM_ID>
-				<PRODUCTNAME><![CDATA[EXPRES MENU {$product->products->name} {$product->weight}]]></PRODUCTNAME> {* upřesnit podle http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
-				<PRODUCT><![CDATA[EXPRES MENU {$product->products->name} {$product->weight}]]></PRODUCT> {* jakýkoliv název i rozvětvený z eshopu *}
+				<PRODUCTNAME><![CDATA[EXPRES MENU {$product->products->name} {$product->products->weight}]]></PRODUCTNAME> {* upřesnit podle http://sluzby.heureka.cz/napoveda/xml-feed/#zpracovani-xml-souboru *}
+				<PRODUCT><![CDATA[EXPRES MENU {$product->products->name} {$product->products->weight}]]></PRODUCT> {* jakýkoliv název i rozvětvený z eshopu *}
 				<DESCRIPTION><![CDATA[{!$product->products->text|striptags}]]></DESCRIPTION>
 				<URL>{plink //:FrontEshop:Products:view eshop => 'e-shop', category => $product->categories->url, cid => $product->categories_id, product => $product->products->url, pid => $product->products_id}</URL>
 				{foreach $product->products->galleries->related("galleries_images")->order("highlight DESC, position ASC") as $image}				
