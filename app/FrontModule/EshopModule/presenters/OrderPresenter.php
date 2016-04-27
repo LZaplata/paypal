@@ -443,6 +443,7 @@
 
 				if (!$this->user->identity->street) {
 					unset($values['text']);
+					unset($values["partner_id"]);
 
 					$data = array_diff((array)$values, $user->toArray());
 
