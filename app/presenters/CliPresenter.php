@@ -79,6 +79,10 @@ use Nette\Utils\Strings;
 			foreach ($orders as $order) {
 				$file = WWW_DIR.'/pohoda/orders/'.$order->no.'.xml';
 
+				if ($order->partner_id) {
+					$file = WWW_DIR.'/pohoda/orders/fta/'.$order->no.'.xml';
+				}
+
 				if (!file_exists($file)) {
 					$xml = new Engine();
 					$params = array(
