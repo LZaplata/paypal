@@ -11,11 +11,13 @@
 			{_'kontaktní údaje'}
 		</a>
 	</li>
-	<li class="level third {if !$order || $order->name == null}disabled{/if} {ifCurrent Order:transport}active{/ifCurrent}">
-		<a href="{plink :FrontEshop:Order:transport}" class="h4 no-margin">
-			{_'doprava a platba'}
-		</a>
-	</li>
+	{if !$presenter->partner}
+		<li class="level third {if !$order || $order->name == null}disabled{/if} {ifCurrent Order:transport}active{/ifCurrent}">
+			<a href="{plink :FrontEshop:Order:transport}" class="h4 no-margin">
+				{_'doprava a platba'}
+			</a>
+		</li>
+	{/if}
 	<li class="level fourth {if !$order || $order->transport_id == null || $order->name == null}disabled{/if} {ifCurrent Order:summary}active{/ifCurrent}">
 		<a href="{plink :FrontEshop:Order:summary}" class="h4 no-margin">
 			{_'souhrn'}

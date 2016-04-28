@@ -67,6 +67,26 @@
 				}
 			}
 
+			if ($this->partner) {
+				$relation = $this->model->getShopMethodsRelations()->wherePrimary(19)->fetch();
+				$values = array();
+				$values["transport_id"] = $relation->shop_methods_id;
+				$values["payment_id"] = $relation->id_shop_methods;
+				$values["transport"] = $relation->price;
+
+				if ($this->user->loggedIn) {
+					$this['cart']->tempOrder->update($values);
+					$this['cart']->getOrder();
+				}
+				else {
+					foreach ($values as $key => $value) {
+						$this['cart']->order->$key = $value;
+					}
+				}
+
+				$this->redirect("Order:summary");
+			}
+
 			$this->transports = $this->model->getShopMethodsRelations()->select('shop_methods.*')->fetchPairs('id', 'name');
 			$this->methodPrices = $this->model->getShopMethods()->select('shop_methods.*')->fetchPairs('id', 'price');
 			$this->payments = $this->context->database->query("SELECT shop_methods.id AS id, name FROM shop_methods LEFT JOIN shop_methods_relations ON shop_methods.id = shop_methods_relations.id_shop_methods WHERE type IN (?)", array(1, 2, 4))->fetchPairs('id', 'name');
