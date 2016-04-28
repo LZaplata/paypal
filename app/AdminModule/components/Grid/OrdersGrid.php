@@ -48,7 +48,7 @@
 				->setTextFilter()
 				->setCellRenderer(function($row){return "text-align: right; font-size: 0.9em;"; })
 				->setRenderer(function ($row) use ($self) {
-					return number_format($row['price'] / $row['rate'], $row['currency'] == 'czk' ? 0 : 2, ',', ' ').' '.($row['currency'] == 'czk' ? 'Kč' : $row['currency']);
+					return number_format(($row['price'] + $row["transport"]) / $row['rate'], $row['currency'] == 'czk' ? 0 : 2, ',', ' ').' '.($row['currency'] == 'czk' ? 'Kč' : $row['currency']);
 				});
 
 			$this->addColumn('state', 'Stav', '150px')
