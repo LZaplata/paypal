@@ -67,7 +67,7 @@
 				}
 			}
 
-			if ($this->partner) {
+			if ($this->partner->id) {
 				$relation = $this->model->getShopMethodsRelations()->wherePrimary(19)->fetch();
 				$values = array();
 				$values["transport_id"] = $relation->shop_methods_id;
