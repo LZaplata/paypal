@@ -82,6 +82,13 @@
 				<ord:orderSummary>
 					<ord:roundingDocument>up2one</ord:roundingDocument>
 				</ord:orderSummary>
+				{if $order->partner_id}
+					<ord:extraElements>
+						<typ:sBeg>{$order->beg}</typ:sBeg>
+						<typ:sReseller>{$order->partner_id}</typ:sReseller>
+						<typ:sFta>{$order->fta}</typ:sFta>
+					<ord:extraElements>
+				{/if}
 			</ord:order>
 		</dat:dataPackItem>
 	</dat:dataPack>
