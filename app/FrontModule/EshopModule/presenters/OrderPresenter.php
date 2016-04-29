@@ -67,6 +67,8 @@
 				}
 			}
 
+			$shopMethodsRelations = $this->model->getShopMethodsRelations()->select('shop_methods.*');
+
 			if ($this->partner->id) {
 				$relation = $this->model->getShopMethodsRelations()->wherePrimary(19)->fetch();
 				$values = array();
@@ -85,9 +87,11 @@
 				}
 
 				$this->redirect("Order:summary");
+			} else {
+				$shopMethodsRelations = $shopMethodsRelations->where('shop_methods_relations.id != 19');
 			}
 
-			$this->transports = $this->model->getShopMethodsRelations()->select('shop_methods.*')->fetchPairs('id', 'name');
+			$this->transports = $shopMethodsRelations->fetchPairs('id', 'name');
 			$this->methodPrices = $this->model->getShopMethods()->select('shop_methods.*')->fetchPairs('id', 'price');
 			$this->payments = $this->context->database->query("SELECT shop_methods.id AS id, name FROM shop_methods LEFT JOIN shop_methods_relations ON shop_methods.id = shop_methods_relations.id_shop_methods WHERE type IN (?)", array(1, 2, 4))->fetchPairs('id', 'name');
 			$values = $_GET ? $_GET : null;
