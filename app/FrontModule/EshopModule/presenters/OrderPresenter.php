@@ -448,6 +448,8 @@
 
 			if (isset($this->partner->id)) {
 				$form->addHidden("partner_id", $this->partner->id);
+				$form->addHidden("beg", $this->partner->beg);
+				$form->addHidden("fta", $this->partner->fta);
 
 				$form->setValues($this->context->parameters["partners"][$this->partner->id]);
 			}
@@ -468,6 +470,8 @@
 				if (!$this->user->identity->street) {
 					unset($values['text']);
 					unset($values["partner_id"]);
+					unset($values["beg"]);
+					unset($values["fta"]);
 
 					$data = array_diff((array)$values, $user->toArray());
 

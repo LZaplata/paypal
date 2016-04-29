@@ -101,6 +101,8 @@
 
 			if (($partner = $this->getParameter("partner"))) {
 				$this->partner->id = $partner;
+				$this->partner->beg = $this->getParameter("beg");
+				$this->partner->fta = $this->getParameter("fta");
 			}
 		}
 
