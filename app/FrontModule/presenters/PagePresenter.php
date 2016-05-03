@@ -81,6 +81,7 @@ use FrontEshopModule\Userbar;
 
 					if ($art = $this->model->getArticles()->where($article)->fetch()) {
 						$article["lat"] = $item["lat"];
+						$article["pid"] = $art->id;
 
 						$art->update($article);
 					} else {
