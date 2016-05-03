@@ -1,6 +1,9 @@
 <?php
 	namespace FrontModule;
 
+	use Nette\Utils\Finder;
+	use Nette\Utils\Json;
+	use Nette\Utils\Strings;
 	use WebLoader\Filter\LessFilter;
 
 	use WebLoader\Nette\JavaScriptLoader;
@@ -64,6 +67,27 @@ use FrontEshopModule\Userbar;
 // 			$this->category = isset($this->params['cid']) ? $this->params['cid'] : null;
 			$this->tag = isset($this->params['tid']) ? $this->params['tid'] : null;
 // 			$this->product = isset($this->params['pid']) ? $this->params['pid'] : null;
+
+			foreach (Finder::find("*.json")->in(WWW_DIR) as $file) {
+				$json = Json::decode(file_get_contents($file), Json::FORCE_ARRAY);
+
+				foreach ($json as $item) {
+					$article = array();
+					$article["name"] = $article["title"] = $article["keywords"] = $article["meta_description"] = $item["Title"];
+					$article["url"] = Strings::webalize($article["name"]);
+					$article["text"] = $item["Content"];
+					$article["lat"] = $item["lag"];
+					$article["lng"] = $item["lng"];
+					$article["sections_id"] = 7;
+					$article["galleries_id"] = $this->model->getGalleries()->insert(array());
+					$article["filestores_id"] = $this->model->getFilestores()->insert(array());
+					$article["date"] = $article["created"] = date("Y-m-d H:i:s");
+
+					if (!$this->model->getArticles()->where($article)->fetch()) {
+						$this->model->getArticles()->insert($article);
+					}
+				}
+			}
 		}
 		
 		public function actionDefault() {
