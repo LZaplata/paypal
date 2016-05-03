@@ -78,19 +78,13 @@ use FrontEshopModule\Userbar;
 					$article["text"] = $item["Content"];
 					$article["lng"] = $item["lng"];
 					$article["sections_id"] = 8;
+					$article["lat"] = $item["lat"];
+//					$article["pid"] = $art->id;
+					$article["galleries_id"] = $this->model->getGalleries()->insert(array());
+					$article["filestores_id"] = $this->model->getFilestores()->insert(array());
+					$article["date"] = $article["created"] = date("Y-m-d H:i:s");
 
-					if ($art = $this->model->getArticles()->where($article)->fetch()) {
-						$article["lat"] = $item["lat"];
-						$article["pid"] = $art->id;
-
-						$art->update($article);
-					} else {
-						$article["galleries_id"] = $this->model->getGalleries()->insert(array());
-						$article["filestores_id"] = $this->model->getFilestores()->insert(array());
-						$article["date"] = $article["created"] = date("Y-m-d H:i:s");
-
-						$this->model->getArticles()->insert($article);
-					}
+					$this->model->getArticles()->insert($article);
 				}
 			}
 		}
