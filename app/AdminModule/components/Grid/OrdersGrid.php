@@ -1,6 +1,7 @@
 <?php
 	namespace AdminModule;
 
+	use Nette\Utils\Strings;
 	use NiftyGrid\DataSource\NDataSource;
 
 	use Nette\Utils\Html;
@@ -55,7 +56,11 @@
 				->setSelectFilter($self->presenter->orderStates)
 				->setSelectEditable($self->presenter->orderStates)
 				->setRenderer(function ($row) use ($self) {
-					return $self->presenter->orderStates[$row['state']];
+					if ($row["state"] == 0) {
+						return Html::el("strong")->addAttributes(array("class" => "text-danger"))->setText($self->presenter->orderStates[$row["state"]]);
+					} else {
+						return $self->presenter->orderStates[$row['state']];
+					}
 				});
 
 			$this->setTemplate(APP_DIR.'/AdminModule/templates/Grid/grid.latte');
