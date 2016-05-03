@@ -463,6 +463,9 @@
 			$values = $button->parent->values;
 
 			if ($this->user->loggedIn) {
+				unset($values["beg"]);
+				unset($values["fta"]);
+
 				$this['cart']->tempOrder->update($values);
 
 				$user = $this->model->getUsers()->wherePrimary($this->user->id)->fetch();
@@ -470,8 +473,6 @@
 				if (!$this->user->identity->street) {
 					unset($values['text']);
 					unset($values["partner_id"]);
-					unset($values["beg"]);
-					unset($values["fta"]);
 
 					$data = array_diff((array)$values, $user->toArray());
 
