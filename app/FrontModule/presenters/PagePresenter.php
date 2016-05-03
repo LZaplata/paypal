@@ -87,6 +87,10 @@ use FrontEshopModule\Userbar;
 //					$this->model->getArticles()->insert($article);
 //				}
 //			}
+
+			foreach ($this->model->getArticles()->where("sections_id", 8) as $row) {
+				$row->update(array("pid" => $row->id));
+			}
 		}
 		
 		public function actionDefault() {
