@@ -88,9 +88,9 @@ use FrontEshopModule\Userbar;
 //				}
 //			}
 
-			foreach ($this->model->getArticles()->where("sections_id", 8) as $row) {
-				$row->update(array("pid" => $row->id));
-			}
+//			foreach ($this->model->getArticles()->where("sections_id", 8) as $row) {
+//				$row->update(array("pid" => $row->id));
+//			}
 		}
 		
 		public function actionDefault() {
