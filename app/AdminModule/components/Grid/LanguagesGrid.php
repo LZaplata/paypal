@@ -38,7 +38,13 @@
 			$this->addColumn('key', 'Zkratka')
 				->setTextEditable()
 				->setTextFilter();
-			
+
+			$this->addColumn("rate", "Kurz")
+				->setTextEditable();
+
+			$this->addColumn("currency", "Měna")
+				->setTextEditable();
+
 			$this->setTemplate(APP_DIR.'/AdminModule/templates/Grid/accountsGrid.latte');
 			$this->paginate = false;
 			$this->setWidth('100%');

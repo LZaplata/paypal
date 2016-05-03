@@ -52,24 +52,28 @@
 // 		}
 		
 		public function getRates () {
-			$txt = false;
-			foreach (Finder::findFiles('denni_kurz.txt')->date('>', '- 1 day')->in(WWW_DIR.'/../temp/') as $key => $file) {
-				$txt = true;
-			}
-			
-			if (!$txt) {
-				$handle = fopen(WWW_DIR.'/../temp/denni_kurz.txt', 'w');
-				fwrite($handle, file_get_contents('http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt'));
-				fclose($handle);
-			}
-			
-			$file = file(WWW_DIR.'/../temp/denni_kurz.txt');
-			
-			unset($file[0]);
-			foreach ($file as $rate) {
-				$data = explode('|', $rate);
-			
-				$this->rates[strtolower($data[3])] = $data[4];
+//			$txt = false;
+//			foreach (Finder::findFiles('denni_kurz.txt')->date('>', '- 1 day')->in(WWW_DIR.'/../temp/') as $key => $file) {
+//				$txt = true;
+//			}
+//
+//			if (!$txt) {
+//				$handle = fopen(WWW_DIR.'/../temp/denni_kurz.txt', 'w');
+//				fwrite($handle, file_get_contents('http://www.cnb.cz/cs/financni_trhy/devizovy_trh/kurzy_devizoveho_trhu/denni_kurz.txt'));
+//				fclose($handle);
+//			}
+//
+//			$file = file(WWW_DIR.'/../temp/denni_kurz.txt');
+//
+//			unset($file[0]);
+//			foreach ($file as $rate) {
+//				$data = explode('|', $rate);
+//
+//				$this->rates[strtolower($data[3])] = $data[4];
+//			}
+
+			foreach ($this->presenter->model->getLanguages() as $lang) {
+				$this->rates[strtolower($lang->currency)] = $lang->rate;
 			}
 			
 			$this->rates['czk'] = 1;
