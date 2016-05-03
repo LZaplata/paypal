@@ -603,7 +603,7 @@
 			$mail = new Message();
 			$mail->setFrom($this->contact->email, $this->contact->name);
 			$mail->addTo($order->email, $order->name.' '.$order->surname);
-			if ($order->partner) {
+			if ($order->partner_id) {
 				$mail->addTo("info@rybolovnorsko.com");
 			}
 			$mail->setSubject('ExpresMenu.cz- nová objednávka č. '.$order->no);
