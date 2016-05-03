@@ -78,7 +78,7 @@ use FrontEshopModule\Userbar;
 					$article["text"] = $item["Content"];
 					$article["lat"] = $item["lag"];
 					$article["lng"] = $item["lng"];
-					$article["sections_id"] = 7;
+					$article["sections_id"] = 8;
 					$article["galleries_id"] = $this->model->getGalleries()->insert(array());
 					$article["filestores_id"] = $this->model->getFilestores()->insert(array());
 					$article["date"] = $article["created"] = date("Y-m-d H:i:s");
