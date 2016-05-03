@@ -11,7 +11,7 @@
 			{_'kontaktní údaje'}
 		</a>
 	</li>
-	{if !$presenter->partner}
+	{if !$presenter->partner->id}
 		<li class="level third {if !$order || $order->name == null}disabled{/if} {ifCurrent Order:transport}active{/ifCurrent}">
 			<a href="{plink :FrontEshop:Order:transport}" class="h4 no-margin">
 				{_'doprava a platba'}

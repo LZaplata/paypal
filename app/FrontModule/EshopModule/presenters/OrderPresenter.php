@@ -633,18 +633,22 @@
 
 		public function heurekaVerification($order){
 			try {
-				$overeno = new \Heureka\Overeno($this->vendorSettings->heurekaVerification);
+				$options = [
+					"service" => \Heureka\ShopCertification::HEUREKA_CZ,
+				];
+
+				$overeno = new \Heureka\ShopCertification($this->vendorSettings->heurekaVerification, $options);
 				// set customer email - MANDATORY
 				$overeno->setEmail($order->email);
 				// products
 				foreach($order->related("orders_products") as $product){
-					$overeno->addProduct($product->products->name);
+//					$overeno->addProduct($product->products->name);
 					$overeno->addProductItemId($product->products_id);
 				}
 				// add order ID - BIGINT (0 - 18446744073709551615)
 				$overeno->setOrderId($order->id);
 				// send request
-				$overeno->send();
+				$overeno->logOrder();
 			} catch (HeurekaOverenoException $e) {
 				// handle errors
 				print $e->getMessage();
