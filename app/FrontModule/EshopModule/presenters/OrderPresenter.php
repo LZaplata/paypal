@@ -486,6 +486,9 @@
 
 				if (!$this->model->getUsers()->where('email', $values['email'])->fetch()) {
 					unset($values['text']);
+					unset($values["beg"]);
+					unset($values["fta"]);
+					unset($values["partner_id"]);
 
 					$values['role'] = 'user';
 					$lastID = $this->model->getUsers()->insert($values);
