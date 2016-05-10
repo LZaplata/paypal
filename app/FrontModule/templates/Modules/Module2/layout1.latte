@@ -45,7 +45,7 @@
     								{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
     							</span>
     							<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article->id|nosafeurl}" class="col-lg-3 col-sm-12 text-right">
-    								<strong>více informací</strong>&nbsp;
+    								<strong>{_"více informací"}</strong>&nbsp;
     								<span class="fa-stack">
     									<i class="fa fa-circle fa-stack-2x"></i>
     									<i class="fa fa-arrow-right fa-stack-1x fa-inverse text-warning"></i>

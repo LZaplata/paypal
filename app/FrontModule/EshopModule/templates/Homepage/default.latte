@@ -1,9 +1,12 @@
+{var $name = 'name'.$presenter->lang}
+{var $defaultName = 'name'.$defaultLang}
+
 {block #eshop}
 	<h1 class="no-margin-top h2">
 		{if $q = $presenter->getParameter("q")}
-			Výsledky vyhledávání výrazu "{$q}"
+			{_"Výsledky vyhledávání výrazu"} "{$q}"
 		{else}
-			nabídka e-shopu
+			{_"nabídka e-shopu"}
 		{/if}
 	</h1>
 
@@ -13,10 +16,10 @@
 				{var $products = $presenter->getCategoryProducts($category->id)->limit(3)}
 
 				<h2 class="h3 text-warning no-margin col-sm-12">
-					{$category->name}
+					{!$category->$name ?: ($category->$defaultName ?: $category->name)|nbsp}
 					<small class="pull-right">
 						<a href="{dlink :FrontEshop:Categories:view eshop => $presenter->eshop, category => $category->url, cid => $category->id}">
-							vše v kategorii
+							{_"vše v kategorii"}
 							<span class="fa-stack">
 								<i class="fa fa-circle fa-stack-2x"></i>
 								<i class="fa fa-arrow-right fa-stack-1x fa-inverse"></i>

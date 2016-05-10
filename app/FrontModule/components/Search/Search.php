@@ -83,7 +83,7 @@ use Nette\Utils\Strings;
 			$this->template->currency = $this->presenter->currency;
 			$this->template->decimals = $this->presenter->currency == 'czk' ? 0 : 2;
 			$this->template->eshop = $this->eshop;
-			
+
 			$this->template->render();
 		}
 		
