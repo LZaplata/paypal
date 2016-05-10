@@ -197,7 +197,7 @@
 				$wp = $this->createComponentWebPay();
 				$response = $wp->getResponse();
 
-				if ($response) {
+				if ($response === true) {
 					$order = $this->model->getOrders()->where('no', $this->getParameter('ORDERNUMBER'))->fetch();
 
 					if ($order) {
@@ -553,11 +553,11 @@
 
 			$wp->setCurrency(203);
 
-			$wp->setPublicKey(APP_DIR.'/FrontModule/components/WebPay/keys/muzo.signing_test.pem');
+			$wp->setPublicKey(APP_DIR.'/FrontModule/components/WebPay/keys/muzo.signing_prod.pem');
 
 			$wp->setPrivateKey(APP_DIR.'/FrontModule/components/WebPay/keys/private_key.pem', 'Exmenu5');
 
-			$wp->setRedirectUrl('http://www.expresmenu.cz/e-shop/order/payment');
+			$wp->setRedirectUrl('http://localhost/www.expresmenu.cz/www/e-shop/order/payment');
 
 			return $wp;
 		}
