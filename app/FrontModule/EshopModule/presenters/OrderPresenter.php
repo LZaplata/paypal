@@ -197,6 +197,8 @@
 				$wp = $this->createComponentWebPay();
 				$response = $wp->getResponse();
 
+				print_r($response);
+
 				if ($response) {
 					$order = $this->model->getOrders()->where('no', $this->getParameter('ORDERNUMBER'))->fetch();
 
@@ -208,7 +210,7 @@
 					}
 				}
 
-				$this->redirect('this', array('response' => $response));
+//				$this->redirect('this', array('response' => $response));
 			}
 			else {
 // 				if ($this->getParameter('response') == false) {
