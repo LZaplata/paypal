@@ -108,18 +108,25 @@
 				{/if}
 
 				<div>
+					{var $construction = 'construction'.$presenter->lang}
+					{var $defaultConstruction = 'construction'.$defaultLang}
+
 					<p class="no-margin text-primary">
-						<strong><em>Složení:</em></strong>
+						<strong><em>{_"Složení"}:</em></strong>
 					</p>
-					{!$product->construction|nbsp}
+
+					{!($product->$construction ?: ($product->$defaultConstruction ?: $product->construction))|nbsp}
 				</div>
 
 				<div>
+					{var $alergens = 'alergens'.$presenter->lang}
+					{var $defaultAlergens = 'alergens'.$defaultLang}
+
 					<p class="no-margin text-primary">
-						<strong><em>Informace pro alergiky:</em></strong>
+						<strong><em>{_"Informace pro alergiky"}:</em></strong>
 					</p>
 					<p>
-						{$product->alergens}
+						{!($product->$alergens ?: ($product->$defaultAlergens ?: $product->alergens))|nbsp}
 					</p>
 				</div>
 			</div>
