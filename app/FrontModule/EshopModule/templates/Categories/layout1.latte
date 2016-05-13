@@ -65,7 +65,7 @@
 
 			<div class="tags">
 				{foreach $presenter->model->getProductsTags()->where("products_id", $product->id) as $tag}
-					<span class="tag" style="background: {!$tag->tags->color}">{$tag->tags->name}</span>
+					<span class="tag" style="background: {!$tag->tags->color}">{_$tag->tags->name}</span>
 				{/foreach}
 			</div>
 
