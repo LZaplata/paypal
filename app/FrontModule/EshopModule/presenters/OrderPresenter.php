@@ -455,6 +455,7 @@
 			}
 
 			$form->setRenderer(new BootstrapFormRenderer());
+			$form->setTranslator($this->translator);
 
 			return $form;
 		}

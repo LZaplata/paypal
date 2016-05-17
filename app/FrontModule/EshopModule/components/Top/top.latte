@@ -5,7 +5,7 @@
 {var $url = 'url'.$presenter->lang}
 {var $category = array()}
 
-<h2 class="h3 col-sm-12 no-margin-bottom">tento týden doporučujeme</h2>
+<h2 class="h3 col-sm-12 no-margin-bottom">{_"tento týden doporučujeme"}</h2>
 
 {foreach $products as $product}
 	{var $image = $product->galleries->related('galleries_images', 'galleries_id')->order('highlight DESC, position ASC')->fetch()}

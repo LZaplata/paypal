@@ -1,5 +1,5 @@
 {block #eshop}
-	<h1 class="h2 no-margin-top">Doprava a platba</h1>
+	<h1 class="h2 no-margin-top">{_"Doprava a platba"}</h1>
 
 	{include menu.latte}
 	
@@ -44,8 +44,8 @@
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<div>
-							Zboží: <span class="pull-right">{$order->price / $order->rate|number:$decimals:",":" "} {_$currency}</span> <br />
-							Doprava a platba: <span class="pull-right">{snippet transportPrice}{$order->transport / $order->rate|number:$decimals:",":" "} {_$currency}{/snippet}</span> <br /> <br />					
+							{_"Zboží"}: <span class="pull-right">{$order->price / $order->rate|number:$decimals:",":" "} {_$currency}</span> <br />
+							{_"Doprava a platba"}: <span class="pull-right">{snippet transportPrice}{$order->transport / $order->rate|number:$decimals:",":" "} {_$currency}{/snippet}</span> <br /> <br />
 							<div class="pull-right h4 no-margin-bottom">{snippet totalPrice}<strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {_$currency}</strong>{/snippet}</div>
 						</div>
 					</div>
