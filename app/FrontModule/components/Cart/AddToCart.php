@@ -15,7 +15,9 @@
 		
 		public function render () {
 			$this->template->setFile(__DIR__.'/addToCart.latte');
-			
+
+			$this->template->setTranslator($this->presenter->translator);
+
 			$this->template->render();
 		}
 		
