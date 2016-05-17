@@ -397,7 +397,8 @@
 				->addRule(Form::NUMERIC, "PSČ musí obsahovat pouze čísla");
 
 			$form->addText('phone', 'Telefon:')
-				->setRequired('Vyplňte telefon!');
+				->setRequired('Vyplňte telefon!')
+				->addRule(Form::PATTERN, 'Telefon musí být ve formátu např. +420777555111', '[+][0-9]{12}');
 
 			$form->addText('email', 'E-mail:')
 				->setRequired('Vyplňte e-mail!')
