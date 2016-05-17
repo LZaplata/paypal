@@ -84,6 +84,8 @@ use Nette\Utils\Strings;
 			$this->template->decimals = $this->presenter->currency == 'czk' ? 0 : 2;
 			$this->template->eshop = $this->eshop;
 
+			$this->template->setTranslator($this->presenter->translator);
+
 			$this->template->render();
 		}
 		

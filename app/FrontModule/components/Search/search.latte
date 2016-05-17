@@ -1,7 +1,9 @@
 <div id="search" class="clearfix pull-right">
 	{form searchForm}
 		<div class="search">
-			{input q class => "form-control autocomplete", placeholder => "vyhledat..."}
+			{capture $placeholder}{_"vyhledat..."}{/capture}
+
+			{input q class => "form-control autocomplete", placeholder => $placeholder}
 			{input search class => "hidden"}
 			
 			{*}
