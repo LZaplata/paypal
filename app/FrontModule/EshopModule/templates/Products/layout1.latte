@@ -63,13 +63,13 @@
 
 				<p>
 					<span>
-						<em><strong class="text-primary">Porce:</strong></em> {$product->meals}
+						<em><strong class="text-primary">{_"Porce"}:</strong></em> {$product->meals}
 					</span>
 				</p>
 
 				<div>
 					<p class="no-margin text-primary">
-						<strong><em>Hmotnost:</em></strong>
+						<strong><em>{_"Hmotnost"}:</em></strong>
 					</p>
 					<p>
 						{$product->weight}
@@ -79,7 +79,7 @@
 				{if !$settings->posts}
 					{if $settings->text}
 						<p class="no-margin text-primary">
-							<em><strong>Popis:</strong></em>
+							<em><strong>{_"Popis"}:</strong></em>
 						</p>
 						{include text}
 					{/if}
@@ -174,30 +174,30 @@
 
 				<div class="values">
 					<p>
-						<strong><em>Výživová hodnota na 100g</em></strong>
+						<strong><em>{_"Výživová hodnota na 100g"}</em></strong>
 					</p>
 					<p class="no-margin">
-						<span>Energetická hodnota</span> {$product->kj} kJ / {$product->kj * 0.239|number:0} kcal <br>
-						<span>Tuky</span> {$product->fats} g <br>
-						<span>Bílkoviny</span> {$product->protein} g <br>
-						<span>Sacharidy</span> {$product->carbohydrates} g
-						<span>Nasycené mastné kyseliny</span> {$product->acids} g
-						<span>Cukry</span> {$product->sugar} g
+						<span>{_"Energetická hodnota"}</span> {$product->kj} kJ / {$product->kj * 0.239|number:0} kcal <br>
+						<span>{_"Tuky"}</span> {$product->fats} g <br>
+						<span>{_"Bílkoviny"}</span> {$product->protein} g <br>
+						<span>{_"Sacharidy"}</span> {$product->carbohydrates} g
+						<span>{_"Nasycené mastné kyseliny"}</span> {$product->acids} g
+						<span>{_"Cukry"}</span> {$product->sugar} g
 						{*<span>Vláknina</span> {$product->roughage} g*}
-						<span>Sůl</span> {$product->salt} g
+						<span>{_"Sůl"}</span> {$product->salt} g
 					</p>
 				</div>
 
 				<div class="gluten">
 					<p class="no-margin h4 text-uppercase">
-						potravina bez lepku
+						{_"potravina bez lepku"}
 					</p>
 					<p>
-						Hotový pokrm sterilovaný, vyrobeno bez konzervačních látek.
+						{_"Hotový pokrm sterilovaný, vyrobeno bez konzervačních látek."}
 					</p>
 					<p class="no-margin">
-						Skladujte v suchu a temnu při teplotě <strong>+1 až +30 °C</strong>. Otevřený výrobek uskladněte v chladničce a spotřebujte do 48 hodin.<br>
-						Doba spotřeby je 36 měsíců.
+						{_"Skladujte v suchu a temnu při teplotě"} <strong>+1 až +30 °C</strong>. {_"Otevřený výrobek uskladněte v chladničce a spotřebujte do 48 hodin."}<br>
+						{_"Doba spotřeby je 36 měsíců."}
 					</p>
 				</div>
 
