@@ -74,7 +74,7 @@ use Nette\Utils\Strings;
 		}
 
 		public function actionExport () {
-			$orders = $this->model->getOrders()->where('state >= ?', 0);
+			$orders = $this->model->getOrders()->where('state >= ?', 0)->where("export", 0);
 
 			foreach ($orders as $order) {
 				$file = WWW_DIR.'/pohoda/orders/'.$order->no.'.xml';
@@ -106,7 +106,7 @@ use Nette\Utils\Strings;
 					fwrite($handle, $xml->renderToString(APP_DIR."/templates/Cli/export.latte", $params));
 					fclose($handle);
 
-//					system('ncftpput -u xml-smiledesign -p xmlsmile  win.humlnet.cz orders  /home/creative/www.designwear.cz/www/pohoda/orders/'.$order->no.'.xml');
+					$order->update(array("export" => 1));
 				}
 			}
 
