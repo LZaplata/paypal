@@ -398,7 +398,8 @@
 
 			$form->addText('phone', 'Telefon:')
 				->addRule(Form::PATTERN, 'Telefon musí být ve formátu např. +420777555111', '[+][0-9]{12}')
-				->setRequired('Vyplňte telefon!');
+				->setRequired('Vyplňte telefon!')
+				->setOption("description", "Telefon musí být ve formátu např. +420777555111");
 
 			$form->addText('email', 'E-mail:')
 				->setRequired('Vyplňte e-mail!')
