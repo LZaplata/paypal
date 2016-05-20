@@ -41,6 +41,8 @@
 				->onClick[] = callback($this, 'signInFormSubmitted');
 			
 			$form->setRenderer(new BootstrapFormRenderer());
+
+			$form->setTranslator($this->translator);
 			
 			return $form;
 		}
