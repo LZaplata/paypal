@@ -61,7 +61,7 @@
 
 			<div class="tags">
 				{foreach $product->related("products_tags") as $tag}
-					<span class="tag" style="background: {!$tag->tags->color}">{$tag->tags->name}</span>
+					<span class="tag" style="background: {!$tag->tags->color}">{_$tag->tags->name}</span>
 				{/foreach}
 			</div>
 		</a>
