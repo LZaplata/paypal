@@ -435,7 +435,7 @@
 			$form->addSubmit('transport')
 				->getControlPrototype()
 				->setName("button")
-				->setHtml("pokračovat v objednávce <span class='fa-stack'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-arrow-right fa-stack-1x fa-inverse'></i></span>");
+				->setHtml($this->translator->translate("pokračovat v objednávce")." <span class='fa-stack'><i class='fa fa-circle fa-stack-2x'></i><i class='fa fa-arrow-right fa-stack-1x fa-inverse'></i></span>");
 
 			$form["transport"]->onClick[] = callback($this, 'submitContact');
 
