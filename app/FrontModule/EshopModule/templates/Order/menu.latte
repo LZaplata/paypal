@@ -7,20 +7,20 @@
 		</a>
 	</li>
 	<li class="level second {ifCurrent Order:contact}active{/ifCurrent}">
-		<a href="{plink :FrontEshop:Order:contact}" class="h4 no-margin">
-			{_'kontaktní údaje'}
+		<a href="{plink :FrontEshop:Order:contact}" class="h4 no-margin text-lowercase">
+			{_'Kontaktní údaje'}
 		</a>
 	</li>
 	{if !$presenter->partner->id}
 		<li class="level third {if !$order || $order->name == null}disabled{/if} {ifCurrent Order:transport}active{/ifCurrent}">
-			<a href="{plink :FrontEshop:Order:transport}" class="h4 no-margin">
-				{_'doprava a platba'}
+			<a href="{plink :FrontEshop:Order:transport}" class="h4 no-margin text-lowercase">
+				{_'Doprava a platba'}
 			</a>
 		</li>
 	{/if}
 	<li class="level fourth {if !$order || $order->transport_id == null || $order->name == null}disabled{/if} {ifCurrent Order:summary}active{/ifCurrent}">
-		<a href="{plink :FrontEshop:Order:summary}" class="h4 no-margin">
-			{_'souhrn'}
+		<a href="{plink :FrontEshop:Order:summary}" class="h4 no-margin text-lowercase">
+			{_'Souhrn'}
 		</a>
 	</li>
 </ul>
