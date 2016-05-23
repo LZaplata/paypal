@@ -12,81 +12,30 @@
 				<h3>{!$editor->$name?: ($editor->$defaultName ?: $editor->name)|nbsp}</h3>
 			{/if}
 		{/if}
-		
-		<div  class="text">
-			{if $editor->sections->text}
-				{!($editor->$text ?: ($editor->$defaultText ?: $editor->text))|nbsp}
-			{/if}
-		</div>
-		
-		{if $editor->sections->gallery}		
-			{if count($images = $control->getImages()) && $thumb = $control->getThumb(2)}
-				<div class="editor-gallery">
-				
-					{if $editor->galleries->paginator}
-						{control paginator}
-					{/if}				
-				
-					<ul>
-						{foreach $images as $image}
-							<li>
-								<a href="{$basePath}/files/galleries/g{$image->galleries}-{$image->name}" rel="{$image->galleries}">
-									<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" />
-								</a> 
-							</li>
-						{/foreach}
-					</ul>
-					
-					{if $editor->galleries->paginator}
-						{control paginator}
-					{/if}					
-					
-				</div> 
-			{/if}
-		{/if}
-		
-		{if $editor->sections->files}
-			{var $files = $control->getFiles($editor)}
-			{var $tag = 1}
-			
-			{if count($files)}			
-				<div id="files">
-					<h2 class="h3">Soubory</h2>
-				
-					{foreach $files as $file}
-						{var $extension = pathinfo($file->name, PATHINFO_EXTENSION)}
-						
-						{if $file->tag != null && $file->tag != $tag}
-							{var $tag = $file->tag}							
-						
-							{if !$iterator->first}
-								</ul>
-							{/if}
-						
-							<h3 class="h4">{$tag}</h3>
-							
-							<ul class="list-unstyled">
-						{else}
-							{if $iterator->first}
-								{var $tag = false}
-							
-								<ul class="list-unstyled">
-							{/if}
-						{/if}
-						
-						<li>
-							<i class="fa fa-file-{$icons[$extension]}-o"></i>&nbsp; 
-							<a href="{$basePath}/files/files/f{$file->filestores_id}-{$file->name}">
-								{$file->title ? $file->title : $file->name}
-							</a>
-						</li>
-					{/foreach}
-				</div>
-			{/if}
-		{/if}
-		
-		{if $control->module->contact_form}
-			{$presenter["contactForm"]->render()}
-		{/if}
+
+		<div id="map" style="width: 100%; height: 700px;"></div>
+
+		<script>
+			var map;
+			function initMap() {
+				map = new google.maps.Map(document.getElementById('map'), {
+					center: { lat: 49.7428581, lng: 15.3384111 },
+					zoom: 8
+				});
+
+				{foreach $presenter->model->getArticles()->where("sections_id", 8) as $article}
+					var image = "http://backup.hucr.cz/www.expresmenu.cz/images/icon-map-small.png";
+					var marker = new google.maps.Marker({
+						position: { lat: {(float)$article->lat}, lng: {(float)$article->lng} },
+						map: map,
+						title: {$article->name},
+						icon: image
+					});
+
+					marker.setMap(map);
+				{/foreach}
+			}
+		</script>
+		<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC2G2vXCmjfW04XKLH90yjJtFuSEJuu-gs&callback=initMap" async defer></script>
 	</div>
 {/if}
