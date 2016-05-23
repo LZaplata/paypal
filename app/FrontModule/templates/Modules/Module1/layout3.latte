@@ -13,14 +13,14 @@
 			{/if}
 		{/if}
 
-		<div id="map" style="width: 100%; height: 700px;"></div>
+		<div id="map" style="width: 100%; height: 500px;"></div>
 
 		<script>
 			var map;
 			function initMap() {
 				map = new google.maps.Map(document.getElementById('map'), {
 					center: { lat: 49.7428581, lng: 15.3384111 },
-					zoom: 8
+					zoom: 7
 				});
 
 				{foreach $presenter->model->getArticles()->where("sections_id", 8) as $article}
