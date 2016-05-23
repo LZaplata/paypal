@@ -197,7 +197,7 @@
                 {/if}
                 <tr>
                     <td>Ulice:</td>
-                    <td>{$order->street}</td>
+                    <td>{$order->street} {$order->street_number}</td>
                 </tr>
                 <tr>
                     <td>Město:</td>
@@ -252,9 +252,9 @@
                     <td>Ulice:</td>
                     <td>
                         {if $order->delivery_street}
-                            {$order->delivery_street}
+                            {$order->delivery_street} {$order->delivery_street_number}
                         {else}
-                            {$order->street}
+                            {$order->street} {$order->street_number}
                         {/if}
                     </td>
                 </tr>
