@@ -25,11 +25,23 @@
 
 				{foreach $presenter->model->getArticles()->where("sections_id", 8) as $article}
 					var image = "http://backup.hucr.cz/www.expresmenu.cz/images/icon-map-small.png";
+					var infowindow = null;
+
+					infowindow = new google.maps.InfoWindow({
+						content: "loading..."
+					});
+
 					var marker = new google.maps.Marker({
 						position: { lat: {(float)$article->lat}, lng: {(float)$article->lng} },
 						map: map,
 						title: {$article->name},
-						icon: image
+						icon: image,
+						html: {$article->text}
+					});
+
+					google.maps.event.addListener(marker, "click", function () {
+						infowindow.setContent(this.html);
+						infowindow.open(map, this);
 					});
 
 					marker.setMap(map);
