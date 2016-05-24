@@ -26,8 +26,10 @@
 				{foreach $presenter->model->getArticles()->where("sections_id", 8) as $article}
 					{if $article->oz}
 						var image = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+						var zindex = 2;
 					{else}
 						var image = "http://maps.google.com/mapfiles/ms/icons/orange-dot.png";
+						var zindex = 1;
 					{/if}
 
 					var infowindow = null;
@@ -41,7 +43,8 @@
 						map: map,
 						title: {$article->name},
 						icon: image,
-						html: {$article->text}
+						html: {$article->text},
+						zIndex: zindex
 					});
 
 					google.maps.event.addListener(marker, "click", function () {
