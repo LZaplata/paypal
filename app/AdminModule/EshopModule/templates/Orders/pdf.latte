@@ -20,7 +20,7 @@
                 </p>
                 <p>
                     {$order->name} {$order->surname} <br>
-                    {$order->street} <br>
+                    {$order->street} {$order->street_number} <br>
                     {$order->psc} {$order->city} <br>
                     {$order->email} <br>
                     {$order->phone} <br><br>
@@ -30,7 +30,7 @@
                 </p>
                 <p>
                     {$order->delivery_name?: $order->name} {$order->delivery_surname?: $order->surname} <br>
-                    {$order->delivery_street?: $order->street} <br>
+                    {if $order->delivery_street}{$order->delivery_street} {$order->delivery_street_number}{else}{$order->street} {$order->street_number}{/if} <br>
                     {$order->delivery_psc?: $order->psc} {$order->delivery_city?: $order->city} <br><br>
                 </p>
                 <p style="color: #5d6975; text-transform: uppercase;">
