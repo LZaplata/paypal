@@ -389,7 +389,7 @@
 				->setRequired('Vyplňte ulici!');
 
 			$form->addText("street_number", "Číslo poštovné")
-				->setRequired("Vyplňte číslo poštovné");
+				->setRequired("Vyplňte číslo popisné:");
 
 			$form->addText('city', 'Město:')
 				->setRequired('Vyplňte město!');
@@ -424,7 +424,7 @@
 			$form->addText('delivery_street', 'Ulice:')
 				->setDisabled(isset($this->partner->id) ? true : false);
 
-			$form->addText("delivery_street_number", "Číslo poštovné")
+			$form->addText("delivery_street_number", "Číslo popisné:")
 				->setRequired("Vyplňte číslo poštovné");
 
 			$form->addText('delivery_city', 'Město:')
