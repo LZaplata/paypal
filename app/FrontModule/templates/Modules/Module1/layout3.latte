@@ -24,7 +24,12 @@
 				});
 
 				{foreach $presenter->model->getArticles()->where("sections_id", 8) as $article}
-					var image = "http://backup.hucr.cz/www.expresmenu.cz/images/icon-map-small.png";
+					{if $article->oz}
+						var image = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+					{else}
+						var image = "http://maps.google.com/mapfiles/ms/icons/orange-dot.png";
+					{/if}
+
 					var infowindow = null;
 
 					infowindow = new google.maps.InfoWindow({
