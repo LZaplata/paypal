@@ -424,8 +424,7 @@
 			$form->addText('delivery_street', 'Ulice:')
 				->setDisabled(isset($this->partner->id) ? true : false);
 
-			$form->addText("delivery_street_number", "Číslo popisné:")
-				->setRequired("Vyplňte číslo popisné");
+			$form->addText("delivery_street_number", "Číslo popisné:");
 
 			$form->addText('delivery_city', 'Město:')
 				->setDisabled(isset($this->partner->id) ? true : false);

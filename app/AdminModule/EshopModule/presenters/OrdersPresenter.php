@@ -331,6 +331,9 @@
 			$form->addText('street', 'Ulice:')
 				->setRequired('Vyplňte ulici!');
 
+			$form->addText("street_number", "Číslo popisné:")
+				->setRequired("Vyplňte číslo popisné");
+
 			$form->addText('city', 'Město:')
 				->setRequired('Vyplňte město!');
 
@@ -350,6 +353,8 @@
 			$form->addText('delivery_surname', 'Příjmení:');
 
 			$form->addText('delivery_street', 'Ulice:');
+
+			$form->addText("delivery_street_number", "Číslo popisné:");
 
 			$form->addText('delivery_city', 'Město:');
 
