@@ -97,7 +97,8 @@ development:
 		    1:
 		        delivery_name: "Fishing Travel Agency, s.r.o."
 		        delivery_surname: info@rybolovnorsko.com
-		        delivery_street: K Severu 257
+		        delivery_street: K Severu
+		        delivery_street_number: 257
 		        delivery_city: Petrov
 		        delivery_psc: 252 81
 

@@ -4,35 +4,37 @@
 	{include menu.latte}
 
 	<div id="contact" class="row">
-		{if !$presenter->user->isLoggedIn()}
-			<div id="login" class="col-sm-6">
-				<div class="well">
-					<fieldset>
-						<legend>{_"Přihlášení"}</legend>
-						{control signInForm}
-					</fieldset>
+		{if !isset($presenter->partner->id)}
+			{if !$presenter->user->isLoggedIn()}
+				<div id="login" class="col-sm-6">
+					<div class="well">
+						<fieldset>
+							<legend>{_"Přihlášení"}</legend>
+							{control signInForm}
+						</fieldset>
+					</div>
 				</div>
-			</div>
-			
-			<div class="col-sm-6">
-				<div class="well">
-					<fieldset>
-						<legend>{_"Jednorázový nákup"}</legend>
-						<p>
-							{_"Pokud nechcete využít výhody registrovaného uživatele, můžete pokračovat v nákupu bez registrace."}
-						</p>
-						<p>
-							<button class="btn btn-primary" data-toggle="collapse" data-target="#contact-data">{_"Jednorázový nákup"}</button>
-							<a href="{dlink Users:registration eshop => $presenter->eshop}" class="btn btn-danger">{_"Registrace"}</a>
-						</p>
-					</fieldset>
+
+				<div class="col-sm-6">
+					<div class="well">
+						<fieldset>
+							<legend>{_"Jednorázový nákup"}</legend>
+							<p>
+								{_"Pokud nechcete využít výhody registrovaného uživatele, můžete pokračovat v nákupu bez registrace."}
+							</p>
+							<p>
+								<button class="btn btn-primary" data-toggle="collapse" data-target="#contact-data">{_"Jednorázový nákup"}</button>
+								<a href="{dlink Users:registration eshop => $presenter->eshop}" class="btn btn-danger">{_"Registrace"}</a>
+							</p>
+						</fieldset>
+					</div>
 				</div>
-			</div>
+			{/if}
 		{/if}
 		
 		<div class="clearfix"></div>
 		
-		<div id="contact-data" class="col-sm-12 collapse {if $user->loggedIn || $presenter['contact']->hasErrors()}in{/if}">
+		<div id="contact-data" class="col-sm-12 collapse {if $user->loggedIn || $presenter['contact']->hasErrors() || (isset($presenter->partner->id) && $user->loggedIn == false)}in{/if}">
 			{control contact}
 		</div>
 
