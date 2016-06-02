@@ -9,10 +9,10 @@ development:
 		database:
 			driver: mysql
 			host: localhost
-			dbname: expresmenu
-			database: expresmenu
-			user: zap
-			password: ZaP2011
+			dbname: expresmenu-pl
+			database: expresmenu-pl
+			user: root
+			password:
 		layouts:
 			1: 1 blok
 			2: 2 bloky vedle sebe
@@ -162,8 +162,8 @@ production < development:
 		database:
 			driver: mysql
 			host: localhost
-			dbname: expresmenu
-			database: expresmenu
+			dbname: expresmenu-pl
+			database: expresmenu-pl
 			user: zap
 			password: ZaP2011
 		contact:
