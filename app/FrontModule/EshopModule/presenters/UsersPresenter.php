@@ -314,6 +314,7 @@
 
 						unset($product->tax);
 						unset($product->productName);
+
 						unset($product->trash);
 						unset($product->pid);
 
@@ -322,6 +323,8 @@
 
 					$this['cart']->updateOrder();
 				}
+
+				$this->sendRegistrationEmail($values);
 
 				$this->redirect(':FrontEshop:Homepage:');
 			}
@@ -415,5 +418,18 @@
 			$mail->setSubject('Nové heslo');
 			$mail->setHtmlBody($template);
 			$this->presenter->mailer->send($mail);
+		}
+
+		public function sendRegistrationEmail($values)
+		{
+			$latte = new Engine();
+
+			$mail = new Message();
+			$mail->setFrom($this->contact->email, $this->contact->name);
+			$mail->addTo($values["email"]);
+			$mail->setSubject("Potvrzení registrace expresmenu.cz");
+			$mail->setHtmlBody($latte->renderToString(APP_DIR . "/FrontModule/EshopModule/templates/Users/registrationEmail.latte", (array)$values));
+
+			$this->mailer->send($mail);
 		}
 	}
