@@ -86,7 +86,7 @@
 			}
 
 			$this->translator->setAvailableLanguages(array_merge(array('cs' => 'nplurals=3; plural=((n==1) ? 0 : (n>=2 && n<=4 ? 1 : 2));'), $langs));
-
+			$this->translator->setCurrentLang("_pl");
 
 			preg_match('/(.*):(.*)/', $this->presenter->name, $names);
 			$this->presenterName = isset($names[2]) ? $names[2] : "";
