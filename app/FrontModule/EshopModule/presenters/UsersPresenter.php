@@ -297,6 +297,32 @@
 				
 				$this->flashMessage('Registrace proběhla úspěšně. Jste přihlášen/a');
 				$this->user->login($values['email'], $password);
+
+				/** přenesení košíku nepřihlášeného přihlášenému */
+				if ($this['cart']->order && $this['cart']->order->products != null) {
+					$order = $this['cart']->order;
+					$products = $order->products;
+
+					unset($order->id);
+					unset($order->products);
+
+					$this['cart']->order->remove();
+					$this['cart']->createOrder($order);
+
+					foreach ($products as $product) {
+						$product->orders_id = $this['cart']->order->id;
+
+						unset($product->tax);
+						unset($product->productName);
+						unset($product->trash);
+						unset($product->pid);
+
+						$this->model->getOrdersProducts()->insert((array)$product);
+					}
+
+					$this['cart']->updateOrder();
+				}
+
 				$this->redirect(':FrontEshop:Homepage:');
 			}
 		}
