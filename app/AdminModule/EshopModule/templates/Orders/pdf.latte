@@ -20,6 +20,15 @@
                 </p>
                 <p>
                     {$order->name} {$order->surname} <br>
+                    {if $order->company}
+                        {$order->company} <br>
+                    {/if}
+                    {if $order->ic}
+                        {$order->ic} <br>
+                    {/if}
+                    {if $order->dic}
+                        {$order->dic} <br>
+                    {/if}
                     {$order->street} {$order->street_number} <br>
                     {$order->psc} {$order->city} <br>
                     {$order->email} <br>
