@@ -314,6 +314,35 @@
 
 						unset($product->tax);
 						unset($product->productName);
+
+						unset($product->trash);
+						unset($product->pid);
+
+						$this->model->getOrdersProducts()->insert((array)$product);
+					}
+
+					$this['cart']->updateOrder();
+				}
+
+				$this->sendRegistrationEmail($values);
+
+
+				/** přenesení košíku nepřihlášeného přihlášenému */
+				if ($this['cart']->order && $this['cart']->order->products != null) {
+					$order = $this['cart']->order;
+					$products = $order->products;
+
+					unset($order->id);
+					unset($order->products);
+
+					$this['cart']->order->remove();
+					$this['cart']->createOrder($order);
+
+					foreach ($products as $product) {
+						$product->orders_id = $this['cart']->order->id;
+
+						unset($product->tax);
+						unset($product->productName);
 						unset($product->trash);
 						unset($product->pid);
 
@@ -415,5 +444,18 @@
 			$mail->setSubject('Nové heslo');
 			$mail->setHtmlBody($template);
 			$this->presenter->mailer->send($mail);
+		}
+
+		public function sendRegistrationEmail($values)
+		{
+			$latte = new Engine();
+
+			$mail = new Message();
+			$mail->setFrom($this->contact->email, $this->contact->name);
+			$mail->addTo($values["email"]);
+			$mail->setSubject("Potvrzení registrace expresmenu.cz");
+			$mail->setHtmlBody($latte->renderToString(APP_DIR . "/FrontModule/EshopModule/templates/Users/registrationEmail.latte", (array)$values));
+
+			$this->mailer->send($mail);
 		}
 	}
