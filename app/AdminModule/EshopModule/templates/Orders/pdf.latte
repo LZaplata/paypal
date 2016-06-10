@@ -37,7 +37,7 @@
                 <p style="color: #5d6975; text-transform: uppercase;">
                     doručovací údaje
                 </p>
-                <p>
+                <p style="font-weight: bold;">
                     {$order->delivery_name?: $order->name} {$order->delivery_surname?: $order->surname} <br>
                     {if $order->delivery_street}{$order->delivery_street} {$order->delivery_street_number}{else}{$order->street} {$order->street_number}{/if} <br>
                     {$order->delivery_psc?: $order->psc} {$order->delivery_city?: $order->city} <br><br>
