@@ -19,13 +19,13 @@
     {*</tr>*}
     <tr>
         <td style="padding: 30px 30px 0; font-weight: bold;" colspan="2">
-            Vážený zákazníku,<br/><br/>
+            Drogi Kliencie,<br/><br/>
         </td>
     </tr>
     <tr>
         <td style="padding: 0 30px 30px;" colspan="2">
-			děkujeme za Vaši objednávku na e-shopu EXPRES MENU. Tímto e-mailem potvrzujeme, že jsme v pořádku přijali Vaši objednávku.
-			Překontrolujte si údaje uvedené v objednávce a v případě nesrovnalostí nás ihned kontaktujte na e-mailu <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a><br><br>
+            dziękujemy za Twoje zamówienie w sklepie internetowym EXPRES MENU. Ta wiadomość jest potwierdzeniem, że zostało ono przez nas przyjęte.
+            Prosimy, abyś sprawdził wprowadzone dane w zamówieniu, a w przypadku jakichkolwiek nieścisłości skontaktuj się z nami pod adresem <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a><br><br>
 
             {if $order->partner_id}
                 V následujících dnech Vám přijde faktura od Fishing Travel Agency, s.r.o, kterou prosím neprodleně uhraďte. <br>
@@ -38,25 +38,25 @@
     </tr>
     <tr>
         <td style="padding: 15px 30px 0; font-weight: bold" colspan="2">
-            Objednané zboží
+            Zamówiony towar
         </td>
     </tr>
     <tr>
         <td style="padding: 0 30px 15px;" colspan="2">
             <table style="width: 100%; border-spacing: 0; border: none; font-size: 14px; font-family: sans-serif, arial, verdana;">
                 <thead>
-	                <th style="color: #859182; text-align: left; width: 40%;">
-	                    <em>Název</em>
-	                </th>
-	                <th style="color: #859182; text-align: left; width: 20%;">
-	                    <em>Cena/MJ</em>
-	                </th>
-	                <th style="color: #859182; text-align: left; width: 20%;">
-	                    <em>Množství</em>
-	                </th>
-	                <th style="color: #859182; text-align: left; width: 20%;">
-	                    <em>Celkem</em>
-	                </th>
+                <th style="color: #859182; text-align: left; width: 40%;">
+                    <em>Nazwa</em>
+                </th>
+                <th style="color: #859182; text-align: left; width: 20%;">
+                    <em>Cena</em>
+                </th>
+                <th style="color: #859182; text-align: left; width: 20%;">
+                    <em>Ilość</em>
+                </th>
+                <th style="color: #859182; text-align: left; width: 20%;">
+                    <em>W sumie</em>
+                </th>
                 </thead>
                 <tbody>
 	                {var $name = "name".$lang}
@@ -85,76 +85,76 @@
     </tr>
     <tr>
         <td style="padding: 15px 30px;" colspan="2">
-            <em style="color: #859182; font-weight: bold;">Zboží:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$currency} <br>
-            <em style="color: #859182; font-weight: bold;">Doprava a platba ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$currency} <br>
-            <em style="color: #859182; font-weight: bold;">Celková cena:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$currency}</strong> <br>
+            <em style="color: #859182; font-weight: bold;">Towar:</em> {$order->price / $order->rate|number:$decimals:",":" "} {$currency} <br>
+            <em style="color: #859182; font-weight: bold;">Dostawa i płatność: ({$methods[$order->transport_id]} + {$methods[$order->payment_id]}):</em> {$order->transport / $order->rate|number:$decimals:",":" "} {$currency} <br>
+            <em style="color: #859182; font-weight: bold;">Cena całkowita:</em> <strong>{($order->price + $order->transport) / $order->rate|number:$decimals:",":" "} {$currency}</strong> <br>
         </td>
     </tr>
     {if $order->payment_id == 4}
     <tr>
         <td style="padding: 0; background: #859182; height: 1px;" colspan="2"></td>
     </tr>
-    <tr>
-        <td style="padding: 30px 0 15px 30px; width: 50%;">
-            <table style="width: 100%; border-spacing: 0; border: none; font-size: 14px; font-family: sans-serif, arial, verdana;">
-                <thead>
-	                <tr>
-	                    <th style="text-align: left;" colspan="2">
-	                        Pokyny k platbě
-	                    </th>
-	                </tr>
-                </thead>
-                <tbody>
-	                <tr>
-	                    <td style="width: 25%;">
-	                        Peněžní ústav:
-	                    </td>
-	                    <td>FIO banka</td>
-	                </tr>
-	                <tr>
-	                    <td style="width: 25%;">
-	                        Číslo účtu:
-	                    </td>
-	                    <td>2500878134/2010</td>
-	                </tr>
-	                {*
-	                <tr>
-	                    <td style="width: 25%;">
-	                        IBAN/SWIFT:
-	                    </td>
-	                    <td>CZ0620100000002500878134/ FIOBCZPPXXX</td>
-	                </tr>
-	                *}
-	                <tr>
-	                    <td style="width: 25%;">
-	                        Variabilní symbol:
-	                    </td>
-	                    <td>{$order->no}</td>
-	                </tr>
-				</tbody>
-			</table>
-		</td>
-	</tr>
-	<tr>
-        <td style="padding: 30px 0 15px 30px; width: 50%;">
-            <table style="width: 100%; border-spacing: 0; border: none; font-size: 14px; font-family: sans-serif, arial, verdana;">
-                <thead>
-	                <tr>
-	                    <th style="text-align: left;" colspan="2">
-	                        Pokyny k platbě pro Slovenskou republiku
-	                    </th>
-	                </tr>
-                </thead>
-                <tbody>
-	                <tr>
-	                    <td style="width: 25%;" colspan="2">
-	                        Vyčkejte, prosím, na zaslání dokladu v EUR.
-	                    </td>
-	                </tr>
-				</tbody>
-			</table>
-		</td>
-	</tr>
+        <tr>
+            <td style="padding: 30px 0 15px 30px; width: 50%;">
+                <table style="width: 100%; border-spacing: 0; border: none; font-size: 14px; font-family: sans-serif, arial, verdana;">
+                    <thead>
+                    <tr>
+                        <th style="text-align: left;" colspan="2">
+                            Instrukcje płatności
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="width: 25%;">
+                            Bank:
+                        </td>
+                        <td>FIO banka</td>
+                    </tr>
+                    <tr>
+                        <td style="width: 25%;">
+                            Numer konta:
+                        </td>
+                        <td>2500878134/2010</td>
+                    </tr>
+                    {*
+                    <tr>
+                        <td style="width: 25%;">
+                            IBAN/SWIFT:
+                        </td>
+                        <td>CZ0620100000002500878134/ FIOBCZPPXXX</td>
+                    </tr>
+                    *}
+                    <tr>
+                        <td style="width: 25%;">
+                            Symbol zmienny:
+                        </td>
+                        <td>{$order->no}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+	{*<tr>*}
+        {*<td style="padding: 30px 0 15px 30px; width: 50%;">*}
+            {*<table style="width: 100%; border-spacing: 0; border: none; font-size: 14px; font-family: sans-serif, arial, verdana;">*}
+                {*<thead>*}
+	                {*<tr>*}
+	                    {*<th style="text-align: left;" colspan="2">*}
+	                        {*Pokyny k platbě pro Slovenskou republiku*}
+	                    {*</th>*}
+	                {*</tr>*}
+                {*</thead>*}
+                {*<tbody>*}
+	                {*<tr>*}
+	                    {*<td style="width: 25%;" colspan="2">*}
+	                        {*Vyčkejte, prosím, na zaslání dokladu v EUR.*}
+	                    {*</td>*}
+	                {*</tr>*}
+				{*</tbody>*}
+			{*</table>*}
+		{*</td>*}
+	{*</tr>*}
     {/if}
     <tr>
         <td style="padding: 30px 0 15px 30px; width: 50%;">
@@ -162,19 +162,19 @@
                 <thead>
                 <tr>
                     <th style="text-align: left;" colspan="2">
-                        Fakturační údaje
+                        Dane do faktury
                     </th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
                     <td style="width: 25%;">
-                        Jméno:
+                        Imię:
                     </td>
                     <td>{$order->name}</td>
                 </tr>
                 <tr>
-                    <td>Příjmení:</td>
+                    <td>Nazwisko:</td>
                     <td>{$order->surname}</td>
                 </tr>
                 {if $order->company}
@@ -191,20 +191,20 @@
                 {/if}
                 {if $order->dic}
                     <tr>
-                        <td>DIČ:</td>
+                        <td>NIP:</td>
                         <td>{$order->dic}</td>
                     </tr>
                 {/if}
                 <tr>
-                    <td>Ulice:</td>
+                    <td>Ulica:</td>
                     <td>{$order->street} {$order->street_number}</td>
                 </tr>
                 <tr>
-                    <td>Město:</td>
+                    <td>Miasto:</td>
                     <td>{$order->city}</td>
                 </tr>
                 <tr>
-                    <td>PSČ:</td>
+                    <td>Kod pocztowy:</td>
                     <td>{$order->psc}</td>
                 </tr>
                 <tr>
@@ -229,7 +229,7 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td style="width: 25%;">Jméno:</td>
+                    <td style="width: 25%;">Imię:</td>
                     <td>
                         {if $order->delivery_name}
                             {$order->delivery_name}
@@ -239,7 +239,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Příjmení:</td>
+                    <td>Nazwisko:</td>
                     <td>
                         {if $order->delivery_surname}
                             {$order->delivery_surname}
@@ -249,7 +249,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Ulice:</td>
+                    <td>Ulica:</td>
                     <td>
                         {if $order->delivery_street}
                             {$order->delivery_street} {$order->delivery_street_number}
@@ -259,7 +259,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>Město:</td>
+                    <td>Miasto:</td>
                     <td>
                         {if $order->delivery_city}
                             {$order->delivery_city}
@@ -269,7 +269,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td>PSČ:</td>
+                    <td>Kod pocztowy:</td>
                     <td>
                         {if $order->delivery_psc}
                             {$order->delivery_psc}
@@ -284,7 +284,7 @@
     </tr>
     <tr>
         <td style="padding: 0 30px;" colspan="2">
-            <strong>Poznámka</strong>
+            <strong>Uwagi</strong>
         </td>
     </tr>
     <tr>
@@ -294,15 +294,15 @@
     </tr>
     <tr>
         <td colspan="2" style="color: #859182; padding: 0 30px 30px;">
-            <strong>Děkujeme Vám a přejeme hezký den.</strong><br><br>
+            <strong>Dziękujemy i życzymy miłego dnia.</strong><br><br>
             EXPRES MENU, s.r.o. <br>
             Email: <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a> <br>
-            Tel.: +420 499 819 219 (Po-Pá; 6.00 - 14.00)
+            Tel.: +420 499 819 219 (pn.-pt.: 6.00 – 14.00)
         </td>
     </tr>
     <tr>
         <td colspan="2" style="padding: 15px 30px; background: #e6e6e6; color: #888888; text-align: center;">
-            (TENTO E-MAIL BYL VYGENEROVÁN AUTOMATICKY. V PŘÍPADĚ DOTAZŮ A PŘIPOMÍNEK K OBJEDNÁVCE NÁS MŮŽETE KONTAKTOVAT NA: <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a>)
+            (Wiadomość ta została wygenerowana automatycznie. W przypadku pytań czy uwag dotyczących zamówienia, prosimy o kontakt pod adresem e-mailowym: <a href="mailto:provoz@expresmenu.com">provoz@expresmenu.com</a>)
         </td>
     </tr>
 </table>
