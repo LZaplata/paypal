@@ -122,7 +122,7 @@
 				$this->redirect('Order:cart');
 			}
 
-			$count = count($this->model->getOrders()->where('state >= ?', 0)) + 20534;
+			$count = count($this->model->getOrders()->where('state >= ?', 0)) + 16080000;
 			$no = date('y').str_pad($count, 6, 0, STR_PAD_LEFT);
 
 			if ($this->user->loggedIn) {
