@@ -171,9 +171,9 @@
 			}
 
 			//overeni zakazniky
-			if ($this->vendorSettings->heurekaVerification) {
-				$this->heurekaVerification($this->order);
-			}
+//			if ($this->vendorSettings->heurekaVerification) {
+//				$this->heurekaVerification($this->order);
+//			}
 
 			$this->sendOfficeEmail($this->order);
 			$this->sendCustomerEmail($this->order, $paymentType);
