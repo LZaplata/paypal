@@ -90,7 +90,7 @@ development:
 		facebook:
 			appId:
 			appSecret:
-		currency: "Kč"
+		currency: "PL"
 		zasilkovna:
 		    apiKey: b1896ed4de0f5afc
 		partners:
