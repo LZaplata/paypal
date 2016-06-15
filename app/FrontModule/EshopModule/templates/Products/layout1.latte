@@ -27,7 +27,7 @@
 									{$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1)|number:$decimals:",":" "} {_$currency}
 								</span>
 								<span>
-									({$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1, true)|number:2:".":" "} {_$currency} bez DPH)
+									({$presenter["cart"]->getProductDiscountPrice($product->id, $product->price, 1, true)|number:2:".":" "} {_$currency} bez VAT)
 								</span>
 							</p>
 						</div>
