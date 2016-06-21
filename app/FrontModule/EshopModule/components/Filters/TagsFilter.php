@@ -21,6 +21,8 @@
 		
 		public function render () {
 			$this->template->setFile(__DIR__.'/tagsFilter.latte');
+
+			$this->template->setTranslator($this->presenter->translator);
 			
 			$this->template->render();
 		}
@@ -37,7 +39,9 @@
 			$form->addCheckboxList("tag", null, $this->tags);
 
 			$form->setRenderer(new BootstrapFormRenderer());
-			
+
+			$form->setTranslator($this->presenter->translator);
+
 			if ($this->activeTags) {
 				$form->setValues($this->activeTags);
 			}
