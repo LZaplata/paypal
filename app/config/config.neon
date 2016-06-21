@@ -11,8 +11,8 @@ development:
 			host: localhost
 			dbname: expresmenu-pl
 			database: expresmenu-pl
-			user: root
-			password:
+			user: zap
+			password: ZaP2011
 		layouts:
 			1: 1 blok
 			2: 2 bloky vedle sebe
