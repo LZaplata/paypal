@@ -396,7 +396,8 @@
 
 			$form->addText('psc', 'PSČ:')
 				->addRule(Form::PATTERN, 'PSČ musí být ve formátu např. 12-345', '[0-9]{2}[-][0-9]{3}')
-				->setRequired('Vyplňte PSČ!');
+				->setRequired('Vyplňte PSČ!')
+				->setOption("description", "PSČ musí být ve formátu např. 12-345");
 
 			$form->addText('phone', 'Telefon:')
 				->addRule(Form::PATTERN, 'Telefon musí být ve formátu např. 600700800', '[0-9]{9}')
