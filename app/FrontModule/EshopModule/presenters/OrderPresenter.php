@@ -395,14 +395,13 @@
 				->setRequired('Vyplňte město!');
 
 			$form->addText('psc', 'PSČ:')
-				->setRequired('Vyplňte PSČ!')
-				->addRule(Form::LENGTH, "PSČ musí obsahovat 5 čísel", 5)
-				->addRule(Form::NUMERIC, "PSČ musí obsahovat pouze čísla");
+				->addRule(Form::PATTERN, 'PSČ musí být ve formátu např. 12-345', '[0-9]{2}[-][0-9]{3}')
+				->setRequired('Vyplňte PSČ!');
 
 			$form->addText('phone', 'Telefon:')
-				->addRule(Form::PATTERN, 'Telefon musí být ve formátu např. +420777555111', '[+][0-9]{12}')
+				->addRule(Form::PATTERN, 'Telefon musí být ve formátu např. 600700800', '[0-9]{9}')
 				->setRequired('Vyplňte telefon!')
-				->setOption("description", "Telefon musí být ve formátu např. +420777555111");
+				->setOption("description", "Telefon musí být ve formátu např. 600700800");
 
 			$form->addText('email', 'E-mail:')
 				->setRequired('Vyplňte e-mail!')
