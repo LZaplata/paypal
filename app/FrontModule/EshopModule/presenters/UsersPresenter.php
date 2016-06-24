@@ -210,7 +210,9 @@
 			$form->addSubmit('submit', 'Registrovat');			
 		
 			$form->onSuccess[] = callback ($this, 'addUser');			
-			$form->setRenderer(new BootstrapFormRenderer());					
+			$form->setRenderer(new BootstrapFormRenderer());
+			$form->setTranslator($this->translator);
+
 			return $form;
 		}
 		
