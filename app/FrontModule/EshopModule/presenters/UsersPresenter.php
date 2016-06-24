@@ -211,7 +211,6 @@
 		
 			$form->onSuccess[] = callback ($this, 'addUser');			
 			$form->setRenderer(new BootstrapFormRenderer());
-			$form->setTranslator($this->translator);
 
 			return $form;
 		}
@@ -281,7 +280,7 @@
 			}
 			
 			if ($this->model->getUsers()->where('email', $values['email'])->where('password IS NOT NULL')->fetch()) {
-				$form->addError(Html::el('span')->setText('Uvedení email se již v databázi nachází. ')->add(Html::el('a')->href($this->link(':FrontEshop:Users:password'))->setText('Zapomněli jste heslo?')->class('alert-link')));
+				$form->addError(Html::el('span')->setText($this->translator->translate('Uvedený email se již v databázi nachází. '))->add(Html::el('a')->href($this->link(':FrontEshop:Users:password'))->setText($this->translator->translate('Zapomněli jste heslo?'))->class('alert-link')));
 			}
 			else {
 				unset($values['password2']);
