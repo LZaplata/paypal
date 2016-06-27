@@ -109,7 +109,7 @@
 		$adminRouter[] = new Route('admin/<presenter>/<action>[/<id>]', 'Homepage:default'/*,Route::SECURED*/);
 
 		$container->router[] = $frontBookingRouter = new RouteList('FrontBooking');
-		$frontBookingRouter[] = new Route('[<lang [a-z]{2}>+<currency=pln [a-z]{3}>/]<booking>/<presenter>/<action>[/<id>]', array(
+		$frontBookingRouter[] = new Route('[<lang [a-z]{2}>+<currency=czk [a-z]{3}>/]<booking>/<presenter>/<action>[/<id>]', array(
 				'lang' => array (
 						Route::FILTER_TABLE => $langs
 				),
@@ -121,7 +121,7 @@
 		)/*,Route::SECURED*/);
 
 		$container->router[] = $frontEshopRouter = new RouteList('FrontEshop');
-		$frontEshopRouter[] = new Route('[<lang=_pl [a-z]{0,2}>+<currency=pln [a-z]{3}>/]<eshop>/<category>+c<cid>/[<product>+<presenter><pid>.htm]', array(
+		$frontEshopRouter[] = new Route('[<lang=_pl [a-z]{0,2}>+<currency=czk [a-z]{3}>/]<eshop>/<category>+c<cid>/[<product>+<presenter><pid>.htm]', array(
 			'lang' => array (
 					Route::FILTER_TABLE => $langs
 			),
@@ -136,7 +136,7 @@
 			),
 			'action' => 'view'
 		)/*,Route::SECURED*/);
-		$frontEshopRouter[] = new Route('[<lang=_pl [a-z]{0,2}>+<currency=pln [a-z]{3}>/]<eshop>/<presenter>/<action>[/<id>]', array(
+		$frontEshopRouter[] = new Route('[<lang=_pl [a-z]{0,2}>+<currency=czk [a-z]{3}>/]<eshop>/<presenter>/<action>[/<id>]', array(
 			'lang' => array (
 					Route::FILTER_TABLE => $langs
 			),
@@ -154,7 +154,7 @@
 			)
 		)/*,Route::SECURED*/);
 
-		$frontRouter[] = new Route('[<lang=_pl [a-z]{0,2}>+<currency=pln [a-z]{3}>/][<url>/][<category>+c<cid>/][<tag>+t<tid>/][<article>+a<aid>.htm]', array(
+		$frontRouter[] = new Route('[<lang=_pl [a-z]{0,2}>+<currency=czk [a-z]{3}>/][<url>/][<category>+c<cid>/][<tag>+t<tid>/][<article>+a<aid>.htm]', array(
 			'lang' => array (
 						Route::FILTER_TABLE => $langs
 					),
