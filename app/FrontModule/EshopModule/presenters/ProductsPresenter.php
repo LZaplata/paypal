@@ -48,7 +48,7 @@
 			$this->template->product = $this->prod;
 			$this->template->settings = $this->settings;
 			$this->template->currency = $this->currency == 'czk' ? $this->context->parameters['currency'] : $this->currency;
-			$this->template->decimals = $this->presenter->currency == 'czk' ? 0 : 2;
+			$this->template->decimals = $this->presenter->currency == 'czk' ? 2 : 2;
 			$this->template->layout = $this->model->getPagesModules()->where('modules_id', 3)->fetch()->layout;
 			$this->template->posts = $this->posts;
 			$this->template->homepage = false;

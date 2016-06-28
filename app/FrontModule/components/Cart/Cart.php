@@ -192,7 +192,7 @@
 			$template->amount = $amount;
 			$template->price = $this->getProductDiscountPrice($product->id, $product->price, $amount, false, true);
 			$template->currency = $this->presenter->currency == 'czk' ? $this->presenter->context->parameters['currency'] : $this->currency;
-			$template->decimals = $this->presenter->currency == 'czk' ? 0 : 2;
+			$template->decimals = $this->presenter->currency == 'czk' ? 2 : 2;
 			$template->defaultLang = $this->presenter->getDefaultLang();
 			$template->setTranslator($this->presenter->translator);	
 			
