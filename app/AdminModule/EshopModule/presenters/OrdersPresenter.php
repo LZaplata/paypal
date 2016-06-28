@@ -472,7 +472,7 @@
 				"paymentType" => $this->model->getShopMethods()->wherePrimary($order->payment_id)->fetch()->type,
 				"presenter" => $this,
 				"host" => $this->context->parameters['host'],
-				"decimals" => $this->currency == 'czk' ? 0 : 2,
+				"decimals" => $this->currency == 'czk' ? 2 : 2,
 				"methods" => $this->model->getShopMethods()->fetchPairs('id', 'name'),
 				"lang" => $this->lang,
 				"defaultLang" => $this->getDefaultLang()
@@ -481,7 +481,7 @@
 			$mail = new Message();
 			$mail->setFrom($this->contact->email, $this->contact->name);
 			$mail->addTo($order->email);
-			$mail->setSubject("Výzva k platbě");
+			$mail->setSubject("Wezwanie do zapłaty");
 			$mail->setHtmlBody($latte->renderToString(APP_DIR . "/AdminModule/EshopModule/templates/Orders/paymentRequest.latte", $params));
 
 			$this->mailer->send($mail);
