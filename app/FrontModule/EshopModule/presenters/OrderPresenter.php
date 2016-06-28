@@ -608,7 +608,7 @@
 			$template->presenter = $this;
 			$template->host = $this->context->parameters['host'];
 			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
-			$template->decimals = $this->currency == 'czk' ? 0 : 2;
+			$template->decimals = $this->currency == 'czk' ? 2 : 2;
 			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
 			$template->lang = $this->lang;
 			$template->defaultLang = $this->getDefaultLang();
@@ -633,7 +633,7 @@
 			$template->presenter = $this;
 			$template->host = $this->context->parameters['host'];
 			$template->currency = $this->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
-			$template->decimals = $this->currency == 'czk' ? 0 : 2;
+			$template->decimals = $this->currency == 'czk' ? 2 : 2;
 			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
 			$template->lang = $this->lang;
 			$template->defaultLang = $this->getDefaultLang();
@@ -721,7 +721,7 @@
 			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
 			$template->order = $order;
 			$template->presenter = $this;
-			$template->decimals = $order->currency == 'czk' ? 0 : 2;
+			$template->decimals = $order->currency == 'czk' ? 2 : 2;
 			$template->host = $this->context->parameters['host'];
 			$template->paymentType = $this->model->getShopMethods()->wherePrimary($order->payment_id)->fetch()->type;
 
