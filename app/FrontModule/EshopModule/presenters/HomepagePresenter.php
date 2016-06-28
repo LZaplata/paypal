@@ -36,7 +36,7 @@
 			$this->template->settings = $this->settings;
 			$this->template->related = true;
 			$this->template->currency = $this->currency == 'czk' ? $this->context->parameters['currency'] : $this->currency;
-			$this->template->decimals = $this->currency == 'czk' ? 0 : 2;
+			$this->template->decimals = $this->currency == 'czk' ? 2 : 2;
 			$this->template->homepage = false;
 			$this->template->cols = $this->cols[$this->module->cols];
 			$this->template->clearfix = $this->module->cols;
