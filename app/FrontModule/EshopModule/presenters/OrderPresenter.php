@@ -226,7 +226,7 @@
 			$this->template->keywords = 'Košík';
 			$this->template->desc = 'Košík';
 			$this->template->currency = $this->currency == 'czk' ? $this->context->parameters['currency'] : $this->currency;
-			$this->template->decimals = $this->currency == 'czk' ? 0 : 2;
+			$this->template->decimals = $this->currency == 'czk' ? 2 : 2;
 			$this->template->order = $this->user->loggedIn ? $this['cart']->tempOrder : $this['cart']->order;
 		}
 
@@ -246,7 +246,7 @@
 			$this->template->desc = 'Doprava a platba';
 			$this->template->order = $this->user->loggedIn ? $this['cart']->tempOrder : $this['cart']->order;
 			$this->template->currency = $this->currency == 'czk' ? $this->context->parameters['currency'] : $this->currency;
-			$this->template->decimals = $this->currency == 'czk' ? 0 : 2;
+			$this->template->decimals = $this->currency == 'czk' ? 2 : 2;
 			$this->template->transports = $this->model->getShopMethods()->where('type', 3)->fetchPairs('id', 'name');
 			$this->template->methodPrices = $this->methodPrices;
 		}
@@ -259,7 +259,7 @@
 			$this->template->desc = 'Souhrn objednávky';
 			$this->template->order = $this->user->loggedIn ? $this['cart']->tempOrder : $this['cart']->order;
 			$this->template->currency = $this->currency == 'czk' ? $this->context->parameters['currency'] : $this->currency;
-			$this->template->decimals = $this->currency == 'czk' ? 0 : 2;
+			$this->template->decimals = $this->currency == 'czk' ? 2 : 2;
 		}
 
 		public function renderSend () {
