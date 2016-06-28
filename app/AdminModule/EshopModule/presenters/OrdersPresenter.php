@@ -186,7 +186,7 @@
 				$mail = new Message();
 				$mail->setFrom($this->contact->email, $this->contact->name);
 				$mail->addTo($order->email, $order->name . ' ' . $order->surname);
-				$mail->setSubject('Změna stavu objednávky č. ' . $order->no);
+				$mail->setSubject('Zmiana statusu zamówienia nr ' . $order->no);
 				$mail->setHtmlBody($template);
 
 				$this->mailer->send($mail);
