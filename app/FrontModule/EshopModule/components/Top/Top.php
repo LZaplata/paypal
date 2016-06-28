@@ -17,7 +17,7 @@
 			$this->template->products = $this->products;
 			$this->template->settings = $this->presenter->model->getShopSettings()->fetch();
 			$this->template->currency = $this->presenter->currency == 'czk' ? $this->presenter->context->parameters['currency'] : $this->presenter->currency;
-			$this->template->decimals = $this->presenter->currency == 'czk' ? 0 : 2;
+			$this->template->decimals = $this->presenter->currency == 'czk' ? 2 : 2;
 			$this->template->eshop = $this->presenter->model->getPagesModules()->where('modules_id', 3)->where('position', 1)->where('pages_id != ?', 1)->fetch()->pages->url;
 			$this->template->registerHelperLoader(array(new \Helpers($this), 'loader'));
 			$this->template->setTranslator($this->presenter->translator);
