@@ -23,7 +23,7 @@
 
 	// Enable Nette Debugger for error visualisation & logging
 //	$configurator->setDebugMode(true);
-	Debugger::enable(Debugger::DETECT, __DIR__ . '/../log');
+	Debugger::enable(Debugger::PRODUCTION, __DIR__ . '/../log');
 
 	// Enable RobotLoader - this will load all classes automatically
 	$configurator->createRobotLoader()
