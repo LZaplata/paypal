@@ -619,7 +619,7 @@
 			if ($order->partner_id) {
 				$mail->addTo("info@rybolovnorsko.com");
 			}
-			$mail->setSubject('ExpresMenu.cz- nová objednávka č. '.$order->no);
+			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
 			$mail->setHtmlBody($template);
 
 			$this->mailer->send($mail);
@@ -641,7 +641,7 @@
 			$mail = new Message();
 			$mail->setFrom('objednavky@shop.cz');
 			$mail->addTo($this->contact->email, $this->contact->name);
-			$mail->setSubject('Nová objednávka - č. '.$order->no);
+			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
 			$mail->setHtmlBody($template);
 
 			$this->mailer->send($mail);
@@ -728,7 +728,7 @@
 			$mail = new Message();
 			$mail->setFrom($this->contact->email, $this->contact->name);
 			$mail->addTo($order->email, $order->name.' '.$order->surname);
-			$mail->setSubject('Změna stavu objednávky č. '.$order->no);
+			$mail->setSubject('Zmiana statusu zamówienia '.$order->no);
 			$mail->setHtmlBody($template);
 
 //			$mail->embedImages();
