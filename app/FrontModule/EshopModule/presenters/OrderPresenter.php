@@ -175,7 +175,7 @@
 //				$this->heurekaVerification($this->order);
 //			}
 
-//			$this->sendOfficeEmail($this->order);
+			$this->sendOfficeEmail($this->order);
 			$this->sendCustomerEmail($this->order, $paymentType);
 			$this->createPdf($this->order);
 
@@ -632,7 +632,7 @@
 			$template->order = $order;
 			$template->presenter = $this;
 			$template->host = $this->context->parameters['host'];
-			$template->currency = $this->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
+			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
 			$template->decimals = $this->currency == 'czk' ? 2 : 2;
 			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
 			$template->lang = $this->lang;
