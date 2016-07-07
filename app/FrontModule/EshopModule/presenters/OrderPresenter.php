@@ -175,7 +175,7 @@
 //				$this->heurekaVerification($this->order);
 //			}
 
-//			$this->sendOfficeEmail($this->order);
+			$this->sendOfficeEmail($this->order);
 //			$this->sendCustomerEmail($this->order, $paymentType);
 //			$this->createPdf($this->order);
 
