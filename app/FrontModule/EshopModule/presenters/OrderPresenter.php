@@ -627,15 +627,15 @@
 
 		public function sendOfficeEmail ($order) {
 			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/officeEmail.latte');
-//			$template->registerFilter(new Engine());
-//			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
-//			$template->order = $order;
-//			$template->presenter = $this;
-//			$template->host = $this->context->parameters['host'];
+			$template->registerFilter(new Engine());
+			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+			$template->order = $order;
+			$template->presenter = $this;
+			$template->host = $this->context->parameters['host'];
 //			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
 //			$template->decimals = $this->currency == 'czk' ? 2 : 2;
 //			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
-//			$template->lang = $this->lang;
+			$template->lang = $this->lang;
 //			$template->defaultLang = $this->getDefaultLang();
 
 			$mail = new Message();
@@ -644,7 +644,7 @@
 			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
 //			$mail->setHtmlBody($template);
 
-//			$this->mailer->send($mail);
+			$this->mailer->send($mail);
 		}
 
 		public function heurekaVerification($order){
