@@ -169,4 +169,4 @@ production < development:
 		contact:
 			name: Obchod Expresmenu
 			email: objednavky@expresmenu.com
-		host: "http://www.expresmenu.cz/"
+		host: "http://www.expres-menu.pl/"
