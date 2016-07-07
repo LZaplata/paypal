@@ -626,9 +626,9 @@
 		}
 
 		public function sendOfficeEmail ($order) {
-			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/officeEmail.latte');
-			$template->registerFilter(new Engine());
-			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+//			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/officeEmail.latte');
+//			$template->registerFilter(new Engine());
+//			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
 //			$template->order = $order;
 //			$template->presenter = $this;
 //			$template->host = $this->context->parameters['host'];
@@ -638,13 +638,13 @@
 //			$template->lang = $this->lang;
 //			$template->defaultLang = $this->getDefaultLang();
 
-			$mail = new Message();
-			$mail->setFrom('objednavky@shop.cz');
-			$mail->addTo($this->contact->email, $this->contact->name);
-			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
-			$mail->setHtmlBody($template);
+//			$mail = new Message();
+//			$mail->setFrom('objednavky@shop.cz');
+//			$mail->addTo($this->contact->email, $this->contact->name);
+//			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
+//			$mail->setHtmlBody($template);
 
-			$this->mailer->send($mail);
+//			$this->mailer->send($mail);
 		}
 
 		public function heurekaVerification($order){
