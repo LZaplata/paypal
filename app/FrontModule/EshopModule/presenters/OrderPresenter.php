@@ -632,17 +632,17 @@
 			$template->order = $order;
 			$template->presenter = $this;
 			$template->host = $this->context->parameters['host'];
-//			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
-//			$template->decimals = $this->currency == 'czk' ? 2 : 2;
-//			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
+			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
+			$template->decimals = $this->currency == 'czk' ? 2 : 2;
+			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
 			$template->lang = $this->lang;
-//			$template->defaultLang = $this->getDefaultLang();
+			$template->defaultLang = $this->getDefaultLang();
 
 			$mail = new Message();
-			$mail->setFrom('objednavky@shop.cz');
+			$mail->setFrom($order->email, $order->name.' '.$order->surname);
 			$mail->addTo($this->contact->email, $this->contact->name);
 			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
-//			$mail->setHtmlBody($template);
+			$mail->setHtmlBody($template);
 
 //			$this->mailer->send($mail);
 		}
