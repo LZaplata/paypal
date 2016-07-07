@@ -644,7 +644,7 @@
 			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
 			$mail->setHtmlBody($template);
 
-//			$this->mailer->send($mail);
+			$this->mailer->send($mail);
 		}
 
 		public function heurekaVerification($order){
