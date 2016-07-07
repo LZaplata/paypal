@@ -166,9 +166,9 @@
 			$paymentType = $this->model->getShopMethods()->wherePrimary($this->order->payment_id)->fetch();
 
 			// při platbě předem změnit defaultní stav objednávky -
-			if ($this->order->payment_id == 4) {
-				$this->order->update(array("state" => 2));
-			}
+//			if ($this->order->payment_id == 4) {
+//				$this->order->update(array("state" => 2));
+//			}
 
 			//overeni zakazniky
 //			if ($this->vendorSettings->heurekaVerification) {
@@ -179,13 +179,13 @@
 			$this->sendCustomerEmail($this->order, $paymentType);
 			$this->createPdf($this->order);
 
-			if ($paymentType) {
-				if ($paymentType->type == 2) {
-					$wp = $this->createComponentWebPay();
-
-					$this->redirectUrl($wp->generateLink($this->order->price + $this->order->transport, $this->order->no));
-				}
-			}
+//			if ($paymentType) {
+//				if ($paymentType->type == 2) {
+//					$wp = $this->createComponentWebPay();
+//
+//					$this->redirectUrl($wp->generateLink($this->order->price + $this->order->transport, $this->order->no));
+//				}
+//			}
 
 			if (isset($this->partner->id)) {
 				$this->partner->remove();
