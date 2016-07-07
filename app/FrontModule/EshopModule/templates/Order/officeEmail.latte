@@ -134,7 +134,6 @@
 
 	<table style="border-spacing: 0; border: none; width: 100%; font-family: sans-serif; font-size: 13px; margin: 30px 0;">
 		<thead>
-			<th align="left">Kód</th>
 			<th align="left">Název</th>
 			<th align="left">Cena/MJ</th>
 			<th align="left">Množství</th>
@@ -146,7 +145,6 @@
 			
 			{foreach $order->related("orders_products") as $product}
 				<tr>
-					<td>{$product->products->code}</td>	
 					<td>
 						{$product->products->$name ?: ($product->products->$defaultName ?: $product->products->name)}<br>
 						
