@@ -166,18 +166,18 @@
 			$paymentType = $this->model->getShopMethods()->wherePrimary($this->order->payment_id)->fetch();
 
 			// při platbě předem změnit defaultní stav objednávky -
-//			if ($this->order->payment_id == 4) {
-//				$this->order->update(array("state" => 2));
-//			}
+			if ($this->order->payment_id == 4) {
+				$this->order->update(array("state" => 2));
+			}
 
 			//overeni zakazniky
 //			if ($this->vendorSettings->heurekaVerification) {
 //				$this->heurekaVerification($this->order);
 //			}
 
-			$this->sendOfficeEmail($this->order);
-			$this->sendCustomerEmail($this->order, $paymentType);
-			$this->createPdf($this->order);
+//			$this->sendOfficeEmail($this->order);
+//			$this->sendCustomerEmail($this->order, $paymentType);
+//			$this->createPdf($this->order);
 
 //			if ($paymentType) {
 //				if ($paymentType->type == 2) {
