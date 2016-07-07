@@ -626,35 +626,23 @@
 		}
 
 		public function sendOfficeEmail ($order) {
-//			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/officeEmail.latte');
-//			$template->registerFilter(new Engine());
-//			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
-//			$template->order = $order;
-//			$template->presenter = $this;
-//			$template->host = $this->context->parameters['host'];
-//			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
-//			$template->decimals = $this->currency == 'czk' ? 2 : 2;
-//			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
-//			$template->lang = $this->lang;
-//			$template->defaultLang = $this->getDefaultLang();
-
-			$latte = new Engine();
-			$params = array(
-				"order" => $order,
-				"presenter" => $this,
-				"host" => $this->context->parameters['host'],
-				"currency" => $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency,
-				"decimals" => $this->currency == 'czk' ? 2 : 2,
-				"methods" => $this->model->getShopMethods()->fetchPairs('id', 'name'),
-				"lang" => $this->lang,
-				"defaultLang" => $this->getDefaultLang()
-			);
+			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/officeEmail.latte');
+			$template->registerFilter(new Engine());
+			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+			$template->order = $order;
+			$template->presenter = $this;
+			$template->host = $this->context->parameters['host'];
+			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
+			$template->decimals = $this->currency == 'czk' ? 2 : 2;
+			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
+			$template->lang = $this->lang;
+			$template->defaultLang = $this->getDefaultLang();
 
 			$mail = new Message();
 			$mail->setFrom($order->email, $order->name.' '.$order->surname);
 			$mail->addTo($this->contact->email, $this->contact->name);
 			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
-			$mail->setHtmlBody($latte->renderToString(APP_DIR."/FrontModule/EshopModule/templates/Order/officeEmail.latte", $params));
+			$mail->setHtmlBody($template);
 
 			$this->mailer->send($mail);
 		}
