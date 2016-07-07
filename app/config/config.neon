@@ -168,5 +168,5 @@ production < development:
 			password: ZaP2011
 		contact:
 			name: Obchod Expresmenu
-			email: objednavky@expresmenu.com
+			email: obchod@expresmenu.com
 		host: "http://www.expres-menu.pl/"
