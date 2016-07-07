@@ -46,6 +46,7 @@ use Nette\Forms\Rendering\BootstrapFormRenderer;
 			}
 			
 			$form->setRenderer(new BootstrapFormRenderer());
+			$form->setTranslator($this->presenter->translator);
 			
 			return $form;
 		}
