@@ -179,13 +179,13 @@
 			$this->sendCustomerEmail($this->order, $paymentType);
 			$this->createPdf($this->order);
 
-			if ($paymentType) {
-				if ($paymentType->type == 2) {
-					$wp = $this->createComponentWebPay();
-
-					$this->redirectUrl($wp->generateLink($this->order->price + $this->order->transport, $this->order->no));
-				}
-			}
+//			if ($paymentType) {
+//				if ($paymentType->type == 2) {
+//					$wp = $this->createComponentWebPay();
+//
+//					$this->redirectUrl($wp->generateLink($this->order->price + $this->order->transport, $this->order->no));
+//				}
+//			}
 
 			if (isset($this->partner->id)) {
 				$this->partner->remove();
