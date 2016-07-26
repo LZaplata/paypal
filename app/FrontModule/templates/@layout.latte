@@ -324,6 +324,9 @@
 	{/if}
 
 	<!-- Kód Google značky pro remarketing -->
+	<!--------------------------------------------------
+    Značka pro remarketing nesmí být spojena s údaji umožňujícími identifikaci osob nebo umístěna na stránkách týkajících se citlivých kategorií. Další informace a postup nastavení značky naleznete na stránce: http://google.com/ads/remarketingsetup
+    --------------------------------------------------->
 	<script type="text/javascript">
 		/* <![CDATA[ */
 		var google_conversion_id = 969189834;
@@ -331,15 +334,20 @@
 		var google_remarketing_only = true;
 		/* ]]> */
 	</script>
-	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js"></script>
-
-	{*affilbox tracking code*}
-	<script src="https://c1876.affilbox.cz/js/module/tracking.js" type="text/javascript"></script>
-	<script type="text/javascript">
-		var affilate = 'https://c1876.affilbox.cz/';
-		var advertiser = 3;
-		var kampan = 1;
-		tracking();
+	<script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
 	</script>
+	<noscript>
+		<div style="display:inline;">
+			<img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/969189834/?value=0&amp;guid=ON&amp;script=0"/>
+		</div>
+	</noscript>
+
+	<!-- Sklik remarketing -->
+	<script type="text/javascript">
+		/* <![CDATA[ */
+		var seznam_retargeting_id = 19500;
+		/* ]]> */
+	</script>
+	<script type="text/javascript" src="//c.imedia.cz/js/retargeting.js"></script>
 </body>
 </html>
