@@ -9,8 +9,8 @@ development:
 		database:
 			driver: mysql
 			host: localhost
-			dbname: expresmenu-pl
-			database: expresmenu-pl
+			dbname: expresmenu-de
+			database: expresmenu-de
 			user: zap
 			password: ZaP2011
 		layouts:
@@ -90,7 +90,7 @@ development:
 		facebook:
 			appId:
 			appSecret:
-		currency: "zł"
+		currency: "eur"
 		zasilkovna:
 		    apiKey: b1896ed4de0f5afc
 		partners:
@@ -162,11 +162,11 @@ production < development:
 		database:
 			driver: mysql
 			host: localhost
-			dbname: expresmenu-pl
-			database: expresmenu-pl
+			dbname: expresmenu-de
+			database: expresmenu-de
 			user: zap
 			password: ZaP2011
 		contact:
 			name: Obchod Expresmenu
 			email: obchod@expresmenu.com
-		host: "http://www.expres-menu.pl/"
+		host: "http://www.expres-menu.de/"
