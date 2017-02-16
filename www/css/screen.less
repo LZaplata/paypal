@@ -815,6 +815,10 @@ body {
 			}
 		}
 
+		&.soldout {
+			opacity: 0.5;
+		}
+
 		.name {
 			padding: 10px @grid-gutter-width;
 			color: @text-color;
@@ -850,14 +854,10 @@ body {
 
 			img {
 				max-height: 168px;
-
-				&.soldout {
-					opacity: 0.3;
-				}
 			}
 
 			span {
-				color: @headings-color;
+				color: white;
 				font-size: @font-size-h3;
 				position: absolute;
 				z-index: 10001;

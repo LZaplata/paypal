@@ -13,7 +13,7 @@
 	{var $category = array("category" => $cat->url, "cid" => $cat->id)}
 				
 	<div class="product col-lg-3 col-md-4 col-sm-6">
-		<a href="{plink :FrontEshop:Products:view (expand) $category, eshop => $eshop, pid => $product->id, product => $product->$url|nosafeurl}">
+		<a href="{plink :FrontEshop:Products:view (expand) $category, eshop => $eshop, pid => $product->id, product => $product->$url|nosafeurl}" class="{if $product->soldout}soldout{/if}">
 			{if $settings->name}
 				<div class="name">
 					<h2 class="h4 no-margin">
@@ -31,7 +31,7 @@
 			{if $image && $thumb}
 				<div class="img">
 					<p class="no-margin">
-						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive {if $product->soldout}soldout{/if}" />
+						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
 						{if $product->soldout}
 							<span>{_"Vyprodáno"}</span>
 						{/if}
