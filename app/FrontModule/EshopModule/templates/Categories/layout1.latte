@@ -23,7 +23,7 @@
 	{/ifset}
 				
 	<div class="product col-lg-{$cols} col-md-4 col-sm-6">
-		<a href="{plink :FrontEshop:Products:view (expand) $category, pid => $product, product => ($product->$url ?: ($product->$defaultUrl ?: $product->url))|nosafeurl}">
+		<a href="{plink :FrontEshop:Products:view (expand) $category, pid => $product, product => ($product->$url ?: ($product->$defaultUrl ?: $product->url))|nosafeurl}" class="{if $product->soldout}soldout{/if}">
 			{if $settings->name}
 				<div class="name">
 					<h2 class="h4 no-margin">
@@ -42,6 +42,9 @@
 				<div class="img">
 					<p class="no-margin">
 						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
+						{if $product->soldout}
+							<span>{_"Vyprodáno"}</span>
+						{/if}
 					</p>
 				</div>
 			{/if}
