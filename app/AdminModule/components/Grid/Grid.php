@@ -38,6 +38,11 @@ use Nette\Utils\Strings;
 			$this->addColumn('highlight')
 				->setWidth('20px')
 				->setRenderer(function($row) use($self) {return Html::el('a')->href($self->presenter->link('Highlight!', array($self->presenter->presenterName == 'Products' ? 0 : $row['sections_id'], $self->presenter->presenterName == 'Products' ? $row['products_id'] : $row['pid'], $row['highlight'] == 0 ? 0 : 1)))->addClass($row['highlight'] == 0 ? 'fa fa-star-o text-danger' : 'fa fa-star text-success')->addClass('grid-ajax')->title('Zvýraznění položky');});
+			if ($self->presenter->presenterName == 'Products') {
+				$this->addColumn('soldout')
+					->setWidth('20px')
+					->setRenderer(function($row) use($self) {return Html::el('a')->href($self->presenter->link('Soldout!', array($self->presenter->presenterName == 'Products' ? 0 : $row['sections_id'], $self->presenter->presenterName == 'Products' ? $row['products_id'] : $row['pid'], $row['soldout'] == 0 ? 0 : 1)))->addClass($row['soldout'] == 0 ? 'fa fa-shopping-basket text-success' : 'fa fa-shopping-basket text-danger')->addClass('grid-ajax')->title('Vyprodaná položka');});
+			}
 			$this->addColumn('name', 'Název')
 				->setTextEditable()
 				->setTextFilter();

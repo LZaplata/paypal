@@ -735,6 +735,23 @@
 			$this->flashMessage('Nastavení zvýraznění produktu změněno!');
 		}
 
+		public function handleSoldout($sid, $id, $vis) {
+			$vis = $vis == 1 ? 0 : 1;
+			$ids = (array)$id;
+
+			foreach ($ids as $row) {
+				$product = $this->model->getProducts()->wherePrimary($id)->fetch();
+
+				$this->model->getProducts()->where('products_id', $product->products_id)->update(array("soldout" => $vis));
+
+				if ($product->pid == null) {
+					$this->model->getProducts()->where('pid', $product->products_id)->update(array("soldout" => $vis));
+				}
+			}
+
+			$this->flashMessage('Nastavení zvýraznění produktu změněno!');
+		}
+
 		public function handleToTrash($sid, $id) {
 			$this->sid = $sid;
 			$ids = (array)$id;

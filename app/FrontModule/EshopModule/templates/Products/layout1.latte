@@ -33,20 +33,22 @@
 						</div>
 					{/if}
 
-					{if $settings->stock}
-						{if $product->amount > 0}
+					{if !$product->soldout}
+						{if $settings->stock}
+							{if $product->amount > 0}
+								<div class="cart">
+									{control addToCart-$product->id}
+								</div>
+							{else}
+								<div class="availability">
+									<p>Zboží neni skladem</p>
+								</div>
+							{/if}
+						{else}
 							<div class="cart">
 								{control addToCart-$product->id}
 							</div>
-						{else}
-							<div class="availability">
-								<p>Zboží neni skladem</p>
-							</div>
 						{/if}
-					{else}
-						<div class="cart">
-							{control addToCart-$product->id}
-						</div>
 					{/if}
 				{/snippet}
 
