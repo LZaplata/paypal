@@ -31,7 +31,10 @@
 			{if $image && $thumb}
 				<div class="img">
 					<p class="no-margin">
-						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive" />
+						<img src="{$basePath}/files/galleries/{$thumb}_g{$image->galleries}-{$image->name}" alt="{$image->title}" class="img-responsive {if $product->soldout}soldout{/if}" />
+						{if $product->soldout}
+							<span>{_"Vyprodáno"}</span>
+						{/if}
 					</p>
 				</div>
 			{/if}

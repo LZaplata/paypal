@@ -846,9 +846,26 @@ body {
 		.img {
 			//width: 268px;
 			height: 168px;
+			position: relative;
 
 			img {
 				max-height: 168px;
+
+				&.soldout {
+					opacity: 0.3;
+				}
+			}
+
+			span {
+				color: @headings-color;
+				font-size: @font-size-h3;
+				position: absolute;
+				z-index: 10001;
+				top: 50%;
+				left: 50%;
+				font-family: @headings-font-family;
+				font-weight: 700;
+				.translate(-50%, -50%);
 			}
 		}
 
