@@ -613,6 +613,7 @@
 			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
 			$template->lang = $this->lang;
 			$template->defaultLang = $this->getDefaultLang();
+			$template->setTranslator($this->translator);
 
 			$mail = new Message();
 			$mail->setFrom($this->contact->email, $this->contact->name);
