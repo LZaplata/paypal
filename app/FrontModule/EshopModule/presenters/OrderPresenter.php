@@ -601,8 +601,7 @@
 
 		public function sendCustomerEmail ($order, $paymentType) {
 // 			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/customerEmail.latte');
-//			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/StatesEmails/state' . $order->state . '.latte');
-			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/StatesEmails/state0.latte');
+			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/StatesEmails/state' . $order->state . '.latte');
 			$template->registerFilter(new Engine());
 			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
 			$template->order = $order;
