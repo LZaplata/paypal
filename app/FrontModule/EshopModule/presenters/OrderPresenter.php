@@ -1,6 +1,8 @@
 <?php
 	namespace FrontEshopModule;
 
+	use Latte\Runtime\Filters;
+	use Nette\Bridges\ApplicationLatte\ILatteFactory;
 	use Nette\Mail\Message;
 
 	use Nette\Templating\FileTemplate;
@@ -29,6 +31,9 @@
 		public $tempOrder;
 		public $order;
 		public $zasilkovnaBranches;
+
+		/** @var  ILatteFactory @inject */
+		public $latteFactory;
 
 		public function beforeRender() {
 			if ($this->isLinkCurrent('Order:transport')) {
@@ -178,7 +183,7 @@
 
 			$this->sendOfficeEmail($this->order);
 			$this->sendCustomerEmail($this->order, $paymentType);
-			$this->createPdf($this->order);
+//			$this->createPdf($this->order);
 
 //			if ($paymentType) {
 //				if ($paymentType->type == 2) {
@@ -599,21 +604,49 @@
 // 				->add($form['update']->control);
 // 		}
 
+//		public function sendCustomerEmail ($order, $paymentType) {
+//// 			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/customerEmail.latte');
+//			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/StatesEmails/state' . $order->state . '.latte');
+//			$template->registerFilter(new Engine());
+//			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
+//			$template->order = $order;
+//			$template->paymentType = $paymentType->type;
+//			$template->presenter = $this;
+//			$template->host = $this->context->parameters['host'];
+//			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
+//			$template->decimals = $this->currency == 'czk' ? 2 : 2;
+//			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
+//			$template->lang = $this->lang;
+//			$template->defaultLang = $this->getDefaultLang();
+////			$template->setTranslator($this->translator);
+//
+//			$mail = new Message();
+//			$mail->setFrom($this->contact->email, $this->contact->name);
+//			$mail->addTo($order->email, $order->name.' '.$order->surname);
+//			if ($order->partner_id) {
+//				$mail->addTo("info@rybolovnorsko.com");
+//			}
+//			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
+//			$mail->setHtmlBody($this->translator->translate($template->__toString()));
+//
+//			$this->mailer->send($mail);
+//		}
+
 		public function sendCustomerEmail ($order, $paymentType) {
-// 			$template = new FileTemplate(APP_DIR.'/FrontModule/EshopModule/templates/Order/customerEmail.latte');
-			$template = new FileTemplate(APP_DIR.'/AdminModule/EshopModule/templates/Orders/StatesEmails/state' . $order->state . '.latte');
-			$template->registerFilter(new Engine());
-			$template->registerHelperLoader('Nette\Templating\Helpers::loader');
-			$template->order = $order;
-			$template->paymentType = $paymentType->type;
-			$template->presenter = $this;
-			$template->host = $this->context->parameters['host'];
-			$template->currency = $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency;
-			$template->decimals = $this->currency == 'czk' ? 2 : 2;
-			$template->methods = $this->model->getShopMethods()->fetchPairs('id', 'name');
-			$template->lang = $this->lang;
-			$template->defaultLang = $this->getDefaultLang();
-			$template->setTranslator($this->translator);
+			$file = APP_DIR.'/AdminModule/EshopModule/templates/Orders/StatesEmails/state' . $order->state . '.latte';
+			$latte = $this->latteFactory->create();
+			$latte->addFilter('translate', $this->translator === NULL ? NULL : array($this->translator, 'translate'));
+			$params = array(
+				"order" => $order,
+				"paymentType" => $paymentType->type,
+				"p" => $this,
+				"host" => $this->context->parameters['host'],
+				"currency" => $order->currency == 'czk' ? $this->context->parameters['currency'] : $order->currency,
+				"decimals" => $this->currency == 'czk' ? 2 : 2,
+				"methods" => $this->model->getShopMethods()->fetchPairs('id', 'name'),
+				"lang" => $this->lang,
+				"defaultLang" => $this->getDefaultLang()
+			);
 
 			$mail = new Message();
 			$mail->setFrom($this->contact->email, $this->contact->name);
@@ -622,7 +655,7 @@
 				$mail->addTo("info@rybolovnorsko.com");
 			}
 			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
-			$mail->setHtmlBody($template);
+			$mail->setHtmlBody($latte->renderToString($file, $params));
 
 			$this->mailer->send($mail);
 		}

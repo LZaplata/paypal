@@ -46,8 +46,8 @@ development:
 			3: 1
 			4: 0
 		contact:
-			name: Adam Valenta
-			email: valenta@hucr.cz
+			name: Lukáš Záplata
+			email: zap@hucr.cz
 		orderStates:
 			0: nevyřízeno
 			1: vyřizuje se
@@ -155,7 +155,7 @@ development:
 	extensions:
 		debugger.session: Kdyby\SessionPanel\DI\SessionPanelExtension
 		webloader: WebLoader\Nette\Extension
-					
+
 
 production < development:
 	parameters:
