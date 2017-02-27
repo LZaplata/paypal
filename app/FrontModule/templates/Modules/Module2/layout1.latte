@@ -41,10 +41,10 @@
 					<div class="row">
 					    {if $article->sections->visName}
     						<h3 class="no-margin">
-    							<span class="col-lg-9 col-sm-12 name">
+    							<span class="col-lg-8 col-sm-12 name">
     								{!$article->$name ?: ($article->$defaultName ?: $article->name)|nbsp}
     							</span>
-    							<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article->id|nosafeurl}" class="col-lg-3 col-sm-12 text-right">
+    							<a href="{plink Page: url => $control->url, article => ($article->$url ?: ($article->$defaultUrl ?: $article->url)), aid => $article->id|nosafeurl}" class="col-lg-4 col-sm-12 text-right">
     								<strong>{_"více informací"}</strong>&nbsp;
     								<span class="fa-stack">
     									<i class="fa fa-circle fa-stack-2x"></i>
