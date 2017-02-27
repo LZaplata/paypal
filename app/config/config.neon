@@ -46,8 +46,8 @@ development:
 			3: 1
 			4: 0
 		contact:
-			name: Lukáš Záplata
-			email: zap@hucr.cz
+			name: Roman Kašpar
+			email: info@fesmafood.de
 		orderStates:
 			0: nevyřízeno
 			1: vyřizuje se
