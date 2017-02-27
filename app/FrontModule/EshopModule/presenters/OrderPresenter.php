@@ -654,7 +654,7 @@
 			if ($order->partner_id) {
 				$mail->addTo("info@rybolovnorsko.com");
 			}
-			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
+			$mail->setSubject($this->translator->translate('ExpresMenu.pl – nowe zamówienie nr')." ".$order->no);
 			$mail->setHtmlBody($latte->renderToString($file, $params));
 
 			$this->mailer->send($mail);
@@ -676,7 +676,7 @@
 			$mail = new Message();
 			$mail->setFrom($order->email, $order->name.' '.$order->surname);
 			$mail->addTo($this->contact->email, $this->contact->name);
-			$mail->setSubject('ExpresMenu.pl – nowe zamówienie nr '.$order->no);
+			$mail->setSubject($this->translator->translate('ExpresMenu.pl – nowe zamówienie nr')." ".$order->no);
 			$mail->setHtmlBody($template);
 
 			$this->mailer->send($mail);
