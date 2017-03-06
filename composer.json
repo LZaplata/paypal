@@ -1,0 +1,14 @@
+{
+	"name": "lzaplata/paypal",
+    "version": "1.0",
+	"authors": [
+		{
+			"name": "Lukáš Záplata",
+			"email": "lukas.zaplata@gmail.com"
+		}
+	],
+	"require": {
+		"php": ">=5.4",
+		"nette/di": "~2.3"
+	}
+}
